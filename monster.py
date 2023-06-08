@@ -29,8 +29,6 @@ class Monster:
     
     def generateMonster(self, areaPlay):
         self.monster = areaPlay.create_rectangle(250, 250, 280, 280, fill="black")
-        self.monster_x = 265  # Coordonnée x initiale du monstre
-        self.monster_y = 265  # Coordonnée y initiale du monstre
 
 
 
