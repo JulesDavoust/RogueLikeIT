@@ -3,28 +3,17 @@ from carac_pj.player import player
 from map import Map
 import tkinter as tk
 
-class interface:
+from windowParameters import WindowParameter
+
+class Interface:
 
     def __init__(self):
-        #Unit interface size
-        originTileSize = 16
-        #A changer par player apres
-        SCALE = 3
-
-        tileSize= originTileSize*SCALE
-
-        screenTileCol = 16
-        screenTileRow = 12
-        screenWidth = tileSize * screenTileCol
-        screenHeight = tileSize * screenTileRow
-        screenSize = f"{screenWidth}x{screenHeight}"
-        print(screenSize)
-
+       
         self.clickChoose = False
-        self.size = screenSize
+        self.size = WindowParameter.screenSize
         self.window = tk.Tk()
-        self.window.minsize(screenWidth,screenHeight)
-        self.window.maxsize(screenWidth,screenHeight)
+        self.window.minsize(WindowParameter.screenWidth,WindowParameter.screenHeight)
+        self.window.maxsize(WindowParameter.screenWidth,WindowParameter.screenHeight)
 
     def select_guerrier(self):
         self.player = player(0)
