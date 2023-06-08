@@ -1,8 +1,9 @@
 import tkinter as tk
+import random
 
 class Map:
     def __init__(self) -> None:
-        pass
+        self.level = 1
 
     def generateMap(self, window, areaPlay):
         areaPlay.create_rectangle(0, 0, 1000, 700, fill="gray")  # Colorier l'aire en noir
