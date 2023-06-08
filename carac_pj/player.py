@@ -1,5 +1,6 @@
 import random
 from map import Map
+from monster import Monster
 import tkinter as tk
 
 class player:
@@ -28,10 +29,13 @@ class player:
 
     def generatePlayer(self, window):
         map = Map()
+        monster = Monster()
         self.areaPlay = tk.Canvas(window, width=1000, height=700)
+
         map.generateMap(window, self.areaPlay)
         map.generateSalle(window, self.areaPlay)
         map.generateFirstSalle(self.areaPlay)
+
         self.character_id = self.areaPlay.create_rectangle(100, 100, 130, 130, fill="red")
         self.update_view()
         self.areaPlay.pack()
