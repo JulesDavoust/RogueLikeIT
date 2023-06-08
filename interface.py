@@ -4,10 +4,27 @@ from map import Map
 import tkinter as tk
 
 class interface:
+
     def __init__(self):
+        #Unit interface size
+        originTileSize = 16
+        #A changer par player apres
+        SCALE = 3
+
+        tileSize= originTileSize*SCALE
+
+        screenTileCol = 16
+        screenTileRow = 12
+        screenWidth = tileSize * screenTileCol
+        screenHeight = tileSize * screenTileRow
+        screenSize = f"{screenWidth}x{screenHeight}"
+        print(screenSize)
+
         self.clickChoose = False
-        self.size = '1280x720'
+        self.size = screenSize
         self.window = tk.Tk()
+        self.window.minsize(screenWidth,screenHeight)
+        self.window.maxsize(screenWidth,screenHeight)
 
     def select_guerrier(self):
         self.player = player(0)
