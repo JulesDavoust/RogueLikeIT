@@ -30,6 +30,4 @@ class Monster:
     def generateMonster(self, areaPlay):
         self.monster = areaPlay.create_rectangle(250, 250, 280, 280, fill="black")
 
-
-
         

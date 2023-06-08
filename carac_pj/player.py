@@ -40,6 +40,8 @@ class player:
 
         self.character_id = self.areaPlay.create_rectangle(100, 100, 130, 130, fill="red")
         self.update_view()
+
+
         self.areaPlay.pack()
         window.bind("<KeyPress>", self.move_character)
         
