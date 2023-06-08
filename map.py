@@ -1,12 +1,15 @@
 import tkinter as tk
 import random
 
+from windowParameters import WindowParameter
+
+
 class Map:
     def __init__(self) -> None:
         self.level = 1
 
     def generateMap(self, window, areaPlay):
-        areaPlay.create_rectangle(0, 0, 1000, 700, fill="gray")  # Colorier l'aire en noir
+        areaPlay.create_rectangle(0, 0, WindowParameter.mapWidth, WindowParameter.mapHeight, fill="gray")  # Colorier l'aire en noir
 
     def generateFirstSalle(self, areaPlay):
         x1, y1 = 150, 150
