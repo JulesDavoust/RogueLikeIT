@@ -1,5 +1,5 @@
 from carac_pj.classePJ import classePJ
-from interface import interface
+from interface import Interface
 
-interface = interface()
+interface = Interface()
 interface.start()
