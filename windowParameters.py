@@ -8,6 +8,7 @@ class WindowParameter:
 
     screenTileCol = 16
     screenTileRow = 9
+    
     mapTileCol = 12
     mapTileRow = 9
 

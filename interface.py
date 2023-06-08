@@ -61,7 +61,7 @@ class Interface:
 
     def start(self):
 
-        game_map = GameMap(self.widht,self.height)
+        #game_map = GameMap(WindowParameter.mapWidth,WindowParameter.mapHeight)
         self.window.geometry(self.size)
         self.menu = tk.Frame(self.window)
         self.generate = tk.Frame(self.window)
