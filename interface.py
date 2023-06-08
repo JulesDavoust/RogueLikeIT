@@ -2,6 +2,7 @@ from carac_pj.classePJ import classePJ
 from carac_pj.player import player
 from map import Map
 import tkinter as tk
+import GameMap
 
 class interface:
     def __init__(self):
@@ -53,6 +54,8 @@ class interface:
             buttonSorcier.pack()
 
     def start(self):
+
+        game_map = GameMap(self.widht,self.height)
         self.window.geometry(self.size)
         self.menu = tk.Frame(self.window)
         self.generate = tk.Frame(self.window)
