@@ -10,6 +10,8 @@ class player:
         self.classe = classe
         self.level = 0
         self.xp = 0
+        self.map = Map()
+        self.monster = Monster(self.map.level)
 
         if classe == 0:
             self.life_point = 120
@@ -28,23 +30,26 @@ class player:
             self.damage = 20
 
     def generatePlayer(self, window):
-        map = Map()
-        monster = Monster(map.level)
+        
         self.areaPlay = tk.Canvas(window, width=1000, height=700)
 
-        map.generateMap(window, self.areaPlay)
-        map.generateSalle(window, self.areaPlay)
-        map.generateFirstSalle(self.areaPlay)
-
-        monster.generateMonster(self.areaPlay)
+        self.map.generateMap(window, self.areaPlay)
+        self.map.generateSalle(window, self.areaPlay)
+        self.map.generateFirstSalle(self.areaPlay)
 
         self.character_id = self.areaPlay.create_rectangle(100, 100, 130, 130, fill="red")
         self.update_view()
 
+        self.monster.generateMonster(self.areaPlay)
+        self.move_monster_periodically()
 
         self.areaPlay.pack()
         window.bind("<KeyPress>", self.move_character)
-        
+    
+
+    def move_monster_periodically(self):
+        self.monster.moveMonster(self.areaPlay, self.view_x1, self.view_y1, self.view_x2, self.view_y2, self.character_x, self.character_y, self.character_x2, self.character_x1, self.character_y2, self.character_y1)
+        self.areaPlay.after(800, self.move_monster_periodically)
 
 
     def move_character(self, event):
@@ -62,18 +67,25 @@ class player:
 
     def update_view(self):
         character_coords = self.areaPlay.coords(self.character_id)
-        character_x = (character_coords[0] + character_coords[2]) / 2  # Coordonnée x du centre du rectangle rouge
-        character_y = (character_coords[1] + character_coords[3]) / 2  # Coordonnée y du centre du rectangle rouge
+        self.character_x = (character_coords[0] + character_coords[2]) / 2  # Coordonnée x du centre du rectangle rouge
+        self.character_y = (character_coords[1] + character_coords[3]) / 2  # Coordonnée y du centre du rectangle rouge
+
+        self.character_x1 = character_coords[0]
+        self.character_y1 = character_coords[1]
+        self.character_x2 = character_coords[2]
+        self.character_y2 = character_coords[3]
 
         self.areaPlay.delete("view")  # Supprimer les anciennes zones de vision
 
         # Dessiner une nouvelle zone de vision
-        view_x1 = character_x - self.view_distance
-        view_y1 = character_y - self.view_distance
-        view_x2 = character_x + self.view_distance
-        view_y2 = character_y + self.view_distance
+        self.view_x1 = self.character_x - self.view_distance
+        self.view_y1 = self.character_y - self.view_distance
+        self.view_x2 = self.character_x + self.view_distance
+        self.view_y2 = self.character_y + self.view_distance
 
-        self.areaPlay.create_rectangle(view_x1, view_y1, view_x2, view_y2, fill="", outline="white", tag="view")
+        print("Player : x1 : ",self.view_x1," y1 : ",self.view_x2," x2 : ",self.view_x2," y2 : ",self.view_y2)
+
+        self.areaPlay.create_rectangle(self.view_x1, self.view_y1, self.view_x2, self.view_y2, fill="", outline="white", tag="view")
 
 
     def displayPJ(self):
