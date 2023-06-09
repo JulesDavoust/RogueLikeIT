@@ -7,11 +7,10 @@ import GameMap
 from windowParameters import WindowParameter
 
 class Interface:
-
     def __init__(self):
-       
         self.clickChoose = False
         self.size = WindowParameter.screenSize
+        self.size = '1280x720'
         self.window = tk.Tk()
         self.window.minsize(WindowParameter.screenWidth,WindowParameter.screenHeight)
         self.window.maxsize(WindowParameter.screenWidth,WindowParameter.screenHeight)
@@ -33,11 +32,13 @@ class Interface:
 
     def GenerateGame(self):
         self.menu.pack_forget()
-        self.player.generatePlayer(self.window)
+        self.player.generatePlayer(self.window, self.generate)
         self.player.areaPlay.focus_set()
+
 
     def MenuClass(self):
         self.generate.pack_forget()
+        self.fight.pack_forget()
         self.menu.pack()
 
         if self.clickChoose:
@@ -60,10 +61,9 @@ class Interface:
             buttonSorcier.pack()
 
     def start(self):
-
-        #game_map = GameMap(WindowParameter.mapWidth,WindowParameter.mapHeight)
         self.window.geometry(self.size)
         self.menu = tk.Frame(self.window)
         self.generate = tk.Frame(self.window)
+        self.fight = tk.Frame(self.window)
         self.MenuClass()
         self.window.mainloop()
