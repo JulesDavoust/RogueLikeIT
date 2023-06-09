@@ -14,6 +14,8 @@ class player:
         self.level = 0
         self.xp = 0
         self.map = Map()
+        self.character_x = random.randint(0, 720)
+        self.character_y = random.randint(0, 520)
 
         if classe == 0:
             self.life_point = 120
@@ -41,10 +43,10 @@ class player:
         self.map.generateSalle(window, self.areaPlay)
         self.map.generateFirstSalle(self.areaPlay)
 
-        self.character_id = self.areaPlay.create_rectangle(100, 100, 130, 130, fill="red")
+        self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 30, self.character_y + 30, fill="red")
         self.update_view()
-
-        self.generateMonsters(5)
+        self.number_monsters = random.randint(5, 10)
+        self.generateMonsters(self.number_monsters)
         self.move_monster_periodically()
 
         self.areaPlay.pack()
