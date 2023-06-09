@@ -45,9 +45,9 @@ class player:
 
         self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 30, self.character_y + 30, fill="red")
         self.update_view()
-        self.number_monsters = random.randint(5, 10)
-        self.generateMonsters(self.number_monsters)
-        self.move_monster_periodically()
+       # self.number_monsters = random.randint(5, 10)
+        #self.generateMonsters(self.number_monsters)
+        #self.move_monster_periodically()
 
         self.areaPlay.pack()
         window.bind("<KeyPress>", self.move_character)
