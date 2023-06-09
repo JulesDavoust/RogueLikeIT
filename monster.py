@@ -4,7 +4,9 @@ import tkinter as tk
 class Monster:
     
     def __init__(self, MapLevel) -> None:
+        self.direction = [0, 1, 2, 3]
         self.monster_collision = False
+        self.monster_positions = []  # Liste pour stocker les positions des monstres
         if(MapLevel == 1):
             self.level = random.randint(1, 2)
         elif(MapLevel == 2 and MapLevel <=4):
@@ -36,6 +38,7 @@ class Monster:
 
     def generateMonster(self, areaPlay, x, y):
         self.monster = areaPlay.create_rectangle(x, y, x + 30, y + 30, fill="black")
+        self.monster_positions.append((x, y))  # Ajouter la position du monstre à la liste
 
     def moveMonster(self, areaPlay, x1P, y1P, x2P, y2P, target_x, target_y, x2, x1, y2, y1, playerSelf):
         self.monster_coords = areaPlay.coords(self.monster)
@@ -65,32 +68,21 @@ class Monster:
             for _ in range(50):
                 areaPlay.move(self.monster, self.step_x, self.step_y)
                 areaPlay.update()  # Mise à jour de la fenêtre du canvas
+
+        elif self.monster_x2 + 20 > 768:
+                    print("x2")
+                    areaPlay.move(self.monster, -20, 0)
+        elif self.monster_x1 - 20 < 0:
+                    print("x1")
+                    areaPlay.move(self.monster, +20, 0)
+        elif self.monster_y2 + 20 > 576:
+                    print("y2")
+                    areaPlay.move(self.monster, 0, -20)
+        elif self.monster_y1 - 20 < 0:
+                    print("y1")
+                    areaPlay.move(self.monster, 0, +20)
         elif(playerSelf.player_collision == False):
             dx = random.randint(-20, 20)
             dy = random.randint(-20, 20)
 
-            new_x1 = self.monster_x1 + dx
-            new_y1 = self.monster_y1 + dy
-            new_x2 = self.monster_x2 + dx
-            new_y2 = self.monster_y2 + dy
-
-            
-            if new_x1 < 0:  # Bord gauche
-                new_x1 = 0
-                new_x2 = new_x1 + (self.monster_x2 - self.monster_x1)
-            elif new_x2 > 1000:  # Bord droit
-                new_x2 = 1000
-                new_x1 = new_x2 - (self.monster_x2 - self.monster_x1)
-            if new_y1 < 0:  # Bord supérieur
-                new_y1 = 0
-                new_y2 = new_y1 + (self.monster_y2 - self.monster_y1)
-            elif new_y2 > 700:  # Bord inférieur
-                new_y2 = 700
-                new_y1 = new_y2 - (self.monster_y2 - self.monster_y1)
-
-            areaPlay.move(self.monster, new_x1 - self.monster_x1, new_y1 - self.monster_y1)
-
-        
-        
-        
-        
+            areaPlay.move(self.monster, dx, dy)
