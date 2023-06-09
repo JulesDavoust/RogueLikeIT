@@ -9,12 +9,12 @@ class WindowParameter:
     screenTileCol = 16
     screenTileRow = 9
     
-    mapTileCol = 12
-    mapTileRow = 9
+    mapTileRow = 12
+    mapTileCol = 9
 
     screenWidth = tileSize * screenTileCol
     screenHeight = tileSize * screenTileRow
     screenSize = f"{screenWidth}x{screenHeight}"
 
-    mapWidth = tileSize * mapTileCol
-    mapHeight = tileSize * mapTileRow
+    mapWidth = tileSize * mapTileRow
+    mapHeight = tileSize * mapTileCol
