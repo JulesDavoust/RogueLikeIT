@@ -40,8 +40,6 @@ class Map:
         y1R = yRed * case_size
         x2R = x1R + case_size
         y2R = y1R + case_size
-        print("red")
-        print(x1R, y1R, x2R, y2R)
         areaPlay.create_rectangle(x1R, y1R, x2R, y2R, fill="red")
 
         self.xGreen = random.randint(0, (self.map_width-50)// case_size)
@@ -53,20 +51,13 @@ class Map:
         y1G = self.yGreen * case_size
         x2G = x1G + case_size
         y2G = y1G + case_size
-        print("Green")
-        print(x1G, y1G, x2G, y2G)
-        print(self.CaseNoire)
         areaPlay.create_rectangle(x1G, y1G, x2G, y2G, fill="green")
         KeyfindG = -1
         KeyfindR = -1
         for cle, valeur in self.CaseNoire.items():
             if(x1G == valeur[0] and y1G == valeur[1] and x2G == valeur[2] and y2G == valeur[3]):
-                print("find G ?")
-                print(cle)
                 KeyfindG = cle
             if(x1R == valeur[0] and y1R == valeur[1] and x2R == valeur[2] and y2R == valeur[3]):
-                print("find R ?")
-                print(cle)
                 KeyfindR = cle
         if KeyfindG != -1:
             self.CaseNoire.pop(KeyfindG)

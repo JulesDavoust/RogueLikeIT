@@ -163,7 +163,7 @@ class player:
                     and new_x1 < valeur[2]
                     and new_y1 < valeur[3]
                 ):
-                    print("coll player")
+                    
                     return  # Collision détectée, arrêter le déplacement
 
             self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
