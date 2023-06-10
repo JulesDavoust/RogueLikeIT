@@ -9,7 +9,7 @@ class Monster:
         self.monster_collision = False
         self.monster_positions = []  # Liste pour stocker les positions des monstres
 
-        self.zombie = tk.PhotoImage(file="C:/Users/jules/Desktop/big_zombie_idle_anim_f0.png")
+        #self.zombie = tk.PhotoImage(file="C:/Users/jules/Desktop/big_zombie_idle_anim_f0.png")
 
         if(MapLevel == 1):
             self.level = random.randint(1, 2)

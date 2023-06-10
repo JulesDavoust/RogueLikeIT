@@ -1,10 +1,13 @@
 import random
+import tkinter as tk
+import os
+
 from map import Map
 from Fight import fight
 from monster import Monster
-import tkinter as tk
 
-class player:
+
+class player():
     def __init__(self, classe):
         self.allClasse = {0: "guerrier", 1: "archer", 2: "sorcier"}
         self.player_collision = False
@@ -21,7 +24,7 @@ class player:
             self.max_life_point = self.life_point
             self.mana = 20
             self.damage = 30
-            self.knight = tk.PhotoImage(file="C:/Users/jules/Desktop/01Knight.png")
+            self.knight = tk.PhotoImage(file="./sprites/knight_f_idle_anim_f0.png")
         elif classe == 1:
             self.life_point = 80
             self.max_life_point = self.life_point
