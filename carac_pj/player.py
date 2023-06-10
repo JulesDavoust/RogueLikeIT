@@ -48,8 +48,8 @@ class player():
         self.map.generateFirstSalle(self.areaPlay)
         print(self.map.CaseNoire)
         print(self.map.centreCaseNoire)
-        self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 10, self.character_y + 10, fill="red", outline="")
-        #self.character_pic = self.areaPlay.create_image((self.character_x + self.character_x + 27)/2, (self.character_y+self.character_y+27)/2, image=self.knight)
+        self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 10, self.character_y + 10, fill="blue", outline="")
+        self.character_pic = self.areaPlay.create_image((self.character_x + self.character_x + 27)/2, (self.character_y+self.character_y+27)/2, image=self.knight)
         self.update_view()
         self.number_monsters = random.randint(5, 7)
         self.generateMonsters(self.number_monsters)
@@ -165,7 +165,7 @@ class player():
                     return  # Collision détectée, arrêter le déplacement
 
             self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
-            #self.areaPlay.move(self.character_pic, dx, dy)
+            self.areaPlay.move(self.character_pic, dx, dy)
             self.update_view()
 
 
