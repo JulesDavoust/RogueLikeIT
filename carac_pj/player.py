@@ -44,6 +44,7 @@ class player:
         self.map.generateSalle(window, self.areaPlay)
         self.map.generateFirstSalle(self.areaPlay)
         print(self.map.CaseNoire)
+        print(self.map.centreCaseNoire)
         self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 30, self.character_y + 30, fill="red")
         self.update_view()
         self.number_monsters = random.randint(5, 7)

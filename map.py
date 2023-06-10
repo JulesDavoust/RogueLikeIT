@@ -8,6 +8,7 @@ class Map:
     def __init__(self) -> None:
         self.level = 1
         self.CaseNoire = {}
+        self.centreCaseNoire = {}
         self.indexDico = 0
         self.cooSpawnX = 0
         self.cooSpawnY = 0
@@ -37,6 +38,7 @@ class Map:
                 y2 = y1 + case_size
                 if fill_color == "black":
                     self.CaseNoire[self.indexDico] = [x1, y1, x2, y2]
+                    self.centreCaseNoire[self.indexDico] = [(x1+x2)/2, (y1+y2)/2]
                     self.indexDico += 1
                 areaPlay.create_rectangle(x1, y1, x2, y2, fill=fill_color)
 

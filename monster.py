@@ -61,15 +61,56 @@ class Monster:
             playerSelf.startFight()
         elif(self.monster_x1 < x2P and self.monster_x2 > x1P and self.monster_y1 < y2P and self.monster_y2 > y1P and playerSelf.player_collision == False):
             print("Monster : x1 : ",self.monster_x1," y1 : ",self.monster_y1," x2 : ",self.monster_x2," y2 : ",self.monster_y2)
-            dx = target_x - self.current_x  # Déplacement en x nécessaire
-            dy = target_y - self.current_y  # Déplacement en y nécessaire
+            """self.caseNoireEntre = False
+            for cle, valeur in map.CaseNoire.items():
+                if ((self.current_x < valeur[0] and target_x > valeur[0]) 
+                    or (self.current_x > valeur[0] and target_x < valeur[0])):
+                    self.caseNoireEntre = True
+                elif((self.current_y < valeur[1] and target_y > valeur[1]) 
+                    or (self.current_y > valeur[1] and target_y < valeur[1])):
+                     self.caseNoireEntre = True"""
+            black_center_x = (self.monster_x1 + self.monster_x2) // 2
+            black_center_y = (self.monster_y1 + self.monster_y2) // 2
+            red_center_x = (x1P + x2P) // 2
+            red_center_y = (y1P + y2P) // 2
 
-            self.step_x = dx/self.speed
-            self.step_y = dy/self.speed
+            # Tracer une ligne entre les centres des carrés
+            line_equation = lambda x: (red_center_y - black_center_y) * (x - black_center_x) / (red_center_x - black_center_x) + black_center_y
+            is_black_tile_in_between = False
+            for x in range(int(min(black_center_x, red_center_x)), int(max(black_center_x, red_center_x))):
+                y = line_equation(x)
+                if self.isBlackTile(x, y, map):
+                    is_black_tile_in_between = True
+                    break
+            
+            print(is_black_tile_in_between)
+            if is_black_tile_in_between == False:
+                dx = target_x - self.current_x  # Déplacement en x nécessaire
+                dy = target_y - self.current_y  # Déplacement en y nécessaire
 
-            for _ in range(50):
-                areaPlay.move(self.monster, self.step_x, self.step_y)
-                areaPlay.update()  # Mise à jour de la fenêtre du canvas
+                self.step_x = dx/self.speed
+                self.step_y = dy/self.speed
+
+                for _ in range(50):
+                    areaPlay.move(self.monster, self.step_x, self.step_y)
+                    areaPlay.update()  # Mise à jour de la fenêtre du canvas
+            else:
+                dx = random.randint(-20, 20)
+                dy = random.randint(-20, 20)
+                new_x1 = self.monster_x1 + dx
+                new_y1 = self.monster_y1 + dy
+                new_x2 = self.monster_x2 + dx
+                new_y2 = self.monster_y2 + dy
+
+                for cle, valeur in map.CaseNoire.items():
+                    if (
+                        new_x2 > valeur[0]
+                        and new_y2 > valeur[1]
+                        and new_x1 < valeur[2]
+                        and new_y1 < valeur[3]
+                    ):
+                        return
+                areaPlay.move(self.monster, dx, dy)
 
         elif self.monster_x2 + 20 > 768:
                     print("x2")
@@ -100,3 +141,9 @@ class Monster:
                 ):
                     return
             areaPlay.move(self.monster, dx, dy)
+
+    def isBlackTile(self, x, y, map):
+        for cle, valeur in map.CaseNoire.items():
+            if valeur[0] < x < valeur[2] and valeur[1] < y < valeur[3]:
+                return True
+        return False
