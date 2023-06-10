@@ -73,9 +73,9 @@ class Map:
         emplacement = False
         emplacementOK = True
         case_size = WindowParameter.tileSize
-        while not emplacement:
-            x1 = random.randint(0, self.map_width)
-            y1 = random.randint(0, self.map_height)
+        while emplacement == False:
+            x1 = random.randint(0, (self.map_width-50))
+            y1 = random.randint(0, (self.map_height-50))
             for cle, valeur in self.CaseNoire.items():
                 if (
                     x1 + case_size > valeur[0]
@@ -87,7 +87,10 @@ class Map:
             if emplacementOK:
                 emplacement = True
             emplacementOK = True
-        print(x1, y1, x1 + case_size, y1 + case_size)
+        self.keyX1 = x1
+        self.keyY1 = y1
+        self.keyX2 = x1 + 6
+        self.keyY2 = y1 + 6
         self.key = areaPlay.create_rectangle(x1, y1, x1+6, y1+6, fill="yellow")
 
     def refreshMap(self,areaPlay):
@@ -108,3 +111,4 @@ class Map:
     def generateSalle(self, window, areaPlay):
         print("salutGENERATESALLE")
         # areaPlay.create_line(100, 450, 100, 350, fill="brown", width=4)
+

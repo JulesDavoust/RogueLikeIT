@@ -51,7 +51,7 @@ class Monster:
         self.monster_y1 = self.monster_coords[1]  
         self.monster_x2 = self.monster_coords[2]
         self.monster_y2 = self.monster_coords[3]
-        print("Monster : x1 : ",self.monster_x1)
+        #print("Monster : x1 : ",self.monster_x1)
         
 
         self.current_x = (self.monster_coords[0] + self.monster_coords[2])/2
@@ -64,15 +64,6 @@ class Monster:
             playerSelf.player_collision = True
             playerSelf.startFight()
         elif(self.monster_x1 < x2P and self.monster_x2 > x1P and self.monster_y1 < y2P and self.monster_y2 > y1P and playerSelf.player_collision == False):
-            print("Monster : x1 : ",self.monster_x1," y1 : ",self.monster_y1," x2 : ",self.monster_x2," y2 : ",self.monster_y2)
-            """self.caseNoireEntre = False
-            for cle, valeur in map.CaseNoire.items():
-                if ((self.current_x < valeur[0] and target_x > valeur[0]) 
-                    or (self.current_x > valeur[0] and target_x < valeur[0])):
-                    self.caseNoireEntre = True
-                elif((self.current_y < valeur[1] and target_y > valeur[1]) 
-                    or (self.current_y > valeur[1] and target_y < valeur[1])):
-                     self.caseNoireEntre = True"""
             black_center_x = (self.monster_x1 + self.monster_x2) // 2
             black_center_y = (self.monster_y1 + self.monster_y2) // 2
             red_center_x = (x1P + x2P) // 2
@@ -87,7 +78,7 @@ class Monster:
                     is_black_tile_in_between = True
                     break
             
-            print(is_black_tile_in_between)
+            #print(is_black_tile_in_between)
             if is_black_tile_in_between == False:
                 dx = target_x - self.current_x  # Déplacement en x nécessaire
                 dy = target_y - self.current_y  # Déplacement en y nécessaire

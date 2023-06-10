@@ -14,6 +14,8 @@ class player:
         self.xp = 0
         self.map = Map()
 
+        self.inventory = {}
+
         if classe == 0:
             self.life_point = 120
             self.max_life_point = self.life_point
@@ -41,8 +43,8 @@ class player:
         self.map.generateKey(self.areaPlay)
         self.map.generateSalle(window, self.areaPlay)
         self.map.generateFirstSalle(self.areaPlay)
-        print(self.map.CaseNoire)
-        print(self.map.centreCaseNoire)
+        """print(self.map.CaseNoire)
+        print(self.map.centreCaseNoire)"""
         self.character_x = self.map.spawnX
         self.character_y = self.map.spawnY
         self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 10, self.character_y + 10, fill="red", outline="")
@@ -51,7 +53,7 @@ class player:
         self.number_monsters = random.randint(5, 7)
         self.generateMonsters(self.number_monsters)
         self.move_monster_periodically()
-
+        
         self.areaPlay.pack()
         window.bind("<KeyPress>", self.move_character)
 
@@ -92,7 +94,7 @@ class player:
                 if emplacementOK:
                     emplacement = True
                 emplacementOK = True
-            print(x1, y1, x1 + 30, y1 + 30)
+            """print(x1, y1, x1 + 30, y1 + 30)"""
 
             # Génère le carré noir du monstre dans l'areaPlay à la position aléatoire
             monster.generateMonster(self.areaPlay, x1, y1)
@@ -128,25 +130,21 @@ class player:
             dx, dy = 0, 0  # Valeurs de déplacement initiales
 
             if key == "Right":
-                print("r")
                 if self.character_x2 + 3 > 768:
                     return
                 dx = 3  # Déplacement vers la droite
 
             elif key == "Left":
-                print("l")
                 if self.character_x1 - 3 < 0:
                     return
                 dx = -3  # Déplacement vers la gauche
 
             elif key == "Up":
-                print("u")
                 if self.character_y1 - 3 < 0:
                     return
                 dy = -3  # Déplacement vers le haut
 
             elif key == "Down":
-                print("d")
                 if self.character_y2 + 3 > 576:
                     return
                 dy = 3  # Déplacement vers le bas
@@ -165,7 +163,7 @@ class player:
                 ):
                     
                     return  # Collision détectée, arrêter le déplacement
-
+            self.getKey()
             self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
             #self.areaPlay.move(self.character_pic, dx, dy)
             self.update_view()
@@ -192,6 +190,12 @@ class player:
         print("Player : x1 : ",self.view_x1," y1 : ",self.view_x2," x2 : ",self.view_x2," y2 : ",self.view_y2)
 
         self.areaPlay.create_rectangle(self.view_x1, self.view_y1, self.view_x2, self.view_y2, fill="", outline="white", tag="view")
+
+    def getKey(self):
+        if (self.character_x1 < self.map.keyX2 and self.character_x2 > self.map.keyX1) and (self.character_y1 < self.map.keyY2 and self.character_y2 > self.map.keyY1):
+            self.inventory["key"] = +1
+            self.areaPlay.delete(self.map.key)
+            print(self.inventory)
 
 
     def displayPJ(self):
