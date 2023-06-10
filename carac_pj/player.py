@@ -2,7 +2,6 @@ import random
 from map import Map
 from Fight import fight
 from monster import Monster
-
 import tkinter as tk
 
 class player:
@@ -22,6 +21,7 @@ class player:
             self.max_life_point = self.life_point
             self.mana = 20
             self.damage = 30
+            self.knight = tk.PhotoImage(file="C:/Users/jules/Desktop/01Knight.png")
         elif classe == 1:
             self.life_point = 80
             self.max_life_point = self.life_point
@@ -45,7 +45,8 @@ class player:
         self.map.generateFirstSalle(self.areaPlay)
         print(self.map.CaseNoire)
         print(self.map.centreCaseNoire)
-        self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 30, self.character_y + 30, fill="red")
+        self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 27, self.character_y + 27, fill="", outline="")
+        self.character_pic = self.areaPlay.create_image((self.character_x + self.character_x + 27)/2, (self.character_y+self.character_y+27)/2, image=self.knight)
         self.update_view()
         self.number_monsters = random.randint(5, 7)
         self.generateMonsters(self.number_monsters)
@@ -161,6 +162,7 @@ class player:
                     return  # Collision détectée, arrêter le déplacement
 
             self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
+            self.areaPlay.move(self.character_pic, dx, dy)
             self.update_view()
 
 

@@ -8,6 +8,9 @@ class Monster:
         self.direction = [0, 1, 2, 3]
         self.monster_collision = False
         self.monster_positions = []  # Liste pour stocker les positions des monstres
+
+        self.zombie = tk.PhotoImage(file="C:/Users/jules/Desktop/big_zombie_idle_anim_f0.png")
+
         if(MapLevel == 1):
             self.level = random.randint(1, 2)
         elif(MapLevel == 2 and MapLevel <=4):
@@ -38,7 +41,8 @@ class Monster:
     
 
     def generateMonster(self, areaPlay, x, y):
-        self.monster = areaPlay.create_rectangle(x, y, x + 30, y + 30, fill="black")
+        self.monster = areaPlay.create_rectangle(x, y, x + 30, y + 30, fill="", outline = "")
+        self.monster_pic = areaPlay.create_image((x+x+30)/2, (y+y+30)/2, image=self.zombie)
         self.monster_positions.append((x, y))  # Ajouter la position du monstre à la liste
 
     def moveMonster(self, areaPlay, x1P, y1P, x2P, y2P, target_x, target_y, x2, x1, y2, y1, playerSelf, map):
@@ -92,6 +96,7 @@ class Monster:
                 self.step_y = dy/self.speed
 
                 for _ in range(50):
+                    areaPlay.move(self.monster_pic, self.step_x, self.step_y)
                     areaPlay.move(self.monster, self.step_x, self.step_y)
                     areaPlay.update()  # Mise à jour de la fenêtre du canvas
             else:
@@ -111,19 +116,24 @@ class Monster:
                     ):
                         return
                 areaPlay.move(self.monster, dx, dy)
+                areaPlay.move(self.monster_pic, dx, dy)
 
         elif self.monster_x2 + 20 > 768:
                     print("x2")
                     areaPlay.move(self.monster, -20, 0)
+                    areaPlay.move(self.monster_pic, -20, 0)
         elif self.monster_x1 - 20 < 0:
                     print("x1")
                     areaPlay.move(self.monster, +20, 0)
+                    areaPlay.move(self.monster_pic, -20, 0)
         elif self.monster_y2 + 20 > 576:
                     print("y2")
                     areaPlay.move(self.monster, 0, -20)
+                    areaPlay.move(self.monster_pic, -20, 0)
         elif self.monster_y1 - 20 < 0:
                     print("y1")
                     areaPlay.move(self.monster, 0, +20)
+                    areaPlay.move(self.monster_pic, -20, 0)
         elif(playerSelf.player_collision == False):
             dx = random.randint(-20, 20)
             dy = random.randint(-20, 20)
@@ -140,6 +150,7 @@ class Monster:
                     and new_y1 < valeur[3]
                 ):
                     return
+            areaPlay.move(self.monster_pic, dx, dy)
             areaPlay.move(self.monster, dx, dy)
 
     def isBlackTile(self, x, y, map):
