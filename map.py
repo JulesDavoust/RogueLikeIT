@@ -47,8 +47,8 @@ class Map:
         emplacementOK = True
         case_size = WindowParameter.tileSize
         while not emplacement:
-            x1 = random.randint(0, 720)
-            y1 = random.randint(0, 520)
+            x1 = random.randint(0, self.map_width)
+            y1 = random.randint(0, self.map_height)
             for cle, valeur in self.CaseNoire.items():
                 if (
                     x1 + case_size > valeur[0]
