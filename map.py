@@ -13,7 +13,7 @@ class Map:
         self.spawnX = 0
         self.spawnY = 0
 
-    def generateMap(self, window, areaPlay):
+    def generateMap(self, areaPlay):
         self.map_width = WindowParameter.mapWidth
         self.map_height = WindowParameter.mapHeight
         case_size = WindowParameter.tileSize
@@ -36,11 +36,11 @@ class Map:
                 areaPlay.create_rectangle(x1, y1, x2, y2, fill=fill_color)
         xRed = random.randint(0, self.map_width// case_size)
         yRed = random.randint(0, self.map_height// case_size)
-        x1R = xRed * case_size
-        y1R = yRed * case_size
-        x2R = x1R + case_size
-        y2R = y1R + case_size
-        areaPlay.create_rectangle(x1R, y1R, x2R, y2R, fill="red")
+        self.x1R = xRed * case_size
+        self.y1R = yRed * case_size
+        self.x2R = self.x1R + case_size
+        self.y2R = self.y1R + case_size
+        areaPlay.create_rectangle(self.x1R, self.y1R, self.x2R, self.y2R, fill="red")
 
         self.xGreen = random.randint(0, (self.map_width-50)// case_size)
         self.yGreen = random.randint(0, (self.map_height-50)// case_size)
@@ -57,7 +57,7 @@ class Map:
         for cle, valeur in self.CaseNoire.items():
             if(x1G == valeur[0] and y1G == valeur[1] and x2G == valeur[2] and y2G == valeur[3]):
                 KeyfindG = cle
-            if(x1R == valeur[0] and y1R == valeur[1] and x2R == valeur[2] and y2R == valeur[3]):
+            if(self.x1R == valeur[0] and self.y1R == valeur[1] and self.x2R == valeur[2] and self.y2R == valeur[3]):
                 KeyfindR = cle
         if KeyfindG != -1:
             self.CaseNoire.pop(KeyfindG)

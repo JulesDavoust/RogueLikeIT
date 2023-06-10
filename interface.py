@@ -32,7 +32,7 @@ class Interface:
 
     def GenerateGame(self):
         self.menu.pack_forget()
-        self.player.generatePlayer(self.window, self.generate)
+        self.player.generatePlayer(self.window)
         self.player.areaPlay.focus_set()
 
 

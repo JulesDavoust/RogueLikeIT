@@ -14,7 +14,7 @@ class player:
         self.xp = 0
         self.map = Map()
 
-        self.inventory = {}
+        self.inventory = {"key":0}
 
         if classe == 0:
             self.life_point = 120
@@ -35,11 +35,11 @@ class player:
             self.range = 5
             self.damage = 20
 
-    def generatePlayer(self, window, generate):
-        
+    def generatePlayer(self, window):
+        self.window = window
         self.areaPlay = tk.Canvas(window, width=1000, height=700)
 
-        self.map.generateMap(window, self.areaPlay)
+        self.map.generateMap(self.areaPlay)
         self.map.generateKey(self.areaPlay)
         self.map.generateSalle(window, self.areaPlay)
         self.map.generateFirstSalle(self.areaPlay)
@@ -164,6 +164,7 @@ class player:
                     
                     return  # Collision détectée, arrêter le déplacement
             self.getKey()
+            self.goNextRoom()
             self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
             #self.areaPlay.move(self.character_pic, dx, dy)
             self.update_view()
@@ -191,12 +192,39 @@ class player:
 
         self.areaPlay.create_rectangle(self.view_x1, self.view_y1, self.view_x2, self.view_y2, fill="", outline="white", tag="view")
 
+    def goNextRoom(self):
+        print("nextRoom ?")
+        if(self.inventory["key"] >= 1 and self.character_x1 >= self.map.x1R and self.character_x2 <= self.map.x2R and self.character_y2 <= self.map.y2R and self.character_y1 >= self.map.y1R):
+            print("Yes !")
+            self.generateNewMap()
+
     def getKey(self):
         if (self.character_x1 < self.map.keyX2 and self.character_x2 > self.map.keyX1) and (self.character_y1 < self.map.keyY2 and self.character_y2 > self.map.keyY1):
             self.inventory["key"] = +1
             self.areaPlay.delete(self.map.key)
             print(self.inventory)
 
+    def generateNewMap(self):
+        # Supprime les éléments de la carte actuelle
+        self.areaPlay.delete("all")
+
+        # Génère une nouvelle carte
+        self.map = Map()
+        self.map.generateMap(self.areaPlay)
+        self.map.generateKey(self.areaPlay)
+
+        # Met à jour les coordonnées du personnage
+        self.character_x = self.map.spawnX
+        self.character_y = self.map.spawnY
+        self.character_id = self.areaPlay.create_rectangle(
+            self.character_x, self.character_y, self.character_x + 10, self.character_y + 10, fill="red", outline=""
+        )
+
+        # Génère les monstres pour la nouvelle carte
+        self.update_view()
+        self.number_monsters = random.randint(5, 7)
+        self.generateMonsters(self.number_monsters)
+        self.move_monster_periodically()
 
     def displayPJ(self):
         if self.classe == 0:
