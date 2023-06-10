@@ -1,7 +1,7 @@
 import tkinter as tk
 import random
 
-from WindowParameters import WindowParameter
+from windowParameters import WindowParameter
 
 
 class Map:
@@ -111,4 +111,17 @@ class Map:
     def generateSalle(self, window, areaPlay):
         print("salutGENERATESALLE")
         # areaPlay.create_line(100, 450, 100, 350, fill="brown", width=4)
+
+    """def numberMonster(self, maplevel):
+        print(maplevel)
+        if(maplevel == 1):
+            return random.randint(5, 7)
+        elif(maplevel == 2 and maplevel <=4):
+            return random.randint(8,10)
+        elif(maplevel == 5 and maplevel <= 7):
+            return random.randint(11,13)
+        elif(maplevel == 8 and maplevel <= 10):
+            return random.randint(14, 16)
+        elif(maplevel > 10):
+            return random.randint(17, 25)"""
 

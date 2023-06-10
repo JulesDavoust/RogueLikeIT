@@ -2,7 +2,7 @@ import random
 from map import Map
 from Fight import fight
 from monster import Monster
-from WindowParameters import WindowParameter
+from windowParameters import WindowParameter
 import tkinter as tk
 
 class player:

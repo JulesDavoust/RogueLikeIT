@@ -4,7 +4,7 @@ from map import Map
 import tkinter as tk
 import GameMap
 
-from WindowParameters import WindowParameter
+from windowParameters import WindowParameter
 
 class Interface:
     def __init__(self):
