@@ -128,24 +128,24 @@ class player:
             dx, dy = 0, 0  # Valeurs de déplacement initiales
 
             if key == "Right":
-                if self.character_x2 + 5 > 768:
+                if self.character_x2 + 3 > 768:
                     return
-                dx = 5  # Déplacement vers la droite
+                dx = 3  # Déplacement vers la droite
 
             elif key == "Left":
-                if self.character_x1 - 5 < 0:
+                if self.character_x1 - 3 < 0:
                     return
-                dx = -5  # Déplacement vers la gauche
+                dx = -3  # Déplacement vers la gauche
 
             elif key == "Up":
-                if self.character_y1 - 5 < 0:
+                if self.character_y1 - 3 < 0:
                     return
-                dy = -5  # Déplacement vers le haut
+                dy = -3  # Déplacement vers le haut
 
             elif key == "Down":
-                if self.character_y2 + 5 > 576:
+                if self.character_y2 + 3 > 576:
                     return
-                dy = 5  # Déplacement vers le bas
+                dy = 3  # Déplacement vers le bas
 
             new_x1 = self.character_x1 + dx
             new_y1 = self.character_y1 + dy

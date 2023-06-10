@@ -61,7 +61,7 @@ class Map:
                 emplacement = True
             emplacementOK = True
         print(x1, y1, x1 + case_size, y1 + case_size)
-        self.key = areaPlay.create_rectangle(x1, y1, x1+20, y1+20, fill="yellow")
+        self.key = areaPlay.create_rectangle(x1, y1, x1+6, y1+6, fill="yellow")
 
     def refreshMap(self,areaPlay):
         print("salut")
