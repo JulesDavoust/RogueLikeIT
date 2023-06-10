@@ -45,8 +45,8 @@ class player:
         self.map.generateFirstSalle(self.areaPlay)
         print(self.map.CaseNoire)
         print(self.map.centreCaseNoire)
-        self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 27, self.character_y + 27, fill="", outline="")
-        self.character_pic = self.areaPlay.create_image((self.character_x + self.character_x + 27)/2, (self.character_y+self.character_y+27)/2, image=self.knight)
+        self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 10, self.character_y + 10, fill="red", outline="")
+        #self.character_pic = self.areaPlay.create_image((self.character_x + self.character_x + 27)/2, (self.character_y+self.character_y+27)/2, image=self.knight)
         self.update_view()
         self.number_monsters = random.randint(5, 7)
         self.generateMonsters(self.number_monsters)
@@ -63,9 +63,9 @@ class player:
     def generateMonsters(self, num_monsters):
         self.monsters = []  # Liste pour stocker les monstres
         min_x = 0
-        max_x = 720
+        max_x = self.map.map_width-50
         min_y = 0
-        max_y = 520
+        max_y = self.map.map_height-50
 
         for _ in range(num_monsters):
             monster = Monster(self.map.level)  # Crée une instance de monstre
@@ -76,15 +76,15 @@ class player:
             emplacement = False
             emplacementOK = True
             while not emplacement:
-                x1 = random.randint(0, 720)
-                y1 = random.randint(0, 520)
+                x1 = random.randint(0, self.map.map_width-50)
+                y1 = random.randint(0, self.map.map_height-50)
                 while self.checkMonsterInView(x1, y1):
                     x1 = random.randint(min_x, max_x)
                     y1 = random.randint(min_y, max_y)
                 for cle, valeur in self.map.CaseNoire.items():
                     if (
-                        x1 + 30 > valeur[0]
-                        and y1 + 30 > valeur[1]
+                        x1 + 10 > valeur[0]
+                        and y1 + 10 > valeur[1]
                         and x1 < valeur[2]
                         and y1 < valeur[3]
                     ):
@@ -128,24 +128,24 @@ class player:
             dx, dy = 0, 0  # Valeurs de déplacement initiales
 
             if key == "Right":
-                if self.character_x2 + 10 > 768:
+                if self.character_x2 + 5 > 768:
                     return
-                dx = 10  # Déplacement vers la droite
+                dx = 5  # Déplacement vers la droite
 
             elif key == "Left":
-                if self.character_x1 - 10 < 0:
+                if self.character_x1 - 5 < 0:
                     return
-                dx = -10  # Déplacement vers la gauche
+                dx = -5  # Déplacement vers la gauche
 
             elif key == "Up":
-                if self.character_y1 - 10 < 0:
+                if self.character_y1 - 5 < 0:
                     return
-                dy = -10  # Déplacement vers le haut
+                dy = -5  # Déplacement vers le haut
 
             elif key == "Down":
-                if self.character_y2 + 10 > 576:
+                if self.character_y2 + 5 > 576:
                     return
-                dy = 10  # Déplacement vers le bas
+                dy = 5  # Déplacement vers le bas
 
             new_x1 = self.character_x1 + dx
             new_y1 = self.character_y1 + dy
@@ -162,7 +162,7 @@ class player:
                     return  # Collision détectée, arrêter le déplacement
 
             self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
-            self.areaPlay.move(self.character_pic, dx, dy)
+            #self.areaPlay.move(self.character_pic, dx, dy)
             self.update_view()
 
 

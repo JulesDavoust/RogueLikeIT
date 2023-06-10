@@ -14,12 +14,12 @@ class Map:
         self.cooSpawnY = 0
 
     def generateMap(self, window, areaPlay):
-        map_width = WindowParameter.mapWidth
-        map_height = WindowParameter.mapHeight
+        self.map_width = WindowParameter.mapWidth
+        self.map_height = WindowParameter.mapHeight
         case_size = WindowParameter.tileSize
         # Dessine les cases
-        for x in range(map_width // case_size):
-            for y in range(map_height // case_size):
+        for x in range(self.map_width // case_size):
+            for y in range(self.map_height // case_size):
                 if x == 11 and y == 8:
                      # Coin inferieur droit (fin du niveau)
                      fill_color = "red"
