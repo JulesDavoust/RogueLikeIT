@@ -13,8 +13,6 @@ class player:
         self.level = 0
         self.xp = 0
         self.map = Map()
-        self.character_x = self.map.cooSpawnX
-        self.character_y = self.map.cooSpawnY
 
         if classe == 0:
             self.life_point = 120
@@ -45,6 +43,8 @@ class player:
         self.map.generateFirstSalle(self.areaPlay)
         print(self.map.CaseNoire)
         print(self.map.centreCaseNoire)
+        self.character_x = self.map.spawnX
+        self.character_y = self.map.spawnY
         self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 10, self.character_y + 10, fill="red", outline="")
         #self.character_pic = self.areaPlay.create_image((self.character_x + self.character_x + 27)/2, (self.character_y+self.character_y+27)/2, image=self.knight)
         self.update_view()
@@ -128,21 +128,25 @@ class player:
             dx, dy = 0, 0  # Valeurs de déplacement initiales
 
             if key == "Right":
+                print("r")
                 if self.character_x2 + 3 > 768:
                     return
                 dx = 3  # Déplacement vers la droite
 
             elif key == "Left":
+                print("l")
                 if self.character_x1 - 3 < 0:
                     return
                 dx = -3  # Déplacement vers la gauche
 
             elif key == "Up":
+                print("u")
                 if self.character_y1 - 3 < 0:
                     return
                 dy = -3  # Déplacement vers le haut
 
             elif key == "Down":
+                print("d")
                 if self.character_y2 + 3 > 576:
                     return
                 dy = 3  # Déplacement vers le bas
@@ -159,6 +163,7 @@ class player:
                     and new_x1 < valeur[2]
                     and new_y1 < valeur[3]
                 ):
+                    print("coll player")
                     return  # Collision détectée, arrêter le déplacement
 
             self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
