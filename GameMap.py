@@ -1,5 +1,5 @@
 import Tile
-from windowParameters import WindowParameter
+from WindowParameters import WindowParameter
 
 class GameMap:
     def __init__(self,width,height):
