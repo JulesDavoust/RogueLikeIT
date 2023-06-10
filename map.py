@@ -10,45 +10,72 @@ class Map:
         self.CaseNoire = {}
         self.centreCaseNoire = {}
         self.indexDico = 0
-        self.cooSpawnX = 0
-        self.cooSpawnY = 0
+        self.spawnX = 0
+        self.spawnY = 0
 
     def generateMap(self, window, areaPlay):
         self.map_width = WindowParameter.mapWidth
         self.map_height = WindowParameter.mapHeight
         case_size = WindowParameter.tileSize
+
         # Dessine les cases
         for x in range(self.map_width // case_size):
             for y in range(self.map_height // case_size):
-                if x == 11 and y == 8:
-                     # Coin inferieur droit (fin du niveau)
-                     fill_color = "red"
-                elif x == 0 and y == 0:
-                     # Coin superieur gauche (entrée du donjon)
-                     fill_color = "green"
+                if random.random() < 0.335:  # Changer la probabilité selon vos besoins
+                    fill_color = "black"  # Mur
                 else:
-                     # Cases aléatoires (noir ou blanc)
-                     if random.random() < 0.335:  # Changer la probabilité selon vos besoins
-                         fill_color = "black"  # Mur
-                     else:
-                         fill_color = "white"  # Libre passage
+                    fill_color = "white"  # Libre passage
                 x1 = x * case_size
                 y1 = y * case_size
                 x2 = x1 + case_size
                 y2 = y1 + case_size
                 if fill_color == "black":
-                    self.CaseNoire[self.indexDico] = [x1, y1, x2, y2]
-                    self.centreCaseNoire[self.indexDico] = [(x1+x2)/2, (y1+y2)/2]
-                    self.indexDico += 1
+                        self.CaseNoire[self.indexDico] = [x1, y1, x2, y2]
+                        self.centreCaseNoire[self.indexDico] = [(x1+x2)/2, (y1+y2)/2]
+                        self.indexDico += 1
                 areaPlay.create_rectangle(x1, y1, x2, y2, fill=fill_color)
+        xRed = random.randint(0, self.map_width// case_size)
+        yRed = random.randint(0, self.map_height// case_size)
+        x1R = xRed * case_size
+        y1R = yRed * case_size
+        x2R = x1R + case_size
+        y2R = y1R + case_size
+        areaPlay.create_rectangle(x1R, y1R, x2R, y2R, fill="red")
+
+        self.xGreen = random.randint(0, (self.map_width-50)// case_size)
+        self.yGreen = random.randint(0, (self.map_height-50)// case_size)
+        while self.xGreen == xRed and yRed == self.yGreen:
+            self.xGreen = random.randint(0, (self.map_width-50)//case_size)
+            self.yGreen = random.randint(0, (self.map_height-50)//case_size)
+        x1G = self.xGreen * case_size
+        y1G = self.yGreen * case_size
+        x2G = x1G + case_size
+        y2G = y1G + case_size
+        areaPlay.create_rectangle(x1G, y1G, x2G, y2G, fill="green")
+        KeyfindG = -1
+        KeyfindR = -1
+        for cle, valeur in self.CaseNoire.items():
+            if(x1G == valeur[0] and y1G == valeur[1] and x2G == valeur[2] and y2G == valeur[3]):
+                KeyfindG = cle
+            if(x1R == valeur[0] and y1R == valeur[1] and x2R == valeur[2] and y2R == valeur[3]):
+                KeyfindR = cle
+        if KeyfindG != -1:
+            self.CaseNoire.pop(KeyfindG)
+            self.centreCaseNoire.pop(KeyfindG)
+        if KeyfindR != -1:
+            self.CaseNoire.pop(KeyfindR)
+            self.centreCaseNoire.pop(KeyfindR)
+        self.spawnX = x1G + (case_size - 10) // 2
+        self.spawnY = y1G + (case_size - 10) // 2
+
 
     def generateKey(self,areaPlay):
         emplacement = False
         emplacementOK = True
         case_size = WindowParameter.tileSize
-        while not emplacement:
-            x1 = random.randint(0, self.map_width)
-            y1 = random.randint(0, self.map_height)
+        while emplacement == False:
+            x1 = random.randint(0, (self.map_width-50))
+            y1 = random.randint(0, (self.map_height-50))
             for cle, valeur in self.CaseNoire.items():
                 if (
                     x1 + case_size > valeur[0]
@@ -60,7 +87,10 @@ class Map:
             if emplacementOK:
                 emplacement = True
             emplacementOK = True
-        print(x1, y1, x1 + case_size, y1 + case_size)
+        self.keyX1 = x1
+        self.keyY1 = y1
+        self.keyX2 = x1 + 6
+        self.keyY2 = y1 + 6
         self.key = areaPlay.create_rectangle(x1, y1, x1+6, y1+6, fill="yellow")
 
     def refreshMap(self,areaPlay):
@@ -81,3 +111,4 @@ class Map:
     def generateSalle(self, window, areaPlay):
         print("salutGENERATESALLE")
         # areaPlay.create_line(100, 450, 100, 350, fill="brown", width=4)
+
