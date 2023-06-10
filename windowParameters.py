@@ -1,10 +1,13 @@
 class WindowParameter:
     #Unit interface size
     originTileSize = 16
+    
     #A changer par player apres
     SCALE = 2
+    FIX = 2 * SCALE
 
     tileSize= originTileSize*SCALE
+    # objectSize = tileSize - FIX
 
     screenTileCol = 16*2
     screenTileRow = 9*2

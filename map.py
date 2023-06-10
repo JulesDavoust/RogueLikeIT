@@ -1,7 +1,7 @@
 import tkinter as tk
 import random
 
-from windowParameters import WindowParameter
+from WindowParameters import WindowParameter
 
 
 class Map:
