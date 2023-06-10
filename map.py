@@ -7,12 +7,15 @@ from windowParameters import WindowParameter
 class Map:
     def __init__(self) -> None:
         self.level = 1
+        self.CaseNoire = {}
+        self.indexDico = 0
+        self.cooSpawnX = 0
+        self.cooSpawnY = 0
 
     def generateMap(self, window, areaPlay):
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
         case_size = WindowParameter.tileSize
-
         # Dessine les cases
         for x in range(map_width // case_size):
             for y in range(map_height // case_size):
@@ -32,8 +35,31 @@ class Map:
                 y1 = y * case_size
                 x2 = x1 + case_size
                 y2 = y1 + case_size
-               
+                if fill_color == "black":
+                    self.CaseNoire[self.indexDico] = [x1, y1, x2, y2]
+                    self.indexDico += 1
                 areaPlay.create_rectangle(x1, y1, x2, y2, fill=fill_color)
+
+    def generateKey(self,areaPlay):
+        emplacement = False
+        emplacementOK = True
+        case_size = WindowParameter.tileSize
+        while not emplacement:
+            x1 = random.randint(0, 720)
+            y1 = random.randint(0, 520)
+            for cle, valeur in self.CaseNoire.items():
+                if (
+                    x1 + case_size > valeur[0]
+                    and y1 + case_size > valeur[1]
+                    and x1 < valeur[2]
+                    and y1 < valeur[3]
+                ):
+                    emplacementOK = False
+            if emplacementOK:
+                emplacement = True
+            emplacementOK = True
+        print(x1, y1, x1 + case_size, y1 + case_size)
+        self.key = areaPlay.create_rectangle(x1, y1, x1+20, y1+20, fill="yellow")
 
     def refreshMap(self,areaPlay):
         print("salut")

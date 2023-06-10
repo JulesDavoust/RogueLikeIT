@@ -1,3 +1,4 @@
+import math
 import random
 import tkinter as tk
 
@@ -40,7 +41,7 @@ class Monster:
         self.monster = areaPlay.create_rectangle(x, y, x + 30, y + 30, fill="black")
         self.monster_positions.append((x, y))  # Ajouter la position du monstre à la liste
 
-    def moveMonster(self, areaPlay, x1P, y1P, x2P, y2P, target_x, target_y, x2, x1, y2, y1, playerSelf):
+    def moveMonster(self, areaPlay, x1P, y1P, x2P, y2P, target_x, target_y, x2, x1, y2, y1, playerSelf, map):
         self.monster_coords = areaPlay.coords(self.monster)
         self.monster_x1 = self.monster_coords[0]
         self.monster_y1 = self.monster_coords[1]  
@@ -52,7 +53,8 @@ class Monster:
         self.current_x = (self.monster_coords[0] + self.monster_coords[2])/2
         self.current_y = (self.monster_coords[1] + self.monster_coords[3])/2
 
-        
+        dx = +20
+        dy = -20
         """if x1_rect1 < x2_rect2 and x2_rect1 > x1_rect2 and y1_rect1 < y2_rect2 and y2_rect1 > y1_rect2:"""
         if(self.monster_x1 < x2 and self.monster_x2 > x1 and self.monster_y1 < y2 and self.monster_y2 > y1 and playerSelf.player_collision == False):
             playerSelf.player_collision = True
@@ -84,5 +86,17 @@ class Monster:
         elif(playerSelf.player_collision == False):
             dx = random.randint(-20, 20)
             dy = random.randint(-20, 20)
+            new_x1 = self.monster_x1 + dx
+            new_y1 = self.monster_y1 + dy
+            new_x2 = self.monster_x2 + dx
+            new_y2 = self.monster_y2 + dy
 
+            for cle, valeur in map.CaseNoire.items():
+                if (
+                    new_x2 > valeur[0]
+                    and new_y2 > valeur[1]
+                    and new_x1 < valeur[2]
+                    and new_y1 < valeur[3]
+                ):
+                    return
             areaPlay.move(self.monster, dx, dy)
