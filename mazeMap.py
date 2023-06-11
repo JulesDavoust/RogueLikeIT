@@ -41,13 +41,12 @@ def generate_maze(width, height):
 
             wall_list.remove(random_wall)
         previous_wall = random_wall
-    
 
     return maze
 
 
 # Display the maze
-maze = generate_maze(WindowParameter.mapTileCol,WindowParameter.mapTileRow)
-for row in maze:
-    print(' '.join(row))
+# maze = generate_maze(WindowParameter.mapTileCol,WindowParameter.mapTileRow)
+# for row in maze:
+#     print(' '.join(row))
 
