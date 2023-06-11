@@ -65,7 +65,7 @@ class Monster:
             #playerSelf.startFight()
             print("collision with player")
             
-        elif(self.monster_x1 < x2P and self.monster_x2 > x1P and self.monster_y1 < y2P and self.monster_y2 > y1P and playerSelf.player_collision == False):
+        elif(self.monster_x1 < x2P and self.monster_x2 > x1P and self.monster_y1 < y2P and self.monster_y2 > y1P and playerSelf.player_collision == False and playerSelf.collPNJ == False):
             black_center_x = (self.monster_x1 + self.monster_x2) // 2
             black_center_y = (self.monster_y1 + self.monster_y2) // 2
             red_center_x = (x1P + x2P) // 2
@@ -90,6 +90,8 @@ class Monster:
 
                 for _ in range(50):
                     #areaPlay.move(self.monster_pic, self.step_x, self.step_y)
+                    if(playerSelf.collPNJ == True):
+                         break
                     areaPlay.move(self.monster, self.step_x, self.step_y)
                     areaPlay.update()  # Mise à jour de la fenêtre du canvas
             else:

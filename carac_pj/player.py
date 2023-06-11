@@ -17,11 +17,10 @@ class player:
         self.map = Map()
         self.character_x = 0
         self.character_y = 0
-
-        self.inventory_open = False
         self.pause = False
+        self.collPNJ = False
 
-        self.inventory = {"key":1}
+        self.inventory = {"key":0}
 
         if classe == 0:
             self.life_point = 120
@@ -189,7 +188,7 @@ class player:
             #self.areaPlay.after(800, self.move_monster_periodically)
 
 
-    def checkPNJCollision(self, i):
+    def checkPNJCollision(self, i, dx, dy):
         self.cooPNJ = self.areaPlay.coords(self.pnjs[i].pnj)
         self.pnj_x = (self.cooPNJ[0] + self.cooPNJ[2]) / 2  # Coordonnée x du centre du rectangle rouge
         self.pnj_y = (self.cooPNJ[1] + self.cooPNJ[3]) / 2  # Coordonnée y du centre du rectangle rouge
@@ -198,8 +197,15 @@ class player:
         self.pnj_y1 = self.cooPNJ[1]
         self.pnj_x2 = self.cooPNJ[2]
         self.pnj_y2 = self.cooPNJ[3]
-        if (self.character_x1 < self.pnj_x2 and self.character_x2 > self.pnj_x1) and (self.character_y1 < self.pnj_y2 and self.character_y2 > self.pnj_y1):
+        if (self.character_x1+dx < self.pnj_x2 and self.character_x2+dx > self.pnj_x1) and (self.character_y1+dy < self.pnj_y2 and self.character_y2+dy > self.pnj_y1):
             print("open shop")
+            self.numPNJ = i
+            self.collPNJ = True
+            print("pnj num : ", self.numPNJ)
+            self.pnjs[i].openShop(self.window)
+            return True
+        else:
+            return False
 
     def checkMonsterCollision(self, i, dx, dy):
         self.monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
@@ -215,76 +221,66 @@ class player:
         else:
             return False
 
-    def openInventory(self, key):
-        if not self.inventory_open:
-            self.second_window = tk.Toplevel(self.window)
-            self.inventory_open = True
-            self.start_moving_monsters() 
-
-    def closeInventory(self):
-        self.second_window.destroy()
-        self.inventory_open = False
-
     def move_character(self, event):
+        
         key = event.keysym
 
         if self.player_collision != True:
-            
-            if key == "i":
-                
-                if self.inventory_open:
-                    self.closeInventory()
-                    self.inventory_open = False
-                    
-                else:
-                    self.openInventory(key)
-                print(self.pause)
-            else:
-                dx, dy = 0, 0  # Valeurs de déplacement initiales
+                if(self.collPNJ == True and key == "e"):
+                    self.pnjs[self.numPNJ].closeShop()
+                    self.collPNJ = False
+                elif(self.collPNJ == False):
+                    dx, dy = 0, 0  # Valeurs de déplacement initiales
+                    if key == "Right":
+                        if self.character_x2 + 3 > WindowParameter.mapWidth:
+                            return
+                        dx = 3  # Déplacement vers la droite
 
-                if key == "Right":
-                    if self.character_x2 + 3 > WindowParameter.mapWidth:
+                    elif key == "Left":
+                        if self.character_x1 - 3 < 0:
+                            return
+                        dx = -3  # Déplacement vers la gauche
+
+                    elif key == "Up":
+                        if self.character_y1 - 3 < 0:
+                            return
+                        dy = -3  # Déplacement vers le haut
+
+                    elif key == "Down":
+                        if self.character_y2 + 3 > WindowParameter.mapHeight:
+                            return
+                        dy = 3  # Déplacement vers le bas
+
+                    new_x1 = self.character_x1 + dx
+                    new_y1 = self.character_y1 + dy
+                    new_x2 = self.character_x2 + dx
+                    new_y2 = self.character_y2 + dy
+
+                    for cle, valeur in self.map.CaseNoire.items():
+                        if (
+                            new_x2 > valeur[0]
+                            and new_y2 > valeur[1]
+                            and new_x1 < valeur[2]
+                            and new_y1 < valeur[3]
+                        ):
+                            
+                            return  # Collision détectée, arrêter le déplacement
+                    i = 0
+                    checkPNJ = False
+                    while i < len(self.pnjs) and checkPNJ == False:
+                        checkPNJ = self.checkPNJCollision(i, dx, dy)
+                        i = i + 1
+                    if(checkPNJ == True):
                         return
-                    dx = 3  # Déplacement vers la droite
-
-                elif key == "Left":
-                    if self.character_x1 - 3 < 0:
-                        return
-                    dx = -3  # Déplacement vers la gauche
-
-                elif key == "Up":
-                    if self.character_y1 - 3 < 0:
-                        return
-                    dy = -3  # Déplacement vers le haut
-
-                elif key == "Down":
-                    if self.character_y2 + 3 > WindowParameter.mapHeight:
-                        return
-                    dy = 3  # Déplacement vers le bas
-
-                new_x1 = self.character_x1 + dx
-                new_y1 = self.character_y1 + dy
-                new_x2 = self.character_x2 + dx
-                new_y2 = self.character_y2 + dy
-
-                for cle, valeur in self.map.CaseNoire.items():
-                    if (
-                        new_x2 > valeur[0]
-                        and new_y2 > valeur[1]
-                        and new_x1 < valeur[2]
-                        and new_y1 < valeur[3]
-                    ):
-                        
-                        return  # Collision détectée, arrêter le déplacement
-                for i in range(0, len(self.pnjs)):
-                    self.checkPNJCollision(i)
-                for i in range(0, len(self.monsters)):
-                    if(self.checkMonsterCollision(i, dx, dy)): return
-                self.getKey()
-                self.goNextRoom()
-                self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
-            #self.areaPlay.move(self.character_pic, dx, dy)
-            self.update_view()
+                    """for i in range(0, len(self.pnjs)):
+                        if(self.checkPNJCollision(i, dx, dy)) : return"""
+                    for i in range(0, len(self.monsters)):
+                        if(self.checkMonsterCollision(i, dx, dy)): return
+                    self.getKey()
+                    self.goNextRoom()
+                    self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
+                #self.areaPlay.move(self.character_pic, dx, dy)
+                    self.update_view()
 
 
     def update_view(self):

@@ -14,8 +14,19 @@ def generate_maze(width, height):
     # List of available walls
     wall_list = [(x + dx[i], y + dy[i], i) for i in range(4)]
 
+    #Check if deadlock happened
+    previous_wall = None
+    count = 0
+
     while wall_list:
         random_wall = random.choice(wall_list)
+        if(previous_wall == random_wall):
+            count += 1
+        else:
+            count = 0
+        if(count >= 3):
+            break
+
         wx, wy, direction = random_wall
 
         nx, ny = wx + dx[direction], wy + dy[direction]
@@ -29,13 +40,14 @@ def generate_maze(width, height):
                         wall_list.append((nx + dx[i], ny + dy[i], i))
 
             wall_list.remove(random_wall)
+        previous_wall = random_wall
+    
 
     return maze
 
 
 # Display the maze
 maze = generate_maze(WindowParameter.mapTileCol,WindowParameter.mapTileRow)
-# for row in maze:
-#     print(' '.join(row))
-count = 0
+for row in maze:
+    print(' '.join(row))
 
