@@ -202,6 +202,20 @@ class player:
         if (self.character_x1 < self.pnj_x2 and self.character_x2 > self.pnj_x1) and (self.character_y1 < self.pnj_y2 and self.character_y2 > self.pnj_y1):
             print("open shop")
 
+    def checkMonsterCollision(self, i, dx, dy):
+        self.monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
+        self.monster_x = (self.monsterCOO[0] + self.monsterCOO[2]) / 2  # Coordonnée x du centre du rectangle rouge
+        self.monster_y = (self.monsterCOO[1] + self.monsterCOO[3]) / 2  # Coordonnée y du centre du rectangle rouge
+
+        self.monster_x1 = self.monsterCOO[0]
+        self.monster_y1 = self.monsterCOO[1]
+        self.monster_x2 = self.monsterCOO[2]
+        self.monster_y2 = self.monsterCOO[3]
+        if (self.character_x1 + dx < self.monster_x2 and self.character_x2 + dx > self.monster_x1) and (self.character_y1 + dy < self.monster_y2 and self.character_y2 + dy > self.monster_y1):
+            return True
+        else:
+            return False
+
     def openInventory(self, key):
         if not self.inventory_open:
             self.second_window = tk.Toplevel(self.window)
@@ -265,6 +279,8 @@ class player:
                         return  # Collision détectée, arrêter le déplacement
                 for i in range(0, len(self.pnjs)):
                     self.checkPNJCollision(i)
+                for i in range(0, len(self.monsters)):
+                    if(self.checkMonsterCollision(i, dx, dy)): return
                 self.getKey()
                 self.goNextRoom()
                 self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage

@@ -60,9 +60,11 @@ class Monster:
         dx = +10
         dy = -10
         """if x1_rect1 < x2_rect2 and x2_rect1 > x1_rect2 and y1_rect1 < y2_rect2 and y2_rect1 > y1_rect2:"""
-        if(self.monster_x1 < x2 and self.monster_x2 > x1 and self.monster_y1 < y2 and self.monster_y2 > y1 and playerSelf.player_collision == False):
-            playerSelf.player_collision = True
-            playerSelf.startFight()
+        if(self.monster_x1-3 < x2 and self.monster_x2+3 > x1 and self.monster_y1-3 < y2 and self.monster_y2+3 > y1 and playerSelf.player_collision == False):
+            #playerSelf.player_collision = True
+            #playerSelf.startFight()
+            print("collision with player")
+            
         elif(self.monster_x1 < x2P and self.monster_x2 > x1P and self.monster_y1 < y2P and self.monster_y2 > y1P and playerSelf.player_collision == False):
             black_center_x = (self.monster_x1 + self.monster_x2) // 2
             black_center_y = (self.monster_y1 + self.monster_y2) // 2
