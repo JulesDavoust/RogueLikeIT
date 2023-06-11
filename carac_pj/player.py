@@ -14,8 +14,8 @@ class player:
         self.level = 0
         self.xp = 0
         self.map = Map()
-        self.character_x = random.randint(0, 720)
-        self.character_y = random.randint(0, 520)
+        self.character_x = 0
+        self.character_y = 0
 
         if classe == 0:
             self.life_point = 120
