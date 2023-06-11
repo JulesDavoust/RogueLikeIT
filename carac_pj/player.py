@@ -11,11 +11,11 @@ class player:
         self.player_collision = False
         self.view_distance = 100
         self.classe = classe
-        self.level = 0
+        self.PlayerLevel = 0
         self.xp = 0
         self.map = Map()
 
-        self.inventory = {"key":0}
+        self.inventory = {"key":1}
 
         if classe == 0:
             self.life_point = 120
@@ -41,9 +41,12 @@ class player:
         self.areaPlay = tk.Canvas(window, width=1000, height=700)
 
         self.map.generateMap(self.areaPlay)
+        self.map.level = self.map.level + 1
+        self.levelMap = self.map.level
         self.map.generateKey(self.areaPlay)
         self.map.generateSalle(window, self.areaPlay)
         self.map.generateFirstSalle(self.areaPlay)
+        print("map level : ", self.levelMap)
         """print(self.map.CaseNoire)
         print(self.map.centreCaseNoire)"""
         self.character_x = self.map.spawnX
@@ -52,12 +55,24 @@ class player:
         #self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + WindowParameter.tileSize, self.character_y + WindowParameter.tileSize, fill="red", outline="")
         #self.character_pic = self.areaPlay.create_image((self.character_x + self.character_x + 27)/2, (self.character_y+self.character_y+27)/2, image=self.knight)
         self.update_view()
-        self.number_monsters = random.randint(5, 7)
-        self.generateMonsters(self.number_monsters)
+        number_monsters = self.numberMonsters()
+        self.generateMonsters(number_monsters)
         self.move_monster_periodically()
         
         self.areaPlay.pack()
         window.bind("<KeyPress>", self.move_character)
+
+    def numberMonsters(self):
+        if(self.levelMap == 1):
+            return random.randint(6,8)
+        elif(self.levelMap == 2):
+            return random.randint(9,11)
+        elif(self.levelMap == 3):
+            return random.randint(12,14)
+        elif(self.levelMap == 4):
+            return random.randint(12,18)
+        elif(self.levelMap >= 5):
+            return random.randint(19,25)
 
     def startFight(self):
         Fight = fight()
@@ -72,7 +87,7 @@ class player:
         max_y = self.map.map_height-50
 
         for _ in range(num_monsters):
-            monster = Monster(self.map.level)  # Crée une instance de monstre
+            monster = Monster(self.levelMap)  # Crée une instance de monstre
 
 
             # Vérifie si les coordonnées du monstre se trouvent dans le champ de vision
@@ -213,6 +228,9 @@ class player:
         # Génère une nouvelle carte
         self.map = Map()
         self.map.generateMap(self.areaPlay)
+        self.map.level = self.levelMap + 1
+        self.levelMap = self.map.level
+        print(self.map.level)
         self.map.generateKey(self.areaPlay)
 
         # Met à jour les coordonnées du personnage
@@ -224,8 +242,8 @@ class player:
 
         # Génère les monstres pour la nouvelle carte
         self.update_view()
-        self.number_monsters = random.randint(5, 7)
-        self.generateMonsters(self.number_monsters)
+        number_monsters = self.numberMonsters()
+        self.generateMonsters(number_monsters)
         self.move_monster_periodically()
 
     def displayPJ(self):

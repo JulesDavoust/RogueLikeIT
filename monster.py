@@ -13,11 +13,11 @@ class Monster:
 
         if(MapLevel == 1):
             self.level = random.randint(1, 2)
-        elif(MapLevel == 2 and MapLevel <=4):
+        elif(MapLevel >= 2 and MapLevel <=4):
             self.level = random.randint(2,4)
-        elif(MapLevel == 5 and MapLevel <= 7):
+        elif(MapLevel >= 5 and MapLevel <= 7):
             self.level = random.randint(5, 7)
-        elif(MapLevel == 8 and MapLevel <= 10):
+        elif(MapLevel >= 8 and MapLevel <= 10):
             self.level = random.randint(8, 10)
         elif(MapLevel > 10):
             self.level = random.randint(10, 15)
