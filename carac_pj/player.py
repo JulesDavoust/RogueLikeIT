@@ -2,7 +2,7 @@ import random
 from map import Map
 from Fight import fight
 from monster import Monster
-
+from windowParameters import WindowParameter
 import tkinter as tk
 
 class player:
@@ -11,17 +11,20 @@ class player:
         self.player_collision = False
         self.view_distance = 100
         self.classe = classe
-        self.level = 0
+        self.PlayerLevel = 0
         self.xp = 0
         self.map = Map()
         self.character_x = 0
         self.character_y = 0
+
+        self.inventory = {"key":1}
 
         if classe == 0:
             self.life_point = 120
             self.max_life_point = self.life_point
             self.mana = 20
             self.damage = 30
+            #self.knight = tk.PhotoImage(file="./sprites/knight_f_idle_anim_f0.png")
         elif classe == 1:
             self.life_point = 80
             self.max_life_point = self.life_point
@@ -35,22 +38,43 @@ class player:
             self.range = 5
             self.damage = 20
 
-    def generatePlayer(self, window, generate):
-        
+    def generatePlayer(self, window):
+        self.window = window
         self.areaPlay = tk.Canvas(window, width=1000, height=700)
 
-        self.map.generateMap(window, self.areaPlay)
+        self.map.generateMap(self.areaPlay)
+        self.map.level = self.map.level + 1
+        self.levelMap = self.map.level
+        self.map.generateKey(self.areaPlay)
         self.map.generateSalle(window, self.areaPlay)
         self.map.generateFirstSalle(self.areaPlay)
-
-        self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 30, self.character_y + 30, fill="red")
+        print("map level : ", self.levelMap)
+        """print(self.map.CaseNoire)
+        print(self.map.centreCaseNoire)"""
+        self.character_x = self.map.spawnX
+        self.character_y = self.map.spawnY
+        self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 10, self.character_y + 10, fill="red", outline="")
+        #self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + WindowParameter.tileSize, self.character_y + WindowParameter.tileSize, fill="red", outline="")
+        #self.character_pic = self.areaPlay.create_image((self.character_x + self.character_x + 27)/2, (self.character_y+self.character_y+27)/2, image=self.knight)
         self.update_view()
-       # self.number_monsters = random.randint(5, 10)
-        #self.generateMonsters(self.number_monsters)
-        #self.move_monster_periodically()
-
+        number_monsters = self.numberMonsters()
+        self.generateMonsters(number_monsters)
+        self.move_monster_periodically()
+        
         self.areaPlay.pack()
         window.bind("<KeyPress>", self.move_character)
+
+    def numberMonsters(self):
+        if(self.levelMap == 1):
+            return random.randint(6,8)
+        elif(self.levelMap == 2):
+            return random.randint(9,11)
+        elif(self.levelMap == 3):
+            return random.randint(12,14)
+        elif(self.levelMap == 4):
+            return random.randint(12,18)
+        elif(self.levelMap >= 5):
+            return random.randint(19,25)
 
     def startFight(self):
         Fight = fight()
@@ -60,24 +84,39 @@ class player:
     def generateMonsters(self, num_monsters):
         self.monsters = []  # Liste pour stocker les monstres
         min_x = 0
-        max_x = 720
+        max_x = self.map.map_width-50
         min_y = 0
-        max_y = 520
+        max_y = self.map.map_height-50
 
         for _ in range(num_monsters):
-            monster = Monster(self.map.level)  # Crée une instance de monstre
+            monster = Monster(self.levelMap)  # Crée une instance de monstre
 
-            # Génère des coordonnées aléatoires pour la position du monstre sur la carte
-            monster_x = random.randint(min_x, max_x)
-            monster_y = random.randint(min_y, max_y)
 
             # Vérifie si les coordonnées du monstre se trouvent dans le champ de vision
-            while self.checkMonsterInView(monster_x, monster_y):
-                monster_x = random.randint(min_x, max_x)
-                monster_y = random.randint(min_y, max_y)
+            
+            emplacement = False
+            emplacementOK = True
+            while not emplacement:
+                x1 = random.randint(0, self.map.map_width-50)
+                y1 = random.randint(0, self.map.map_height-50)
+                while self.checkMonsterInView(x1, y1):
+                    x1 = random.randint(min_x, max_x)
+                    y1 = random.randint(min_y, max_y)
+                for cle, valeur in self.map.CaseNoire.items():
+                    if (
+                        x1 + 10 > valeur[0]
+                        and y1 + 10 > valeur[1]
+                        and x1 < valeur[2]
+                        and y1 < valeur[3]
+                    ):
+                        emplacementOK = False
+                if emplacementOK:
+                    emplacement = True
+                emplacementOK = True
+            """print(x1, y1, x1 + 30, y1 + 30)"""
 
             # Génère le carré noir du monstre dans l'areaPlay à la position aléatoire
-            monster.generateMonster(self.areaPlay, monster_x, monster_y)
+            monster.generateMonster(self.areaPlay, x1, y1)
 
             self.monsters.append(monster)  # Ajoute le monstre à la liste
     
@@ -98,7 +137,7 @@ class player:
                 monster.moveMonster(
                     self.areaPlay, self.view_x1, self.view_y1, self.view_x2, self.view_y2,
                     self.character_x, self.character_y, self.character_x2, self.character_x1,
-                    self.character_y2, self.character_y1, self
+                    self.character_y2, self.character_y1, self, self.map
                 )
             self.areaPlay.after(800, self.move_monster_periodically)
         #self.areaPlay.after(800, self.move_monster_periodically)
@@ -107,23 +146,46 @@ class player:
     def move_character(self, event):
         key = event.keysym
         if self.player_collision != True:
-            if key == "Right":
-                if self.character_x2 + 10 > 768:
-                    return
-                self.areaPlay.move(self.character_id, 10, 0)  # Déplacement vers la droite de 10 pixels
-            elif key == "Left":
-                if self.character_x1 - 10 < 0:
-                    return
-                self.areaPlay.move(self.character_id, -10, 0)  # Déplacement vers la gauche de 10 pixels
-            elif key == "Up":
-                if self.character_y1 - 10 < 0:
-                    return
-                self.areaPlay.move(self.character_id, 0, -10)  # Déplacement vers le haut de 10 pixels
-            elif key == "Down":
-                if self.character_y2 + 10 > 576:
-                    return
-                self.areaPlay.move(self.character_id, 0, 10)  # Déplacement vers le bas de 10 pixels
+            dx, dy = 0, 0  # Valeurs de déplacement initiales
 
+            if key == "Right":
+                if self.character_x2 + 3 > WindowParameter.mapWidth:
+                    return
+                dx = 3  # Déplacement vers la droite
+
+            elif key == "Left":
+                if self.character_x1 - 3 < 0:
+                    return
+                dx = -3  # Déplacement vers la gauche
+
+            elif key == "Up":
+                if self.character_y1 - 3 < 0:
+                    return
+                dy = -3  # Déplacement vers le haut
+
+            elif key == "Down":
+                if self.character_y2 + 3 > WindowParameter.mapHeight:
+                    return
+                dy = 3  # Déplacement vers le bas
+
+            new_x1 = self.character_x1 + dx
+            new_y1 = self.character_y1 + dy
+            new_x2 = self.character_x2 + dx
+            new_y2 = self.character_y2 + dy
+
+            for cle, valeur in self.map.CaseNoire.items():
+                if (
+                    new_x2 > valeur[0]
+                    and new_y2 > valeur[1]
+                    and new_x1 < valeur[2]
+                    and new_y1 < valeur[3]
+                ):
+                    
+                    return  # Collision détectée, arrêter le déplacement
+            self.getKey()
+            self.goNextRoom()
+            self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
+            #self.areaPlay.move(self.character_pic, dx, dy)
             self.update_view()
 
 
@@ -149,6 +211,42 @@ class player:
 
         self.areaPlay.create_rectangle(self.view_x1, self.view_y1, self.view_x2, self.view_y2, fill="", outline="white", tag="view")
 
+    def goNextRoom(self):
+        print("nextRoom ?")
+        if(self.inventory["key"] >= 1 and self.character_x1 >= self.map.x1R and self.character_x2 <= self.map.x2R and self.character_y2 <= self.map.y2R and self.character_y1 >= self.map.y1R):
+            print("Yes !")
+            self.generateNewMap()
+
+    def getKey(self):
+        if (self.character_x1 < self.map.keyX2 and self.character_x2 > self.map.keyX1) and (self.character_y1 < self.map.keyY2 and self.character_y2 > self.map.keyY1):
+            self.inventory["key"] = +1
+            self.areaPlay.delete(self.map.key)
+            print(self.inventory)
+
+    def generateNewMap(self):
+        # Supprime les éléments de la carte actuelle
+        self.areaPlay.delete("all")
+
+        # Génère une nouvelle carte
+        self.map = Map()
+        self.map.generateMap(self.areaPlay)
+        self.map.level = self.levelMap + 1
+        self.levelMap = self.map.level
+        print(self.map.level)
+        self.map.generateKey(self.areaPlay)
+
+        # Met à jour les coordonnées du personnage
+        self.character_x = self.map.spawnX
+        self.character_y = self.map.spawnY
+        self.character_id = self.areaPlay.create_rectangle(
+            self.character_x, self.character_y, self.character_x + 10, self.character_y + 10, fill="red", outline=""
+        )
+
+        # Génère les monstres pour la nouvelle carte
+        self.update_view()
+        number_monsters = self.numberMonsters()
+        self.generateMonsters(number_monsters)
+        self.move_monster_periodically()
 
     def displayPJ(self):
         if self.classe == 0:

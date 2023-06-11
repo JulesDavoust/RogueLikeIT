@@ -10,7 +10,7 @@ class Interface:
     def __init__(self):
         self.clickChoose = False
         self.size = WindowParameter.screenSize
-        self.size = '1280x720'
+        #self.size = '1280x720'
         self.window = tk.Tk()
         self.window.minsize(WindowParameter.screenWidth,WindowParameter.screenHeight)
         self.window.maxsize(WindowParameter.screenWidth,WindowParameter.screenHeight)
@@ -32,7 +32,7 @@ class Interface:
 
     def GenerateGame(self):
         self.menu.pack_forget()
-        self.player.generatePlayer(self.window, self.generate)
+        self.player.generatePlayer(self.window)
         self.player.areaPlay.focus_set()
 
 
