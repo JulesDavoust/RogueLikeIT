@@ -86,11 +86,13 @@ class player:
 
     def generatePNJs(self, number_pnj):
         self.pnjs = []
+        self.shops = []
         min_x = 0
         max_x = self.map.map_width-50
         min_y = 0
         max_y = self.map.map_height-50
         for _ in range(number_pnj):
+            print(_)
             pnj = PNJ()  # Crée une instance de pnj
 
 
@@ -114,8 +116,10 @@ class player:
                 emplacementOK = True
             """print(x1, y1, x1 + 30, y1 + 30)"""
             pnj.generateShop(self.areaPlay, x1, y1)
-
+            self.shops.append(pnj.shop)
             self.pnjs.append(pnj)
+        print(self.shops)
+        print(self.pnjs)
 
     def generateMonsters(self, num_monsters):
         self.monsters = []  # Liste pour stocker les monstres

@@ -16,6 +16,17 @@ class PNJ:
     def generatePNJ(self, areaPlay, x, y):
         self.pnj = areaPlay.create_rectangle(x, y, x + 10, y + 10, fill="brown", outline = "")
 
+    def checkItems(self, index, indexRandom, AllItems):
+        check = False
+        for j in range(0, len(index)):
+            if(index[j] == indexRandom):
+                while(index[j] == indexRandom):
+                    indexRandom = random.randint(0, len(AllItems)-1)
+                check = True
+        if check == True:
+            indexRandom = self.checkItems(index, indexRandom, AllItems)
+        return indexRandom
+
     def generateShop(self,areaPlay, x1, y1):
         self.generatePNJ(areaPlay, x1, y1)
         AllItems = {0 : "Sword", 1 : "Potion of heal", 2 : "Potion of mana", 3: "Armor", 4:"Bow", 5:"Wizard's staff"}
@@ -24,9 +35,8 @@ class PNJ:
         for i in range(0, self.NumberItems):
             indexRandom = random.randint(0, len(AllItems)-1)
             if i > 0:
-                for j in range(0, len(index)):
-                    while(index[j] == indexRandom):
-                        indexRandom = random.randint(0, len(AllItems)-1)
+                while indexRandom in index:
+                    indexRandom = random.randint(0, len(AllItems)-1)
             index.append(indexRandom)
             ItemsShop.append(AllItems[indexRandom])
         print(index)
