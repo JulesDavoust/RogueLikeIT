@@ -50,8 +50,7 @@ class player:
         self.map.level = self.map.level + 1
         self.levelMap = self.map.level
         self.map.generateKey(self.areaPlay)
-        self.map.generateSalle(window, self.areaPlay)
-        self.map.generateFirstSalle(self.areaPlay)
+        self.map.player_info(self.areaPlay)
         print("map level : ", self.levelMap)
         """print(self.map.CaseNoire)
         print(self.map.centreCaseNoire)"""
