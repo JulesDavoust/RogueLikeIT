@@ -19,8 +19,14 @@ class PNJ:
     def generatePNJ(self, areaPlay, x, y):
         self.pnj = areaPlay.create_rectangle(x, y, x + 10, y + 10, fill="brown", outline = "")
 
-    def generateWindowShop(self, window):
+    def openShop(self, window):
+        print(self.shop)
         self.windowShop = tk.Toplevel(window)
+
+    def closeShop(self):
+        self.windowShop.destroy()
+
+    #def closeShop(self, window)
 
     def generateShop(self,areaPlay, x1, y1):
         self.generatePNJ(areaPlay, x1, y1)
