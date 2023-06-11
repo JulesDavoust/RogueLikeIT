@@ -23,8 +23,6 @@ class Map:
         case_size = WindowParameter.tileSize
         x_tile = WindowParameter.mapTileCol
         y_tile = WindowParameter.mapTileRow
-        # print(x_tile)
-        # print(y_tile)
         maze = mazeMap.generate_maze(x_tile,y_tile)
 
         wall_image = Image.open(".\sprites\wall_mid.png").convert("RGBA")
@@ -45,35 +43,7 @@ class Map:
                     self.indexDico += 1
                 elif(maze[y][x] == 'C'):
                     areaPlay.create_image(x * case_size, y * case_size, anchor="nw", image=self.floor_photo)
-        
-        # # Dessine les cases
-        # for x in range(x_tile):
-        #     for y in range(y_tile):
-        #         if random.random() < 0.335:  # Changer la probabilité selon vos besoins
-        #             areaPlay.create_image(x * case_size, y * case_size, anchor="nw", image=self.wall_photo)
-        #             self.CaseNoire[self.indexDico] = [x * case_size, y * case_size, (x + 1) * case_size, (y + 1) * case_size]
-        #             self.centreCaseNoire[self.indexDico] = [(x * case_size + (x + 1) * case_size) / 2, (y * case_size + (y + 1) * case_size) / 2]
-        #             self.indexDico += 1
-        #         else:  
-        #             areaPlay.create_image(x * case_size, y * case_size, anchor="nw", image=self.floor_photo)
-        #         # if fill_color == "black":
-                         
-                        
-        #         #if(fill_color== "black"):
-        #             # # Create the canvas, size in pixels.
-        #             # canvas = tk.Canvas(width=16, height=16)
-        #             # # Pack the canvas into the Frame.
-        #             # canvas.pack(expand=YES, fill=BOTH)
-        #             # # Load the .gif image file.
-        #             # wall = ImageTk.PhotoImage(file='./sprites/wall_mid.png')
-        #             # # Put gif image on canvas.
-        #             # # Pic's upper-left corner (NW) on the canvas is at x=50 y=10.
-        #             # canvas.create_image(x, y, image=wall, anchor=NW)
-
-        #             #wall= ImageTk.PhotoImage(Image.open("./sprites/wall_mid.png"))
-        #             #wall = tk.PhotoImage(file = './sprites/wall_mid.png')
-        #             #areaPlay.create_image(x1,y1, image= wall)
-        #             #areaPlay.create_image(10,10,image=wall)    
+    
         xRed = random.randint(0, (self.map_width-50)// case_size)
         yRed = random.randint(0, (self.map_height-50)// case_size)
         self.x1R = xRed * case_size
@@ -110,8 +80,6 @@ class Map:
         self.spawnY = y1G + (case_size - 10) // 2
 
 
-
-
     def generateKey(self,areaPlay):
         emplacement = False
         emplacementOK = True
@@ -136,37 +104,20 @@ class Map:
         self.keyY2 = y1 + 6
         self.key = areaPlay.create_rectangle(x1, y1, x1+6, y1+6, fill="yellow")
 
-    def refreshMap(self,areaPlay,player):
+                
+    def player_info(self,areaPlay):
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
-        case_size = WindowParameter.tileSize
-        x_tile = map_width // case_size
-        y_tile = map_height // case_size
-        print(x_tile)
-        print(y_tile)
+        screen_width = WindowParameter.screenWidth
+        x1 = map_width
+        x2 = screen_width
+        y2 = screen_width
+        areaPlay.create_rectangle(x1, 0, x2, y2, fill="black", outline="red", dash=(3,5))
+        areaPlay.create_text(map_width + 50,50, text="Hello, world", fill="white")
+        areaPlay.create_rectangle(x1 + 20,400,x1 + 310,y2-50,fill="grey",outline="white")
 
-        #Parcours les cases et change la map
-        for x in range(x_tile):
-            for y in range(y_tile):
-                if player.x == 3:
-                    return True
-                
-    def generateFirstSalle(self, areaPlay):
-        print("salutGENERATEfirstSALLE")
-        # x1, y1 = 150, 150
-        # x2, y2 = 300, 150
-        # x3, y3 = 300, 300
-        # x4, y4 = 150, 300
-        # areaPlay.create_line(x1, y1, x2, y2, fill="brown", width=WindowParameter.tileSize)
-        # areaPlay.create_line(x2, y2, x3, y3, fill="brown", width=WindowParameter.tileSize)
-        # areaPlay.create_line(x3, y3, x4, y4, fill="brown", width=WindowParameter.tileSize)
-        # areaPlay.create_line(x4, y4, x1, y1, fill="brown", width=WindowParameter.tileSize)
-        
 
-    def generateSalle(self, window, areaPlay):
-        print("salutGENERATESALLE")
-        # areaPlay.create_line(100, 450, 100, 350, fill="brown", width=4)
-
+    
     """def numberMonster(self, maplevel):
         print(maplevel)
         if(maplevel == 1):
