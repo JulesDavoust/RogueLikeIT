@@ -4,6 +4,7 @@ import tkinter as tk
 
 class PNJ:
     def __init__(self):
+        self.finalShop = {}
         self.shop = {}
         self.NumberItems = 3
 
@@ -20,8 +21,34 @@ class PNJ:
         self.pnj = areaPlay.create_rectangle(x, y, x + 10, y + 10, fill="brown", outline = "")
 
     def openShop(self, window):
-        print(self.shop)
+        self.keysItem = list(self.shop.keys())
+        print(self.keysItem[0])
         self.windowShop = tk.Toplevel(window)
+        self.windowShop.geometry("400x300")
+
+    
+
+        self.item0 = tk.Label(self.windowShop, text=self.keysItem[0])
+        self.buyI0 = tk.Button(self.windowShop, text="Buy", command=self.buy())
+        self.item1 = tk.Label(self.windowShop, text=self.keysItem[1])
+        self.buyI1 = tk.Button(self.windowShop, text="Buy", command=self.buy())
+        self.item2 = tk.Label(self.windowShop, text=self.keysItem[2])
+        self.buyI2 = tk.Button(self.windowShop, text="Buy", command=self.buy())
+
+        """self.item0.grid(row=0, column=0, sticky="nsew")
+        self.buyI0.grid(row=2, column=0, sticky="nsew")
+        self.item1.grid(row=0, column=1, sticky="nsew")
+        self.buyI1.grid(row=5, column=1, sticky="nsew")
+        self.item2.grid(row=0, column=2, sticky="nsew")
+        self.buyI2.grid(row=4, column=2, sticky="nsew")
+
+        self.windowShop.grid_columnconfigure(0, weight=1)
+        self.windowShop.grid_columnconfigure(1, weight=1)
+        self.windowShop.grid_columnconfigure(2, weight=1)"""
+        self.item0.place(anchor="center", x=50, y=50)
+
+    def buy(self):
+        print("buy")
 
     def closeShop(self):
         self.windowShop.destroy()
