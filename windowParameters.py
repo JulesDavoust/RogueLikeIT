@@ -9,11 +9,11 @@ class WindowParameter:
     tileSize= originTileSize*SCALE
     # objectSize = tileSize - FIX
 
-    screenTileCol = 16*2
-    screenTileRow = 9*2
+    screenTileCol = 36
+    screenTileRow = 21
     
-    mapTileRow = 12*2
-    mapTileCol = 9*2
+    mapTileRow = 21
+    mapTileCol = 21
 
     screenWidth = tileSize * screenTileCol
     screenHeight = tileSize * screenTileRow

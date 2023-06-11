@@ -2,10 +2,10 @@ import tkinter as tk
 import random
 from PIL import Image,ImageTk
 from tkinter.constants import *
-import mazeMap
 
 
 from windowParameters import WindowParameter
+
 
 
 class Map:
@@ -21,12 +21,10 @@ class Map:
         self.map_width = WindowParameter.mapWidth
         self.map_height = WindowParameter.mapHeight
         case_size = WindowParameter.tileSize
-        x_tile = WindowParameter.mapTileCol
-        y_tile = WindowParameter.mapTileRow
-        # print(x_tile)
-        # print(y_tile)
-        maze = mazeMap.generate_maze(x_tile,y_tile)
-
+        x_tile = self.map_width // case_size
+        y_tile = self.map_height // case_size
+        print(x_tile)
+        print(y_tile)
         wall_image = Image.open(".\sprites\wall_mid.png").convert("RGBA")
         wall_image = wall_image.resize((case_size, case_size), Image.ANTIALIAS)
         self.wall_photo = ImageTk.PhotoImage(wall_image)
@@ -34,46 +32,36 @@ class Map:
         floor_image = Image.open("./sprites/floor_1.png").convert("RGBA")
         floor_image= floor_image.resize((case_size, case_size), Image.ANTIALIAS)
         self.floor_photo = ImageTk.PhotoImage(floor_image)
-
-        #Dessine les cases V2.0
-        for y in range(len(maze)):
-            for x in range(len(maze[y])):
-                if(maze[y][x] == 'W'):
+        
+        
+        # Dessine les cases
+        for x in range(x_tile):
+            for y in range(y_tile):
+                if random.random() < 0.335:  # Changer la probabilité selon vos besoins
                     areaPlay.create_image(x * case_size, y * case_size, anchor="nw", image=self.wall_photo)
                     self.CaseNoire[self.indexDico] = [x * case_size, y * case_size, (x + 1) * case_size, (y + 1) * case_size]
                     self.centreCaseNoire[self.indexDico] = [(x * case_size + (x + 1) * case_size) / 2, (y * case_size + (y + 1) * case_size) / 2]
                     self.indexDico += 1
-                elif(maze[y][x] == 'C'):
+                else:  
                     areaPlay.create_image(x * case_size, y * case_size, anchor="nw", image=self.floor_photo)
-        
-        # # Dessine les cases
-        # for x in range(x_tile):
-        #     for y in range(y_tile):
-        #         if random.random() < 0.335:  # Changer la probabilité selon vos besoins
-        #             areaPlay.create_image(x * case_size, y * case_size, anchor="nw", image=self.wall_photo)
-        #             self.CaseNoire[self.indexDico] = [x * case_size, y * case_size, (x + 1) * case_size, (y + 1) * case_size]
-        #             self.centreCaseNoire[self.indexDico] = [(x * case_size + (x + 1) * case_size) / 2, (y * case_size + (y + 1) * case_size) / 2]
-        #             self.indexDico += 1
-        #         else:  
-        #             areaPlay.create_image(x * case_size, y * case_size, anchor="nw", image=self.floor_photo)
-        #         # if fill_color == "black":
+                # if fill_color == "black":
                          
                         
-        #         #if(fill_color== "black"):
-        #             # # Create the canvas, size in pixels.
-        #             # canvas = tk.Canvas(width=16, height=16)
-        #             # # Pack the canvas into the Frame.
-        #             # canvas.pack(expand=YES, fill=BOTH)
-        #             # # Load the .gif image file.
-        #             # wall = ImageTk.PhotoImage(file='./sprites/wall_mid.png')
-        #             # # Put gif image on canvas.
-        #             # # Pic's upper-left corner (NW) on the canvas is at x=50 y=10.
-        #             # canvas.create_image(x, y, image=wall, anchor=NW)
+                #if(fill_color== "black"):
+                    # # Create the canvas, size in pixels.
+                    # canvas = tk.Canvas(width=16, height=16)
+                    # # Pack the canvas into the Frame.
+                    # canvas.pack(expand=YES, fill=BOTH)
+                    # # Load the .gif image file.
+                    # wall = ImageTk.PhotoImage(file='./sprites/wall_mid.png')
+                    # # Put gif image on canvas.
+                    # # Pic's upper-left corner (NW) on the canvas is at x=50 y=10.
+                    # canvas.create_image(x, y, image=wall, anchor=NW)
 
-        #             #wall= ImageTk.PhotoImage(Image.open("./sprites/wall_mid.png"))
-        #             #wall = tk.PhotoImage(file = './sprites/wall_mid.png')
-        #             #areaPlay.create_image(x1,y1, image= wall)
-        #             #areaPlay.create_image(10,10,image=wall)    
+                    #wall= ImageTk.PhotoImage(Image.open("./sprites/wall_mid.png"))
+                    #wall = tk.PhotoImage(file = './sprites/wall_mid.png')
+                    #areaPlay.create_image(x1,y1, image= wall)
+                    #areaPlay.create_image(10,10,image=wall)    
         xRed = random.randint(0, (self.map_width-50)// case_size)
         yRed = random.randint(0, (self.map_height-50)// case_size)
         self.x1R = xRed * case_size
