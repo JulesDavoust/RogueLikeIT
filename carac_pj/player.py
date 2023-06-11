@@ -17,8 +17,6 @@ class player:
         self.map = Map()
         self.character_x = 0
         self.character_y = 0
-
-        self.inventory_open = False
         self.pause = False
 
         self.inventory = {"key":1}
@@ -216,31 +214,11 @@ class player:
         else:
             return False
 
-    def openInventory(self, key):
-        if not self.inventory_open:
-            self.second_window = tk.Toplevel(self.window)
-            self.inventory_open = True
-            self.start_moving_monsters() 
-
-    def closeInventory(self):
-        self.second_window.destroy()
-        self.inventory_open = False
-
     def move_character(self, event):
         key = event.keysym
 
         if self.player_collision != True:
             
-            if key == "i":
-                
-                if self.inventory_open:
-                    self.closeInventory()
-                    self.inventory_open = False
-                    
-                else:
-                    self.openInventory(key)
-                print(self.pause)
-            else:
                 dx, dy = 0, 0  # Valeurs de déplacement initiales
 
                 if key == "Right":
@@ -285,7 +263,7 @@ class player:
                 self.goNextRoom()
                 self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
             #self.areaPlay.move(self.character_pic, dx, dy)
-            self.update_view()
+                self.update_view()
 
 
     def update_view(self):
