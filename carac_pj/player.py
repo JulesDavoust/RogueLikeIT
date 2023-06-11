@@ -2,6 +2,7 @@ import random
 from map import Map
 from Fight import fight
 from monster import Monster
+from pnj import PNJ
 from windowParameters import WindowParameter
 import tkinter as tk
 
@@ -59,6 +60,8 @@ class player:
         self.update_view()
         number_monsters = self.numberMonsters()
         self.generateMonsters(number_monsters)
+        number_pnj = random.randint(0,3)
+        self.generatePNJs(number_pnj)
         self.move_monster_periodically()
         
         self.areaPlay.pack()
@@ -80,6 +83,44 @@ class player:
         Fight = fight()
         print("Loading...")
         Fight.FightPage()
+
+    def generatePNJs(self, number_pnj):
+        self.pnjs = []
+        self.shops = []
+        min_x = 0
+        max_x = self.map.map_width-50
+        min_y = 0
+        max_y = self.map.map_height-50
+        for _ in range(number_pnj):
+            print(_)
+            pnj = PNJ()  # Crée une instance de pnj
+
+
+            # Vérifie si les coordonnées du monstre se trouvent dans le champ de vision
+            
+            emplacement = False
+            emplacementOK = True
+            while not emplacement:
+                x1 = random.randint(0, self.map.map_width-50)
+                y1 = random.randint(0, self.map.map_height-50)
+                for cle, valeur in self.map.CaseNoire.items():
+                    if (
+                        x1 + 10 > valeur[0]
+                        and y1 + 10 > valeur[1]
+                        and x1 < valeur[2]
+                        and y1 < valeur[3]
+                    ):
+                        emplacementOK = False
+                if emplacementOK:
+                    emplacement = True
+                emplacementOK = True
+            """print(x1, y1, x1 + 30, y1 + 30)"""
+            pnj.generateShop(self.areaPlay, x1, y1)
+            self.shops.append(pnj.shop)
+            self.pnjs.append(pnj)
+        print(self.shops)
+        for i in range(0, len(self.pnjs)):
+            print(self.areaPlay.coords(self.pnjs[i].pnj))
 
     def generateMonsters(self, num_monsters):
         self.monsters = []  # Liste pour stocker les monstres
@@ -142,6 +183,18 @@ class player:
             self.areaPlay.after(800, self.move_monster_periodically)
         #self.areaPlay.after(800, self.move_monster_periodically)
 
+    def checkPNJCollision(self, i):
+        self.cooPNJ = self.areaPlay.coords(self.pnjs[i].pnj)
+        self.pnj_x = (self.cooPNJ[0] + self.cooPNJ[2]) / 2  # Coordonnée x du centre du rectangle rouge
+        self.pnj_y = (self.cooPNJ[1] + self.cooPNJ[3]) / 2  # Coordonnée y du centre du rectangle rouge
+
+        self.pnj_x1 = self.cooPNJ[0]
+        self.pnj_y1 = self.cooPNJ[1]
+        self.pnj_x2 = self.cooPNJ[2]
+        self.pnj_y2 = self.cooPNJ[3]
+        if (self.character_x1 < self.pnj_x2 and self.character_x2 > self.pnj_x1) and (self.character_y1 < self.pnj_y2 and self.character_y2 > self.pnj_y1):
+            print("open shop")
+
 
     def move_character(self, event):
         key = event.keysym
@@ -182,6 +235,8 @@ class player:
                 ):
                     
                     return  # Collision détectée, arrêter le déplacement
+            for i in range(0, len(self.pnjs)):
+                self.checkPNJCollision(i)
             self.getKey()
             self.goNextRoom()
             self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
@@ -246,6 +301,8 @@ class player:
         self.update_view()
         number_monsters = self.numberMonsters()
         self.generateMonsters(number_monsters)
+        number_pnj = random.randint(0,3)
+        self.generatePNJs(number_pnj)
         self.move_monster_periodically()
 
     def displayPJ(self):
