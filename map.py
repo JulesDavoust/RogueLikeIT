@@ -1,6 +1,7 @@
 import tkinter as tk
 import random
 
+
 from windowParameters import WindowParameter
 
 
@@ -14,11 +15,23 @@ class Map:
         self.spawnY = 0
 
     def generateMap(self, areaPlay):
-        self.map_width = WindowParameter.mapWidth
-        self.map_height = WindowParameter.mapHeight
+        map_width = WindowParameter.mapWidth
+        map_height = WindowParameter.mapHeight
         case_size = WindowParameter.tileSize
+        x_tile = map_width // case_size
+        y_tile = map_height // case_size
+        print(x_tile)
+        print(y_tile)
 
         # Dessine les cases
+        for x in range(x_tile):
+            for y in range(y_tile):
+                if x == x_tile - 1 and y == y_tile - 1 :
+                     # Coin inferieur droit (fin du niveau)
+                     fill_color = "red"
+                elif x == 0 and y == 0:
+                     # Coin superieur gauche (entrée du donjon)
+                     fill_color = "green"
         for x in range(self.map_width // case_size):
             for y in range(self.map_height // case_size):
                 if random.random() < 0.335:  # Changer la probabilité selon vos besoins
@@ -93,9 +106,21 @@ class Map:
         self.keyY2 = y1 + 6
         self.key = areaPlay.create_rectangle(x1, y1, x1+6, y1+6, fill="yellow")
 
-    def refreshMap(self,areaPlay):
-        print("salut")
+    def refreshMap(self,areaPlay,player):
+        map_width = WindowParameter.mapWidth
+        map_height = WindowParameter.mapHeight
+        case_size = WindowParameter.tileSize
+        x_tile = map_width // case_size
+        y_tile = map_height // case_size
+        print(x_tile)
+        print(y_tile)
 
+        #Parcours les cases et change la map
+        for x in range(x_tile):
+            for y in range(y_tile):
+                if player.x == 3:
+                    return True
+                
     def generateFirstSalle(self, areaPlay):
         print("salutGENERATEfirstSALLE")
         # x1, y1 = 150, 150

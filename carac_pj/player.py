@@ -15,6 +15,8 @@ class player:
         self.PlayerLevel = 0
         self.xp = 0
         self.map = Map()
+        self.character_x = 0
+        self.character_y = 0
 
         self.inventory = {"key":1}
 
@@ -183,7 +185,7 @@ class player:
             dx, dy = 0, 0  # Valeurs de déplacement initiales
 
             if key == "Right":
-                if self.character_x2 + 3 > 768:
+                if self.character_x2 + 3 > WindowParameter.mapWidth:
                     return
                 dx = 3  # Déplacement vers la droite
 
@@ -198,7 +200,7 @@ class player:
                 dy = -3  # Déplacement vers le haut
 
             elif key == "Down":
-                if self.character_y2 + 3 > 576:
+                if self.character_y2 + 3 > WindowParameter.mapHeight:
                     return
                 dy = 3  # Déplacement vers le bas
 
