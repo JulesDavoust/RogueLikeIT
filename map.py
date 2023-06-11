@@ -15,11 +15,11 @@ class Map:
         self.spawnY = 0
 
     def generateMap(self, areaPlay):
-        map_width = WindowParameter.mapWidth
-        map_height = WindowParameter.mapHeight
+        self.map_width = WindowParameter.mapWidth
+        self.map_height = WindowParameter.mapHeight
         case_size = WindowParameter.tileSize
-        x_tile = map_width // case_size
-        y_tile = map_height // case_size
+        x_tile = self.map_width // case_size
+        y_tile = self.map_height // case_size
         print(x_tile)
         print(y_tile)
 
