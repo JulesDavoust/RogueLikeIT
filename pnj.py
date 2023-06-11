@@ -13,8 +13,11 @@ class PNJ:
         self.bow = {}
         self.WS = {}
 
+        self.pnj_position = []
+
     def generatePNJ(self, areaPlay, x, y):
         self.pnj = areaPlay.create_rectangle(x, y, x + 10, y + 10, fill="brown", outline = "")
+
 
     def generateShop(self,areaPlay, x1, y1):
         self.generatePNJ(areaPlay, x1, y1)
@@ -56,4 +59,8 @@ class PNJ:
                 if(damage <= 8):
                     self.shop["Wizard's staff"] = {"damage" : damage, "cost" : 4}
         print(self.shop)
+
+
+
+    
 

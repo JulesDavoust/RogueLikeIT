@@ -119,7 +119,8 @@ class player:
             self.shops.append(pnj.shop)
             self.pnjs.append(pnj)
         print(self.shops)
-        print(self.pnjs)
+        for i in range(0, len(self.pnjs)):
+            print(self.areaPlay.coords(self.pnjs[i].pnj))
 
     def generateMonsters(self, num_monsters):
         self.monsters = []  # Liste pour stocker les monstres
@@ -182,6 +183,18 @@ class player:
             self.areaPlay.after(800, self.move_monster_periodically)
         #self.areaPlay.after(800, self.move_monster_periodically)
 
+    def checkPNJCollision(self, i):
+        self.cooPNJ = self.areaPlay.coords(self.pnjs[i].pnj)
+        self.pnj_x = (self.cooPNJ[0] + self.cooPNJ[2]) / 2  # Coordonnée x du centre du rectangle rouge
+        self.pnj_y = (self.cooPNJ[1] + self.cooPNJ[3]) / 2  # Coordonnée y du centre du rectangle rouge
+
+        self.pnj_x1 = self.cooPNJ[0]
+        self.pnj_y1 = self.cooPNJ[1]
+        self.pnj_x2 = self.cooPNJ[2]
+        self.pnj_y2 = self.cooPNJ[3]
+        if (self.character_x1 < self.pnj_x2 and self.character_x2 > self.pnj_x1) and (self.character_y1 < self.pnj_y2 and self.character_y2 > self.pnj_y1):
+            print("open shop")
+
 
     def move_character(self, event):
         key = event.keysym
@@ -222,6 +235,8 @@ class player:
                 ):
                     
                     return  # Collision détectée, arrêter le déplacement
+            for i in range(0, len(self.pnjs)):
+                self.checkPNJCollision(i)
             self.getKey()
             self.goNextRoom()
             self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
