@@ -1,4 +1,5 @@
 import random
+import tkinter as tk
 
 
 class PNJ:
@@ -18,6 +19,8 @@ class PNJ:
     def generatePNJ(self, areaPlay, x, y):
         self.pnj = areaPlay.create_rectangle(x, y, x + 10, y + 10, fill="brown", outline = "")
 
+    def generateWindowShop(self, window):
+        self.windowShop = tk.Toplevel(window)
 
     def generateShop(self,areaPlay, x1, y1):
         self.generatePNJ(areaPlay, x1, y1)

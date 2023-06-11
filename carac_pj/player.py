@@ -19,7 +19,7 @@ class player:
         self.character_y = 0
         self.pause = False
 
-        self.inventory = {"key":1}
+        self.inventory = {"key":0}
 
         if classe == 0:
             self.life_point = 120
@@ -188,7 +188,7 @@ class player:
             #self.areaPlay.after(800, self.move_monster_periodically)
 
 
-    def checkPNJCollision(self, i):
+    def checkPNJCollision(self, i, dx, dy):
         self.cooPNJ = self.areaPlay.coords(self.pnjs[i].pnj)
         self.pnj_x = (self.cooPNJ[0] + self.cooPNJ[2]) / 2  # Coordonnée x du centre du rectangle rouge
         self.pnj_y = (self.cooPNJ[1] + self.cooPNJ[3]) / 2  # Coordonnée y du centre du rectangle rouge
@@ -197,8 +197,12 @@ class player:
         self.pnj_y1 = self.cooPNJ[1]
         self.pnj_x2 = self.cooPNJ[2]
         self.pnj_y2 = self.cooPNJ[3]
-        if (self.character_x1 < self.pnj_x2 and self.character_x2 > self.pnj_x1) and (self.character_y1 < self.pnj_y2 and self.character_y2 > self.pnj_y1):
+        if (self.character_x1+dx < self.pnj_x2 and self.character_x2+dx > self.pnj_x1) and (self.character_y1+dy < self.pnj_y2 and self.character_y2+dy > self.pnj_y1):
             print("open shop")
+            self.pnjs[i].generateWindowShop(self.window)
+            return True
+        else:
+            return False
 
     def checkMonsterCollision(self, i, dx, dy):
         self.monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
@@ -255,8 +259,15 @@ class player:
                     ):
                         
                         return  # Collision détectée, arrêter le déplacement
-                for i in range(0, len(self.pnjs)):
-                    self.checkPNJCollision(i)
+                i = 0
+                checkPNJ = False
+                while i < len(self.pnjs) and checkPNJ == False:
+                    checkPNJ = self.checkPNJCollision(i, dx, dy)
+                    i = i + 1
+                if(checkPNJ == True):
+                    return
+                """for i in range(0, len(self.pnjs)):
+                    self.checkPNJCollision(i)"""
                 for i in range(0, len(self.monsters)):
                     if(self.checkMonsterCollision(i, dx, dy)): return
                 self.getKey()
