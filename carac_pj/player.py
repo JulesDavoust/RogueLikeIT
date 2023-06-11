@@ -2,6 +2,7 @@ import random
 from map import Map
 from Fight import fight
 from monster import Monster
+from pnj import PNJ
 from windowParameters import WindowParameter
 import tkinter as tk
 
@@ -57,6 +58,8 @@ class player:
         self.update_view()
         number_monsters = self.numberMonsters()
         self.generateMonsters(number_monsters)
+        number_pnj = random.randint(0,3)
+        self.generatePNJs(number_pnj)
         self.move_monster_periodically()
         
         self.areaPlay.pack()
@@ -78,6 +81,39 @@ class player:
         Fight = fight()
         print("Loading...")
         Fight.FightPage()
+
+    def generatePNJs(self, number_pnj):
+        self.pnjs = []
+        min_x = 0
+        max_x = self.map.map_width-50
+        min_y = 0
+        max_y = self.map.map_height-50
+        for _ in range(number_pnj):
+            pnj = PNJ()  # Crée une instance de pnj
+
+
+            # Vérifie si les coordonnées du monstre se trouvent dans le champ de vision
+            
+            emplacement = False
+            emplacementOK = True
+            while not emplacement:
+                x1 = random.randint(0, self.map.map_width-50)
+                y1 = random.randint(0, self.map.map_height-50)
+                for cle, valeur in self.map.CaseNoire.items():
+                    if (
+                        x1 + 10 > valeur[0]
+                        and y1 + 10 > valeur[1]
+                        and x1 < valeur[2]
+                        and y1 < valeur[3]
+                    ):
+                        emplacementOK = False
+                if emplacementOK:
+                    emplacement = True
+                emplacementOK = True
+            """print(x1, y1, x1 + 30, y1 + 30)"""
+            pnj.generateShop(self.areaPlay, x1, y1)
+
+            self.pnjs.append(pnj)
 
     def generateMonsters(self, num_monsters):
         self.monsters = []  # Liste pour stocker les monstres
@@ -244,6 +280,8 @@ class player:
         self.update_view()
         number_monsters = self.numberMonsters()
         self.generateMonsters(number_monsters)
+        number_pnj = random.randint(0,3)
+        self.generatePNJs(number_pnj)
         self.move_monster_periodically()
 
     def displayPJ(self):
