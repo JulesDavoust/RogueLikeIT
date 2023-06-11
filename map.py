@@ -6,7 +6,7 @@ from windowParameters import WindowParameter
 
 class Map:
     def __init__(self) -> None:
-        self.level = 1
+        self.level = 0
         self.CaseNoire = {}
         self.centreCaseNoire = {}
         self.indexDico = 0
@@ -34,8 +34,8 @@ class Map:
                         self.centreCaseNoire[self.indexDico] = [(x1+x2)/2, (y1+y2)/2]
                         self.indexDico += 1
                 areaPlay.create_rectangle(x1, y1, x2, y2, fill=fill_color)
-        xRed = random.randint(0, self.map_width// case_size)
-        yRed = random.randint(0, self.map_height// case_size)
+        xRed = random.randint(0, (self.map_width-50)// case_size)
+        yRed = random.randint(0, (self.map_height-50)// case_size)
         self.x1R = xRed * case_size
         self.y1R = yRed * case_size
         self.x2R = self.x1R + case_size
