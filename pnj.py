@@ -1,5 +1,6 @@
 import random
 import tkinter as tk
+from windowParameters import WindowParameter
 
 
 class PNJ:
@@ -20,7 +21,7 @@ class PNJ:
         self.collPNJ = False
 
     def generatePNJ(self, areaPlay, x, y):
-        self.pnj = areaPlay.create_rectangle(x, y, x + 10, y + 10, fill="brown", outline = "")
+        self.pnj = areaPlay.create_rectangle(x, y, x + WindowParameter.characterSize, y + WindowParameter.characterSize, fill="blue", outline = "")
 
     def openShop(self, window, gold, inventory, collPNJ):
         self.collPNJ = collPNJ
