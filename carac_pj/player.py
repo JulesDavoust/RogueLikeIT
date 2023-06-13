@@ -8,22 +8,31 @@ import tkinter as tk
 
 class player:
     def __init__(self, classe):
+        
+        
+        
         self.allClasse = {0: "guerrier", 1: "archer", 2: "sorcier"}
-        self.player_collision = False
-        self.view_distance = 100
         self.classe = classe
         self.PlayerLevel = 0
         self.xp = 0
+        self.inventory = {"key":0}
+        self.gold = 0
+
         self.map = Map()
+
+        self.view_distance = 100
         self.character_x = 0
         self.character_y = 0
+
+        self.player_collision = False
         self.pause = False
         self.collPNJ = False
-        
-        self.inventory = {"key":0}
-
-        self.attackDirection = "Right"
         self.cooldown_active = False
+        
+        self.attackDirection = "Right"
+
+        self.numPNJ = 0
+        
 
         if classe == 0:
             self.life_point = 120
@@ -69,7 +78,6 @@ class player:
         self.start_moving_monsters()
         self.areaPlay.pack()
         window.bind("<KeyPress>", self.move_character)
-        window.after(1000, )
 
     def start_moving_monsters(self):
         self.move_monster_periodically()
@@ -205,7 +213,7 @@ class player:
             self.numPNJ = i
             self.collPNJ = True
             print("pnj num : ", self.numPNJ)
-            self.pnjs[i].openShop(self.window)
+            self.pnjs[i].openShop(self.window, self.gold, self.inventory, self.collPNJ)
             return True
         else:
             return False
@@ -255,6 +263,16 @@ class player:
                     self.areaPlay.delete(self.monsters[i].monster)
                     self.monsters.pop(i)
                     pop = True
+                else:
+                    if(self.attackDirection == "Right"):
+                        self.areaPlay.move(self.monsters[i].monster, +8, 0)
+                    elif(self.attackDirection == "Left"):
+                        self.areaPlay.move(self.monsters[i].monster, -8, 0)
+                    elif(self.attackDirection == "Up"):
+                        self.areaPlay.move(self.monsters[i].monster, 0, -8)
+                    elif(self.attackDirection == "Down"):
+                        self.areaPlay.move(self.monsters[i].monster, 0, +8)
+
             i += 1
 
 
@@ -333,14 +351,13 @@ class player:
                     self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
 
             
-                  
+        
 
 
         if self.player_collision != True:
-                if(self.collPNJ == True and key == "e"):
-                    self.pnjs[self.numPNJ].closeShop()
+                if(len(self.pnjs) > 0 and self.pnjs[self.numPNJ].collPNJ == False):
                     self.collPNJ = False
-                elif(self.collPNJ == False):
+                if(self.collPNJ == False):
                     dx, dy = 0, 0  # Valeurs de déplacement initiales
                     if key == "Right":
                         if self.character_x2 + 3 > WindowParameter.mapWidth:

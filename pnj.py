@@ -17,10 +17,14 @@ class PNJ:
         self.buyIt = False
         self.pnj_position = []
 
+        self.collPNJ = False
+
     def generatePNJ(self, areaPlay, x, y):
         self.pnj = areaPlay.create_rectangle(x, y, x + 10, y + 10, fill="brown", outline = "")
 
-    def openShop(self, window):
+    def openShop(self, window, gold, inventory, collPNJ):
+        self.collPNJ = collPNJ
+        print(self.collPNJ)
         self.keysItem = list(self.shop.keys())
         """self.keySousItem0 = list()
         self.keySousItem1 = list(self.shop[self.keysItem[1]])
@@ -39,27 +43,26 @@ class PNJ:
         """self.keySousDico0[0]," : ",
         ,self.keySousDico0[1]," : " """
 
-    
-        if self.buyIt == True:
-            self.putInventory()
-        else:
-            self.item0 = tk.Label(self.windowShop, text=self.string0)
-            self.buyI0 = tk.Button(self.windowShop, text="Buy", command=self.buy())
-            self.item1 = tk.Label(self.windowShop, text=self.string1)
-            self.buyI1 = tk.Button(self.windowShop, text="Buy", command=self.buy())
-            self.item2 = tk.Label(self.windowShop, text=self.string2)
-            self.buyI2 = tk.Button(self.windowShop, text="Buy", command=self.buy())
-
-            self.item0.grid(row=0, column=0, pady=20, sticky="nsew")
-            self.buyI0.grid(row=1, column=0, sticky="nsew")
-            self.item1.grid(row=0, column=1, pady=20, sticky="nsew")
-            self.buyI1.grid(row=1, column=1, sticky="nsew")
-            self.item2.grid(row=0, column=2, pady=20, sticky="nsew")
-            self.buyI2.grid(row=1, column=2, sticky="nsew")
-
-            self.windowShop.grid_columnconfigure(0, weight=1)
-            self.windowShop.grid_columnconfigure(1, weight=1)
-            self.windowShop.grid_columnconfigure(2, weight=1)
+        print("gold : ", gold, "inventory : ", inventory)
+        
+        self.item0 = tk.Label(self.windowShop, text=self.string0)
+        self.buyI0 = tk.Button(self.windowShop, text="Buy", command=self.buy)
+        self.item1 = tk.Label(self.windowShop, text=self.string1)
+        self.buyI1 = tk.Button(self.windowShop, text="Buy", command=self.buy)
+        self.item2 = tk.Label(self.windowShop, text=self.string2)
+        self.buyI2 = tk.Button(self.windowShop, text="Buy", command=self.buy)
+        
+        self.item0.grid(row=0, column=0, pady=20, sticky="nsew")
+        self.buyI0.grid(row=1, column=0, sticky="nsew")
+        self.item1.grid(row=0, column=1, pady=20, sticky="nsew")
+        self.buyI1.grid(row=1, column=1, sticky="nsew")
+        self.item2.grid(row=0, column=2, pady=20, sticky="nsew")
+        self.buyI2.grid(row=1, column=2, sticky="nsew")
+        self.windowShop.grid_columnconfigure(0, weight=1)
+        self.windowShop.grid_columnconfigure(1, weight=1)
+        self.windowShop.grid_columnconfigure(2, weight=1)
+        print(self.collPNJ)
+        self.windowShop.bind("<KeyPress>", self.closeShop)
         """self.item0.place(anchor="center", x=60, y=120)
         self.buyI1.place(anchor="center", x = 60, y=150)"""
 
@@ -70,8 +73,15 @@ class PNJ:
     def putInventory(self):
         print("In inventory")
 
-    def closeShop(self):
-        self.windowShop.destroy()
+    def closeShop(self, event):
+        key = event.keysym
+        self.collPNJ = False
+        if key == "e":
+            self.windowShop.destroy()
+        
+            
+
+        
 
     #def closeShop(self, window)
 
