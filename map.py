@@ -102,7 +102,7 @@ class Map:
         self.keyY1 = y1
         self.keyX2 = x1 + 6
         self.keyY2 = y1 + 6
-        self.key = areaPlay.create_rectangle(x1, y1, x1+6, y1+6, fill="yellow")
+        self.key = areaPlay.create_rectangle(x1, y1, x1+WindowParameter.objectSize, y1+WindowParameter.objectSize, fill="yellow")
 
                 
     def player_info(self,areaPlay):

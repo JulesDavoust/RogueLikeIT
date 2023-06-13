@@ -1,6 +1,7 @@
 import math
 import random
 import tkinter as tk
+from windowParameters import WindowParameter
 
 class Monster:
     
@@ -41,7 +42,7 @@ class Monster:
     
 
     def generateMonster(self, areaPlay, x, y):
-        self.monster = areaPlay.create_rectangle(x, y, x + 10, y + 10, fill="black", outline = "")
+        self.monster = areaPlay.create_rectangle(x, y, x + WindowParameter.characterSize, y + WindowParameter.characterSize, fill="black", outline = "")
         #self.monster_pic = areaPlay.create_image((x+x+30)/2, (y+y+30)/2, image=self.zombie)
         self.monster_positions.append((x, y))  # Ajouter la position du monstre à la liste
 
