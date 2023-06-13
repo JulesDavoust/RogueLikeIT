@@ -227,6 +227,38 @@ class player:
     def reset_cooldown(self):
         self.cooldown_active = False
 
+    def Fight(self, attackRect):
+        print("fonction fight")
+        attack = self.areaPlay.coords(attackRect)
+        attack_x1 = attack[0]
+        attack_y1 = attack[1]
+        attack_x2 = attack[2]
+        attack_y2 = attack[3]
+        i = 0
+        pop = False
+        while i < len(self.monsters) and pop == False:
+            print("for loop")
+            monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
+
+            monster_x1 = monsterCOO[0]
+            monster_y1 = monsterCOO[1]
+            monster_x2 = monsterCOO[2]
+            monster_y2 = monsterCOO[3]
+            if (attack_x2 >= monster_x1 
+                and attack_x1 <= monster_x2 
+                and attack_y2 >= monster_y1 
+                and attack_y1 <= monster_y2):
+                print(self.monsters[i].life_points_monster)
+                self.monsters[i].life_points_monster = self.monsters[i].life_points_monster - self.damage
+                print(self.monsters[i].life_points_monster)
+                if(self.monsters[i].life_points_monster <= 0):
+                    self.areaPlay.delete(self.monsters[i].monster)
+                    self.monsters.pop(i)
+                    pop = True
+            i += 1
+
+
+
     def move_character(self, event):
         
         key = event.keysym
@@ -243,6 +275,7 @@ class player:
                     y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
                     attackRect = self.areaPlay.create_rectangle(x1, y1, x2+3, y2, fill="blue")
+                    self.Fight(attackRect)
                     self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                     self.cooldown_active = True
                     self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
@@ -259,6 +292,7 @@ class player:
                     y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
                     attackRect = self.areaPlay.create_rectangle(x1-3, y1, x2, y2, fill="blue")
+                    self.Fight(attackRect)
                     self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                     self.cooldown_active = True
                     self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
@@ -276,6 +310,7 @@ class player:
                     
 
                     attackRect = self.areaPlay.create_rectangle(x1, y1-3, x2, y2, fill="blue")
+                    self.Fight(attackRect)
                     self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                     self.cooldown_active = True
                     self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
@@ -292,6 +327,7 @@ class player:
                     y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
                     attackRect = self.areaPlay.create_rectangle(x1, y1, x2, y2+3, fill="blue")
+                    self.Fight(attackRect)
                     self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                     self.cooldown_active = True
                     self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
