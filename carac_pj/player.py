@@ -19,8 +19,11 @@ class player:
         self.character_y = 0
         self.pause = False
         self.collPNJ = False
-
+        
         self.inventory = {"key":0}
+
+        self.attackDirection = "Right"
+        self.cooldown_active = False
 
         if classe == 0:
             self.life_point = 120
@@ -66,6 +69,7 @@ class player:
         self.start_moving_monsters()
         self.areaPlay.pack()
         window.bind("<KeyPress>", self.move_character)
+        window.after(1000, )
 
     def start_moving_monsters(self):
         self.move_monster_periodically()
@@ -187,7 +191,6 @@ class player:
                     )
             #self.areaPlay.after(800, self.move_monster_periodically)
 
-
     def checkPNJCollision(self, i, dx, dy):
         self.cooPNJ = self.areaPlay.coords(self.pnjs[i].pnj)
         self.pnj_x = (self.cooPNJ[0] + self.cooPNJ[2]) / 2  # Coordonnée x du centre du rectangle rouge
@@ -221,9 +224,81 @@ class player:
         else:
             return False
 
+    def reset_cooldown(self):
+        self.cooldown_active = False
+
     def move_character(self, event):
         
         key = event.keysym
+        if not self.cooldown_active:
+            if event.char == "a":
+                if self.attackDirection == "Right":
+                    print("direction attack right")
+                    taille_cote = 10  # Taille du côté du carré principal
+                    taille_secondaire = 6  # Taille du côté du carré secondaire
+
+                    x1 = self.character_x2  # Coordonnée x1 du carré secondaire
+                    y1 = self.character_y1 + (taille_cote - taille_secondaire) / 2  # Coordonnée y1 du carré secondaire
+                    x2 = x1 + taille_secondaire  # Coordonnée x2 du carré secondaire
+                    y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
+
+                    attackRect = self.areaPlay.create_rectangle(x1, y1, x2+3, y2, fill="blue")
+                    self.window.after(100, lambda: self.areaPlay.delete(attackRect))
+                    self.cooldown_active = True
+                    self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+            
+            if event.char == "a":
+                if self.attackDirection == "Left":
+                    print("direction attack Left")
+                    taille_cote = 10  # Taille du côté du carré principal
+                    taille_secondaire = 6  # Taille du côté du carré secondaire
+
+                    x2 = self.character_x1  # Coordonnée x1 du carré secondaire
+                    y1 = self.character_y1 + (taille_cote - taille_secondaire) / 2  # Coordonnée y1 du carré secondaire
+                    x1 = x2 - taille_secondaire  # Coordonnée x2 du carré secondaire
+                    y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
+
+                    attackRect = self.areaPlay.create_rectangle(x1-3, y1, x2, y2, fill="blue")
+                    self.window.after(100, lambda: self.areaPlay.delete(attackRect))
+                    self.cooldown_active = True
+                    self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+                    
+            if event.char == "a":
+                if self.attackDirection == "Up":
+                    print("direction attack Up")
+                    taille_cote = 10  # Taille du côté du carré principal
+                    taille_secondaire = 6  # Taille du côté du carré secondaire
+
+                    x1 = self.character_x1 + (taille_cote - taille_secondaire) / 2
+                    x2 = x1 + taille_secondaire
+                    y2 = self.character_y1 # Coordonnée y2 du carré secondaire
+                    y1 = y2 - taille_secondaire
+                    
+
+                    attackRect = self.areaPlay.create_rectangle(x1, y1-3, x2, y2, fill="blue")
+                    self.window.after(100, lambda: self.areaPlay.delete(attackRect))
+                    self.cooldown_active = True
+                    self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+                    
+            if event.char == "a":
+                if self.attackDirection == "Down":
+                    print("direction attack Down")
+                    taille_cote = 10  # Taille du côté du carré principal
+                    taille_secondaire = 6  # Taille du côté du carré secondaire
+
+                    x1 = self.character_x1 + (taille_cote - taille_secondaire) / 2 # Coordonnée x1 du carré secondaire
+                    y1 = self.character_y2  # Coordonnée y1 du carré secondaire
+                    x2 = x1 + taille_secondaire  # Coordonnée x2 du carré secondaire
+                    y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
+
+                    attackRect = self.areaPlay.create_rectangle(x1, y1, x2, y2+3, fill="blue")
+                    self.window.after(100, lambda: self.areaPlay.delete(attackRect))
+                    self.cooldown_active = True
+                    self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+
+            
+                  
+
 
         if self.player_collision != True:
                 if(self.collPNJ == True and key == "e"):
@@ -235,21 +310,25 @@ class player:
                         if self.character_x2 + 3 > WindowParameter.mapWidth:
                             return
                         dx = 3  # Déplacement vers la droite
+                        self.attackDirection = "Right"
 
                     elif key == "Left":
                         if self.character_x1 - 3 < 0:
                             return
                         dx = -3  # Déplacement vers la gauche
+                        self.attackDirection = "Left"
 
                     elif key == "Up":
                         if self.character_y1 - 3 < 0:
                             return
                         dy = -3  # Déplacement vers le haut
+                        self.attackDirection = "Up"
 
                     elif key == "Down":
                         if self.character_y2 + 3 > WindowParameter.mapHeight:
                             return
                         dy = 3  # Déplacement vers le bas
+                        self.attackDirection = "Down"
 
                     new_x1 = self.character_x1 + dx
                     new_y1 = self.character_y1 + dy
@@ -281,7 +360,10 @@ class player:
                     self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
                 #self.areaPlay.move(self.character_pic, dx, dy)
                     self.update_view()
+        
 
+    def attackPlayer(self):
+        print("attack")
 
     def update_view(self):
         character_coords = self.areaPlay.coords(self.character_id)
@@ -301,7 +383,7 @@ class player:
         self.view_x2 = self.character_x + self.view_distance
         self.view_y2 = self.character_y + self.view_distance
 
-        print("Player : x1 : ",self.view_x1," y1 : ",self.view_x2," x2 : ",self.view_x2," y2 : ",self.view_y2)
+        #print("Player : x1 : ",self.view_x1," y1 : ",self.view_x2," x2 : ",self.view_x2," y2 : ",self.view_y2)
 
         self.areaPlay.create_rectangle(self.view_x1, self.view_y1, self.view_x2, self.view_y2, fill="", outline="white", tag="view")
 

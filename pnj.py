@@ -81,7 +81,7 @@ class PNJ:
             elif ItemsShop[i] == "Potion of mana":
                 mana = random.randint(3,5)
                 if(mana <= 5):
-                    self.shop["Potion of mana"] = {"heal" : mana, "cost" : 3}
+                    self.shop["Potion of mana"] = {"mana" : mana, "cost" : 3}
             elif ItemsShop[i] == "Armor":
                 armor = random.randint(5,9)
                 if(armor <= 9):

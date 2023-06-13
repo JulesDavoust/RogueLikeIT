@@ -114,19 +114,19 @@ class Monster:
                 #areaPlay.move(self.monster_pic, dx, dy)
 
         elif self.monster_x2 + 10 > map.map_width:
-                    print("x2")
+                    #print("x2")
                     areaPlay.move(self.monster, -10, 0)
                     #areaPlay.move(self.monster_pic, -20, 0)
         elif self.monster_x1 - 10 < 0:
-                    print("x1")
+                    #print("x1")
                     areaPlay.move(self.monster, +10, 0)
                     #areaPlay.move(self.monster_pic, -20, 0)
         elif self.monster_y2 + 10 > map.map_height:
-                    print("y2")
+                    #print("y2")
                     areaPlay.move(self.monster, 0, -10)
                     #areaPlay.move(self.monster_pic, -20, 0)
         elif self.monster_y1 - 10 < 0:
-                    print("y1")
+                    #print("y1")
                     areaPlay.move(self.monster, 0, +10)
                     #areaPlay.move(self.monster_pic, -20, 0)
         elif(playerSelf.player_collision == False):
