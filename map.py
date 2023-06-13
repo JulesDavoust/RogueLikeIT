@@ -25,11 +25,11 @@ class Map:
         y_tile = WindowParameter.mapTileRow
         maze = mazeMap.generate_maze(x_tile,y_tile)
 
-        wall_image = Image.open(".\sprites\wall_mid.png").convert("RGBA")
+        wall_image = Image.open(".\sprites\wall_mid.png").convert("P")
         wall_image = wall_image.resize((case_size, case_size), Image.ANTIALIAS)
         self.wall_photo = ImageTk.PhotoImage(wall_image)
 
-        floor_image = Image.open("./sprites/floor_1.png").convert("RGBA")
+        floor_image = Image.open("./sprites/floor_1.png").convert("P")
         floor_image= floor_image.resize((case_size, case_size), Image.ANTIALIAS)
         self.floor_photo = ImageTk.PhotoImage(floor_image)
 
@@ -112,8 +112,13 @@ class Map:
         x1 = map_width
         x2 = screen_width
         y2 = screen_width
+        p_image = Image.open(".\sprites\knight_f_idle_anim_f0.png").convert("P")
+        p_image = p_image.resize((32,56))
+        self.player_photo = ImageTk.PhotoImage(p_image)
+
         areaPlay.create_rectangle(x1, 0, x2, y2, fill="black", outline="red", dash=(3,5))
-        areaPlay.create_text(map_width + 50,50, text="Hello, world", fill="white")
+        areaPlay.create_image(map_width + 50,50,image=self.player_photo)
+        areaPlay.create_rectangle(map_width+80,50,map_width+300,80,fill="red")
         areaPlay.create_rectangle(x1 + 20,400,x1 + 310,y2-50,fill="grey",outline="white")
 
 
