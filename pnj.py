@@ -14,7 +14,9 @@ class PNJ:
         self.armor = {}
         self.bow = {}
         self.WS = {}
-        self.buyIt = False
+        self.buyIt1 = False
+        self.buyIt2 = False
+        self.buyIt3 = False
         self.pnj_position = []
 
         self.collPNJ = False
@@ -22,8 +24,9 @@ class PNJ:
     def generatePNJ(self, areaPlay, x, y):
         self.pnj = areaPlay.create_rectangle(x, y, x + 10, y + 10, fill="brown", outline = "")
 
-    def openShop(self, window, gold, inventory, collPNJ):
+    def openShop(self, window, selfPlayer, collPNJ):
         self.collPNJ = collPNJ
+        self.selfP = selfPlayer
         print(self.collPNJ)
         self.keysItem = list(self.shop.keys())
         """self.keySousItem0 = list()
@@ -33,24 +36,23 @@ class PNJ:
         self.string0 = self.keysItem[0]+"\n"+self.keySousDico0[0]+" : "+str(self.shop[self.keysItem[0]][self.keySousDico0[0]])+" \n"+self.keySousDico0[1]+" : "+str(self.shop[self.keysItem[0]][self.keySousDico0[1]])
         self.keySousDico1 = list(self.shop[self.keysItem[1]].keys())
         self.string1 = self.keysItem[1]+"\n"+self.keySousDico1[0]+" : "+str(self.shop[self.keysItem[1]][self.keySousDico1[0]])+" \n"+self.keySousDico1[1]+" : "+str(self.shop[self.keysItem[1]][self.keySousDico1[1]])
-        print(self.string1)
         self.keySousDico2 = list(self.shop[self.keysItem[2]].keys())
         self.string2 = self.keysItem[2]+"\n"+self.keySousDico2[0]+" : "+str(self.shop[self.keysItem[2]][self.keySousDico2[0]])+" \n"+self.keySousDico2[1]+" : "+str(self.shop[self.keysItem[2]][self.keySousDico2[1]])
-        print(self.string2)
         self.windowShop = tk.Toplevel(window)
         self.windowShop.geometry("400x300")
 
         """self.keySousDico0[0]," : ",
         ,self.keySousDico0[1]," : " """
 
-        print("gold : ", gold, "inventory : ", inventory)
+        print("gold : ", self.selfP.gold, "inventory : ", self.selfP.inventory)
+        print(self.buyIt1,"\n",self.buyIt2,"\n",self.buyIt3)
         
         self.item0 = tk.Label(self.windowShop, text=self.string0)
-        self.buyI0 = tk.Button(self.windowShop, text="Buy", command=self.buy)
+        self.buyI0 = tk.Button(self.windowShop, text="Buy", command=self.buy1)
         self.item1 = tk.Label(self.windowShop, text=self.string1)
-        self.buyI1 = tk.Button(self.windowShop, text="Buy", command=self.buy)
+        self.buyI1 = tk.Button(self.windowShop, text="Buy", command=self.buy2)
         self.item2 = tk.Label(self.windowShop, text=self.string2)
-        self.buyI2 = tk.Button(self.windowShop, text="Buy", command=self.buy)
+        self.buyI2 = tk.Button(self.windowShop, text="Buy", command=self.buy3)
         
         self.item0.grid(row=0, column=0, pady=20, sticky="nsew")
         self.buyI0.grid(row=1, column=0, sticky="nsew")
@@ -61,17 +63,55 @@ class PNJ:
         self.windowShop.grid_columnconfigure(0, weight=1)
         self.windowShop.grid_columnconfigure(1, weight=1)
         self.windowShop.grid_columnconfigure(2, weight=1)
-        print(self.collPNJ)
+
+    
         self.windowShop.bind("<KeyPress>", self.closeShop)
         """self.item0.place(anchor="center", x=60, y=120)
         self.buyI1.place(anchor="center", x = 60, y=150)"""
 
-    def buy(self):
+    def buy1(self):
         print("buy")
-        self.buyIt = True
+        self.putInventoryItem1()
 
-    def putInventory(self):
-        print("In inventory")
+    def buy2(self):
+        print("buy")
+        self.putInventoryItem2()
+
+    def buy3(self):
+        print("buy")
+        self.putInventoryItem3()
+
+
+    def putInventoryItem1(self):
+        print(self.selfP.gold)
+        if self.selfP.gold >= self.shop[self.keysItem[0]][self.keySousDico0[1]]:
+            self.selfP.inventory[self.keysItem[0]] = self.shop[self.keysItem[0]]
+            if self.selfP.gold >= self.shop[self.keysItem[0]][self.keySousDico0[1]]:
+                self.selfP.gold = self.selfP.gold - self.shop[self.keysItem[0]][self.keySousDico0[1]]
+            else:
+                self.selfP.gold = 0
+        print(self.selfP.inventory)
+
+    def putInventoryItem2(self):
+        print(self.selfP.gold)
+        if self.selfP.gold >= self.shop[self.keysItem[1]][self.keySousDico1[1]]:
+            self.selfP.inventory[self.keysItem[1]] = self.shop[self.keysItem[1]]
+            if self.selfP.gold >= self.shop[self.keysItem[1]][self.keySousDico1[1]]:
+                self.selfP.gold = self.selfP.gold - self.shop[self.keysItem[1]][self.keySousDico1[1]]
+            else:
+                self.selfP.gold = 0
+        print(self.selfP.inventory)
+
+    def putInventoryItem3(self):
+        print(self.selfP.gold)
+        if self.selfP.gold >= self.shop[self.keysItem[2]][self.keySousDico2[1]]:
+            self.selfP.inventory[self.keysItem[2]] = self.shop[self.keysItem[2]]
+            if self.selfP.gold >= self.shop[self.keysItem[2]][self.keySousDico2[1]]:
+                self.selfP.gold = self.selfP.gold - self.shop[self.keysItem[1]][self.keySousDico1[1]]
+            else:
+                self.selfP.gold = 0
+        print(self.selfP.inventory)
+
 
     def closeShop(self, event):
         key = event.keysym

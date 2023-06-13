@@ -16,7 +16,7 @@ class player:
         self.PlayerLevel = 0
         self.xp = 0
         self.inventory = {"key":0}
-        self.gold = 0
+        self.gold = 30
 
         self.map = Map()
 
@@ -213,7 +213,7 @@ class player:
             self.numPNJ = i
             self.collPNJ = True
             print("pnj num : ", self.numPNJ)
-            self.pnjs[i].openShop(self.window, self.gold, self.inventory, self.collPNJ)
+            self.pnjs[i].openShop(self.window, self, self.collPNJ)
             return True
         else:
             return False
