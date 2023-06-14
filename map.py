@@ -18,7 +18,7 @@ class Map:
         self.spawnX = 0
         self.spawnY = 0
 
-    def generateMap(self, areaPlay, numberPNJ):
+    def generateMap(self, areaPlay):
         self.map_width = WindowParameter.mapWidth
         self.map_height = WindowParameter.mapHeight
         case_size = WindowParameter.tileSize
@@ -44,7 +44,7 @@ class Map:
                     self.indexDico += 1
                 elif(maze[y][x] == 'C'):
                     areaPlay.create_image(x * case_size, y * case_size, anchor="nw", image=self.floor_photo)
-    
+        
         xRed = random.randint(0, (self.map_width-50)// case_size)
         yRed = random.randint(0, (self.map_height-50)// case_size)
         self.x1R = xRed * case_size
