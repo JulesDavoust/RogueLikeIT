@@ -49,7 +49,17 @@ def delete_wall(maze, axis_x, axis_y):
     maze[axis_x][axis_y] = 'C'
     return maze
 
-# Display the maze
-"""maze = generate_maze(WindowParameter.mapTileCol,WindowParameter.mapTileRow)"""
+def detect_walls(maze):
+    wall_list = []
+    for y in range(0, len(maze)):
+        for x in range(0, len(maze[y])):
+            #print(maze[y][x])
+            if(maze[y][x] == 'W'):
+                #print(f"YES: Y:{y} X:{x}")
+                wall_list.append([y,x])
+    return wall_list
 
+# Display the maze
+# maze = generate_maze(WindowParameter.mapTileCol,WindowParameter.mapTileRow)
+# wall_list = detect_walls(maze)
 

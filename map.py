@@ -18,16 +18,17 @@ class Map:
         self.indexDico = 0
         self.indexDicoC= 0
         self.spawnX = 0
-        self.spawnY = 0
+        self.spawnY = 0    
 
     def generateMap(self, areaPlay):
         self.map_width = WindowParameter.mapWidth
         self.map_height = WindowParameter.mapHeight
         case_size = WindowParameter.tileSize
         x_tile = WindowParameter.mapTileCol
-        y_tile = WindowParameter.mapTileRow
-        maze = mazeMap.generate_maze(x_tile,y_tile)
+        y_tile = WindowParameter.mapTileRow    
+        num_remove_walls = 50
 
+        #Image assests import
         wall_image = Image.open("./sprites/wall_mid.png").convert("P")
         wall_image = wall_image.resize((case_size, case_size), Image.ANTIALIAS)
         self.wall_photo = ImageTk.PhotoImage(wall_image)
@@ -35,6 +36,15 @@ class Map:
         floor_image = Image.open("./sprites/floor_1.png").convert("P")
         floor_image= floor_image.resize((case_size, case_size), Image.ANTIALIAS)
         self.floor_photo = ImageTk.PhotoImage(floor_image)
+
+        #maze generation The number of wall can be modified(removed)
+        maze = mazeMap.generate_maze(x_tile,y_tile)
+        wall_list = mazeMap.detect_walls(maze)
+        for i in range(num_remove_walls):
+            remove_index = random.choice(wall_list)
+            maze = mazeMap.delete_wall(maze, remove_index[0],remove_index[1])
+            wall_list = mazeMap.detect_walls(maze)
+
 
         #Dessine les cases V2.0
         for y in range(len(maze)):
