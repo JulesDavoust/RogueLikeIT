@@ -31,6 +31,9 @@ class player:
         self.gonext = False
         self.tourPlayer = True
 
+        self.countTourActivate = False
+        self.countTour = 0
+
         self.attackDirection = "Right"
 
         self.numPNJ = 0
@@ -103,6 +106,7 @@ class player:
     def start_moving_monsters(self):
         self.move_monster_periodically()
         self.tourPlayer = True
+        
 
     def numberMonsters(self):
         if(self.levelMap == 1):
@@ -294,23 +298,22 @@ class player:
                     pop = True
                 else:
                     if(self.attackDirection == "Right"):
-                        self.areaPlay.move(self.monsters[i].monster, +15, 0)
+                        self.areaPlay.move(self.monsters[i].monster, +WindowParameter.tileSize, 0)
                     elif(self.attackDirection == "Left"):
-                        self.areaPlay.move(self.monsters[i].monster, -15, 0)
+                        self.areaPlay.move(self.monsters[i].monster, -WindowParameter.tileSize, 0)
                     elif(self.attackDirection == "Up"):
-                        self.areaPlay.move(self.monsters[i].monster, 0, -15)
+                        self.areaPlay.move(self.monsters[i].monster, 0, -WindowParameter.tileSize)
                     elif(self.attackDirection == "Down"):
-                        self.areaPlay.move(self.monsters[i].monster, 0, +15)
+                        self.areaPlay.move(self.monsters[i].monster, 0, +WindowParameter.tileSize)
 
             i += 1
 
 
 
     def move_character(self, event):
-        
         key = event.keysym
         if self.tourPlayer == True:
-            if not self.cooldown_active:
+            if self.countTour%3 == 0:
                 if event.char == "a":
                     if self.attackDirection == "Right":
                         print("direction attack right")
@@ -325,10 +328,13 @@ class player:
                         attackRect = self.areaPlay.create_rectangle(x1, y1, x2+8, y2, fill="blue")
                         self.Fight(attackRect)
                         self.window.after(100, lambda: self.areaPlay.delete(attackRect))
+
                         self.cooldown_active = True
-                        self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+                        self.countTourActivate = True
+
+                        self.window.after(500, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
                         self.window.after(1000, self.start_moving_monsters)
-                if event.char == "a":
+                if event.char == "a" and self.countTour%3 == 0:
                     if self.attackDirection == "Left":
                         print("direction attack Left")
                         taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
@@ -343,9 +349,10 @@ class player:
                         self.Fight(attackRect)
                         self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                         self.cooldown_active = True
-                        self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+                        self.countTourActivate = True
+                        self.window.after(500, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
                         self.window.after(1000, self.start_moving_monsters)
-                if event.char == "a":
+                if event.char == "a" and self.countTour%3 == 0:
                     if self.attackDirection == "Up":
                         print("direction attack Up")
                         taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
@@ -361,9 +368,10 @@ class player:
                         self.Fight(attackRect)
                         self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                         self.cooldown_active = True
-                        self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+                        self.countTourActivate = True
+                        self.window.after(500, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
                         self.window.after(1000, self.start_moving_monsters)
-                if event.char == "a":
+                if event.char == "a" and self.countTour%3 == 0:
                     if self.attackDirection == "Down":
                         print("direction attack Down")
                         taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
@@ -378,7 +386,8 @@ class player:
                         self.Fight(attackRect)
                         self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                         self.cooldown_active = True
-                        self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+                        self.countTourActivate = True
+                        self.window.after(500, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
                         self.window.after(1000, self.start_moving_monsters)
                 
             
@@ -446,11 +455,15 @@ class player:
                             self.update_view()
                         self.goNextRoom()
                     self.window.after(1000, self.start_moving_monsters)
-        print(self.tourPlayer)
         self.tourPlayer = False
-        print(self.tourPlayer)
-        
-        print(self.tourPlayer)
+        if self.countTour == 3:
+            self.countTour = 0
+            self.countTourActivate = False
+        if self.countTourActivate == True:
+            self.countTour += 1
+        print(self.countTour)
+            
+        print(self.countTour)
             
         
 

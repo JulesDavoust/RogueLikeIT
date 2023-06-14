@@ -56,9 +56,21 @@ class Monster:
         self.current_x = (self.monster_coords[0] + self.monster_coords[2])/2
         self.current_y = (self.monster_coords[1] + self.monster_coords[3])/2
 
+        black_center_x = (self.monster_x1 + self.monster_x2) // 2
+        black_center_y = (self.monster_y1 + self.monster_y2) // 2
+        red_center_x = (x1P + x2P) // 2
+        red_center_y = (y1P + y2P) // 2
+
+        if (red_center_x - black_center_x) != 0:
+                slope = (red_center_y - black_center_y) / (red_center_x - black_center_x)
+        else:
+            slope = 0
+        print(slope)
+
         dx = self.moveDistance
         dy = -self.moveDistance
         """if x1_rect1 < x2_rect2 and x2_rect1 > x1_rect2 and y1_rect1 < y2_rect2 and y2_rect1 > y1_rect2:"""
+        
         if(self.monster_x1-3 < x2 and self.monster_x2+3 > x1 and self.monster_y1-3 < y2 and self.monster_y2+3 > y1 and playerSelf.player_collision == False):
             #playerSelf.player_collision = True
             self.monster_collision = True
@@ -66,19 +78,17 @@ class Monster:
             print("collision with player")
             
         elif(self.monster_x1 < x2P and self.monster_x2 > x1P and self.monster_y1 < y2P and self.monster_y2 > y1P and playerSelf.player_collision == False and playerSelf.collPNJ == False):
-            black_center_x = (self.monster_x1 + self.monster_x2) // 2
-            black_center_y = (self.monster_y1 + self.monster_y2) // 2
-            red_center_x = (x1P + x2P) // 2
-            red_center_y = (y1P + y2P) // 2
-
-            # Tracer une ligne entre les centres des carrés
+            
+            # Tracer une ligne entre les centres des carrés 
             line_equation = lambda x: (red_center_y - black_center_y) * (x - black_center_x) / (red_center_x - black_center_x) + black_center_y
             is_black_tile_in_between = False
             for x in range(int(min(black_center_x, red_center_x)), int(max(black_center_x, red_center_x))):
                 y = line_equation(x)
+                print(y)
                 if self.isBlackTile(x, y, map):
                     is_black_tile_in_between = True
                     break
+            
             
             #print(is_black_tile_in_between)
             if is_black_tile_in_between == False:
@@ -88,6 +98,7 @@ class Monster:
                 print(dx)
                 print(dy)
                 if dx == 0 and dy < 0:
+
                     areaPlay.move(self.monster, 0, -1 * self.moveDistance)
                 elif dx == 0 and dy > 0:
                     areaPlay.move(self.monster, 0, 1 * self.moveDistance)
