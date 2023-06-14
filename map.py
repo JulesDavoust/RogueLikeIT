@@ -18,7 +18,7 @@ class Map:
         self.spawnX = 0
         self.spawnY = 0
 
-    def generateMap(self, areaPlay):
+    def generateMap(self, areaPlay, numberPNJ):
         self.map_width = WindowParameter.mapWidth
         self.map_height = WindowParameter.mapHeight
         case_size = WindowParameter.tileSize
