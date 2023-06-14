@@ -26,7 +26,7 @@ class Map:
         y_tile = WindowParameter.mapTileRow
         maze = mazeMap.generate_maze(x_tile,y_tile)
 
-        wall_image = Image.open(".\sprites\wall_mid.png").convert("P")
+        wall_image = Image.open("./sprites/wall_mid.png").convert("P")
         wall_image = wall_image.resize((case_size, case_size), Image.ANTIALIAS)
         self.wall_photo = ImageTk.PhotoImage(wall_image)
 

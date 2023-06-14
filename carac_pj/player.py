@@ -82,7 +82,7 @@ class player:
         self.player_photo = ImageTk.PhotoImage(player_image)
         
         # Changer le couleur de character_id à transparent 
-        self.character_id = self.areaPlay.create_rectangle(self.character_x + 1, self.character_y + 1, self.character_x + WindowParameter.characterSize, self.character_y + WindowParameter.characterSize, fill="red", outline="")
+        self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + WindowParameter.tileSize-1, self.character_y + WindowParameter.tileSize-1, fill="red", outline="")
         self.sprite = self.areaPlay.create_image(self.character_x, self.character_y, image=self.player_photo, anchor="nw")
 
         self.update_view()
