@@ -85,30 +85,33 @@ class Monster:
                 dx = (target_x - self.current_x)  # Déplacement en x nécessaire
                 dy = (target_y - self.current_y)  # Déplacement en y nécessaire
 
-
-                for _ in range(50):
-                    #areaPlay.move(self.monster_pic, self.step_x, self.step_y)
-                    if(playerSelf.collPNJ == True):
-                         break
-                    areaPlay.move(self.monster, self.step_x, self.step_y)
-                    areaPlay.update()  # Mise à jour de la fenêtre du canvas
+                print(dx)
+                print(dy)
+                if dx == 0 and dy < 0:
+                    areaPlay.move(self.monster, 0, -1 * self.moveDistance)
+                elif dx == 0 and dy > 0:
+                    areaPlay.move(self.monster, 0, 1 * self.moveDistance)
+                elif dx < 0 and dy == 0:
+                    areaPlay.move(self.monster, -1 * self.moveDistance , 0)
+                elif dx > 0 and dy == 0:
+                    areaPlay.move(self.monster, +1 * self.moveDistance , 0)
             else:
                 dx = random.randint(-1, 1)
-                dy = random.randint(-1, 1)
+                dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
                 new_x1 = self.monster_x1 + dx * self.moveDistance
                 new_y1 = self.monster_y1 + dy * self.moveDistance
                 new_x2 = self.monster_x2 + dx * self.moveDistance
                 new_y2 = self.monster_y2 + dy * self.moveDistance
+                #print(new_x1, new_y1, new_x2, new_y2)
+                while any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()):
+                    dx = random.randint(-1, 1)
+                    dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
+                    new_x1 = self.monster_x1 + dx * self.moveDistance
+                    new_y1 = self.monster_y1 + dy * self.moveDistance
+                    new_x2 = self.monster_x2 + dx * self.moveDistance
+                    new_y2 = self.monster_y2 + dy * self.moveDistance
 
-                for cle, valeur in map.CaseNoire.items():
-                    if (
-                        new_x2 > valeur[0]
-                        and new_y2 > valeur[1]
-                        and new_x1 < valeur[2]
-                        and new_y1 < valeur[3]
-                    ):
-                        return
-                areaPlay.move(self.monster, dx*self.moveDistance, dy*self.moveDistance)
+                areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                 #areaPlay.move(self.monster_pic, dx, dy)
 
         elif self.monster_x2 + 10 > map.map_width:
@@ -128,23 +131,25 @@ class Monster:
                     areaPlay.move(self.monster, 0, +1*self.moveDistance)
                     #areaPlay.move(self.monster_pic, -20, 0)
         elif(playerSelf.player_collision == False):
+            coll = False
+            index = list(map.CaseNoire.keys())
+            i = 0
             dx = random.randint(-1, 1)
-            dy = random.randint(-1, 1)
-            new_x1 = self.monster_x1 + dx*self.moveDistance
-            new_y1 = self.monster_y1 + dy*self.moveDistance
-            new_x2 = self.monster_x2 + dx*self.moveDistance
-            new_y2 = self.monster_y2 + dy*self.moveDistance
+            dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
+            new_x1 = self.monster_x1 + dx * self.moveDistance
+            new_y1 = self.monster_y1 + dy * self.moveDistance
+            new_x2 = self.monster_x2 + dx * self.moveDistance
+            new_y2 = self.monster_y2 + dy * self.moveDistance
+            #print(new_x1, new_y1, new_x2, new_y2)
+            while any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()):
+                dx = random.randint(-1, 1)
+                dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
+                new_x1 = self.monster_x1 + dx * self.moveDistance
+                new_y1 = self.monster_y1 + dy * self.moveDistance
+                new_x2 = self.monster_x2 + dx * self.moveDistance
+                new_y2 = self.monster_y2 + dy * self.moveDistance
 
-            for cle, valeur in map.CaseNoire.items():
-                if (
-                    new_x2 > valeur[0]
-                    and new_y2 > valeur[1]
-                    and new_x1 < valeur[2]
-                    and new_y1 < valeur[3]
-                ):
-                    return
-            #areaPlay.move(self.monster_pic, dx, dy)
-            areaPlay.move(self.monster, dx*self.moveDistance, dy*self.moveDistance)
+            areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
 
     def isBlackTile(self, x, y, map):
         for cle, valeur in map.CaseNoire.items():

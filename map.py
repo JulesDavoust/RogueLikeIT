@@ -88,6 +88,7 @@ class Map:
             self.centreCaseNoire.pop(KeyfindR)
         self.spawnX = x1G
         self.spawnY = y1G
+        print(self.CaseNoire)
 
 
     def generateKey(self,areaPlay):
