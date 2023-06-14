@@ -287,13 +287,13 @@ class player:
                     pop = True
                 else:
                     if(self.attackDirection == "Right"):
-                        self.areaPlay.move(self.monsters[i].monster, +8, 0)
+                        self.areaPlay.move(self.monsters[i].monster, +15, 0)
                     elif(self.attackDirection == "Left"):
-                        self.areaPlay.move(self.monsters[i].monster, -8, 0)
+                        self.areaPlay.move(self.monsters[i].monster, -15, 0)
                     elif(self.attackDirection == "Up"):
-                        self.areaPlay.move(self.monsters[i].monster, 0, -8)
+                        self.areaPlay.move(self.monsters[i].monster, 0, -15)
                     elif(self.attackDirection == "Down"):
-                        self.areaPlay.move(self.monsters[i].monster, 0, +8)
+                        self.areaPlay.move(self.monsters[i].monster, 0, +15)
 
             i += 1
 
@@ -306,15 +306,15 @@ class player:
             if event.char == "a":
                 if self.attackDirection == "Right":
                     print("direction attack right")
-                    taille_cote = 10  # Taille du côté du carré principal
-                    taille_secondaire = 6  # Taille du côté du carré secondaire
+                    taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
+                    taille_secondaire = 8  # Taille du côté du carré secondaire
 
                     x1 = self.character_x2  # Coordonnée x1 du carré secondaire
                     y1 = self.character_y1 + (taille_cote - taille_secondaire) / 2  # Coordonnée y1 du carré secondaire
                     x2 = x1 + taille_secondaire  # Coordonnée x2 du carré secondaire
                     y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
-                    attackRect = self.areaPlay.create_rectangle(x1, y1, x2+3, y2, fill="blue")
+                    attackRect = self.areaPlay.create_rectangle(x1, y1, x2+8, y2, fill="blue")
                     self.Fight(attackRect)
                     self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                     self.cooldown_active = True
@@ -323,15 +323,15 @@ class player:
             if event.char == "a":
                 if self.attackDirection == "Left":
                     print("direction attack Left")
-                    taille_cote = 10  # Taille du côté du carré principal
-                    taille_secondaire = 6  # Taille du côté du carré secondaire
+                    taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
+                    taille_secondaire = 8  # Taille du côté du carré secondaire
 
                     x2 = self.character_x1  # Coordonnée x1 du carré secondaire
                     y1 = self.character_y1 + (taille_cote - taille_secondaire) / 2  # Coordonnée y1 du carré secondaire
                     x1 = x2 - taille_secondaire  # Coordonnée x2 du carré secondaire
                     y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
-                    attackRect = self.areaPlay.create_rectangle(x1-3, y1, x2, y2, fill="blue")
+                    attackRect = self.areaPlay.create_rectangle(x1-8, y1, x2, y2, fill="blue")
                     self.Fight(attackRect)
                     self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                     self.cooldown_active = True
@@ -340,8 +340,8 @@ class player:
             if event.char == "a":
                 if self.attackDirection == "Up":
                     print("direction attack Up")
-                    taille_cote = 10  # Taille du côté du carré principal
-                    taille_secondaire = 6  # Taille du côté du carré secondaire
+                    taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
+                    taille_secondaire = 8  # Taille du côté du carré secondaire
 
                     x1 = self.character_x1 + (taille_cote - taille_secondaire) / 2
                     x2 = x1 + taille_secondaire
@@ -349,7 +349,7 @@ class player:
                     y1 = y2 - taille_secondaire
                     
 
-                    attackRect = self.areaPlay.create_rectangle(x1, y1-3, x2, y2, fill="blue")
+                    attackRect = self.areaPlay.create_rectangle(x1, y1-8, x2, y2, fill="blue")
                     self.Fight(attackRect)
                     self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                     self.cooldown_active = True
@@ -358,15 +358,15 @@ class player:
             if event.char == "a":
                 if self.attackDirection == "Down":
                     print("direction attack Down")
-                    taille_cote = 10  # Taille du côté du carré principal
-                    taille_secondaire = 6  # Taille du côté du carré secondaire
+                    taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
+                    taille_secondaire = 8  # Taille du côté du carré secondaire
 
                     x1 = self.character_x1 + (taille_cote - taille_secondaire) / 2 # Coordonnée x1 du carré secondaire
                     y1 = self.character_y2  # Coordonnée y1 du carré secondaire
                     x2 = x1 + taille_secondaire  # Coordonnée x2 du carré secondaire
                     y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
-                    attackRect = self.areaPlay.create_rectangle(x1, y1, x2, y2+3, fill="blue")
+                    attackRect = self.areaPlay.create_rectangle(x1, y1, x2, y2+8, fill="blue")
                     self.Fight(attackRect)
                     self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                     self.cooldown_active = True
