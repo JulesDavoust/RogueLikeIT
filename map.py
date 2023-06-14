@@ -5,6 +5,7 @@ from tkinter.constants import *
 import mazeMap
 
 
+
 from windowParameters import WindowParameter
 
 
@@ -25,7 +26,7 @@ class Map:
         y_tile = WindowParameter.mapTileRow
         maze = mazeMap.generate_maze(x_tile,y_tile)
 
-        wall_image = Image.open("./sprites/wall_mid.png").convert("P")
+        wall_image = Image.open(".\sprites\wall_mid.png").convert("P")
         wall_image = wall_image.resize((case_size, case_size), Image.ANTIALIAS)
         self.wall_photo = ImageTk.PhotoImage(wall_image)
 
@@ -63,6 +64,8 @@ class Map:
         x2G = x1G + case_size
         y2G = y1G + case_size
         areaPlay.create_rectangle(x1G, y1G, x2G, y2G, fill="green")
+
+
         KeyfindG = -1
         KeyfindR = -1
         for cle, valeur in self.CaseNoire.items():
@@ -76,12 +79,8 @@ class Map:
         if KeyfindR != -1:
             self.CaseNoire.pop(KeyfindR)
             self.centreCaseNoire.pop(KeyfindR)
-
-        #For the spawn of the player
-        self.spawnX = x1G
-        self.spawnY = y1G
-        # self.spawnX = x1G + (case_size - 10) // 2
-        # self.spawnY = y1G + (case_size - 10) // 2
+        self.spawnX = x1G + (case_size - 10) // 2
+        self.spawnY = y1G + (case_size - 10) // 2
 
 
     def generateKey(self,areaPlay):
@@ -106,7 +105,7 @@ class Map:
         self.keyY1 = y1
         self.keyX2 = x1 + 6
         self.keyY2 = y1 + 6
-        self.key = areaPlay.create_rectangle(x1, y1, x1+WindowParameter.objectSize, y1+WindowParameter.objectSize, fill="yellow")
+        self.key = areaPlay.create_rectangle(x1, y1, x1+6, y1+6, fill="yellow")
 
                 
     def player_info(self,areaPlay):
@@ -127,8 +126,14 @@ class Map:
         areaPlay.create_rectangle(map_width+80,50,map_width+300,80,fill="red")
         areaPlay.create_rectangle(x1 + 20,400,x1 + 310,y2-50,fill="grey",outline="white")
 
-
+    def hp_update(self,player,areaPlay,monster):
+        hp_max = player.max_life_point
+        current_hp = player.life_point
     
+        areaPlay.create_rectangle(WindowParameter.mapWidth+80,50,WindowParameter.mapWidth+(hp_max*3),80,fill="grey")
+        areaPlay.create_rectangle(WindowParameter.mapWidth+80,50,WindowParameter.mapWidth+(current_hp*3),80,fill="red")
+
+
     """def numberMonster(self, maplevel):
         print(maplevel)
         if(maplevel == 1):
