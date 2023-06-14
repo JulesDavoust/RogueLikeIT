@@ -28,7 +28,8 @@ class player:
         self.pause = False
         self.collPNJ = False
         self.cooldown_active = False
-        
+        self.gonext = False
+
         self.attackDirection = "Right"
 
         self.numPNJ = 0
@@ -428,10 +429,12 @@ class player:
                     for i in range(0, len(self.monsters)):
                         if(self.checkMonsterCollision(i, dx, dy)): return
                     self.getKey()
+                    
+                    if not self.gonext:
+                        self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
+                        self.areaPlay.move(self.sprite, dx, dy)
+                        self.update_view()
                     self.goNextRoom()
-                    self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
-                    self.areaPlay.move(self.sprite, dx, dy)
-                    self.update_view()
         
 
     def attackPlayer(self):
@@ -461,9 +464,13 @@ class player:
 
     def goNextRoom(self):
         print("nextRoom ?")
-        if(self.inventory["key"] >= 1 and self.character_x1 >= self.map.x1R and self.character_x2 <= self.map.x2R and self.character_y2 <= self.map.y2R and self.character_y1 >= self.map.y1R):
+        if self.gonext == True:
+            self.gonext = False
+        elif(self.inventory["key"] >= 1 and self.character_x1 >= self.map.x1R and self.character_x2 <= self.map.x2R and self.character_y2 <= self.map.y2R and self.character_y1 >= self.map.y1R):
+            self.gonext = True
             print("Yes !")
             self.generateNewMap()
+        
 
     def getKey(self):
         if (self.character_x1 < self.map.keyX2 and self.character_x2 > self.map.keyX1) and (self.character_y1 < self.map.keyY2 and self.character_y2 > self.map.keyY1):
