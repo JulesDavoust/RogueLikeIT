@@ -11,7 +11,6 @@ class player:
     def __init__(self, classe):
         
         
-        
         self.allClasse = {0: "guerrier", 1: "archer", 2: "sorcier"}
         self.classe = classe
         self.PlayerLevel = 0
@@ -39,7 +38,7 @@ class player:
         
 
         if classe == 0:
-            self.life_point = 120
+            self.life_point = 100
             self.max_life_point = self.life_point
             self.mana = 20
             self.damage = 30
@@ -76,12 +75,14 @@ class player:
 
         self.character_x = self.map.spawnX
         self.character_y = self.map.spawnY
+
         player_image = Image.open("./sprites/knight_f_idle_anim_f0.png").convert("P")
         pImage_width,pImage_height = player_image.size
         player_image = player_image.resize((pImage_width * WindowParameter.SCALE,pImage_height* WindowParameter.SCALE))
         self.player_photo = ImageTk.PhotoImage(player_image)
         
-        self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + WindowParameter.characterSize, self.character_y + WindowParameter.characterSize, fill="red", outline="")
+        # Changer le couleur de character_id à transparent 
+        self.character_id = self.areaPlay.create_rectangle(self.character_x + 1, self.character_y + 1, self.character_x + WindowParameter.characterSize, self.character_y + WindowParameter.characterSize, fill="red", outline="")
         self.sprite = self.areaPlay.create_image(self.character_x, self.character_y, image=self.player_photo, anchor="nw")
 
         self.update_view()
