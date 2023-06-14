@@ -25,7 +25,7 @@ class Map:
         y_tile = WindowParameter.mapTileRow
         maze = mazeMap.generate_maze(x_tile,y_tile)
 
-        wall_image = Image.open(".\sprites\wall_mid.png").convert("P")
+        wall_image = Image.open("./sprites/wall_mid.png").convert("P")
         wall_image = wall_image.resize((case_size, case_size), Image.ANTIALIAS)
         self.wall_photo = ImageTk.PhotoImage(wall_image)
 
@@ -80,7 +80,6 @@ class Map:
             self.centreCaseNoire.pop(KeyfindR)
         self.spawnX = x1G + (case_size - 10) // 2
         self.spawnY = y1G + (case_size - 10) // 2
-        print(self.CaseNoire)
 
 
     def generateKey(self,areaPlay):
@@ -115,9 +114,11 @@ class Map:
         x1 = map_width
         x2 = screen_width
         y2 = screen_width
-        p_image = Image.open(".\sprites\knight_f_idle_anim_f0.png").convert("P")
-        p_image = p_image.resize((32,56))
-        self.player_photo = ImageTk.PhotoImage(p_image)
+        player_image = Image.open("./sprites/knight_f_idle_anim_f0.png").convert("P")
+        pImage_width,pImage_height = player_image.size
+        player_image = player_image.resize((pImage_width * WindowParameter.SCALE,pImage_height* WindowParameter.SCALE))
+        self.player_photo = ImageTk.PhotoImage(player_image)
+       
 
         areaPlay.create_rectangle(x1, 0, x2, y2, fill="black", outline="red", dash=(3,5))
         areaPlay.create_image(map_width + 50,50,image=self.player_photo)

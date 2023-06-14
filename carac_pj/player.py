@@ -33,6 +33,9 @@ class player:
         self.attackDirection = "Right"
 
         self.numPNJ = 0
+
+        # The distance of mouvement for player and monster
+        self.moveDistance = WindowParameter.tileSize
         
 
         if classe == 0:
@@ -64,17 +67,19 @@ class player:
         self.map.generateKey(self.areaPlay)
         self.map.player_info(self.areaPlay)
         print("map level : ", self.levelMap)
-        """print(self.map.CaseNoire)
-        print(self.map.centreCaseNoire)"""
+        # """print(self.map.CaseNoire)
+        # print(self.map.centreCaseNoire)"""
+
         self.character_x = self.map.spawnX
         self.character_y = self.map.spawnY
-        # player_image = Image.open("./sprites/knight_f_idle_anim_f0.png").convert("P")
-        # self.player_photo = ImageTk.PhotoImage(player_image)
-        # self.sprite = self.areaplay.create_image(self.character_x, self.character_y, image=self.player_photo, anchor="nw")
-        self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 10, self.character_y + 10, fill="red", outline="")
+        player_image = Image.open("./sprites/knight_f_idle_anim_f0.png").convert("P")
+        pImage_width,pImage_height = player_image.size
+        player_image = player_image.resize((pImage_width * WindowParameter.SCALE,pImage_height* WindowParameter.SCALE))
+        self.player_photo = ImageTk.PhotoImage(player_image)
+        
         self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + WindowParameter.characterSize, self.character_y + WindowParameter.characterSize, fill="red", outline="")
-        #self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + WindowParameter.tileSize, self.character_y + WindowParameter.tileSize, fill="red", outline="")
-        #self.character_pic = self.areaPlay.create_image((self.character_x + self.character_x + 27)/2, (self.character_y+self.character_y+27)/2, image=self.knight)
+        self.sprite = self.areaPlay.create_image(self.character_x, self.character_y, image=self.player_photo, anchor="nw")
+
         self.update_view()
         number_monsters = self.numberMonsters()
         self.generateMonsters(number_monsters)
@@ -364,34 +369,34 @@ class player:
             
         
 
-
+        #Player
         if self.player_collision != True:
                 if(len(self.pnjs) > 0 and self.pnjs[self.numPNJ].collPNJ == False):
                     self.collPNJ = False
                 if(self.collPNJ == False):
                     dx, dy = 0, 0  # Valeurs de déplacement initiales
                     if key == "Right":
-                        if self.character_x2 + 3 > WindowParameter.mapWidth:
+                        if self.character_x2 + self.moveDistance > WindowParameter.mapWidth:
                             return
-                        dx = 3  # Déplacement vers la droite
+                        dx = self.moveDistance  # Déplacement vers la droite
                         self.attackDirection = "Right"
 
                     elif key == "Left":
-                        if self.character_x1 - 3 < 0:
+                        if self.character_x1 - self.moveDistance < 0:
                             return
-                        dx = -3  # Déplacement vers la gauche
+                        dx = -self.moveDistance  # Déplacement vers la gauche
                         self.attackDirection = "Left"
 
                     elif key == "Up":
-                        if self.character_y1 - 3 < 0:
+                        if self.character_y1 - self.moveDistance < 0:
                             return
-                        dy = -3  # Déplacement vers le haut
+                        dy = -self.moveDistance  # Déplacement vers le haut
                         self.attackDirection = "Up"
 
                     elif key == "Down":
-                        if self.character_y2 + 3 > WindowParameter.mapHeight:
+                        if self.character_y2 + self.moveDistance > WindowParameter.mapHeight:
                             return
-                        dy = 3  # Déplacement vers le bas
+                        dy = self.moveDistance  # Déplacement vers le bas
                         self.attackDirection = "Down"
 
                     new_x1 = self.character_x1 + dx
@@ -422,7 +427,7 @@ class player:
                     self.getKey()
                     self.goNextRoom()
                     self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
-                    # self.areaPlay.move(self.sprite, dx, dy)
+                    self.areaPlay.move(self.sprite, dx, dy)
                     self.update_view()
         
 
