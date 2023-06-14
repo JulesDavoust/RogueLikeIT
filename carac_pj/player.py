@@ -60,7 +60,11 @@ class player:
     def generatePlayer(self, window):
         self.window = window
         self.areaPlay = tk.Canvas(window, width=WindowParameter.screenWidth, height=WindowParameter.screenWidth)
+        self.createAll()
+        self.areaPlay.pack()
+        window.bind("<KeyPress>", self.move_character)
 
+    def createAll(self):
         self.map.generateMap(self.areaPlay)
         self.map.level = self.map.level + 1
         self.levelMap = self.map.level
@@ -86,8 +90,6 @@ class player:
         number_pnj = random.randint(0,3)
         self.generatePNJs(number_pnj)
         self.start_moving_monsters()
-        self.areaPlay.pack()
-        window.bind("<KeyPress>", self.move_character)
 
     def start_moving_monsters(self):
         self.move_monster_periodically()
@@ -473,27 +475,7 @@ class player:
         self.areaPlay.delete("all")
 
         # Génère une nouvelle carte
-        self.map = Map()
-        self.map.generateMap(self.areaPlay)
-        self.map.level = self.levelMap + 1
-        self.levelMap = self.map.level
-        print(self.map.level)
-        self.map.generateKey(self.areaPlay)
-
-        # Met à jour les coordonnées du personnage
-        self.character_x = self.map.spawnX
-        self.character_y = self.map.spawnY
-        self.character_id = self.areaPlay.create_rectangle(
-            self.character_x, self.character_y, self.character_x + 10, self.character_y + 10, fill="red", outline=""
-        )
-
-        # Génère les monstres pour la nouvelle carte
-        self.update_view()
-        number_monsters = self.numberMonsters()
-        self.generateMonsters(number_monsters)
-        number_pnj = random.randint(0,3)
-        self.generatePNJs(number_pnj)
-        self.move_monster_periodically()
+        self.createAll()
 
     def displayPJ(self):
         if self.classe == 0:
