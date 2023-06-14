@@ -5,6 +5,7 @@ from monster import Monster
 from pnj import PNJ
 from windowParameters import WindowParameter
 import tkinter as tk
+from PIL import Image,ImageTk
 
 class player:
     def __init__(self, classe):
@@ -58,6 +59,9 @@ class player:
         print(self.map.centreCaseNoire)"""
         self.character_x = self.map.spawnX
         self.character_y = self.map.spawnY
+        # player_image = Image.open("./sprites/knight_f_idle_anim_f0.png").convert("P")
+        # self.player_photo = ImageTk.PhotoImage(player_image)
+        # self.sprite = self.areaplay.create_image(self.character_x, self.character_y, image=self.player_photo, anchor="nw")
         self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 10, self.character_y + 10, fill="red", outline="")
         #self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + WindowParameter.tileSize, self.character_y + WindowParameter.tileSize, fill="red", outline="")
         #self.character_pic = self.areaPlay.create_image((self.character_x + self.character_x + 27)/2, (self.character_y+self.character_y+27)/2, image=self.knight)
@@ -358,7 +362,7 @@ class player:
                     self.getKey()
                     self.goNextRoom()
                     self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
-                #self.areaPlay.move(self.character_pic, dx, dy)
+                    # self.areaPlay.move(self.sprite, dx, dy)
                     self.update_view()
         
 
