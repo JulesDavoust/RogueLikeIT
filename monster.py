@@ -10,6 +10,7 @@ class Monster:
         self.monster_collision = False
         self.monster_positions = []  # Liste pour stocker les positions des monstres
         self.life_points_monster = 50
+        self.moveDistance = WindowParameter.tileSize
         #self.zombie = tk.PhotoImage(file="C:/Users/jules/Desktop/big_zombie_idle_anim_f0.png")
 
         if(MapLevel == 1):
@@ -25,24 +26,19 @@ class Monster:
         
         if(self.level <= 2):
             self.damage = 5
-            self.speed = 300
         elif(self.level <= 4 and self.level > 2):
             self.damage = 10
-            self.speed = 300
         elif(self.level <= 7 and self.level > 4):
             self.damage = 15
-            self.speed = 250
         elif(self.level <= 10 and self.level > 7):
             self.damage = 25
-            self.speed = 200
         elif(self.level > 10):
             self.damage = 30
-            self.speed = 200
 
     
 
     def generateMonster(self, areaPlay, x, y):
-        self.monster = areaPlay.create_rectangle(x, y, x + WindowParameter.characterSize, y + WindowParameter.characterSize, fill="black", outline = "")
+        self.monster = areaPlay.create_rectangle(x, y, x + WindowParameter.tileSize-1, y + WindowParameter.tileSize-1, fill="black", outline = "")
         #self.monster_pic = areaPlay.create_image((x+x+30)/2, (y+y+30)/2, image=self.zombie)
         self.monster_positions.append((x, y))  # Ajouter la position du monstre à la liste
 
@@ -60,8 +56,8 @@ class Monster:
         self.current_x = (self.monster_coords[0] + self.monster_coords[2])/2
         self.current_y = (self.monster_coords[1] + self.monster_coords[3])/2
 
-        dx = +10
-        dy = -10
+        dx = self.moveDistance
+        dy = -self.moveDistance
         """if x1_rect1 < x2_rect2 and x2_rect1 > x1_rect2 and y1_rect1 < y2_rect2 and y2_rect1 > y1_rect2:"""
         if(self.monster_x1-3 < x2 and self.monster_x2+3 > x1 and self.monster_y1-3 < y2 and self.monster_y2+3 > y1 and playerSelf.player_collision == False):
             #playerSelf.player_collision = True
@@ -86,11 +82,9 @@ class Monster:
             
             #print(is_black_tile_in_between)
             if is_black_tile_in_between == False:
-                dx = target_x - self.current_x  # Déplacement en x nécessaire
-                dy = target_y - self.current_y  # Déplacement en y nécessaire
+                dx = (target_x - self.current_x)  # Déplacement en x nécessaire
+                dy = (target_y - self.current_y)  # Déplacement en y nécessaire
 
-                self.step_x = dx/self.speed
-                self.step_y = dy/self.speed
 
                 for _ in range(50):
                     #areaPlay.move(self.monster_pic, self.step_x, self.step_y)
@@ -99,12 +93,12 @@ class Monster:
                     areaPlay.move(self.monster, self.step_x, self.step_y)
                     areaPlay.update()  # Mise à jour de la fenêtre du canvas
             else:
-                dx = random.randint(-10, 10)
-                dy = random.randint(-10, 10)
-                new_x1 = self.monster_x1 + dx
-                new_y1 = self.monster_y1 + dy
-                new_x2 = self.monster_x2 + dx
-                new_y2 = self.monster_y2 + dy
+                dx = random.randint(-1, 1)
+                dy = random.randint(-1, 1)
+                new_x1 = self.monster_x1 + dx * self.moveDistance
+                new_y1 = self.monster_y1 + dy * self.moveDistance
+                new_x2 = self.monster_x2 + dx * self.moveDistance
+                new_y2 = self.monster_y2 + dy * self.moveDistance
 
                 for cle, valeur in map.CaseNoire.items():
                     if (
@@ -114,32 +108,32 @@ class Monster:
                         and new_y1 < valeur[3]
                     ):
                         return
-                areaPlay.move(self.monster, dx, dy)
+                areaPlay.move(self.monster, dx*self.moveDistance, dy*self.moveDistance)
                 #areaPlay.move(self.monster_pic, dx, dy)
 
         elif self.monster_x2 + 10 > map.map_width:
                     #print("x2")
-                    areaPlay.move(self.monster, -10, 0)
+                    areaPlay.move(self.monster, -1*self.moveDistance, 0)
                     #areaPlay.move(self.monster_pic, -20, 0)
         elif self.monster_x1 - 10 < 0:
                     #print("x1")
-                    areaPlay.move(self.monster, +10, 0)
+                    areaPlay.move(self.monster, +1*self.moveDistance, 0)
                     #areaPlay.move(self.monster_pic, -20, 0)
         elif self.monster_y2 + 10 > map.map_height:
                     #print("y2")
-                    areaPlay.move(self.monster, 0, -10)
+                    areaPlay.move(self.monster, 0, -1*self.moveDistance)
                     #areaPlay.move(self.monster_pic, -20, 0)
         elif self.monster_y1 - 10 < 0:
                     #print("y1")
-                    areaPlay.move(self.monster, 0, +10)
+                    areaPlay.move(self.monster, 0, +1*self.moveDistance)
                     #areaPlay.move(self.monster_pic, -20, 0)
         elif(playerSelf.player_collision == False):
-            dx = random.randint(-10, 10)
-            dy = random.randint(-10, 10)
-            new_x1 = self.monster_x1 + dx
-            new_y1 = self.monster_y1 + dy
-            new_x2 = self.monster_x2 + dx
-            new_y2 = self.monster_y2 + dy
+            dx = random.randint(-1, 1)
+            dy = random.randint(-1, 1)
+            new_x1 = self.monster_x1 + dx*self.moveDistance
+            new_y1 = self.monster_y1 + dy*self.moveDistance
+            new_x2 = self.monster_x2 + dx*self.moveDistance
+            new_y2 = self.monster_y2 + dy*self.moveDistance
 
             for cle, valeur in map.CaseNoire.items():
                 if (
@@ -150,7 +144,7 @@ class Monster:
                 ):
                     return
             #areaPlay.move(self.monster_pic, dx, dy)
-            areaPlay.move(self.monster, dx, dy)
+            areaPlay.move(self.monster, dx*self.moveDistance, dy*self.moveDistance)
 
     def isBlackTile(self, x, y, map):
         for cle, valeur in map.CaseNoire.items():

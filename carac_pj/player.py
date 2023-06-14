@@ -176,11 +176,13 @@ class player:
             emplacement = False
             emplacementOK = True
             while not emplacement:
-                x1 = random.randint(0, self.map.map_width-50)
-                y1 = random.randint(0, self.map.map_height-50)
+                cooM = random.randint(0, len(list(self.map.dicoC)))
+                x1 = self.map.dicoC[cooM][0]
+                y1 = self.map.dicoC[cooM][1]
                 while self.checkMonsterInView(x1, y1):
-                    x1 = random.randint(min_x, max_x)
-                    y1 = random.randint(min_y, max_y)
+                    cooM = random.randint(0, len(list(self.map.dicoC)))
+                    x1 = self.map.dicoC[cooM][0]
+                    y1 = self.map.dicoC[cooM][1]
                 for cle, valeur in self.map.CaseNoire.items():
                     if (
                         x1 + + WindowParameter.characterSize > valeur[0]
