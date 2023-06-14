@@ -18,8 +18,8 @@ class player:
         self.inventory = {"key":0}
         self.gold = 30
 
+        
         self.map = Map()
-
         self.view_distance = 100
         self.character_x = 0
         self.character_y = 0
@@ -65,7 +65,7 @@ class player:
         window.bind("<KeyPress>", self.move_character)
 
     def createAll(self):
-        
+        self.map = Map()
         self.map.generateMap(self.areaPlay)
         self.map.level = self.map.level + 1
         self.levelMap = self.map.level
@@ -212,7 +212,7 @@ class player:
     def move_monster_periodically(self):
         #self.monster.moveMonster(self.areaPlay, self.view_x1, self.view_y1, self.view_x2, self.view_y2, self.character_x, self.character_y, self.character_x2, self.character_x1, self.character_y2, self.character_y1)
         if self.player_collision == False:
-                print("continue ?")
+                #print("continue ?")
                 for monster in self.monsters:
                     monster.moveMonster(
                         self.areaPlay, self.view_x1, self.view_y1, self.view_x2, self.view_y2,
@@ -465,7 +465,7 @@ class player:
         self.areaPlay.create_rectangle(self.view_x1, self.view_y1, self.view_x2, self.view_y2, fill="", outline="white", tag="view")
 
     def goNextRoom(self):
-        print("nextRoom ?")
+        #print("nextRoom ?")
         if self.gonext == True:
             self.gonext = False
         elif(self.inventory["key"] >= 1 and self.character_x1 >= self.map.x1R and self.character_x2 <= self.map.x2R and self.character_y2 <= self.map.y2R and self.character_y1 >= self.map.y1R):
