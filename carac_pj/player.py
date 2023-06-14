@@ -9,22 +9,31 @@ from PIL import Image,ImageTk
 
 class player:
     def __init__(self, classe):
+        
+        
+        
         self.allClasse = {0: "guerrier", 1: "archer", 2: "sorcier"}
-        self.player_collision = False
-        self.view_distance = 100
         self.classe = classe
         self.PlayerLevel = 0
         self.xp = 0
+        self.inventory = {"key":0}
+        self.gold = 30
+
         self.map = Map()
+
+        self.view_distance = 100
         self.character_x = 0
         self.character_y = 0
+
+        self.player_collision = False
         self.pause = False
         self.collPNJ = False
-        
-        self.inventory = {"key":0}
-
-        self.attackDirection = "Right"
         self.cooldown_active = False
+        
+        self.attackDirection = "Right"
+
+        self.numPNJ = 0
+        
 
         if classe == 0:
             self.life_point = 120
@@ -47,7 +56,7 @@ class player:
 
     def generatePlayer(self, window):
         self.window = window
-        self.areaPlay = tk.Canvas(window, width=1000, height=700)
+        self.areaPlay = tk.Canvas(window, width=WindowParameter.screenWidth, height=WindowParameter.screenWidth)
 
         self.map.generateMap(self.areaPlay)
         self.map.level = self.map.level + 1
@@ -63,6 +72,7 @@ class player:
         # self.player_photo = ImageTk.PhotoImage(player_image)
         # self.sprite = self.areaplay.create_image(self.character_x, self.character_y, image=self.player_photo, anchor="nw")
         self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 10, self.character_y + 10, fill="red", outline="")
+        self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + WindowParameter.characterSize, self.character_y + WindowParameter.characterSize, fill="red", outline="")
         #self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + WindowParameter.tileSize, self.character_y + WindowParameter.tileSize, fill="red", outline="")
         #self.character_pic = self.areaPlay.create_image((self.character_x + self.character_x + 27)/2, (self.character_y+self.character_y+27)/2, image=self.knight)
         self.update_view()
@@ -73,7 +83,6 @@ class player:
         self.start_moving_monsters()
         self.areaPlay.pack()
         window.bind("<KeyPress>", self.move_character)
-        window.after(1000, )
 
     def start_moving_monsters(self):
         self.move_monster_periodically()
@@ -209,7 +218,7 @@ class player:
             self.numPNJ = i
             self.collPNJ = True
             print("pnj num : ", self.numPNJ)
-            self.pnjs[i].openShop(self.window)
+            self.pnjs[i].openShop(self.window, self, self.collPNJ)
             return True
         else:
             return False
@@ -231,6 +240,48 @@ class player:
     def reset_cooldown(self):
         self.cooldown_active = False
 
+    def Fight(self, attackRect):
+        print("fonction fight")
+        attack = self.areaPlay.coords(attackRect)
+        attack_x1 = attack[0]
+        attack_y1 = attack[1]
+        attack_x2 = attack[2]
+        attack_y2 = attack[3]
+        i = 0
+        pop = False
+        while i < len(self.monsters) and pop == False:
+            print("for loop")
+            monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
+
+            monster_x1 = monsterCOO[0]
+            monster_y1 = monsterCOO[1]
+            monster_x2 = monsterCOO[2]
+            monster_y2 = monsterCOO[3]
+            if (attack_x2 >= monster_x1 
+                and attack_x1 <= monster_x2 
+                and attack_y2 >= monster_y1 
+                and attack_y1 <= monster_y2):
+                print(self.monsters[i].life_points_monster)
+                self.monsters[i].life_points_monster = self.monsters[i].life_points_monster - self.damage
+                print(self.monsters[i].life_points_monster)
+                if(self.monsters[i].life_points_monster <= 0):
+                    self.areaPlay.delete(self.monsters[i].monster)
+                    self.monsters.pop(i)
+                    pop = True
+                else:
+                    if(self.attackDirection == "Right"):
+                        self.areaPlay.move(self.monsters[i].monster, +8, 0)
+                    elif(self.attackDirection == "Left"):
+                        self.areaPlay.move(self.monsters[i].monster, -8, 0)
+                    elif(self.attackDirection == "Up"):
+                        self.areaPlay.move(self.monsters[i].monster, 0, -8)
+                    elif(self.attackDirection == "Down"):
+                        self.areaPlay.move(self.monsters[i].monster, 0, +8)
+
+            i += 1
+
+
+
     def move_character(self, event):
         
         key = event.keysym
@@ -247,6 +298,7 @@ class player:
                     y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
                     attackRect = self.areaPlay.create_rectangle(x1, y1, x2+3, y2, fill="blue")
+                    self.Fight(attackRect)
                     self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                     self.cooldown_active = True
                     self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
@@ -263,6 +315,7 @@ class player:
                     y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
                     attackRect = self.areaPlay.create_rectangle(x1-3, y1, x2, y2, fill="blue")
+                    self.Fight(attackRect)
                     self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                     self.cooldown_active = True
                     self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
@@ -280,6 +333,7 @@ class player:
                     
 
                     attackRect = self.areaPlay.create_rectangle(x1, y1-3, x2, y2, fill="blue")
+                    self.Fight(attackRect)
                     self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                     self.cooldown_active = True
                     self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
@@ -296,19 +350,19 @@ class player:
                     y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
                     attackRect = self.areaPlay.create_rectangle(x1, y1, x2, y2+3, fill="blue")
+                    self.Fight(attackRect)
                     self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                     self.cooldown_active = True
                     self.window.after(3000, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
 
             
-                  
+        
 
 
         if self.player_collision != True:
-                if(self.collPNJ == True and key == "e"):
-                    self.pnjs[self.numPNJ].closeShop()
+                if(len(self.pnjs) > 0 and self.pnjs[self.numPNJ].collPNJ == False):
                     self.collPNJ = False
-                elif(self.collPNJ == False):
+                if(self.collPNJ == False):
                     dx, dy = 0, 0  # Valeurs de déplacement initiales
                     if key == "Right":
                         if self.character_x2 + 3 > WindowParameter.mapWidth:

@@ -4,19 +4,20 @@ class WindowParameter:
     
     #A changer par player apres
     SCALE = 2
-    FIX = 2 * SCALE
+    FIX = 4 
 
-    tileSize= originTileSize*SCALE
-    # objectSize = tileSize - FIX
+    tileSize= originTileSize*SCALE  #16*2 = 32
+    objectSize = (originTileSize - FIX*2)*SCALE
+    characterSize = (originTileSize - FIX)*SCALE
 
-    screenTileCol = 36
+    screenTileCol = 32
     screenTileRow = 21
     
     mapTileRow = 21
     mapTileCol = 21
 
-    screenWidth = tileSize * screenTileCol #21 * 16 = 672
-    screenHeight = tileSize * screenTileRow
+    screenWidth = tileSize * screenTileCol #32 * 32
+    screenHeight = tileSize * screenTileRow #32 * 21
     screenSize = f"{screenWidth}x{screenHeight}"
 
     mapWidth = tileSize * mapTileRow

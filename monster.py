@@ -1,6 +1,7 @@
 import math
 import random
 import tkinter as tk
+from windowParameters import WindowParameter
 
 class Monster:
     
@@ -8,7 +9,7 @@ class Monster:
         self.direction = [0, 1, 2, 3]
         self.monster_collision = False
         self.monster_positions = []  # Liste pour stocker les positions des monstres
-
+        self.life_points_monster = 50
         #self.zombie = tk.PhotoImage(file="C:/Users/jules/Desktop/big_zombie_idle_anim_f0.png")
 
         if(MapLevel == 1):
@@ -41,9 +42,11 @@ class Monster:
     
 
     def generateMonster(self, areaPlay, x, y):
-        self.monster = areaPlay.create_rectangle(x, y, x + 10, y + 10, fill="black", outline = "")
+        self.monster = areaPlay.create_rectangle(x, y, x + WindowParameter.characterSize, y + WindowParameter.characterSize, fill="black", outline = "")
         #self.monster_pic = areaPlay.create_image((x+x+30)/2, (y+y+30)/2, image=self.zombie)
         self.monster_positions.append((x, y))  # Ajouter la position du monstre à la liste
+
+    
 
     def moveMonster(self, areaPlay, x1P, y1P, x2P, y2P, target_x, target_y, x2, x1, y2, y1, playerSelf, map):
         self.monster_coords = areaPlay.coords(self.monster)
@@ -153,3 +156,5 @@ class Monster:
             if valeur[0] < x < valeur[2] and valeur[1] < y < valeur[3]:
                 return True
         return False
+
+         
