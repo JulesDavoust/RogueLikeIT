@@ -28,7 +28,6 @@ def generate_maze(width, height):
             break
 
         wx, wy, direction = random_wall
-
         nx, ny = wx + dx[direction], wy + dy[direction]
 
         if 0 <= nx < width and 0 <= ny < height:
@@ -44,6 +43,10 @@ def generate_maze(width, height):
 
     return maze
 
+
+def delete_wall(maze, axis_x, axis_y):
+    maze[axis_x][axis_y] = 'C'
+    return maze
 
 # Display the maze
 # maze = generate_maze(WindowParameter.mapTileCol,WindowParameter.mapTileRow)
