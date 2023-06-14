@@ -14,7 +14,9 @@ class Map:
         self.level = 0
         self.CaseNoire = {}
         self.centreCaseNoire = {}
+        self.dicoC = {}
         self.indexDico = 0
+        self.indexDicoC= 0
         self.spawnX = 0
         self.spawnY = 0
 
@@ -43,26 +45,31 @@ class Map:
                     self.centreCaseNoire[self.indexDico] = [(x * case_size + (x + 1) * case_size) / 2, (y * case_size + (y + 1) * case_size) / 2]
                     self.indexDico += 1
                 elif(maze[y][x] == 'C'):
+                    self.dicoC[self.indexDicoC] = [x * case_size, y * case_size, (x + 1) * case_size, (y + 1) * case_size]
                     areaPlay.create_image(x * case_size, y * case_size, anchor="nw", image=self.floor_photo)
-        
-        xRed = random.randint(0, (self.map_width-50)// case_size)
+                    self.indexDicoC +=1
+
+
+        cooR = random.randint(0, len(list(self.dicoC.keys())))
         yRed = random.randint(0, (self.map_height-50)// case_size)
-        self.x1R = xRed * case_size
-        self.y1R = yRed * case_size
-        self.x2R = self.x1R + case_size
-        self.y2R = self.y1R + case_size
+
+        self.x1R = self.dicoC[cooR][0]
+        self.y1R = self.dicoC[cooR][1]
+        self.x2R = self.dicoC[cooR][2]
+        self.y2R = self.dicoC[cooR][3]
         
         areaPlay.create_rectangle(self.x1R, self.y1R, self.x2R, self.y2R, fill="red")
 
-        self.xGreen = random.randint(0, (self.map_width-50)// case_size)
-        self.yGreen = random.randint(0, (self.map_height-50)// case_size)
-        while self.xGreen == xRed and yRed == self.yGreen:
-            self.xGreen = random.randint(0, (self.map_width-50)//case_size)
-            self.yGreen = random.randint(0, (self.map_height-50)//case_size)
-        x1G = self.xGreen * case_size
-        y1G = self.yGreen * case_size
-        x2G = x1G + case_size
-        y2G = y1G + case_size
+        cooG = random.randint(0, len(list(self.dicoC.keys())))
+        """self.xGreen = random.randint(0, (self.map_width-50)// case_size)
+        self.yGreen = random.randint(0, (self.map_height-50)// case_size)"""
+        while cooG == cooR:
+            cooG = random.randint(0, len(list(self.dicoC.keys())))
+            #self.yGreen = random.randint(0, (self.map_height-50)//case_size)
+        x1G = self.dicoC[cooG][0]
+        y1G = self.dicoC[cooG][1]
+        x2G = self.dicoC[cooG][2]
+        y2G = self.dicoC[cooG][3]
         areaPlay.create_rectangle(x1G, y1G, x2G, y2G, fill="green")
 
 
