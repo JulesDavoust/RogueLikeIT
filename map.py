@@ -112,7 +112,7 @@ class Map:
         x1 = map_width
         x2 = screen_width
         y2 = screen_width
-        p_image = Image.open(".\sprites\knight_f_idle_anim_f0.png").convert("P")
+        p_image = Image.open("./sprites/knight_f_idle_anim_f0.png").convert("P")
         p_image = p_image.resize((32,56))
         self.player_photo = ImageTk.PhotoImage(p_image)
 

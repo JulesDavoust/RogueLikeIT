@@ -69,7 +69,8 @@ class player:
         self.character_x = self.map.spawnX
         self.character_y = self.map.spawnY
         player_image = Image.open("./sprites/knight_f_idle_anim_f0.png").convert("P")
-        player_image = player_image.resize((WindowParameter.characterSize,WindowParameter.characterSize*2))
+        pImage_width,pImage_height = player_image.size
+        player_image = player_image.resize((pImage_width * WindowParameter.SCALE,pImage_width* WindowParameter.SCALE))
         self.player_photo = ImageTk.PhotoImage(player_image)
         
         #self.character_id = self.areaPlay.create_rectangle(self.character_x, self.character_y, self.character_x + 10, self.character_y + 10, fill="red", outline="")
