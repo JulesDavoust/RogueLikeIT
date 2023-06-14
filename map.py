@@ -63,6 +63,8 @@ class Map:
         x2G = x1G + case_size
         y2G = y1G + case_size
         areaPlay.create_rectangle(x1G, y1G, x2G, y2G, fill="green")
+
+
         KeyfindG = -1
         KeyfindR = -1
         for cle, valeur in self.CaseNoire.items():
@@ -78,6 +80,7 @@ class Map:
             self.centreCaseNoire.pop(KeyfindR)
         self.spawnX = x1G + (case_size - 10) // 2
         self.spawnY = y1G + (case_size - 10) // 2
+        print(self.CaseNoire)
 
 
     def generateKey(self,areaPlay):

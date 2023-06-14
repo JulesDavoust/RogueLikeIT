@@ -118,27 +118,33 @@ class player:
 
 
             # Vérifie si les coordonnées du monstre se trouvent dans le champ de vision
-            
+            randomPNJ = random.randint(0, len(list(self.map.CaseNoire.keys()))-1)
             emplacement = False
             emplacementOK = True
-            while not emplacement:
+            cooCaseNoire = self.map.CaseNoire[randomPNJ]
+            x1 = cooCaseNoire[0]
+            y1 = cooCaseNoire[1]
+
+            """while not emplacement:
                 x1 = random.randint(0, self.map.map_width-50)
                 y1 = random.randint(0, self.map.map_height-50)
                 for cle, valeur in self.map.CaseNoire.items():
                     if (
-                        x1 + 10 > valeur[0]
-                        and y1 + 10 > valeur[1]
+                        x1 + WindowParameter.characterSize > valeur[0]
+                        and y1 + WindowParameter.characterSize > valeur[1]
                         and x1 < valeur[2]
                         and y1 < valeur[3]
                     ):
                         emplacementOK = False
                 if emplacementOK:
                     emplacement = True
-                emplacementOK = True
+                emplacementOK = True"""
             """print(x1, y1, x1 + 30, y1 + 30)"""
+            self.areaPlay.create_image(x1*WindowParameter.tileSize, y1*WindowParameter.tileSize, anchor="nw", image=self.map.floor_photo)
             pnj.generateShop(self.areaPlay, x1, y1)
             self.shops.append(pnj.shop)
             self.pnjs.append(pnj)
+            self.map.CaseNoire.pop(randomPNJ)
         print(self.shops)
         for i in range(0, len(self.pnjs)):
             print(self.areaPlay.coords(self.pnjs[i].pnj))
@@ -166,8 +172,8 @@ class player:
                     y1 = random.randint(min_y, max_y)
                 for cle, valeur in self.map.CaseNoire.items():
                     if (
-                        x1 + 10 > valeur[0]
-                        and y1 + 10 > valeur[1]
+                        x1 + + WindowParameter.characterSize > valeur[0]
+                        and y1 + WindowParameter.characterSize > valeur[1]
                         and x1 < valeur[2]
                         and y1 < valeur[3]
                     ):
