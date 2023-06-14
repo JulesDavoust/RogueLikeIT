@@ -65,9 +65,8 @@ class player:
         window.bind("<KeyPress>", self.move_character)
 
     def createAll(self):
-        number_pnj = random.randint(0,3)
-        self.generatePNJs(number_pnj)
-        self.map.generateMap(self.areaPlay, number_pnj)
+        
+        self.map.generateMap(self.areaPlay)
         self.map.level = self.map.level + 1
         self.levelMap = self.map.level
         self.map.generateKey(self.areaPlay)
@@ -91,6 +90,8 @@ class player:
         self.update_view()
         number_monsters = self.numberMonsters()
         self.generateMonsters(number_monsters)
+        number_pnj = random.randint(0,3)
+        self.generatePNJs(number_pnj)
         
         self.start_moving_monsters()
 
