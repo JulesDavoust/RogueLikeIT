@@ -10,6 +10,9 @@ from windowParameters import WindowParameter
 
 
 class Map:
+
+    maze = None
+
     def __init__(self) -> None:
         self.level = 0
         self.CaseNoire = {}
@@ -98,7 +101,7 @@ class Map:
             self.centreCaseNoire.pop(KeyfindR)
         self.spawnX = x1G
         self.spawnY = y1G
-        print(self.CaseNoire)
+        #print(self.CaseNoire)
 
 
     def generateKey(self,areaPlay):

@@ -136,7 +136,6 @@ class player:
             print(_)
             pnj = PNJ()  # Crée une instance de pnj
 
-
             # Vérifie si les coordonnées du monstre se trouvent dans le champ de vision
             randomPNJ = random.randint(0, len(list(self.map.CaseNoire.keys()))-1)
             emplacement = False
@@ -144,7 +143,6 @@ class player:
             cooCaseNoire = self.map.CaseNoire[randomPNJ]
             x1 = cooCaseNoire[0]
             y1 = cooCaseNoire[1]
-
             """while not emplacement:
                 x1 = random.randint(0, self.map.map_width-50)
                 y1 = random.randint(0, self.map.map_height-50)
@@ -160,7 +158,10 @@ class player:
                     emplacement = True
                 emplacementOK = True"""
             """print(x1, y1, x1 + 30, y1 + 30)"""
+            
+
             self.areaPlay.create_image(x1*WindowParameter.tileSize, y1*WindowParameter.tileSize, anchor="nw", image=self.map.floor_photo)
+
             pnj.generateShop(self.areaPlay, x1, y1)
             self.shops.append(pnj.shop)
             self.pnjs.append(pnj)

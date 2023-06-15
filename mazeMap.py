@@ -59,7 +59,42 @@ def detect_walls(maze):
                 wall_list.append([y,x])
     return wall_list
 
+
+def three_walls_cells(maze):
+    cell_list = []
+    for y in range(len(maze)):
+        for x in range(len(maze[y])):
+            count = 0
+            #maze[y][x]
+            #Check if four adjacent directions cells are walls
+            if(x-1 < 0):
+                count += 1
+            elif(maze[y][x-1] == 'W'):
+                count += 1
+
+            if(y-1 < 0):
+                count += 1
+            elif(maze[y-1][x] == 'W'):
+                count += 1
+
+            if(x+1 > WindowParameter.mapTileCol-1):
+                count += 1
+            elif(maze[y][x+1] == 'W'):
+                count += 1
+
+            if(y+1 > WindowParameter.mapTileRow-1):
+                count += 1
+            elif(maze[y+1][x] == 'W'):
+                count += 1
+                
+            if(count == 3 ):
+                cell_list.append([y,x])
+            
+    return cell_list
+            
+   
+
 # Display the maze
 # maze = generate_maze(WindowParameter.mapTileCol,WindowParameter.mapTileRow)
 # wall_list = detect_walls(maze)
-
+# print(three_walls_cells(maze))
