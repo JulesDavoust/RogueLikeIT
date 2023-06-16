@@ -20,7 +20,11 @@ class player:
         self.gold = 30
 
         self.pnjCooDico = {}
+        self.monsterDico = {}
+        self.moved_monsters_positions = []
+
         self.indexDico = 0
+        self.indexMonster = 0
 
         self.map = Map()
         self.view_distance = 100
@@ -229,8 +233,11 @@ class player:
 
             # Génère le carré noir du monstre dans l'areaPlay à la position aléatoire
             monster.generateMonster(self.areaPlay, x1, y1)
-
+            self.monsterDico[self.indexMonster] = [x1, y1, x1 + WindowParameter.tileSize-1, y1 + WindowParameter.tileSize-1]
+            self.indexMonster += 1
             self.monsters.append(monster)  # Ajoute le monstre à la liste
+        print("coo ===========",self.monsterDico)
+
     
     def checkMonsterInView(self, monster_x, monster_y):
         if (
@@ -252,6 +259,8 @@ class player:
                         self.character_x, self.character_y, self.character_x2, self.character_x1,
                         self.character_y2, self.character_y1, self, self.map
                     )
+                print(self.moved_monsters_positions)
+                self.moved_monsters_positions = []
             #self.areaPlay.after(800, self.move_monster_periodically)
 
     def checkPNJCollision(self, i, dx, dy):
