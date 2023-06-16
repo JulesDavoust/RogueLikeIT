@@ -10,9 +10,6 @@ from windowParameters import WindowParameter
 
 
 class Map:
-
-    maze = None
-
     def __init__(self) -> None:
         self.level = 0
         self.CaseNoire = {}
