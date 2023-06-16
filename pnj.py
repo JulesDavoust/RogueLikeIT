@@ -20,13 +20,14 @@ class PNJ:
         self.buyIt3 = False
         self.pnj_position = []
 
+        
         self.collPNJ = False
 
     def generatePNJ(self, areaPlay, x, y):
         #print(f"In generatePNJ: \nX:{x} Y:{y}")
         x = x * WindowParameter.tileSize
         y = y * WindowParameter.tileSize
-        self.pnj = areaPlay.create_rectangle(x +1, y +1 , x + WindowParameter.characterSize -1, y + WindowParameter.characterSize -1, fill="blue", outline = "")
+        self.pnj = areaPlay.create_rectangle(x +1, y +1 , x + WindowParameter.tileSize-1, y + WindowParameter.tileSize-1, fill="blue", outline = "")
 
     def openShop(self, window, selfPlayer, collPNJ):
         self.collPNJ = collPNJ

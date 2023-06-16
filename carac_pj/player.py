@@ -19,7 +19,9 @@ class player:
         self.inventory = {"key":0}
         self.gold = 30
 
-        
+        self.pnjCooDico = {}
+        self.indexDico = 0
+
         self.map = Map()
         self.view_distance = 100
         self.character_x = 0
@@ -173,10 +175,12 @@ class player:
             
             # print(f"In generatePNJs:\n X: {x1*WindowParameter.tileSize} Y: {y1*WindowParameter.tileSize}")
             # self.areaPlay.create_image(x1*WindowParameter.tileSize, y1*WindowParameter.tileSize, anchor="nw", image=self.map.floor_photo)
-
+            self.pnjCooDico[self.indexDico] = [x1+1, y1+1, x1 + WindowParameter.tileSize-1, y1 + WindowParameter.tileSize-1]
+            self.indexDico += 1
             pnj.generateShop(self.areaPlay, x1, y1)
             self.shops.append(pnj.shop)
             self.pnjs.append(pnj)
+            
             #self.map.CaseNoire.pop(randomPNJ)
         print(self.shops)
         for i in range(0, len(self.pnjs)):
@@ -198,7 +202,7 @@ class player:
             emplacement = False
             emplacementOK = True
             while not emplacement:
-                cooM = random.randint(0, len(list(self.map.dicoC)))
+                cooM = random.randint(0, len(list(self.map.dicoC))-1)
                 print(self.map.dicoC)
                 print(cooM)
                 x1 = self.map.dicoC[cooM][0]
@@ -326,6 +330,8 @@ class player:
 
 
     def move_character(self, event):
+        print(self.map.CaseNoire.values())
+        print(self.pnjCooDico.values())
         key = event.keysym
         if self.tourPlayer == True:
             if self.countTour%3 == 0:
@@ -347,8 +353,8 @@ class player:
                         self.cooldown_active = True
                         self.countTourActivate = True
 
-                        self.window.after(500, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
-                        self.window.after(1000, self.start_moving_monsters)
+                        self.window.after(50, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+                        self.window.after(500, self.start_moving_monsters)
                 if event.char == "a" and self.countTour%3 == 0:
                     if self.attackDirection == "Left":
                         print("direction attack Left")
@@ -365,8 +371,8 @@ class player:
                         self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                         self.cooldown_active = True
                         self.countTourActivate = True
-                        self.window.after(500, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
-                        self.window.after(1000, self.start_moving_monsters)
+                        self.window.after(50, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+                        self.window.after(500, self.start_moving_monsters)
                 if event.char == "a" and self.countTour%3 == 0:
                     if self.attackDirection == "Up":
                         print("direction attack Up")
@@ -384,8 +390,8 @@ class player:
                         self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                         self.cooldown_active = True
                         self.countTourActivate = True
-                        self.window.after(500, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
-                        self.window.after(1000, self.start_moving_monsters)
+                        self.window.after(50, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+                        self.window.after(500, self.start_moving_monsters)
                 if event.char == "a" and self.countTour%3 == 0:
                     if self.attackDirection == "Down":
                         print("direction attack Down")
@@ -402,8 +408,8 @@ class player:
                         self.window.after(100, lambda: self.areaPlay.delete(attackRect))
                         self.cooldown_active = True
                         self.countTourActivate = True
-                        self.window.after(500, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
-                        self.window.after(1000, self.start_moving_monsters)
+                        self.window.after(50, self.reset_cooldown)  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+                        self.window.after(500, self.start_moving_monsters)
                 
             
 
@@ -469,7 +475,7 @@ class player:
                             self.areaPlay.move(self.sprite, dx, dy)
                             self.update_view()
                         self.goNextRoom()
-                    self.window.after(1000, self.start_moving_monsters)
+                    self.window.after(500, self.start_moving_monsters)
         self.tourPlayer = False
         if self.countTour == 3:
             self.countTour = 0
