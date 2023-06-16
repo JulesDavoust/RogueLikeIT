@@ -102,8 +102,7 @@ class player:
         self.update_view()
         number_monsters = self.numberMonsters()
         self.generateMonsters(number_monsters)
-        number_pnj = random.randint(0,3)
-        self.generatePNJs(number_pnj)
+        self.generatePNJs()
         
 
     def start_moving_monsters(self):
@@ -128,7 +127,7 @@ class player:
         print("Loading...")
         Fight.FightPage()
 
-    def generatePNJs(self, number_pnj):
+    def generatePNJs(self):
         self.pnjs = []
         self.shops = []
         min_x = 0
@@ -136,7 +135,11 @@ class player:
         min_y = 0
         max_y = self.map.map_height-50
         placeable_cell_list = mazeMap.three_walls_cells(self.map.maze)
-        for _ in range(3):
+        number_pnj = random.randint(0,3)
+        if(number_pnj > len(placeable_cell_list)):
+            number_pnj = len(placeable_cell_list)
+
+        for _ in range(number_pnj):
             #print(_)
             pnj = PNJ()  # Crée une instance de pnj
 
