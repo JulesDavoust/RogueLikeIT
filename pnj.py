@@ -23,7 +23,10 @@ class PNJ:
         self.collPNJ = False
 
     def generatePNJ(self, areaPlay, x, y):
-        self.pnj = areaPlay.create_rectangle(x, y, x + WindowParameter.characterSize, y + WindowParameter.characterSize, fill="blue", outline = "")
+        #print(f"In generatePNJ: \nX:{x} Y:{y}")
+        x = x * WindowParameter.tileSize
+        y = y * WindowParameter.tileSize
+        self.pnj = areaPlay.create_rectangle(x +1, y +1 , x + WindowParameter.characterSize -1, y + WindowParameter.characterSize -1, fill="blue", outline = "")
 
     def openShop(self, window, selfPlayer, collPNJ):
         self.collPNJ = collPNJ
@@ -127,6 +130,7 @@ class PNJ:
     #def closeShop(self, window)
 
     def generateShop(self,areaPlay, x1, y1):
+        # print(f"In generateShop: \nX:{x1} Y:{y1}")
         self.generatePNJ(areaPlay, x1, y1)
         AllItems = {0 : "Sword", 1 : "Potion of heal", 2 : "Potion of mana", 3: "Armor", 4:"Bow", 5:"Wizard's staff"}
         ItemsShop = []
@@ -138,8 +142,8 @@ class PNJ:
                     indexRandom = random.randint(0, len(AllItems)-1)
             index.append(indexRandom)
             ItemsShop.append(AllItems[indexRandom])
-        print(index)
-        print(ItemsShop)
+        #print(index)
+        #print(ItemsShop)
         for i in range(0, len(ItemsShop)):
             if ItemsShop[i] == "Sword":
                 damage = random.randint(5, 8)
@@ -165,7 +169,7 @@ class PNJ:
                 damage = random.randint(4,8)
                 if(damage <= 8):
                     self.shop["Wizard's staff"] = {"damage" : damage, "cost" : 4}
-        print(self.shop)
+        # print(self.shop)
 
 
 

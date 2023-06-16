@@ -65,7 +65,7 @@ class Monster:
                 slope = (red_center_y - black_center_y) / (red_center_x - black_center_x)
         else:
             slope = 0
-        print(slope)
+        # print(slope)
 
         dx = self.moveDistance
         dy = -self.moveDistance
@@ -84,7 +84,7 @@ class Monster:
             is_black_tile_in_between = False
             for x in range(int(min(black_center_x, red_center_x)), int(max(black_center_x, red_center_x))):
                 y = line_equation(x)
-                print(y)
+                # print(y)
                 if self.isBlackTile(x, y, map):
                     is_black_tile_in_between = True
                     break
@@ -95,8 +95,8 @@ class Monster:
                 dx = (target_x - self.current_x)  # Déplacement en x nécessaire
                 dy = (target_y - self.current_y)  # Déplacement en y nécessaire
 
-                print(dx)
-                print(dy)
+                # print(dx)
+                # print(dy)
                 if dx == 0 and dy < 0:
 
                     areaPlay.move(self.monster, 0, -1 * self.moveDistance)
