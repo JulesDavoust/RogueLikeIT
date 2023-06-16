@@ -8,6 +8,7 @@ class Monster:
     def __init__(self, MapLevel) -> None:
         self.direction = [0, 1, 2, 3]
         self.monster_collision = False
+        self.diag = False
         self.monster_positions = []  # Liste pour stocker les positions des monstres
         self.life_points_monster = 50
         self.moveDistance = WindowParameter.tileSize
@@ -51,10 +52,7 @@ class Monster:
         self.monster_x2 = self.monster_coords[2]
         self.monster_y2 = self.monster_coords[3]
         #print("Monster : x1 : ",self.monster_x1)
-        murs = map.CaseNoire.values()
-        #print(list(murs))
-        if 0 in murs:
-             print("test")
+        
 
         self.current_x = (self.monster_coords[0] + self.monster_coords[2])/2
         self.current_y = (self.monster_coords[1] + self.monster_coords[3])/2
@@ -64,11 +62,7 @@ class Monster:
         red_center_x = (x1P + x2P) // 2
         red_center_y = (y1P + y2P) // 2
 
-        if (red_center_x - black_center_x) != 0:
-                slope = (red_center_y - black_center_y) / (red_center_x - black_center_x)
-        else:
-            slope = 0
-        print(slope)
+        
 
         dx = self.moveDistance
         dy = -self.moveDistance
@@ -82,7 +76,7 @@ class Monster:
         elif(self.monster_x1 < x2P and self.monster_x2 > x1P and self.monster_y1 < y2P and self.monster_y2 > y1P and playerSelf.player_collision == False and playerSelf.collPNJ == False):
             
             # Tracer une ligne entre les centres des carrés 
-            line_equation = lambda x: (red_center_y - black_center_y) * (x - black_center_x) / (red_center_x - black_center_x) + black_center_y
+            """line_equation = lambda x: (red_center_y - black_center_y) * (x - black_center_x) / (red_center_x - black_center_x) + black_center_y
             is_black_tile_in_between = False
             for x in range(int(min(black_center_x, red_center_x)), int(max(black_center_x, red_center_x))):
                 y = line_equation(x)
@@ -90,26 +84,147 @@ class Monster:
                 if self.isBlackTile(x, y, map):
                     is_black_tile_in_between = True
                     break
-            
-            
-            #print(is_black_tile_in_between)
-            """if case_noire_entre == False:
-                print("if")
-                dx = (target_x - self.current_x)  # Déplacement en x nécessaire
-                dy = (target_y - self.current_y)  # Déplacement en y nécessaire
-
-                # print(dx)
-                # print(dy)
-                if dx == 0 and dy < 0:
-                    areaPlay.move(self.monster, 0, -1 * self.moveDistance)
-                elif dx == 0 and dy > 0:
-                    areaPlay.move(self.monster, 0, 1 * self.moveDistance)
-                elif dx < 0 and dy == 0:
-                    areaPlay.move(self.monster, -1 * self.moveDistance , 0)
-                elif dx > 0 and dy == 0:
-                    areaPlay.move(self.monster, +1 * self.moveDistance , 0)
+            """
+            if (red_center_x - black_center_x) != 0:
+                slope = (red_center_y - black_center_y) / (red_center_x - black_center_x)
             else:
-                print("else")
+                slope = 0
+            print(self.current_x, self.current_y, target_x, target_y)
+            print("slope", slope)
+            intersec = False
+            for case in map.CaseNoire.values():
+                x3, y3, x4, y4 = case
+                if self.intersect(self.current_x, self.current_y, target_x, target_y, x3, y3, x4, y4):
+                    #return True
+                    intersec = True
+
+            #return False
+            if intersec == False:
+                if slope == 0 and target_x == self.current_x and self.current_y < target_y:
+                    areaPlay.move(self.monster, 0, 1 * self.moveDistance)
+                elif slope == 0 and target_x == self.current_x and self.current_y > target_y:
+                    areaPlay.move(self.monster, 0, -1 * self.moveDistance)
+                elif slope == -0.0 and target_y == self.current_y and self.current_x > target_x:
+                    areaPlay.move(self.monster, -1 * self.moveDistance, 0)
+                elif slope == 0.0 and target_y == self.current_y and self.current_x < target_x:
+                    areaPlay.move(self.monster, 1 * self.moveDistance, 0)
+                else:
+                    if self.current_x > target_x:
+                        if slope < 0:
+                            if self.diag == False:
+                                self.diag = True
+                                dy = 1
+                                dx = 0
+                                new_x1 = self.monster_x1
+                                new_y1 = self.monster_y1 + dy * self.moveDistance
+                                new_x2 = self.monster_x2
+                                new_y2 = self.monster_y2 + dy * self.moveDistance
+                                if any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()):
+                                    self.diage = False
+                                    dx = -1
+                                    dy = 0
+                                areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                            else:
+                                self.diag = False
+                                dx = -1
+                                dy = 0
+                                new_x1 = self.monster_x1 + dx * self.moveDistance
+                                new_y1 = self.monster_y1
+                                new_x2 = self.monster_x2 + dx * self.moveDistance
+                                new_y2 = self.monster_y2
+                                if any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()):
+                                    self.diag = True
+                                    dx = 0
+                                    dy = 1
+                                areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                        elif slope > 0:
+                            if self.diag == False:
+                                self.diag = True
+                                dy = -1
+                                dx = 0
+                                new_x1 = self.monster_x1
+                                new_y1 = self.monster_y1 + dy * self.moveDistance
+                                new_x2 = self.monster_x2
+                                new_y2 = self.monster_y2 + dy * self.moveDistance
+                                if any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()):
+                                    dx = -1
+                                    dy = 0
+                                    self.diag = False
+                                areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                            else:
+                                self.diag = False
+                                dx = -1
+                                dy = 0
+                                new_x1 = self.monster_x1 + dx * self.moveDistance
+                                new_y1 = self.monster_y1
+                                new_x2 = self.monster_x2 + dx * self.moveDistance
+                                new_y2 = self.monster_y2
+                                if any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()):
+                                    self.diag = True
+                                    dx = 0
+                                    dy = -1
+                                areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                    elif self.current_x < target_x:
+                        if slope < 0:
+                            if self.diag == False:
+                                self.diag = True
+                                dy = -1
+                                dx = 0
+                                new_x1 = self.monster_x1
+                                new_y1 = self.monster_y1 + dy * self.moveDistance
+                                new_x2 = self.monster_x2
+                                new_y2 = self.monster_y2 + dy * self.moveDistance
+                                if any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()):
+                                    self.diag = False
+                                    dx = 1
+                                    dy = 0
+                                areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                            else:
+                                self.diag = False
+                                dx = 1
+                                dy = 0
+                                new_x1 = self.monster_x1 + dx * self.moveDistance
+                                new_y1 = self.monster_y1
+                                new_x2 = self.monster_x2 + dx * self.moveDistance
+                                new_y2 = self.monster_y2
+                                if any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()):
+                                    self.diag = True
+                                    dx = 0
+                                    dy = -1
+                                areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                        elif slope > 0:
+                            if self.diag == False:
+                                self.diag = True
+                                dy = 1
+                                dx = 0
+                                new_x1 = self.monster_x1
+                                new_y1 = self.monster_y1 + dy * self.moveDistance
+                                new_x2 = self.monster_x2
+                                new_y2 = self.monster_y2 + dy * self.moveDistance
+                                if any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()):
+                                    self.diag = False
+                                    dx = 1
+                                    dy = 0
+                                areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                            else:
+                                self.diag = False
+                                dx = 1
+                                dy = 0
+                                new_x1 = self.monster_x1 + dx * self.moveDistance
+                                new_y1 = self.monster_y1
+                                new_x2 = self.monster_x2 + dx * self.moveDistance
+                                new_y2 = self.monster_y2
+                                if any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()):
+                                    self.diag = True
+                                    dx = 0
+                                    dy = 1
+                                areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+
+                    print("diag")
+                
+                print("not intersec")
+            else:
+                print("intersec")
                 dx = random.randint(-1, 1)
                 dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
                 new_x1 = self.monster_x1 + dx * self.moveDistance
@@ -126,7 +241,25 @@ class Monster:
                     new_y2 = self.monster_y2 + dy * self.moveDistance
 
                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
-                #areaPlay.move(self.monster_pic, dx, dy)"""
+                #areaPlay.move(self.monster_pic, dx, dy)
+            """else:
+                print("intersect")
+            #print(is_black_tile_in_between)
+                print("if")
+                dx = (target_x - self.current_x)  # Déplacement en x nécessaire
+                dy = (target_y - self.current_y)  # Déplacement en y nécessaire
+
+                # print(dx)
+                # print(dy)
+                if dx == 0 and dy < 0:
+                    areaPlay.move(self.monster, 0, -1 * self.moveDistance)
+                elif dx == 0 and dy > 0:
+                    areaPlay.move(self.monster, 0, 1 * self.moveDistance)
+                elif dx < 0 and dy == 0:
+                    areaPlay.move(self.monster, -1 * self.moveDistance , 0)
+                elif dx > 0 and dy == 0:
+                    areaPlay.move(self.monster, +1 * self.moveDistance , 0)"""
+            
 
         elif self.monster_x2 + 10 > map.map_width:
                     #print("x2")

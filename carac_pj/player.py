@@ -199,6 +199,8 @@ class player:
             emplacementOK = True
             while not emplacement:
                 cooM = random.randint(0, len(list(self.map.dicoC)))
+                print(self.map.dicoC)
+                print(cooM)
                 x1 = self.map.dicoC[cooM][0]
                 y1 = self.map.dicoC[cooM][1]
                 while self.checkMonsterInView(x1, y1):
