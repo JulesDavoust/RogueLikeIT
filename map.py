@@ -10,6 +10,9 @@ from windowParameters import WindowParameter
 
 
 class Map:
+
+    maze = None
+
     def __init__(self) -> None:
         self.level = 0
         self.CaseNoire = {}
@@ -18,7 +21,8 @@ class Map:
         self.indexDico = 0
         self.indexDicoC= 0
         self.spawnX = 0
-        self.spawnY = 0    
+        self.spawnY = 0   
+        self.maze = None 
 
     def generateMap(self, areaPlay):
         self.map_width = WindowParameter.mapWidth
@@ -38,23 +42,25 @@ class Map:
         self.floor_photo = ImageTk.PhotoImage(floor_image)
 
         #maze generation The number of wall can be modified(removed)
-        maze = mazeMap.generate_maze(x_tile,y_tile)
-        wall_list = mazeMap.detect_walls(maze)
+        self.maze = mazeMap.generate_maze(x_tile,y_tile)
+        wall_list = mazeMap.detect_walls(self.maze)
         for i in range(num_remove_walls):
             remove_index = random.choice(wall_list)
-            maze = mazeMap.delete_wall(maze, remove_index[0],remove_index[1])
-            wall_list = mazeMap.detect_walls(maze)
+            self.maze = mazeMap.delete_wall(self.maze, remove_index[0],remove_index[1])
+            wall_list = mazeMap.detect_walls(self.maze)
 
-
+        print("Maze after delete walls:")
+        for row in self.maze:
+            print(' '.join(row))
         #Dessine les cases V2.0
-        for y in range(len(maze)):
-            for x in range(len(maze[y])):
-                if(maze[y][x] == 'W'):
+        for y in range(len(self.maze)):
+            for x in range(len(self.maze[y])):
+                if(self.maze[y][x] == 'W'):
                     areaPlay.create_image(x * case_size, y * case_size, anchor="nw", image=self.wall_photo)
                     self.CaseNoire[self.indexDico] = [x * case_size, y * case_size, (x + 1) * case_size, (y + 1) * case_size]
                     self.centreCaseNoire[self.indexDico] = [(x * case_size + (x + 1) * case_size) / 2, (y * case_size + (y + 1) * case_size) / 2]
                     self.indexDico += 1
-                elif(maze[y][x] == 'C'):
+                elif(self.maze[y][x] == 'C'):
                     self.dicoC[self.indexDicoC] = [x * case_size, y * case_size, (x + 1) * case_size, (y + 1) * case_size]
                     areaPlay.create_image(x * case_size, y * case_size, anchor="nw", image=self.floor_photo)
                     self.indexDicoC +=1
