@@ -203,8 +203,6 @@ class player:
         for _ in range(num_monsters):
             monster = Monster(self.levelMap)  # Crée une instance de monstre
 
-
-            # Vérifie si les coordonnées du monstre se trouvent dans le champ de vision
             
             emplacement = False
             emplacementOK = True
@@ -671,9 +669,6 @@ class player:
 
         # Génère une nouvelle carte
         self.createAll()
-        if self.tourPlayer == False:
-            self.window.after(100, self.start_moving_monsters)
-        self.window.bind("<KeyPress>", self.move_character)
 
     def displayPJ(self):
         if self.classe == 0:

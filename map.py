@@ -112,8 +112,11 @@ class Map:
         emplacementOK = True
         case_size = WindowParameter.tileSize
         while emplacement == False:
-            x1 = random.randint(0, (self.map_width-50))
-            y1 = random.randint(0, (self.map_height-50))
+            cooM = random.randint(0, len(list(self.dicoC))-1)
+            x1 = self.dicoC[cooM][0]
+            y1 = self.dicoC[cooM][1]
+            """x1 = random.randint(0, (self.map_width-50))
+            y1 = random.randint(0, (self.map_height-50))"""
             for cle, valeur in self.CaseNoire.items():
                 if (
                     x1 + case_size > valeur[0]
@@ -125,11 +128,19 @@ class Map:
             if emplacementOK:
                 emplacement = True
             emplacementOK = True
+        a_width = self.dicoC[cooM][2] - x1
+        a_height = self.dicoC[cooM][3] - y1
+        b_width = a_width * 0.5
+        b_height = a_height * 0.5
+        b_x1 = x1 + (a_width - b_width) / 2
+        b_y1 = y1 + (a_height - b_height) / 2
+        b_x2 = b_x1 + b_width
+        b_y2 = b_y1 + b_height
         self.keyX1 = x1
         self.keyY1 = y1
         self.keyX2 = x1 + 6
         self.keyY2 = y1 + 6
-        self.key = areaPlay.create_rectangle(x1, y1, x1+6, y1+6, fill="yellow")
+        self.key = areaPlay.create_rectangle(b_x1, b_y1, b_x2, b_y2, fill="yellow")
 
                 
     def player_info(self,areaPlay):
