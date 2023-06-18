@@ -21,7 +21,7 @@ class player:
 
         self.pnjCooDico = {}
         self.monsterDico = {}
-        self.moved_monsters_positions = []
+        self.moved_m_index = 0
 
         self.indexDico = 0
         self.indexMonster = 0
@@ -250,6 +250,8 @@ class player:
         return False
 
     def move_monster_periodically(self):
+        self.monsterDico = {}
+        self.moved_m_index = 0
         #self.monster.moveMonster(self.areaPlay, self.view_x1, self.view_y1, self.view_x2, self.view_y2, self.character_x, self.character_y, self.character_x2, self.character_x1, self.character_y2, self.character_y1)
         if self.player_collision == False:
                 #print("continue ?")
@@ -259,8 +261,11 @@ class player:
                         self.character_x, self.character_y, self.character_x2, self.character_x1,
                         self.character_y2, self.character_y1, self, self.map
                     )
-                print(self.moved_monsters_positions)
-                self.moved_monsters_positions = []
+                    monster_coords = self.areaPlay.coords(monster.monster)
+                    self.monsterDico[self.moved_m_index] = [monster_coords[0], monster_coords[1], monster_coords[2], monster_coords[3]]
+                    self.moved_m_index += 1
+                    print(self.monsterDico)
+                
             #self.areaPlay.after(800, self.move_monster_periodically)
 
     def checkPNJCollision(self, i, dx, dy):
@@ -300,7 +305,7 @@ class player:
         self.cooldown_active = False
 
     def Fight(self, attackRect):
-        print("fonction fight")
+        print("fonction fight :", self.monsterDico)
         attack = self.areaPlay.coords(attackRect)
         attack_x1 = attack[0]
         attack_y1 = attack[1]
@@ -311,7 +316,7 @@ class player:
         while i < len(self.monsters) and pop == False:
             print("for loop")
             monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
-
+            print(monsterCOO)
             monster_x1 = monsterCOO[0]
             monster_y1 = monsterCOO[1]
             monster_x2 = monsterCOO[2]
@@ -320,21 +325,140 @@ class player:
                 and attack_x1 <= monster_x2 
                 and attack_y2 >= monster_y1 
                 and attack_y1 <= monster_y2):
+                
                 print(self.monsters[i].life_points_monster)
                 self.monsters[i].life_points_monster = self.monsters[i].life_points_monster - self.damage
                 print(self.monsters[i].life_points_monster)
+
                 if(self.monsters[i].life_points_monster <= 0):
                     self.areaPlay.delete(self.monsters[i].monster)
                     self.monsters.pop(i)
                     pop = True
                 else:
-                    if(self.attackDirection == "Right"):
+                    if self.attackDirection == "Right":
+                        new_x2 = self.monsters[i].monster_x2 + self.moveDistance
+                        new_x1 = self.monsters[i].monster_x1 + self.moveDistance
+                        new_y1 = self.monsters[i].monster_y1
+                        new_y2 = self.monsters[i].monster_y2
+                        if (
+                            new_x2 > WindowParameter.mapWidth
+                            or any(
+                                new_x2 > case[0]
+                                and new_y2 > case[1]
+                                and new_x1 < case[2]
+                                and new_y1 < case[3]
+                                for case in self.map.CaseNoire.values()
+                            )
+                            or any(
+                                new_x2 > square[0]
+                                and new_y2 > square[1]
+                                and new_x1 < square[2]
+                                and new_y1 < square[3]
+                                for square in self.pnjCooDico.values()
+                            )
+                        ):
+                            return
+                        for monster in self.monsterDico.values():
+                                    if monsterCOO != self.areaPlay.coords(monster):
+                                        if (new_x2 > monster[0] 
+                                        and new_y2 > monster[1]
+                                        and new_x1 < monster[2]
+                                        and new_y1 < monster[3]):
+                                            return
                         self.areaPlay.move(self.monsters[i].monster, +WindowParameter.tileSize, 0)
-                    elif(self.attackDirection == "Left"):
+                    elif self.attackDirection == "Left":
+                        new_x2 = self.monsters[i].monster_x2 - self.moveDistance
+                        new_x1 = self.monsters[i].monster_x1 - self.moveDistance
+                        new_y1 = self.monsters[i].monster_y1
+                        new_y2 = self.monsters[i].monster_y2
+                        if (
+                            new_x1 < 0
+                            or any(
+                                new_x2 > case[0]
+                                and new_y2 > case[1]
+                                and new_x1 < case[2]
+                                and new_y1 < case[3]
+                                for case in self.map.CaseNoire.values()
+                            )
+                            or any(
+                                new_x2 > square[0]
+                                and new_y2 > square[1]
+                                and new_x1 < square[2]
+                                and new_y1 < square[3]
+                                for square in self.pnjCooDico.values()
+                            )
+                        ):
+                            return
+                        for monster in self.monsterDico.values():
+                                    if monsterCOO != self.areaPlay.coords(monster):
+                                        if (new_x2 > monster[0] 
+                                        and new_y2 > monster[1]
+                                        and new_x1 < monster[2]
+                                        and new_y1 < monster[3]):
+                                            return
+                        print("isit continue")
                         self.areaPlay.move(self.monsters[i].monster, -WindowParameter.tileSize, 0)
-                    elif(self.attackDirection == "Up"):
+                    elif self.attackDirection == "Up":
+                        new_x2 = self.monsters[i].monster_x2
+                        new_x1 = self.monsters[i].monster_x1
+                        new_y1 = self.monsters[i].monster_y1 - self.moveDistance
+                        new_y2 = self.monsters[i].monster_y2 - self.moveDistance
+                        if (
+                            new_y1 < 0
+                            or any(
+                                new_x2 > case[0]
+                                and new_y2 > case[1]
+                                and new_x1 < case[2]
+                                and new_y1 < case[3]
+                                for case in self.map.CaseNoire.values()
+                            )
+                            or any(
+                                new_x2 > square[0]
+                                and new_y2 > square[1]
+                                and new_x1 < square[2]
+                                and new_y1 < square[3]
+                                for square in self.pnjCooDico.values()
+                            )
+                        ):
+                            return
+                        for monster in self.monsterDico.values():
+                                    if monsterCOO != self.areaPlay.coords(monster):
+                                        if (new_x2 > monster[0] 
+                                        and new_y2 > monster[1]
+                                        and new_x1 < monster[2]
+                                        and new_y1 < monster[3]):
+                                            return
                         self.areaPlay.move(self.monsters[i].monster, 0, -WindowParameter.tileSize)
-                    elif(self.attackDirection == "Down"):
+                    elif self.attackDirection == "Down":
+                        new_x2 = self.monsters[i].monster_x2
+                        new_x1 = self.monsters[i].monster_x1
+                        new_y1 = self.monsters[i].monster_y1 + self.moveDistance
+                        new_y2 = self.monsters[i].monster_y2 + self.moveDistance
+                        if (
+                            new_y2 > WindowParameter.mapHeight
+                            or any(
+                                new_x2 > case[0]
+                                and new_y2 > case[1]
+                                and new_x1 < case[2]
+                                and new_y1 < case[3]
+                                for case in self.map.CaseNoire.values()
+                            )
+                            or any(
+                                new_x2 > square[0]
+                                and new_y2 > square[1]
+                                and new_x1 < square[2]
+                                and new_y1 < square[3]
+                                for square in self.pnjCooDico.values()
+                            )
+                        ):
+                            return
+                        for monster in self.monsterDico.values():
+                                    if monsterCOO != self.areaPlay.coords(monster):
+                                        if (new_x2 > monster[0] 
+                                        and new_y2 > monster[1]
+                                        and new_x1 < monster[2]
+                                        and new_y1 < monster[3]):
+                                            return
                         self.areaPlay.move(self.monsters[i].monster, 0, +WindowParameter.tileSize)
 
             i += 1
@@ -547,6 +671,9 @@ class player:
 
         # Génère une nouvelle carte
         self.createAll()
+        if self.tourPlayer == False:
+            self.window.after(100, self.start_moving_monsters)
+        self.window.bind("<KeyPress>", self.move_character)
 
     def displayPJ(self):
         if self.classe == 0:
