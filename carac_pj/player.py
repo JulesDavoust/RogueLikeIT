@@ -1,5 +1,6 @@
 import random
 from map import Map
+from Fight import fight
 from monster import Monster
 from pnj import PNJ
 from windowParameters import WindowParameter
@@ -126,6 +127,11 @@ class player:
             return random.randint(12,18)
         elif(self.levelMap >= 5):
             return random.randint(19,25)
+
+    def startFight(self):
+        Fight = fight()
+        #print("Loading...")
+        Fight.FightPage()
 
     def generatePNJs(self):
         self.pnjs = []
@@ -482,7 +488,7 @@ class player:
         #print(self.map.CaseNoire.values())
         #print(self.pnjCooDico.values())
         key = event.keysym
-        if self.collPNJ == False:
+        if self.tourPlayer == True:
             if self.countTour%3 == 0:
                 if event.char == "a":
                     if self.attackDirection == "Right":
@@ -625,7 +631,7 @@ class player:
                             self.update_view()
                         self.goNextRoom()
                     self.window.after(500, self.start_moving_monsters)
-            self.tourPlayer = False
+        self.tourPlayer = False
         if self.countTour == 3:
             self.countTour = 0
             self.countTourActivate = False

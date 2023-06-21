@@ -161,6 +161,7 @@ class Map:
         areaPlay.create_rectangle(map_width+80,50,map_width+300,80,fill="red")
         areaPlay.create_rectangle(x1 + 20,400,x1 + 310,y2-50,fill="grey",outline="white")
 
+
     def hp_update(self,player,areaPlay,monster):
         hp_max = player.max_life_point
         current_hp = player.life_point
