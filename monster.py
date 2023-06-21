@@ -1,6 +1,7 @@
 import math
 import random
 import tkinter as tk
+import map
 from windowParameters import WindowParameter
 
 class Monster:
@@ -105,7 +106,7 @@ class Monster:
         dx = self.moveDistance
         dy = -self.moveDistance
         """if x1_rect1 < x2_rect2 and x2_rect1 > x1_rect2 and y1_rect1 < y2_rect2 and y2_rect1 > y1_rect2:"""
-        if(self.monster_x1-3 < x2 and self.monster_x2+3 > x1 and self.monster_y1-3 < y2 and self.monster_y2+3 > y1 and playerSelf.player_collision == False):
+        if(self.monster_x1-3 <= x2 and self.monster_x2+3 >= x1 and self.monster_y1-3 <= y2 and self.monster_y2+3 >= y1 and playerSelf.player_collision == False):
             #playerSelf.player_collision = True
             self.monster_collision = True
             if self.current_x > target_x:
@@ -137,7 +138,6 @@ class Monster:
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                         elif slope > 0:
-                            if self.diag == False:
                                 self.diag = True
                                 dy = -1
                                 dx = 0
@@ -223,7 +223,7 @@ class Monster:
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                             
-                               
+           
             #playerSelf.startFight()
             ##print("collision with player")
             #self.diag = False # ==============> à voir si on doit mettre ou pas
