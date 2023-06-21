@@ -202,14 +202,8 @@ class Map:
         areaPlay.create_text(WindowParameter.mapWidth + 50, WindowParameter.tileSize * 3, text= invento_string, fill="white", anchor = "w")
 
 
-        # World information
-        areaPlay.create_rectangle(
-            x1 + 20, 400, x1 + 310, y2 - 50, fill="grey", outline="white"
-        )
 
-
-
-    def hp_update(self, player, areaPlay, monster):
+    def hp_update(self,player,areaPlay,monster):
         hp_max = player.max_life_point
         current_hp = player.life_point
 

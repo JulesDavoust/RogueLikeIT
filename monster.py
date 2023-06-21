@@ -64,6 +64,8 @@ class Monster:
         self.create_healthBar(areaPlay, x, y)
         self.monster_positions.append((x, y))  # Ajouter la position du monstre à la liste
 
+
+
     def create_healthBar(self, areaPlay, x, y):
         self.health_percent = self.life_points_monster/self.life_points_monster_max
         self.bar_width = self.health_percent * 31
