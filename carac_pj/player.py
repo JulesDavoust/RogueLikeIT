@@ -89,7 +89,7 @@ class player:
         self.map.level = self.map.level + 1
         self.levelMap = self.map.level
         self.map.generateKey(self.areaPlay)
-        self.map.player_info(self.areaPlay, self)
+        self.player_info(self.areaPlay, self)
         #print("map level : ", self.levelMap)
         # """#print(self.map.CaseNoire)
         # #print(self.map.centreCaseNoire)"""
@@ -301,6 +301,100 @@ class player:
         else:
             return False
 
+
+    def player_info(self, areaPlay, player):
+        map_width = WindowParameter.mapWidth
+        map_height = WindowParameter.mapHeight
+        screen_width = WindowParameter.screenWidth
+        x1 = map_width
+        x2 = screen_width
+        y2 = screen_width
+
+        # Barre de vie
+        player_imageI = Image.open("./sprites/knight_f_idle_anim_f0.png").convert("P")
+        pImage_width, pImage_height = player_imageI.size
+        player_imageI = player_imageI.resize(
+            (
+                pImage_width * WindowParameter.SCALE,
+                pImage_height * WindowParameter.SCALE,
+            )
+        )
+        self.player_photoI = ImageTk.PhotoImage(player_imageI)
+        self.areaPlay.create_rectangle(
+            x1, 0, x2, y2, fill="black", outline="red", dash=(3, 5)
+        )
+        self.areaPlay.create_image(
+            map_width + 50, WindowParameter.tileSize +10, image=self.player_photoI
+        )
+        self.areaPlay.create_rectangle(map_width + 80, WindowParameter.tileSize, map_width + 300, WindowParameter.tileSize + 30, fill="red")
+        
+        # Inventory information
+        invento_string = ""
+        for item in self.inventory.items():
+            invento_string += f"{item[0]} : {item[1]} \n"
+        # print(invento_string)
+        # invento_info = tk.Label(areaPlay, text= invento_string, fg = "White", bg= "Black")
+        # invento_info.place(x= WindowParameter.mapWidth + 30, y=100)
+        #areaPlay.create_text(WindowParameter.mapWidth + 50, WindowParameter.tileSize * 3, text= invento_string, fill="white", anchor = "w")
+
+
+        self.areaPlay.create_rectangle(x1 + 20, 100, x1+310, 140, fill="white")
+        self.areaPlay.create_rectangle(x1 + 20, 100, x1+123, 140, fill="black", outline="white")
+
+        gold_image = Image.open("./sprites/roguelikeitems.png").convert("P")
+        gImage_width,gImage_height = gold_image.size
+        gold_image = gold_image.resize((gImage_width * WindowParameter.SCALE,gImage_height* WindowParameter.SCALE))
+        self.gold_photo = ImageTk.PhotoImage(gold_image)
+
+        self.areaPlay.create_image(x1 + 48, 120, image=self.gold_photo)
+        self.areaPlay.create_text(x1 + 70, 125, text=self.gold, fill="white",font=("Press Start 2P", 12), anchor="w")
+
+        self.areaPlay.create_rectangle(x1 + 127, 100, x1+230, 140, fill="black", outline="white")
+        self.areaPlay.create_text(x1 + 140, 125, text="XP:", fill="white",font=("Press Start 2P", 12), anchor="w")
+        self.areaPlay.create_text(x1 + 190, 125, text=self.xp, fill="white",font=("Press Start 2P", 12), anchor="w")
+
+        self.areaPlay.create_rectangle(x1 + 234, 100, x1+337, 140, fill="black", outline="white")
+        self.areaPlay.create_text(x1 + 240, 125, text="LVL:", fill="white",font=("Press Start 2P", 12), anchor="w")
+        self.areaPlay.create_text(x1 + 305, 125, text=self.PlayerLevel, fill="white",font=("Press Start 2P", 12), anchor="w")
+        
+        self.areaPlay.create_rectangle(x1+3, 200, x1+88, 340, fill="white")
+        self.areaPlay.create_rectangle(x1 + 3, 200, x1+88, 250, fill="", outline="black")
+        self.areaPlay.create_rectangle(x1 + 3, 250, x1+88, 295, fill="", outline="black")
+        self.areaPlay.create_rectangle(x1 + 3, 295, x1+88, 340, fill="", outline="black")
+
+        self.areaPlay.create_rectangle(x1 + 89, 200, x1+174, 340, fill="white")
+        self.areaPlay.create_rectangle(x1 + 89, 200, x1+174, 250, fill="", outline="black")
+        self.areaPlay.create_rectangle(x1 + 89, 250, x1+174, 295, fill="", outline="black")
+        self.areaPlay.create_rectangle(x1 + 89, 295, x1+174, 340, fill="", outline="black") 
+
+        self.areaPlay.create_rectangle(x1 + 175, 200, x1+260, 340, fill="white")
+        self.areaPlay.create_rectangle(x1 + 175, 200, x1+260, 250, fill="", outline="black")
+        self.areaPlay.create_rectangle(x1 + 175, 250, x1+260, 295, fill="", outline="black")
+        self.areaPlay.create_rectangle(x1 + 175, 295, x1+260, 340, fill="", outline="black") 
+
+        self.areaPlay.create_rectangle(x1 + 261, 200, x1+346, 340, fill="white")
+        self.areaPlay.create_rectangle(x1 + 261, 200, x1+346, 250, fill="", outline="black")
+        self.areaPlay.create_rectangle(x1 + 261, 250, x1+346, 295, fill="", outline="black")
+        self.areaPlay.create_rectangle(x1 + 261, 295, x1+346, 340, fill="", outline="black") 
+
+    def hp_update(self,player,areaPlay,monster):
+        hp_max = self.max_life_point
+        current_hp = self.life_point
+
+        self.areaPlay.create_rectangle(
+            WindowParameter.mapWidth + 80,
+            50,
+            WindowParameter.mapWidth + (hp_max * 3),
+            80,
+            fill="grey",
+        )
+        self.areaPlay.create_rectangle(
+            WindowParameter.mapWidth + 80,
+            50,
+            WindowParameter.mapWidth + (current_hp * 3),
+            80,
+            fill="red",
+        )
 
     def Fight(self, attackRect):
         ##print("fonction fight :", self.monsterDico)
@@ -628,7 +722,7 @@ class player:
                 self.countTourActivate = False
             if self.countTourActivate == True:
                 self.countTour += 1
-        self.map.player_info(self.areaPlay, self)
+        self.player_info(self.areaPlay, self)
         #print(self.countTour)
             
         #print(self.countTour)
