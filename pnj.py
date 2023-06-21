@@ -120,7 +120,7 @@ class PNJ:
 
     def closeShop(self, event):
         key = event.keysym
-        self.collPNJ = False
+        self.selfP.collPNJ = False
         if key == "e":
             self.windowShop.destroy()
         

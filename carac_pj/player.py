@@ -486,7 +486,7 @@ class player:
         #print(self.map.CaseNoire.values())
         #print(self.pnjCooDico.values())
         key = event.keysym
-        if self.tourPlayer == True:
+        if self.collPNJ == False:
             if self.countTour%3 == 0:
                 if event.char == "a":
                     if self.attackDirection == "Right":
