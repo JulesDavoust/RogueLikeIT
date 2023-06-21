@@ -24,7 +24,7 @@ class PNJ:
         self.collPNJ = False
 
     def generatePNJ(self, areaPlay, x, y):
-        #print(f"In generatePNJ: \nX:{x} Y:{y}")
+        ##print(f"In generatePNJ: \nX:{x} Y:{y}")
         x = x * WindowParameter.tileSize
         y = y * WindowParameter.tileSize
         self.pnj = areaPlay.create_rectangle(x +1, y +1 , x + WindowParameter.tileSize-1, y + WindowParameter.tileSize-1, fill="blue", outline = "")
@@ -32,7 +32,7 @@ class PNJ:
     def openShop(self, window, selfPlayer, collPNJ):
         self.collPNJ = collPNJ
         self.selfP = selfPlayer
-        print(self.collPNJ)
+        #print(self.collPNJ)
         self.keysItem = list(self.shop.keys())
         """self.keySousItem0 = list()
         self.keySousItem1 = list(self.shop[self.keysItem[1]])
@@ -49,8 +49,8 @@ class PNJ:
         """self.keySousDico0[0]," : ",
         ,self.keySousDico0[1]," : " """
 
-        print("gold : ", self.selfP.gold, "inventory : ", self.selfP.inventory)
-        print(self.buyIt1,"\n",self.buyIt2,"\n",self.buyIt3)
+        #print("gold : ", self.selfP.gold, "inventory : ", self.selfP.inventory)
+        #print(self.buyIt1,"\n",self.buyIt2,"\n",self.buyIt3)
         
         self.item0 = tk.Label(self.windowShop, text=self.string0)
         self.buyI0 = tk.Button(self.windowShop, text="Buy", command=self.buy1)
@@ -75,47 +75,39 @@ class PNJ:
         self.buyI1.place(anchor="center", x = 60, y=150)"""
 
     def buy1(self):
-        print("buy")
+        #print("buy")
         self.putInventoryItem1()
 
     def buy2(self):
-        print("buy")
+        #print("buy")
         self.putInventoryItem2()
 
     def buy3(self):
-        print("buy")
+        #print("buy")
         self.putInventoryItem3()
 
 
     def putInventoryItem1(self):
-        print(self.selfP.gold)
+        #print(self.selfP.gold)
         if self.selfP.gold >= self.shop[self.keysItem[0]][self.keySousDico0[1]]:
             self.selfP.inventory[self.keysItem[0]] = self.shop[self.keysItem[0]]
-            if self.selfP.gold >= self.shop[self.keysItem[0]][self.keySousDico0[1]]:
-                self.selfP.gold = self.selfP.gold - self.shop[self.keysItem[0]][self.keySousDico0[1]]
-            else:
-                self.selfP.gold = 0
-        print(self.selfP.inventory)
+            self.selfP.gold = self.selfP.gold - self.shop[self.keysItem[0]][self.keySousDico0[1]]
+        #print(self.selfP.inventory)
+        
 
     def putInventoryItem2(self):
-        print(self.selfP.gold)
+        #print(self.selfP.gold)
         if self.selfP.gold >= self.shop[self.keysItem[1]][self.keySousDico1[1]]:
             self.selfP.inventory[self.keysItem[1]] = self.shop[self.keysItem[1]]
-            if self.selfP.gold >= self.shop[self.keysItem[1]][self.keySousDico1[1]]:
-                self.selfP.gold = self.selfP.gold - self.shop[self.keysItem[1]][self.keySousDico1[1]]
-            else:
-                self.selfP.gold = 0
-        print(self.selfP.inventory)
+            self.selfP.gold = self.selfP.gold - self.shop[self.keysItem[1]][self.keySousDico1[1]]
+        #print(self.selfP.inventory)
 
     def putInventoryItem3(self):
-        print(self.selfP.gold)
+        #print(self.selfP.gold)
         if self.selfP.gold >= self.shop[self.keysItem[2]][self.keySousDico2[1]]:
             self.selfP.inventory[self.keysItem[2]] = self.shop[self.keysItem[2]]
-            if self.selfP.gold >= self.shop[self.keysItem[2]][self.keySousDico2[1]]:
-                self.selfP.gold = self.selfP.gold - self.shop[self.keysItem[1]][self.keySousDico1[1]]
-            else:
-                self.selfP.gold = 0
-        print(self.selfP.inventory)
+            self.selfP.gold = self.selfP.gold - self.shop[self.keysItem[1]][self.keySousDico1[1]]
+        #print(self.selfP.inventory)
 
 
     def closeShop(self, event):
@@ -131,7 +123,7 @@ class PNJ:
     #def closeShop(self, window)
 
     def generateShop(self,areaPlay, x1, y1):
-        # print(f"In generateShop: \nX:{x1} Y:{y1}")
+        # #print(f"In generateShop: \nX:{x1} Y:{y1}")
         self.generatePNJ(areaPlay, x1, y1)
         AllItems = {0 : "Sword", 1 : "Potion of heal", 2 : "Potion of mana", 3: "Armor", 4:"Bow", 5:"Wizard's staff"}
         ItemsShop = []
@@ -143,8 +135,8 @@ class PNJ:
                     indexRandom = random.randint(0, len(AllItems)-1)
             index.append(indexRandom)
             ItemsShop.append(AllItems[indexRandom])
-        #print(index)
-        #print(ItemsShop)
+        ##print(index)
+        ##print(ItemsShop)
         for i in range(0, len(ItemsShop)):
             if ItemsShop[i] == "Sword":
                 damage = random.randint(5, 8)
@@ -170,7 +162,7 @@ class PNJ:
                 damage = random.randint(4,8)
                 if(damage <= 8):
                     self.shop["Wizard's staff"] = {"damage" : damage, "cost" : 4}
-        # print(self.shop)
+        # #print(self.shop)
 
 
 

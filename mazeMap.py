@@ -40,8 +40,8 @@ def generate_maze(width, height):
 
             wall_list.remove(random_wall)
         previous_wall = random_wall
-    for row in maze:
-        print(' '.join(row))
+    # for row in maze:
+        # print(' '.join(row))
     return maze
 
 
@@ -53,9 +53,9 @@ def detect_walls(maze):
     wall_list = []
     for y in range(0, len(maze)):
         for x in range(0, len(maze[y])):
-            #print(maze[y][x])
+            ##print(maze[y][x])
             if(maze[y][x] == 'W'):
-                #print(f"YES: Y:{y} X:{x}")
+                ##print(f"YES: Y:{y} X:{x}")
                 wall_list.append([y,x])
     return wall_list
 
@@ -98,4 +98,4 @@ def three_walls_cells(maze):
 # Display the maze
 # maze = generate_maze(WindowParameter.mapTileCol,WindowParameter.mapTileRow)
 # wall_list = detect_walls(maze)
-# print(three_walls_cells(maze))
+# #print(three_walls_cells(maze))

@@ -70,6 +70,7 @@ class player:
             self.range = 5
             self.damage = 20
 
+
     def generatePlayer(self, window):
         self.window = window
         self.areaPlay = tk.Canvas(window, width=WindowParameter.screenWidth, height=WindowParameter.screenWidth)
@@ -80,7 +81,7 @@ class player:
         window.bind("<KeyPress>", self.move_character)
         
         
-        #print("test")
+        ##print("test")
 
     def createAll(self):
         self.map = Map()
@@ -88,10 +89,10 @@ class player:
         self.map.level = self.map.level + 1
         self.levelMap = self.map.level
         self.map.generateKey(self.areaPlay)
-        self.map.player_info(self.areaPlay)
-        print("map level : ", self.levelMap)
-        # """print(self.map.CaseNoire)
-        # print(self.map.centreCaseNoire)"""
+        self.map.player_info(self.areaPlay, self)
+        #print("map level : ", self.levelMap)
+        # """#print(self.map.CaseNoire)
+        # #print(self.map.centreCaseNoire)"""
 
         self.character_x = self.map.spawnX
         self.character_y = self.map.spawnY
@@ -130,7 +131,7 @@ class player:
 
     def startFight(self):
         Fight = fight()
-        #print("Loading...")
+        ##print("Loading...")
         Fight.FightPage()
 
     def generatePNJs(self):
@@ -146,15 +147,14 @@ class player:
             number_pnj = len(placeable_cell_list)
 
         for _ in range(number_pnj):
-            #print(_)
+            ##print(_)
             pnj = PNJ()  # Crée une instance de pnj
 
             # PNJ generation V2.0
-
             randomPNJ = random.choice(placeable_cell_list)
             placeable_cell_list.remove(randomPNJ)
-            #print("Random PNJ:")
-            #print(randomPNJ)
+            ##print("Random PNJ:")
+            ##print(randomPNJ)
             x1 = randomPNJ[1]
             y1 = randomPNJ[0]
 
@@ -180,9 +180,9 @@ class player:
                 if emplacementOK:
                     emplacement = True
                 emplacementOK = True"""
-            """print(x1, y1, x1 + 30, y1 + 30)"""
+            """#print(x1, y1, x1 + 30, y1 + 30)"""
             
-            # print(f"In generatePNJs:\n X: {x1*WindowParameter.tileSize} Y: {y1*WindowParameter.tileSize}")
+            # #print(f"In generatePNJs:\n X: {x1*WindowParameter.tileSize} Y: {y1*WindowParameter.tileSize}")
             # self.areaPlay.create_image(x1*WindowParameter.tileSize, y1*WindowParameter.tileSize, anchor="nw", image=self.map.floor_photo)
             self.pnjCooDico[self.indexDico] = [x1+1, y1+1, x1 + WindowParameter.tileSize-1, y1 + WindowParameter.tileSize-1]
             self.indexDico += 1
@@ -191,9 +191,9 @@ class player:
             self.pnjs.append(pnj)
             
             #self.map.CaseNoire.pop(randomPNJ)
-        #print(self.shops)
+        ##print(self.shops)
         #for i in range(0, len(self.pnjs)):
-            #print(self.areaPlay.coords(self.pnjs[i].pnj))
+            ##print(self.areaPlay.coords(self.pnjs[i].pnj))
 
     def generateMonsters(self, num_monsters):
         self.monsters = []  # Liste pour stocker les monstres
@@ -204,14 +204,13 @@ class player:
 
         for _ in range(num_monsters):
             monster = Monster(self.levelMap)  # Crée une instance de monstre
-
-            
+ 
             emplacement = False
             emplacementOK = True
             while not emplacement:
                 cooM = random.randint(0, len(list(self.map.dicoC))-1)
-                #print(self.map.dicoC)
-                #print(cooM)
+                ##print(self.map.dicoC)
+                ##print(cooM)
                 x1 = self.map.dicoC[cooM][0]
                 y1 = self.map.dicoC[cooM][1]
                 while self.checkMonsterInView(x1, y1):
@@ -229,14 +228,14 @@ class player:
                 if emplacementOK:
                     emplacement = True
                 emplacementOK = True
-            """print(x1, y1, x1 + 30, y1 + 30)"""
+            """#print(x1, y1, x1 + 30, y1 + 30)"""
 
             # Génère le carré noir du monstre dans l'areaPlay à la position aléatoire
             monster.generateMonster(self.areaPlay, x1, y1)
             self.monsterDico[self.indexMonster] = [x1, y1, x1 + WindowParameter.tileSize-1, y1 + WindowParameter.tileSize-1]
             self.indexMonster += 1
             self.monsters.append(monster)  # Ajoute le monstre à la liste
-        #print("coo ===========",self.monsterDico)
+        ##print("coo ===========",self.monsterDico)
 
     
     def checkMonsterInView(self, monster_x, monster_y):
@@ -254,7 +253,7 @@ class player:
         self.moved_m_index = 0
         #self.monster.moveMonster(self.areaPlay, self.view_x1, self.view_y1, self.view_x2, self.view_y2, self.character_x, self.character_y, self.character_x2, self.character_x1, self.character_y2, self.character_y1)
         if self.player_collision == False:
-                #print("continue ?")
+                ##print("continue ?")
                 for monster in self.monsters:
                     monster.moveMonster(
                         self.areaPlay, self.view_x1, self.view_y1, self.view_x2, self.view_y2,
@@ -264,7 +263,7 @@ class player:
                     monster_coords = self.areaPlay.coords(monster.monster)
                     self.monsterDico[self.moved_m_index] = [monster_coords[0], monster_coords[1], monster_coords[2], monster_coords[3]]
                     self.moved_m_index += 1
-                    #print(self.monsterDico)
+                    ##print(self.monsterDico)
                 
             #self.areaPlay.after(800, self.move_monster_periodically)
 
@@ -278,10 +277,10 @@ class player:
         self.pnj_x2 = self.cooPNJ[2]
         self.pnj_y2 = self.cooPNJ[3]
         if (self.character_x1+dx < self.pnj_x2 and self.character_x2+dx > self.pnj_x1) and (self.character_y1+dy < self.pnj_y2 and self.character_y2+dy > self.pnj_y1):
-            #print("open shop")
+            ##print("open shop")
             self.numPNJ = i
             self.collPNJ = True
-            #print("pnj num : ", self.numPNJ)
+            ##print("pnj num : ", self.numPNJ)
             self.pnjs[i].openShop(self.window, self, self.collPNJ)
             return True
         else:
@@ -305,7 +304,7 @@ class player:
         self.cooldown_active = False
 
     def Fight(self, attackRect):
-        #print("fonction fight :", self.monsterDico)
+        ##print("fonction fight :", self.monsterDico)
         attack = self.areaPlay.coords(attackRect)
         attack_x1 = attack[0]
         attack_y1 = attack[1]
@@ -314,9 +313,9 @@ class player:
         i = 0
         pop = False
         while i < len(self.monsters) and pop == False:
-            #print("for loop")
+            ##print("for loop")
             monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
-            #print(monsterCOO)
+            ##print(monsterCOO)
             monster_x1 = monsterCOO[0]
             monster_y1 = monsterCOO[1]
             monster_x2 = monsterCOO[2]
@@ -326,10 +325,10 @@ class player:
                 and attack_y2 >= monster_y1 
                 and attack_y1 <= monster_y2):
                 
-                #print(self.monsters[i].life_points_monster)
+                ##print(self.monsters[i].life_points_monster)
                 self.monsters[i].life_points_monster = self.monsters[i].life_points_monster - self.damage
                 
-                #print(self.monsters[i].life_points_monster)
+                ##print(self.monsters[i].life_points_monster)
 
                 if(self.monsters[i].life_points_monster <= 0):
                     self.areaPlay.delete(self.monsters[i].health_bar)
@@ -342,9 +341,9 @@ class player:
                         self.xp = self.xp + 1
                     self.gold = self.monsters[i].xp + self.gold
                     pop = True
-                    print("Level : ", self.PlayerLevel)
-                    print("Xp : ", self.xp)
-                    print("Gold : ", self.gold)
+                    #print("Level : ", self.PlayerLevel)
+                    #print("Xp : ", self.xp)
+                    #print("Gold : ", self.gold)
                     self.monsters.pop(i)
                 else:
                     self.monsters[i].update_healthBar(self.areaPlay, monster_x1, monster_y1)
@@ -410,7 +409,7 @@ class player:
                                         and new_x1 < monster[2]
                                         and new_y1 < monster[3]):
                                             return
-                        #print("isit continue")
+                        ##print("isit continue")
                         self.areaPlay.move(self.monsters[i].monster, -WindowParameter.tileSize, 0)
                         self.areaPlay.move(self.monsters[i].health_bar, -WindowParameter.tileSize, 0)
                     elif self.attackDirection == "Up":
@@ -483,14 +482,14 @@ class player:
 
 
     def move_character(self, event):
-        #print(self.map.CaseNoire.values())
-        #print(self.pnjCooDico.values())
+        ##print(self.map.CaseNoire.values())
+        ##print(self.pnjCooDico.values())
         key = event.keysym
         if self.collPNJ == False:
             if self.countTour%3 == 0:
                 if event.char == "a":
                     if self.attackDirection == "Right":
-                        #print("direction attack right")
+                        ##print("direction attack right")
                         taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
                         taille_secondaire = 8  # Taille du côté du carré secondaire
 
@@ -510,7 +509,7 @@ class player:
                         self.window.after(500, self.start_moving_monsters)
                 if event.char == "a" and self.countTour%3 == 0:
                     if self.attackDirection == "Left":
-                        #print("direction attack Left")
+                        ##print("direction attack Left")
                         taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
                         taille_secondaire = 8  # Taille du côté du carré secondaire
 
@@ -528,7 +527,7 @@ class player:
                         self.window.after(500, self.start_moving_monsters)
                 if event.char == "a" and self.countTour%3 == 0:
                     if self.attackDirection == "Up":
-                        #print("direction attack Up")
+                        ##print("direction attack Up")
                         taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
                         taille_secondaire = 8  # Taille du côté du carré secondaire
 
@@ -547,7 +546,7 @@ class player:
                         self.window.after(500, self.start_moving_monsters)
                 if event.char == "a" and self.countTour%3 == 0:
                     if self.attackDirection == "Down":
-                        #print("direction attack Down")
+                        ##print("direction attack Down")
                         taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
                         taille_secondaire = 8  # Taille du côté du carré secondaire
 
@@ -635,14 +634,11 @@ class player:
             self.countTourActivate = False
         if self.countTourActivate == True:
             self.countTour += 1
-        #print(self.countTour)
-            
-        #print(self.countTour)
+        # print(self.countTour)
+        
+        self.map.player_info(self.areaPlay, self)
             
         
-
-    #def attackPlayer(self):
-        #print("attack")
 
     def update_view(self):
         character_coords = self.areaPlay.coords(self.character_id)
@@ -662,17 +658,17 @@ class player:
         self.view_x2 = self.character_x + self.view_distance
         self.view_y2 = self.character_y + self.view_distance
 
-        #print("Player : x1 : ",self.view_x1," y1 : ",self.view_x2," x2 : ",self.view_x2," y2 : ",self.view_y2)
+        ##print("Player : x1 : ",self.view_x1," y1 : ",self.view_x2," x2 : ",self.view_x2," y2 : ",self.view_y2)
 
         self.areaPlay.create_rectangle(self.view_x1, self.view_y1, self.view_x2, self.view_y2, fill="", outline="white", tag="view")
 
     def goNextRoom(self):
-        #print("nextRoom ?")
+        ##print("nextRoom ?")
         if self.gonext == True:
             self.gonext = False
         elif(self.inventory["key"] >= 1 and self.character_x1 >= self.map.x1R and self.character_x2 <= self.map.x2R and self.character_y2 <= self.map.y2R and self.character_y1 >= self.map.y1R):
             self.gonext = True
-            #print("Yes !")
+            ##print("Yes !")
             self.generateNewMap()
         
 
@@ -680,7 +676,7 @@ class player:
         if (self.character_x1 < self.map.keyX2 and self.character_x2 > self.map.keyX1) and (self.character_y1 < self.map.keyY2 and self.character_y2 > self.map.keyY1):
             self.inventory["key"] = +1
             self.areaPlay.delete(self.map.key)
-            #print(self.inventory)
+            ##print(self.inventory)
 
     def generateNewMap(self):
         # Supprime les éléments de la carte actuelle
