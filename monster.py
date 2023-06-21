@@ -537,9 +537,7 @@ class Monster:
                                 stop = True        
                     ##print(new_x1, new_y1, new_x2, new_y2)
                     while (new_x2 > WindowParameter.mapWidth or
-                    any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                    any(new_x2 > square[0] and new_y2 > square[1] and new_x1 < square[2] and new_y1 < square[3] for square in playerSelf.pnjCooDico.values())or
-                    any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
+                    any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or stop == True):
                         ##print("Whiletest1")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
@@ -582,9 +580,7 @@ class Monster:
                                         stop = True
                             ##print(new_x1, new_y1, new_x2, new_y2)
                             while (new_x1 < 0 or
-                            any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                            any(new_x2 > square[0] and new_y2 > square[1] and new_x1 < square[2] and new_y1 < square[3] for square in playerSelf.pnjCooDico.values())or
-                            any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
+                            any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or stop == True):
                                 ##print("Whiletest2")
                                 stop = False
                                 for monster in playerSelf.monsterDico.values():
@@ -626,9 +622,7 @@ class Monster:
                                         stop = True
                             ##print(new_x1, new_y1, new_x2, new_y2)
                             while (new_y2 > WindowParameter.mapHeight or
-                            any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                            any(new_x2 > square[0] and new_y2 > square[1] and new_x1 < square[2] and new_y1 < square[3] for square in playerSelf.pnjCooDico.values())or
-                            any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
+                            any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or stop == True):
                                 ##print("Whiletest3")
                                 stop = False
                                 for monster in playerSelf.monsterDico.values():
@@ -671,9 +665,7 @@ class Monster:
                                         stop = True
                             ##print(new_x1, new_y1, new_x2, new_y2)
                             while (new_y1 < 0 or
-                            any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                            any(new_x2 > square[0] and new_y2 > square[1] and new_x1 < square[2] and new_y1 < square[3] for square in playerSelf.pnjCooDico.values())or
-                            any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
+                            any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or stop == True):
                                 ##print("Whiletest4")
                                 stop = False
                                 for monster in playerSelf.monsterDico.values():
@@ -715,9 +707,7 @@ class Monster:
                             and new_y1 < monster[3]):
                                 stop = True
                     # Vérification de collision avec les murs (cases noires) et les carrés bleus
-                    while (any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                        any(new_x2 > square[0] and new_y2 > square[1] and new_x1 < square[2] and new_y1 < square[3] for square in playerSelf.pnjCooDico.values())or
-                        any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
+                    while (any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or stop == True):
                         ##print("Whiletest5")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
@@ -781,9 +771,7 @@ class Monster:
                                     stop = True
                     ##print(new_x1, new_y1, new_x2, new_y2)
                     while (new_x2 > WindowParameter.mapWidth or
-                    any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                    any(new_x2 > square[0] and new_y2 > square[1] and new_x1 < square[2] and new_y1 < square[3] for square in playerSelf.pnjCooDico.values())or
-                    any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
+                    any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or stop == True):
                         ##print("Whiletest6")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
@@ -827,9 +815,7 @@ class Monster:
                                     stop = True
                     ##print(new_x1, new_y1, new_x2, new_y2)
                     while (new_x1 < 0 or
-                    any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                    any(new_x2 > square[0] and new_y2 > square[1] and new_x1 < square[2] and new_y1 < square[3] for square in playerSelf.pnjCooDico.values())or
-                    any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
+                    any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or stop == True):
                         ##print("Whiletest7")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
@@ -873,9 +859,7 @@ class Monster:
                                     stop = True
                     ##print(new_x1, new_y1, new_x2, new_y2)
                     while (new_y2 > WindowParameter.mapHeight or
-                    any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                    any(new_x2 > square[0] and new_y2 > square[1] and new_x1 < square[2] and new_y1 < square[3] for square in playerSelf.pnjCooDico.values())or
-                    any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
+                    any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or stop == True):
                         ##print("Whiletest8")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
@@ -919,9 +903,7 @@ class Monster:
                                     stop = True
                     ##print(new_x1, new_y1, new_x2, new_y2)
                     while (new_y1 < 0 or
-                    any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                    any(new_x2 > square[0] and new_y2 > square[1] and new_x1 < square[2] and new_y1 < square[3] for square in playerSelf.pnjCooDico.values())or
-                    any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
+                    any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or stop == True):
                         ##print("Whiletest10")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
@@ -965,9 +947,7 @@ class Monster:
                                 and new_y1 < monster[3]):
                                     stop = True
             # Vérification de collision avec les murs (cases noires) et les carrés bleus
-            while (any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                any(new_x2 > square[0] and new_y2 > square[1] and new_x1 < square[2] and new_y1 < square[3] for square in playerSelf.pnjCooDico.values())or
-                any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
+            while (any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or stop == True):
                 ##print("Whiletest11")
                 stop = False
                 for monster in playerSelf.monsterDico.values():

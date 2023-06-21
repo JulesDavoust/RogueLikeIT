@@ -180,11 +180,16 @@ class player:
             
             # #print(f"In generatePNJs:\n X: {x1*WindowParameter.tileSize} Y: {y1*WindowParameter.tileSize}")
             # self.areaPlay.create_image(x1*WindowParameter.tileSize, y1*WindowParameter.tileSize, anchor="nw", image=self.map.floor_photo)
+            self.map.indexDico += 1
+            self.map.CaseNoire[self.map.indexDico] = [x1+1, y1+1, x1 + WindowParameter.tileSize-1, y1 + WindowParameter.tileSize-1]
             self.pnjCooDico[self.indexDico] = [x1+1, y1+1, x1 + WindowParameter.tileSize-1, y1 + WindowParameter.tileSize-1]
             self.indexDico += 1
             pnj.generateShop(self.areaPlay, x1, y1)
             self.shops.append(pnj.shop)
             self.pnjs.append(pnj)
+
+            print("pnj : ", self.pnjCooDico)
+            print("CN : ", self.map.CaseNoire)
             
             #self.map.CaseNoire.pop(randomPNJ)
         ##print(self.shops)
