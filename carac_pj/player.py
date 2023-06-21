@@ -1,6 +1,5 @@
 import random
 from map import Map
-from Fight import fight
 from monster import Monster
 from pnj import PNJ
 from windowParameters import WindowParameter
@@ -127,11 +126,6 @@ class player:
             return random.randint(12,18)
         elif(self.levelMap >= 5):
             return random.randint(19,25)
-
-    def startFight(self):
-        Fight = fight()
-        #print("Loading...")
-        Fight.FightPage()
 
     def generatePNJs(self):
         self.pnjs = []
@@ -336,6 +330,8 @@ class player:
                     self.areaPlay.delete(self.monsters[i].monster)
                     if self.xp >= 50:
                         self.PlayerLevel = self.PlayerLevel + 1
+                        self.life_point = self.life_point + 3
+                        self.damage = self.damage + 3
                         self.xp = 0
                     self.xp = self.xp + (self.monsters[i].xp - self.PlayerLevel * 2)
                     if self.xp <= 0:
