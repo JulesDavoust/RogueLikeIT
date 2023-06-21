@@ -326,13 +326,16 @@ class player:
                 
                 print(self.monsters[i].life_points_monster)
                 self.monsters[i].life_points_monster = self.monsters[i].life_points_monster - self.damage
+                
                 print(self.monsters[i].life_points_monster)
 
                 if(self.monsters[i].life_points_monster <= 0):
+                    self.areaPlay.delete(self.monsters[i].health_bar)
                     self.areaPlay.delete(self.monsters[i].monster)
                     self.monsters.pop(i)
                     pop = True
                 else:
+                    self.monsters[i].update_healthBar(self.areaPlay, monster_x1, monster_y1)
                     if self.attackDirection == "Right":
                         new_x2 = self.monsters[i].monster_x2 + self.moveDistance
                         new_x1 = self.monsters[i].monster_x1 + self.moveDistance
@@ -364,6 +367,7 @@ class player:
                                         and new_y1 < monster[3]):
                                             return
                         self.areaPlay.move(self.monsters[i].monster, +WindowParameter.tileSize, 0)
+                        self.areaPlay.move(self.monsters[i].health_bar, +WindowParameter.tileSize, 0)
                     elif self.attackDirection == "Left":
                         new_x2 = self.monsters[i].monster_x2 - self.moveDistance
                         new_x1 = self.monsters[i].monster_x1 - self.moveDistance
@@ -396,6 +400,7 @@ class player:
                                             return
                         print("isit continue")
                         self.areaPlay.move(self.monsters[i].monster, -WindowParameter.tileSize, 0)
+                        self.areaPlay.move(self.monsters[i].health_bar, -WindowParameter.tileSize, 0)
                     elif self.attackDirection == "Up":
                         new_x2 = self.monsters[i].monster_x2
                         new_x1 = self.monsters[i].monster_x1
@@ -427,6 +432,7 @@ class player:
                                         and new_y1 < monster[3]):
                                             return
                         self.areaPlay.move(self.monsters[i].monster, 0, -WindowParameter.tileSize)
+                        self.areaPlay.move(self.monsters[i].health_bar, 0, -WindowParameter.tileSize)
                     elif self.attackDirection == "Down":
                         new_x2 = self.monsters[i].monster_x2
                         new_x1 = self.monsters[i].monster_x1
@@ -458,6 +464,7 @@ class player:
                                         and new_y1 < monster[3]):
                                             return
                         self.areaPlay.move(self.monsters[i].monster, 0, +WindowParameter.tileSize)
+                        self.areaPlay.move(self.monsters[i].health_bar, 0, +WindowParameter.tileSize)
 
             i += 1
 

@@ -11,7 +11,6 @@ class Monster:
         self.diag = False
         self.monster_positions = []  # Liste pour stocker les positions des monstres
         
-        self.life_points_monster = 50
         self.moveDistance = WindowParameter.tileSize
         #self.zombie = tk.PhotoImage(file="C:/Users/jules/Desktop/big_zombie_idle_anim_f0.png")
 
@@ -28,23 +27,47 @@ class Monster:
         
         if(self.level <= 2):
             self.damage = 5
+            self.life_points_monster_max = 50
+            self.life_points_monster = 50
+            self.xp = 10
         elif(self.level <= 4 and self.level > 2):
             self.damage = 10
+            self.life_points_monster_max = 70
+            self.life_points_monster = 70
+            self.xp = 10
         elif(self.level <= 7 and self.level > 4):
             self.damage = 15
+            self.life_points_monster_max = 90
+            self.life_points_monster = 90
+            self.xp = 10
         elif(self.level <= 10 and self.level > 7):
             self.damage = 25
+            self.life_points_monster_max = 100
+            self.life_points_monster = 100
+            self.xp = 10
         elif(self.level > 10):
             self.damage = 30
+            self.life_points_monster_max = 120
+            self.life_points_monster = 120
+            self.xp = 10
 
     
 
     def generateMonster(self, areaPlay, x, y):
         self.monster = areaPlay.create_rectangle(x, y, x + WindowParameter.tileSize-1, y + WindowParameter.tileSize-1, fill="black", outline = "")
         #self.monster_pic = areaPlay.create_image((x+x+30)/2, (y+y+30)/2, image=self.zombie)
+        self.create_healthBar(areaPlay, x, y)
         self.monster_positions.append((x, y))  # Ajouter la position du monstre à la liste
 
+    def create_healthBar(self, areaPlay, x, y):
+        self.health_percent = self.life_points_monster/self.life_points_monster_max
+        self.bar_width = self.health_percent * 31
+        self.health_bar = areaPlay.create_rectangle(x, y+1, x + self.bar_width-1, y+4, fill="red")
 
+    def update_healthBar(self, areaPlay, x, y):
+        self.health_percent = self.life_points_monster/self.life_points_monster_max
+        self.bar_width = self.health_percent * 31
+        areaPlay.coords(self.health_bar, x, y+1, x + self.bar_width-1, y+4)
 
     def moveMonster(self, areaPlay, x1P, y1P, x2P, y2P, target_x, target_y, x2, x1, y2, y1, playerSelf, map):
 
@@ -105,6 +128,7 @@ class Monster:
                                         and new_y1 < monster[3]):
                                             return
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                                areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                         elif slope > 0:
                             if self.diag == False:
                                 self.diag = True
@@ -132,6 +156,7 @@ class Monster:
                                         and new_y1 < monster[3]):
                                             return
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                                areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
             elif self.current_x < target_x:
                         if slope < 0:
                             
@@ -160,6 +185,7 @@ class Monster:
                                         and new_y1 < monster[3]):
                                             return
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                                areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                             
                         elif slope > 0:
                             
@@ -188,6 +214,7 @@ class Monster:
                                         and new_y1 < monster[3]):
                                             return
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                                areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                             
                                
             #playerSelf.startFight()
@@ -222,6 +249,7 @@ class Monster:
                             and new_y1 < monster[3]):
                                 return
                     areaPlay.move(self.monster, 0, 1 * self.moveDistance)
+                    areaPlay.move(self.health_bar, 0, 1 * self.moveDistance)
                 elif slope == 0 and target_x == self.current_x and self.current_y > target_y:
                     new_x2 = self.monster_x2 
                     new_x1 = self.monster_x1 
@@ -235,6 +263,7 @@ class Monster:
                             and new_y1 < monster[3]):
                                 return
                     areaPlay.move(self.monster, 0, -1 * self.moveDistance)
+                    areaPlay.move(self.health_bar, 0, -1 * self.moveDistance)
                 elif slope == -0.0 and target_y == self.current_y and self.current_x > target_x:
                     new_x2 = self.monster_x2 - self.moveDistance
                     new_x1 = self.monster_x1 - self.moveDistance
@@ -248,6 +277,7 @@ class Monster:
                             and new_y1 < monster[3]):
                                 return
                     areaPlay.move(self.monster, -1 * self.moveDistance, 0)
+                    areaPlay.move(self.health_bar, -1 * self.moveDistance, 0)
                 elif slope == 0.0 and target_y == self.current_y and self.current_x < target_x:
                     new_x2 = self.monster_x2 + self.moveDistance
                     new_x1 = self.monster_x1 + self.moveDistance
@@ -261,6 +291,7 @@ class Monster:
                             and new_y1 < monster[3]):
                                 return
                     areaPlay.move(self.monster, 1 * self.moveDistance, 0)
+                    areaPlay.move(self.health_bar, 1 * self.moveDistance, 0)
                 else:
                     if self.current_x > target_x:
                         if slope < 0:
@@ -288,6 +319,7 @@ class Monster:
                                         and new_y1 < monster[3]):
                                             return
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                                areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                             else:
                                 self.diag = False
                                 dx = -1
@@ -312,6 +344,7 @@ class Monster:
                                         and new_y1 < monster[3]):
                                             return
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                                areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                         elif slope > 0:
                             if self.diag == False:
                                 self.diag = True
@@ -337,6 +370,7 @@ class Monster:
                                         and new_y1 < monster[3]):
                                             return
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                                areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                             else:
                                 self.diag = False
                                 dx = -1
@@ -361,6 +395,7 @@ class Monster:
                                         and new_y1 < monster[3]):
                                             return
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                                areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                     elif self.current_x < target_x:
                         if slope < 0:
                             if self.diag == False:
@@ -387,6 +422,7 @@ class Monster:
                                         and new_y1 < monster[3]):
                                             return
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                                areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                             else:
                                 self.diag = False
                                 dx = 1
@@ -411,6 +447,7 @@ class Monster:
                                         and new_y1 < monster[3]):
                                             return
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                                areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                         elif slope > 0:
                             if self.diag == False:
                                 self.diag = True
@@ -436,6 +473,7 @@ class Monster:
                                         and new_y1 < monster[3]):
                                             return
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                                areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                             else:
                                 self.diag = False
                                 dx = 1
@@ -460,6 +498,7 @@ class Monster:
                                         and new_y1 < monster[3]):
                                             return
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                                areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
 
                     print("diag")
                 
@@ -513,6 +552,7 @@ class Monster:
                         new_y2 = self.monster_y2 + dy * self.moveDistance
                         
                     areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                    areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                     #areaPlay.move(self.monster_pic, -20, 0)
                 elif self.monster_x1 - self.moveDistance < 0+WindowParameter.tileSize:
                             print("test2")
@@ -556,6 +596,7 @@ class Monster:
                                 new_x2 = self.monster_x2 + dx * self.moveDistance
                                 new_y2 = self.monster_y2 + dy * self.moveDistance
                             areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                            areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                             #areaPlay.move(self.monster_pic, -20, 0)
                 elif self.monster_y2 + self.moveDistance > WindowParameter.mapHeight-WindowParameter.tileSize:
                             self.diag = False
@@ -600,6 +641,7 @@ class Monster:
                                 new_y2 = self.monster_y2 + dy * self.moveDistance
                             
                             areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                            areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                             #areaPlay.move(self.monster_pic, -20, 0)
                 elif self.monster_y1 - self.moveDistance < 0+WindowParameter.tileSize:
                             self.diag = False
@@ -643,6 +685,7 @@ class Monster:
                                 new_x2 = self.monster_x2 + dx * self.moveDistance
                                 new_y2 = self.monster_y2 + dy * self.moveDistance
                             areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                            areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                             #areaPlay.move(self.monster_pic, -20, 0)
                 else:
                     self.diag = False
@@ -686,6 +729,7 @@ class Monster:
                         new_x2 = self.monster_x2 + dx * self.moveDistance
                         new_y2 = self.monster_y2 + dy * self.moveDistance
                     areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                    areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                 #areaPlay.move(self.monster_pic, dx, dy)
             """else:
                 print("intersect")
@@ -750,6 +794,7 @@ class Monster:
                         new_x2 = self.monster_x2 + dx * self.moveDistance
                         new_y2 = self.monster_y2 + dy * self.moveDistance
                     areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                    areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                     #areaPlay.move(self.monster_pic, -20, 0)
         elif self.monster_x1 - self.moveDistance < 0+WindowParameter.tileSize:
                     self.diag = False
@@ -794,6 +839,7 @@ class Monster:
                         new_x2 = self.monster_x2 + dx * self.moveDistance
                         new_y2 = self.monster_y2 + dy * self.moveDistance
                     areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                    areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                     #areaPlay.move(self.monster_pic, -20, 0)
         elif self.monster_y2 + self.moveDistance > WindowParameter.mapHeight-WindowParameter.tileSize:
                     self.diag = False
@@ -838,6 +884,7 @@ class Monster:
                         new_x2 = self.monster_x2 + dx * self.moveDistance
                         new_y2 = self.monster_y2 + dy * self.moveDistance
                     areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                    areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                     #areaPlay.move(self.monster_pic, -20, 0)
         elif self.monster_y1 - self.moveDistance < 0+WindowParameter.tileSize:
                     self.diag = False
@@ -882,6 +929,7 @@ class Monster:
                         new_x2 = self.monster_x2 + dx * self.moveDistance
                         new_y2 = self.monster_y2 + dy * self.moveDistance
                     areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+                    areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                     #areaPlay.move(self.monster_pic, -20, 0)
         elif(playerSelf.player_collision == False):
             self.diag = False
@@ -927,6 +975,7 @@ class Monster:
                 new_x2 = self.monster_x2 + dx * self.moveDistance
                 new_y2 = self.monster_y2 + dy * self.moveDistance
             areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
+            areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
     
     # Vérifier si deux segments de ligne s'intersectent
     def intersect(self, x1, y1, x2, y2, x3, y3, x4, y4):
