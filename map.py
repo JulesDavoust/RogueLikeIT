@@ -199,9 +199,29 @@ class Map:
         # print(invento_string)
         # invento_info = tk.Label(areaPlay, text= invento_string, fg = "White", bg= "Black")
         # invento_info.place(x= WindowParameter.mapWidth + 30, y=100)
-        areaPlay.create_text(WindowParameter.mapWidth + 50, WindowParameter.tileSize * 3, text= invento_string, fill="white", anchor = "w")
+        #areaPlay.create_text(WindowParameter.mapWidth + 50, WindowParameter.tileSize * 3, text= invento_string, fill="white", anchor = "w")
 
 
+        areaPlay.create_rectangle(x1 + 20, 100, x1+310, 140, fill="white")
+        areaPlay.create_rectangle(x1 + 20, 100, x1+123, 140, fill="black", outline="white")
+
+        gold_image = Image.open("./sprites/roguelikeitems.png").convert("P")
+        gImage_width,gImage_height = gold_image.size
+        gold_image = gold_image.resize((gImage_width * WindowParameter.SCALE,gImage_height* WindowParameter.SCALE))
+        self.gold_photo = ImageTk.PhotoImage(gold_image)
+
+        areaPlay.create_image(x1 + 48, 120, image=self.gold_photo)
+        areaPlay.create_text(x1 + 70, 120, text=player.gold, fill="white",font=("Arial", 14), anchor="w")
+
+        areaPlay.create_rectangle(x1 + 127, 100, x1+230, 140, fill="black", outline="white")
+        areaPlay.create_rectangle(x1 + 234, 100, x1+337, 140, fill="black", outline="white")
+
+        areaPlay.create_rectangle(x1 + 20, 250, x1+310, 290, fill="white")
+        
+
+        areaPlay.create_rectangle(x1 + 20, 300, x1+310, 340, fill="white")
+
+        areaPlay.create_rectangle(x1 + 20, 350, x1+310, 390, fill="white")
 
     def hp_update(self,player,areaPlay,monster):
         hp_max = player.max_life_point

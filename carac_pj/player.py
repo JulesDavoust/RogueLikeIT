@@ -619,12 +619,14 @@ class player:
                                 self.update_view()
                             self.goNextRoom()
                         self.window.after(500, self.start_moving_monsters)
+            
             self.tourPlayer = False
             if self.countTour == 3:
                 self.countTour = 0
                 self.countTourActivate = False
             if self.countTourActivate == True:
                 self.countTour += 1
+        self.map.player_info(self.areaPlay, self)
         #print(self.countTour)
             
         #print(self.countTour)
