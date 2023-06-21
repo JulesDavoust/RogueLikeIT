@@ -211,13 +211,19 @@ class Map:
         self.gold_photo = ImageTk.PhotoImage(gold_image)
 
         areaPlay.create_image(x1 + 48, 120, image=self.gold_photo)
-        areaPlay.create_text(x1 + 70, 120, text=player.gold, fill="white",font=("Arial", 14), anchor="w")
+        areaPlay.create_text(x1 + 70, 125, text=player.gold, fill="white",font=("Press Start 2P", 12), anchor="w")
 
         areaPlay.create_rectangle(x1 + 127, 100, x1+230, 140, fill="black", outline="white")
+        areaPlay.create_text(x1 + 140, 125, text="XP:", fill="white",font=("Press Start 2P", 12), anchor="w")
+        areaPlay.create_text(x1 + 190, 125, text=player.xp, fill="white",font=("Press Start 2P", 12), anchor="w")
+
         areaPlay.create_rectangle(x1 + 234, 100, x1+337, 140, fill="black", outline="white")
+        areaPlay.create_text(x1 + 240, 125, text="LVL:", fill="white",font=("Press Start 2P", 12), anchor="w")
+        areaPlay.create_text(x1 + 305, 125, text=player.PlayerLevel, fill="white",font=("Press Start 2P", 12), anchor="w")
+        
+
 
         areaPlay.create_rectangle(x1 + 20, 250, x1+310, 290, fill="white")
-        
 
         areaPlay.create_rectangle(x1 + 20, 300, x1+310, 340, fill="white")
 

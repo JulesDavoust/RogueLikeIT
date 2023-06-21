@@ -129,10 +129,6 @@ class player:
         elif(self.levelMap >= 5):
             return random.randint(19,25)
 
-    def startFight(self):
-        Fight = fight()
-        ##print("Loading...")
-        Fight.FightPage()
 
     def generatePNJs(self):
         self.pnjs = []
@@ -331,14 +327,15 @@ class player:
                 if(self.monsters[i].life_points_monster <= 0):
                     self.areaPlay.delete(self.monsters[i].health_bar)
                     self.areaPlay.delete(self.monsters[i].monster)
+                    
+                    self.xp = self.xp + (self.monsters[i].xp - self.PlayerLevel * 2)
+                    if self.xp <= 0:
+                        self.xp = self.xp + 1
                     if self.xp >= 50:
                         self.PlayerLevel = self.PlayerLevel + 1
                         self.life_point = self.life_point + 3
                         self.damage = self.damage + 3
                         self.xp = 0
-                    self.xp = self.xp + (self.monsters[i].xp - self.PlayerLevel * 2)
-                    if self.xp <= 0:
-                        self.xp = self.xp + 1
                     self.gold = self.monsters[i].xp + self.gold
                     pop = True
                     #print("Level : ", self.PlayerLevel)
@@ -630,7 +627,7 @@ class player:
         #print(self.countTour)
             
         #print(self.countTour)
-            
+        
         
 
     def update_view(self):
