@@ -11,15 +11,18 @@ import mazeMap
 class player:
     def __init__(self, classe):
         
-        
         self.allClasse = {0: "guerrier", 1: "archer", 2: "sorcier"}
         self.classe = classe
 
         self.PlayerLevel = 0
         self.xp = 0
-        
-        self.inventory = {"key":0}
+
+        # add the other items in case we have time, like bomb
+        # Each item is saved as dict in the list of inventory, in this way we can know the storage directly
+        self.inventory = [{"potion_PV":1},{"bomb":0}] 
         self.gold = 30
+
+        self.hasExitKey = False
 
         self.pnjCooDico = {}
         self.monsterDico = {}
@@ -42,6 +45,7 @@ class player:
 
         self.countTourActivate = False
         self.countTour = 0
+        self.weaponTour = 3
 
         self.attackDirection = "Right"
 
@@ -77,13 +81,14 @@ class player:
         self.createAll()
         self.areaPlay.pack()
         if self.tourPlayer == False:
-            window.after(100, self.start_moving_monsters)
+            window.after(10, self.start_moving_monsters)
         window.bind("<KeyPress>", self.move_character)
         
         
         ##print("test")
 
     def createAll(self):
+        self.hasExitKey = False
         self.map = Map()
         self.map.generateMap(self.areaPlay)
         self.map.level = self.map.level + 1
@@ -115,6 +120,7 @@ class player:
     def start_moving_monsters(self):
         self.move_monster_periodically()
         self.tourPlayer = True
+        
         
 
     def numberMonsters(self):
@@ -581,9 +587,9 @@ class player:
         ##print(self.map.CaseNoire.values())
         ##print(self.pnjCooDico.values())
         key = event.keysym
-        if self.collPNJ == False:
-            if self.tourPlayer == True:
-                if event.char == "a" and self.countTour%3 == 0:
+        if not self.collPNJ :
+            if self.tourPlayer :
+                if event.char == "a" and self.countTour% self.weaponTour == 0:
                         if self.attackDirection == "Right":
                             #print("direction attack right")
                             taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
@@ -717,10 +723,10 @@ class player:
                         self.window.after(500, self.start_moving_monsters)
             
             self.tourPlayer = False
-            if self.countTour == 3:
+            if self.countTour == self.weaponTour:
                 self.countTour = 0
                 self.countTourActivate = False
-            if self.countTourActivate == True:
+            if self.countTourActivate :
                 self.countTour += 1
         self.player_info(self.areaPlay, self)
         #print(self.countTour)
@@ -753,9 +759,9 @@ class player:
 
     def goNextRoom(self):
         ##print("nextRoom ?")
-        if self.gonext == True:
+        if self.gonext :
             self.gonext = False
-        elif(self.inventory["key"] >= 1 and self.character_x1 >= self.map.x1R and self.character_x2 <= self.map.x2R and self.character_y2 <= self.map.y2R and self.character_y1 >= self.map.y1R):
+        elif(self.hasExitKey and self.character_x1 >= self.map.x1R and self.character_x2 <= self.map.x2R and self.character_y2 <= self.map.y2R and self.character_y1 >= self.map.y1R):
             self.gonext = True
             ##print("Yes !")
             self.generateNewMap()
@@ -763,7 +769,7 @@ class player:
 
     def getKey(self):
         if (self.character_x1 < self.map.keyX2 and self.character_x2 > self.map.keyX1) and (self.character_y1 < self.map.keyY2 and self.character_y2 > self.map.keyY1):
-            self.inventory["key"] = +1
+            self.hasExitKey = True
             self.areaPlay.delete(self.map.key)
             ##print(self.inventory)
 
