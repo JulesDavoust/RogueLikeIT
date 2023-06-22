@@ -16,8 +16,8 @@ class WindowParameter:
     mapTileRow = 21
     mapTileCol = 21
 
-    screenWidth = tileSize * screenTileCol #32 * 32
-    screenHeight = tileSize * screenTileRow #32 * 21
+    screenWidth = tileSize * screenTileCol #32 * 32 = 1024
+    screenHeight = tileSize * screenTileRow #32 * 21 = 672
     screenSize = f"{screenWidth}x{screenHeight}"
 
     mapWidth = tileSize * mapTileRow
