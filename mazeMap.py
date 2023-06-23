@@ -17,15 +17,15 @@ def generate_maze(width, height):
     #Check if deadlock happened
     previous_wall = None
     count = 0
-
     while wall_list:
         random_wall = random.choice(wall_list)
         if(previous_wall == random_wall):
             count += 1
         else:
             count = 0
-        if(count >= 3):
-            random_wall = random.choice(wall_list)
+        if(count >= 5):
+            wall_list.remove(random_wall)
+            count = 0
             continue
 
         wx, wy, direction = random_wall
