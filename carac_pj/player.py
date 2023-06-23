@@ -35,6 +35,11 @@ class player:
         self.lengthFullMonster = 0
         self.maxLengthFullMonster = 3
 
+        self.monsterAttack = []
+        
+        
+        self.text = "Monster :"
+
         self.map = Map()
         self.view_distance = 100
         self.character_x = 0
@@ -46,6 +51,17 @@ class player:
         self.cooldown_active = False
         self.gonext = False
         self.tourPlayer = True
+
+        self.EJ = False
+        self.E = False
+        self.EA = False
+
+        self.eventNrVar = False
+        self.eventKVar = False
+        self.eventMWVar = False
+        self.eventMWalked = False
+
+        self.eventMAVar = False
 
         self.countTourActivate = False
         self.countTour = 0
@@ -92,6 +108,7 @@ class player:
 
     def createAll(self):
         self.hasExitKey = False
+        self.tourPlayer = True
         self.map = Map()
         self.map.generateMap(self.areaPlay)
         self.map.level = self.map.level + 1
@@ -338,6 +355,7 @@ class player:
             self.numPNJ = i
             self.collPNJ = True
             ##print("pnj num : ", self.numPNJ)
+            self.eventJoueur("Shop open")
             self.pnjs[i].openShop(self.window, self, self.collPNJ)
             return True
         else:
@@ -466,58 +484,58 @@ class player:
         )
 
         # Monsters infos
-        self.areaPlay.create_rectangle(x1 + 3, 200, x1 + 88, 340, fill="white")
+        self.areaPlay.create_rectangle(x1 + 3, 200, x1 + 88, 340, fill="")
         self.areaPlay.create_rectangle(
-            x1 + 3, 200, x1 + 88, 250, fill="", outline="black"
+            x1 + 3, 200, x1 + 88, 250, fill="", outline="white"
         )
         self.areaPlay.create_rectangle(
-            x1 + 3, 250, x1 + 88, 295, fill="", outline="black"
+            x1 + 3, 250, x1 + 88, 295, fill="", outline="white"
         )
         self.areaPlay.create_rectangle(
-            x1 + 3, 295, x1 + 88, 340, fill="", outline="black"
+            x1 + 3, 295, x1 + 88, 340, fill="", outline="white"
         )
         
 
-        self.areaPlay.create_rectangle(x1 + 89, 200, x1 + 174, 340, fill="white")
+        self.areaPlay.create_rectangle(x1 + 89, 200, x1 + 174, 340, fill="")
         self.areaPlay.create_rectangle(
-            x1 + 89, 200, x1 + 174, 250, fill="", outline="black"
+            x1 + 89, 200, x1 + 174, 250, fill="", outline="white"
         )
         self.areaPlay.create_rectangle(
-            x1 + 89, 250, x1 + 174, 295, fill="", outline="black"
+            x1 + 89, 250, x1 + 174, 295, fill="", outline="white"
         )
         self.areaPlay.create_rectangle(
-            x1 + 89, 295, x1 + 174, 340, fill="", outline="black"
-        )
-
-        self.areaPlay.create_rectangle(x1 + 175, 200, x1 + 260, 340, fill="white")
-        self.areaPlay.create_rectangle(
-            x1 + 175, 200, x1 + 260, 250, fill="", outline="black"
-        )
-        self.areaPlay.create_rectangle(
-            x1 + 175, 250, x1 + 260, 295, fill="", outline="black"
-        )
-        self.areaPlay.create_rectangle(
-            x1 + 175, 295, x1 + 260, 340, fill="", outline="black"
+            x1 + 89, 295, x1 + 174, 340, fill="", outline="white"
         )
 
-        self.areaPlay.create_rectangle(x1 + 261, 200, x1 + 346, 340, fill="white")
+        self.areaPlay.create_rectangle(x1 + 175, 200, x1 + 260, 340, fill="")
         self.areaPlay.create_rectangle(
-            x1 + 261, 200, x1 + 346, 250, fill="", outline="black"
+            x1 + 175, 200, x1 + 260, 250, fill="", outline="white"
         )
         self.areaPlay.create_rectangle(
-            x1 + 261, 250, x1 + 346, 295, fill="", outline="black"
+            x1 + 175, 250, x1 + 260, 295, fill="", outline="white"
         )
         self.areaPlay.create_rectangle(
-            x1 + 261, 295, x1 + 346, 340, fill="", outline="black"
+            x1 + 175, 295, x1 + 260, 340, fill="", outline="white"
+        )
+
+        self.areaPlay.create_rectangle(x1 + 261, 200, x1 + 346, 340, fill="")
+        self.areaPlay.create_rectangle(
+            x1 + 261, 200, x1 + 346, 250, fill="", outline="white"
+        )
+        self.areaPlay.create_rectangle(
+            x1 + 261, 250, x1 + 346, 295, fill="", outline="white"
+        )
+        self.areaPlay.create_rectangle(
+            x1 + 261, 295, x1 + 346, 340, fill="", outline="white"
         )
         # the low border of the monster information: X: x1 + 3   Y: 340
         #                                            X: x1 + 346 Y:
 
-        self.areaPlay.create_rectangle(x1 + 27, 360, x1+320, 400, fill="white")
+        self.areaPlay.create_rectangle(x1 + 3, 380, x1+346, 495, fill="", outline="white")
 
-        self.areaPlay.create_rectangle(x1 + 27, 410, x1+320, 450, fill="white")
+        #self.areaPlay.create_rectangle(x1 + 27, 410, x1+320, 450, fill="white")
 
-        self.areaPlay.create_rectangle(x1 + 27, 460, x1+320, 500, fill="white")
+        #self.areaPlay.create_rectangle(x1 + 27, 460, x1+320, 500, fill="white")
 
     def hp_update(self,player,areaPlay,monster):
         # The battle information
@@ -600,6 +618,9 @@ class player:
 
 
     def eventJoueur(self, text):
+        if self.EJ == True:
+            self.areaPlay.delete(self.eventJoueurtxt)
+            self.EJ = False
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
         screen_width = WindowParameter.screenWidth
@@ -607,8 +628,53 @@ class player:
         x2 = screen_width
         y2 = screen_width
 
-        eventJoueur = self.areaPlay.create_text(x1 + 170, 385, text=text, fill="black",font=("Press Start 2P", 12))
-        self.window.after(500, lambda: self.areaPlay.delete(eventJoueur))
+        self.eventJoueurtxt = self.areaPlay.create_text(x1 + 9, 395, text=text, fill="white",font=("Press Start 2P", 9),  anchor="w")
+        self.EJ = True
+
+    def eventMonster(self, text):
+        if self.E == True:
+            self.areaPlay.delete(self.eventMonstertxt)
+            self.E = False
+        map_width = WindowParameter.mapWidth
+        map_height = WindowParameter.mapHeight
+        screen_width = WindowParameter.screenWidth
+        x1 = map_width
+        x2 = screen_width
+        y2 = screen_width
+
+        self.eventMonstertxt = self.areaPlay.create_text(x1 + 9, 410, text=text, fill="white",font=("Press Start 2P", 9),  anchor="nw")
+        self.E = True
+
+    def eventMonsterAttack(self, direction):
+        self.eventMAVar = True
+        if self.EA == True:
+            self.areaPlay.delete(self.eventMonsterAttacktxt)
+            self.EA = False
+        if self.E == True:
+            self.areaPlay.delete(self.eventMonstertxt)
+            self.E = False
+        map_width = WindowParameter.mapWidth
+        map_height = WindowParameter.mapHeight
+        screen_width = WindowParameter.screenWidth
+        x1 = map_width
+        x2 = screen_width
+        y2 = screen_width
+
+        if direction == "n":
+            self.text = self.text+"\n"+"\t-Attack from north"
+            print( self.text)
+        if direction == "e":
+            self.text = self.text+"\n"+"\t-Attack from east"
+            print( self.text)
+        if direction == "s":
+            self.text = self.text+"\n"+"\t-Attack from south"
+            print( self.text)
+        if direction == "w":
+            self.text = self.text+"\n"+"\t-Attack from west"
+            print( self.text)
+
+        self.eventMonsterAttacktxt = self.areaPlay.create_text(x1 + 9, 410, text= self.text, fill="white",font=("Press Start 2P", 9),  anchor="nw")
+        self.EA = True
 
     def update_infoPN(self):
         print(self.fullMonster)
@@ -624,8 +690,8 @@ class player:
         monsterN_image = monsterN_image.resize((mNImage_width,mNImage_height))
         self.monsterN_photo = ImageTk.PhotoImage(monsterN_image)
         self.areaPlay.create_image(x1 + 47, 220, image = self.monsterN_photo)
-        self.areaPlay.create_text(x1 + 47, 275, text=self.fullMonster["n"][1], fill="black",font=("Press Start 2P", 12), anchor="w")
-        self.areaPlay.create_text(x1 + 47, 320, text=self.fullMonster["n"][2], fill="black",font=("Press Start 2P", 12), anchor="w")
+        self.areaPlay.create_text(x1 + 47, 275, text=self.fullMonster["n"][1], fill="white",font=("Press Start 2P", 12), anchor="w")
+        self.areaPlay.create_text(x1 + 47, 320, text=self.fullMonster["n"][2], fill="white",font=("Press Start 2P", 12), anchor="w")
 
     def update_infoPE(self):
         print(self.fullMonster)
@@ -641,8 +707,8 @@ class player:
         monsterE_image = monsterE_image.resize((mEImage_width ,mEImage_height))
         self.monsterE_photo = ImageTk.PhotoImage(monsterE_image)
         self.areaPlay.create_image(x1 + 133, 220, image = self.monsterE_photo)
-        self.areaPlay.create_text(x1 + 133, 275, text=self.fullMonster["e"][1], fill="black",font=("Press Start 2P", 12), anchor="w")
-        self.areaPlay.create_text(x1 + 133, 320, text=self.fullMonster["e"][2], fill="black",font=("Press Start 2P", 12), anchor="w")
+        self.areaPlay.create_text(x1 + 133, 275, text=self.fullMonster["e"][1], fill="white",font=("Press Start 2P", 12), anchor="w")
+        self.areaPlay.create_text(x1 + 133, 320, text=self.fullMonster["e"][2], fill="white",font=("Press Start 2P", 12), anchor="w")
 
     def update_infoPS(self):
         print(self.fullMonster)
@@ -658,8 +724,8 @@ class player:
         monsterS_image = monsterS_image.resize((mSImage_width,mSImage_height))
         self.monsterS_photo = ImageTk.PhotoImage(monsterS_image)
         self.areaPlay.create_image(x1 + 219, 220, image = self.monsterS_photo)
-        self.areaPlay.create_text(x1 + 219, 275, text=self.fullMonster["s"][1], fill="black",font=("Press Start 2P", 12), anchor="w")
-        self.areaPlay.create_text(x1 + 219, 320, text=self.fullMonster["s"][2], fill="black",font=("Press Start 2P", 12), anchor="w")
+        self.areaPlay.create_text(x1 + 219, 275, text=self.fullMonster["s"][1], fill="white",font=("Press Start 2P", 12), anchor="w")
+        self.areaPlay.create_text(x1 + 219, 320, text=self.fullMonster["s"][2], fill="white",font=("Press Start 2P", 12), anchor="w")
         
     def update_infoPW(self):
         print(self.fullMonster)
@@ -675,8 +741,8 @@ class player:
         monsterW_image = monsterW_image.resize((mWImage_width,mWImage_height))
         self.monsterW_photo = ImageTk.PhotoImage(monsterW_image)
         self.areaPlay.create_image(x1 + 305, 220, image = self.monsterW_photo)
-        self.areaPlay.create_text(x1 + 305, 275, text=self.fullMonster["w"][1], fill="black",font=("Press Start 2P", 12), anchor="w")
-        self.areaPlay.create_text(x1 + 305, 320, text=self.fullMonster["w"][2], fill="black",font=("Press Start 2P", 12), anchor="w")
+        self.areaPlay.create_text(x1 + 305, 275, text=self.fullMonster["w"][1], fill="white",font=("Press Start 2P", 12), anchor="w")
+        self.areaPlay.create_text(x1 + 305, 320, text=self.fullMonster["w"][2], fill="white",font=("Press Start 2P", 12), anchor="w")
 
     def Fight(self):
         print("Event joueur : Le joueur attaque")
@@ -758,10 +824,10 @@ class player:
 
 
     def move_character(self, event):
+        print("début move")
         eventJoueur = False
         self.countTourActivate = False
-        ##print(self.map.CaseNoire.values())
-        ##print(self.pnjCooDico.values())
+        
         key = event.keysym
         if not self.collPNJ :
             if self.tourPlayer :
@@ -910,14 +976,30 @@ class player:
         #self.collisionWithMonster()
         print("in p ",self.fullMonster)
         self.player_info(self.areaPlay, self)
-        if eventJoueur == True:
-            print("Event joueur : Le joueur se déplace à ",self.attackDirection)
-            text = "Le joueur marche"
+        if self.eventNrVar == True:
+            text =  "Player go to the next room"
+            self.eventJoueur(text)
+            self.eventNrVar = False
+        elif self.eventKVar == True:
+            text =  "Player get the key"
+            print(text)
+            self.eventJoueur(text)
+            self.eventKVar = False
+        elif eventJoueur == True:
+            text = "Player walks"
             self.eventJoueur(text)
         elif self.countTourActivate == True:
-            text = "Le joueur attaque"
+            text = "Player attacks"
             self.eventJoueur(text)
+        print(self.text)
+        self.eventMWalked = False
+        self.eventMAVar = False
+        self.text = "Monster :"
+        
+        
 
+        
+            
         
 
     def update_view(self):
@@ -967,6 +1049,7 @@ class player:
         ):
             self.gonext = True
             print("Event : Le joueur passe au prochain étage")
+            self.eventNrVar = True
             ##print("Yes !")
             self.generateNewMap()
 
@@ -978,6 +1061,7 @@ class player:
         ):
             self.hasExitKey = True
             print("Event : Le joueur ramasse la clé")
+            self.eventKVar = True
             self.areaPlay.delete(self.map.key)
             ##print(self.inventory)
 
