@@ -534,6 +534,13 @@ class player:
 
         # The storage of items
         # Start at Y :  WindowParameter.screenHeight - 150
+
+        map_width = WindowParameter.mapWidth
+        map_height = WindowParameter.mapHeight
+        screen_width = WindowParameter.screenWidth
+        x1 = map_width
+        x2 = screen_width
+        y2 = screen_width
         lineX = x1 + 3
         max_x = x1 + 346
         item_img_size = 70
@@ -654,7 +661,6 @@ class player:
         self.areaPlay.create_text(x1 + 219, 275, text=self.fullMonster["s"][1], fill="black",font=("Press Start 2P", 12), anchor="w")
         self.areaPlay.create_text(x1 + 219, 320, text=self.fullMonster["s"][2], fill="black",font=("Press Start 2P", 12), anchor="w")
         
-    
     def update_infoPW(self):
         print(self.fullMonster)
         map_width = WindowParameter.mapWidth
@@ -750,20 +756,12 @@ class player:
                         print("S")
                         self.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
 
-                    
-            x2, y2, w2, h2 = monsterCOO
-            if (x1 + 5 < w2 and w1 + 5 > x2) and (y1 + 5 < h2 and h1 + 5 > y2):
-                print("coll")
 
     def move_character(self, event):
         eventJoueur = False
         self.countTourActivate = False
         ##print(self.map.CaseNoire.values())
         ##print(self.pnjCooDico.values())
-        # print(self.map.CaseNoire.values())
-        # print(self.pnjCooDico.values())
-        # print(self.fullMonster)
-        self.collisionWithMonster()
         key = event.keysym
         if not self.collPNJ :
             if self.tourPlayer :
@@ -772,105 +770,71 @@ class player:
                             #print("direction attack right")
                             taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
                             taille_secondaire = 8  # Taille du côté du carré secondaire
-        if not self.collPNJ:
-            if self.tourPlayer:
-                if event.char == "a" and self.countTour % self.weaponTour == 0:
-                    if self.attackDirection == "Right":
-                        # print("direction attack right")
-                        taille_cote = (
-                            WindowParameter.characterSize
-                        )  # Taille du côté du carré principal
-                        taille_secondaire = 8  # Taille du côté du carré secondaire
 
-                        x1 = self.character_x2  # Coordonnée x1 du carré secondaire
-                        y1 = (
-                            self.character_y1 + (taille_cote - taille_secondaire) / 2
-                        )  # Coordonnée y1 du carré secondaire
-                        x2 = x1 + taille_secondaire  # Coordonnée x2 du carré secondaire
-                        y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
+                            x1 = self.character_x2  # Coordonnée x1 du carré secondaire
+                            y1 = self.character_y1 + (taille_cote - taille_secondaire) / 2  # Coordonnée y1 du carré secondaire
+                            x2 = x1 + taille_secondaire  # Coordonnée x2 du carré secondaire
+                            y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
-                        self.attackRect = self.areaPlay.create_rectangle(
-                            x1, y1, x2 + 8, y2, fill="blue"
-                        )
-                        self.Fight()
-                        self.window.after(
-                            100, lambda: self.areaPlay.delete(self.attackRect)
-                        )
+                            self.attackRect = self.areaPlay.create_rectangle(x1, y1, x2+8, y2, fill="blue")
+                            self.Fight()
+                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
 
-                        self.countTourActivate = True
+                            self.countTourActivate = True
+                            
+                        elif self.attackDirection == "Left":
+                            #print("direction attack Left")
+                            taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
+                            taille_secondaire = 8  # Taille du côté du carré secondaire
 
-                    elif self.attackDirection == "Left":
-                        # print("direction attack Left")
-                        taille_cote = (
-                            WindowParameter.characterSize
-                        )  # Taille du côté du carré principal
-                        taille_secondaire = 8  # Taille du côté du carré secondaire
+                            x2 = self.character_x1  # Coordonnée x1 du carré secondaire
+                            y1 = self.character_y1 + (taille_cote - taille_secondaire) / 2  # Coordonnée y1 du carré secondaire
+                            x1 = x2 - taille_secondaire  # Coordonnée x2 du carré secondaire
+                            y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
-                        x2 = self.character_x1  # Coordonnée x1 du carré secondaire
-                        y1 = (
-                            self.character_y1 + (taille_cote - taille_secondaire) / 2
-                        )  # Coordonnée y1 du carré secondaire
-                        x1 = x2 - taille_secondaire  # Coordonnée x2 du carré secondaire
-                        y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
+                            self.attackRect = self.areaPlay.create_rectangle(x1-8, y1, x2, y2, fill="blue")
+                            self.Fight()
+                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
 
-                        self.attackRect = self.areaPlay.create_rectangle(
-                            x1 - 8, y1, x2, y2, fill="blue"
-                        )
-                        self.Fight()
-                        self.window.after(
-                            100, lambda: self.areaPlay.delete(self.attackRect)
-                        )
+                            self.countTourActivate = True  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+                            
+                        elif self.attackDirection == "Up":
+                            #print("direction attack Up")
+                            taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
+                            taille_secondaire = 8  # Taille du côté du carré secondaire
 
-                        self.countTourActivate = True  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+                            x1 = self.character_x1 + (taille_cote - taille_secondaire) / 2
+                            x2 = x1 + taille_secondaire
+                            y2 = self.character_y1 # Coordonnée y2 du carré secondaire
+                            y1 = y2 - taille_secondaire
+                            
 
-                    elif self.attackDirection == "Up":
-                        # print("direction attack Up")
-                        taille_cote = (
-                            WindowParameter.characterSize
-                        )  # Taille du côté du carré principal
-                        taille_secondaire = 8  # Taille du côté du carré secondaire
+                            self.attackRect = self.areaPlay.create_rectangle(x1, y1-8, x2, y2, fill="blue")
+                            self.Fight()
+                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
+                            
+                            self.countTourActivate = True
+                        
+                        elif self.attackDirection == "Down":
+                            #print("direction attack Down")
+                            taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
+                            taille_secondaire = 8  # Taille du côté du carré secondaire
 
-                        x1 = self.character_x1 + (taille_cote - taille_secondaire) / 2
-                        x2 = x1 + taille_secondaire
-                        y2 = self.character_y1  # Coordonnée y2 du carré secondaire
-                        y1 = y2 - taille_secondaire
+                            x1 = self.character_x1 + (taille_cote - taille_secondaire) / 2 # Coordonnée x1 du carré secondaire
+                            y1 = self.character_y2  # Coordonnée y1 du carré secondaire
+                            x2 = x1 + taille_secondaire  # Coordonnée x2 du carré secondaire
+                            y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
-                        self.attackRect = self.areaPlay.create_rectangle(
-                            x1, y1 - 8, x2, y2, fill="blue"
-                        )
-                        self.Fight()
-                        self.window.after(
-                            100, lambda: self.areaPlay.delete(self.attackRect)
-                        )
+                            self.attackRect = self.areaPlay.create_rectangle(x1, y1, x2, y2+8, fill="blue")
+                            self.Fight()
+                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
+                            
+                            self.countTourActivate = True
+                        self.window.after(500, self.start_moving_monsters)
+       
+                
 
-                        self.countTourActivate = True
-
-                    elif self.attackDirection == "Down":
-                        # print("direction attack Down")
-                        taille_cote = (
-                            WindowParameter.characterSize
-                        )  # Taille du côté du carré principal
-                        taille_secondaire = 8  # Taille du côté du carré secondaire
-
-                        x1 = (
-                            self.character_x1 + (taille_cote - taille_secondaire) / 2
-                        )  # Coordonnée x1 du carré secondaire
-                        y1 = self.character_y2  # Coordonnée y1 du carré secondaire
-                        x2 = x1 + taille_secondaire  # Coordonnée x2 du carré secondaire
-                        y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
-
-                        self.attackRect = self.areaPlay.create_rectangle(
-                            x1, y1, x2, y2 + 8, fill="blue"
-                        )
-                        self.Fight()
-                        self.window.after(
-                            100, lambda: self.areaPlay.delete(self.attackRect)
-                        )
-
-                        self.countTourActivate = True
-                    self.window.after(500, self.start_moving_monsters)
-
-                # Player
+                #Player
                 elif self.player_collision != True:
                         if(len(self.pnjs) > 0 and self.pnjs[self.numPNJ].collPNJ == False):
                             self.collPNJ = False
@@ -888,61 +852,41 @@ class player:
                                     return
                                 dx = -self.moveDistance  # Déplacement vers la gauche
                                 self.attackDirection = "Left"
-                    if len(self.pnjs) > 0 and self.pnjs[self.numPNJ].collPNJ == False:
-                        self.collPNJ = False
-                    if self.collPNJ == False:
-                        dx, dy = 0, 0  # Valeurs de déplacement initiales
-                        if key == "Right":
-                            if (
-                                self.character_x2 + self.moveDistance
-                                > WindowParameter.mapWidth
-                            ):
+
+                            elif key == "Up":
+                                if self.character_y1 - self.moveDistance < 0:
+                                    return
+                                dy = -self.moveDistance  # Déplacement vers le haut
+                                self.attackDirection = "Up"
+
+                            elif key == "Down":
+                                if self.character_y2 + self.moveDistance > WindowParameter.mapHeight:
+                                    return
+                                dy = self.moveDistance  # Déplacement vers le bas
+                                self.attackDirection = "Down"
+
+                            new_x1 = self.character_x1 + dx
+                            new_y1 = self.character_y1 + dy
+                            new_x2 = self.character_x2 + dx
+                            new_y2 = self.character_y2 + dy
+
+                            for cle, valeur in self.map.CaseNoire.items():
+                                if (
+                                    new_x2 > valeur[0]
+                                    and new_y2 > valeur[1]
+                                    and new_x1 < valeur[2]
+                                    and new_y1 < valeur[3]
+                                ):
+                                    
+                                    return  # Collision détectée, arrêter le déplacement
+                            i = 0
+                            checkPNJ = False
+                            while i < len(self.pnjs) and checkPNJ == False:
+                                checkPNJ = self.checkPNJCollision(i, dx, dy)
+                                i = i + 1
+                            if(checkPNJ == True):
                                 return
-                            dx = self.moveDistance  # Déplacement vers la droite
-                            self.attackDirection = "Right"
-
-                        elif key == "Left":
-                            if self.character_x1 - self.moveDistance < 0:
-                                return
-                            dx = -self.moveDistance  # Déplacement vers la gauche
-                            self.attackDirection = "Left"
-
-                        elif key == "Up":
-                            if self.character_y1 - self.moveDistance < 0:
-                                return
-                            dy = -self.moveDistance  # Déplacement vers le haut
-                            self.attackDirection = "Up"
-
-                        elif key == "Down":
-                            if (
-                                self.character_y2 + self.moveDistance
-                                > WindowParameter.mapHeight
-                            ):
-                                return
-                            dy = self.moveDistance  # Déplacement vers le bas
-                            self.attackDirection = "Down"
-
-                        new_x1 = self.character_x1 + dx
-                        new_y1 = self.character_y1 + dy
-                        new_x2 = self.character_x2 + dx
-                        new_y2 = self.character_y2 + dy
-
-                        for cle, valeur in self.map.CaseNoire.items():
-                            if (
-                                new_x2 > valeur[0]
-                                and new_y2 > valeur[1]
-                                and new_x1 < valeur[2]
-                                and new_y1 < valeur[3]
-                            ):
-                                return  # Collision détectée, arrêter le déplacement
-                        i = 0
-                        checkPNJ = False
-                        while i < len(self.pnjs) and checkPNJ == False:
-                            checkPNJ = self.checkPNJCollision(i, dx, dy)
-                            i = i + 1
-                        if checkPNJ == True:
-                            return
-                        """for i in range(0, len(self.pnjs)):
+                            """for i in range(0, len(self.pnjs)):
                                 if(self.checkPNJCollision(i, dx, dy)) : return"""
                             for i in range(0, len(self.monsters)):
                                 if(self.checkMonsterCollision(i, dx, dy)):
@@ -961,10 +905,10 @@ class player:
             """if self.countTour == self.weaponTour:
                 self.countTour = 0
                 self.countTourActivate = False
-            if self.countTourActivate:
+            if self.countTourActivate :
                 self.countTour += 1"""
         #self.collisionWithMonster()
-        # print("in p ",self.fullMonster)
+        print("in p ",self.fullMonster)
         self.player_info(self.areaPlay, self)
         if eventJoueur == True:
             print("Event joueur : Le joueur se déplace à ",self.attackDirection)
@@ -973,9 +917,7 @@ class player:
         elif self.countTourActivate == True:
             text = "Le joueur attaque"
             self.eventJoueur(text)
-        #print(self.countTour)
-            
-        #print(self.countTour)
+
         
 
     def update_view(self):
