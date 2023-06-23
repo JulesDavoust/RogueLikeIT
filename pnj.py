@@ -1,5 +1,6 @@
 import random
 import tkinter as tk
+from PIL import Image, ImageTk
 from windowParameters import WindowParameter
 
 
@@ -27,7 +28,15 @@ class PNJ:
         ##print(f"In generatePNJ: \nX:{x} Y:{y}")
         x = x * WindowParameter.tileSize
         y = y * WindowParameter.tileSize
-        self.pnj = areaPlay.create_rectangle(x +1, y +1 , x + WindowParameter.tileSize-1, y + WindowParameter.tileSize-1, fill="blue", outline = "")
+
+        self.pnj = areaPlay.create_rectangle(x +1, y +1 , x + WindowParameter.tileSize-1, y + WindowParameter.tileSize-1, outline = "")
+        image_item = Image.open("./sprites/PNJ.png").convert("P")
+        image_item = image_item.resize((WindowParameter.tileSize, WindowParameter.tileSize))
+        self.image_pnj = ImageTk.PhotoImage(image_item)
+        areaPlay.create_image(
+           x, y, image=self.image_pnj , anchor = "nw"
+        )
+        
 
     def openShop(self, window, selfPlayer, collPNJ):
         self.collPNJ = collPNJ
