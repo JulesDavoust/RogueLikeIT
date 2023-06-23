@@ -526,13 +526,8 @@ class player:
         # the low border of the monster information: X: x1 + 3   Y: 340
         #                                            X: x1 + 346 Y:
 
-        self.areaPlay.create_rectangle(x1 + 3, 380, x1+346, 495, fill="", outline="white")
-
-        #self.areaPlay.create_rectangle(x1 + 27, 410, x1+320, 450, fill="white")
-
-        self.areaPlay.create_rectangle(x1 + 27, 460, x1+320, 500, fill="white")
-        
         # The battle information
+        self.areaPlay.create_rectangle(x1 + 3, 380, x1+346, 495, fill="", outline="white")
         # TBC
 
         # The storage of items
@@ -996,7 +991,7 @@ class player:
                                 self.areaPlay.move(self.sprite, dx, dy)
                                 self.update_view()
                             self.goNextRoom()
-                        self.window.after(500, self.start_moving_monsters)
+                        self.window.after(100, self.start_moving_monsters)
             
             self.tourPlayer = False
             """if self.countTour == self.weaponTour:
