@@ -514,8 +514,6 @@ class player:
         self.areaPlay.create_rectangle(x1 + 27, 410, x1+320, 450, fill="white")
 
         self.areaPlay.create_rectangle(x1 + 27, 460, x1+320, 500, fill="white")
-
-    def hp_update(self,player,areaPlay,monster):
         # The battle information
         # TBC
 
@@ -586,8 +584,10 @@ class player:
             max_x,
             y_item_top_aera + item_img_size,
             fill="Black",
-            width=3,
+            width=3
         )
+
+
 
     def hp_update(self, player, areaPlay, monster):
         hp_max = self.max_life_point

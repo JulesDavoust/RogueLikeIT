@@ -25,6 +25,7 @@ def generate_maze(width, height):
         else:
             count = 0
         if(count >= 3):
+            random_wall = random.choice(wall_list)
             continue
 
         wx, wy, direction = random_wall
