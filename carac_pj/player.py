@@ -31,7 +31,7 @@ class player:
         self.indexDico = 0
         self.indexMonster = 0
 
-        self.fullMonster = []
+        self.fullMonster = {"n": [], "e": [], "s": [], "w": []}
         self.lengthFullMonster = 0
         self.maxLengthFullMonster = 3
 
@@ -84,8 +84,6 @@ class player:
         self.areaPlay = tk.Canvas(window, width=WindowParameter.screenWidth, height=WindowParameter.screenWidth)
         self.createAll()
         self.areaPlay.pack()
-        if self.tourPlayer == False:
-            window.after(10, self.start_moving_monsters)
         window.bind("<KeyPress>", self.move_character)
         
         
@@ -337,9 +335,9 @@ class player:
         self.areaPlay.create_rectangle(map_width + 80, WindowParameter.tileSize, map_width + 300, WindowParameter.tileSize + 30, fill="red")
         
         # Inventory information
-        invento_string = ""
-        for item in self.inventory.items():
-            invento_string += f"{item[0]} : {item[1]} \n"
+        #invento_string = ""
+        #for item in self.inventory.items():
+        #    invento_string += f"{item[0]} : {item[1]} \n"
         # print(invento_string)
         # invento_info = tk.Label(areaPlay, text= invento_string, fg = "White", bg= "Black")
         # invento_info.place(x= WindowParameter.mapWidth + 30, y=100)
@@ -369,6 +367,7 @@ class player:
         self.areaPlay.create_rectangle(x1 + 3, 200, x1+88, 250, fill="", outline="black")
         self.areaPlay.create_rectangle(x1 + 3, 250, x1+88, 295, fill="", outline="black")
         self.areaPlay.create_rectangle(x1 + 3, 295, x1+88, 340, fill="", outline="black")
+        
 
         self.areaPlay.create_rectangle(x1 + 89, 200, x1+174, 340, fill="white")
         self.areaPlay.create_rectangle(x1 + 89, 200, x1+174, 250, fill="", outline="black")
@@ -383,7 +382,13 @@ class player:
         self.areaPlay.create_rectangle(x1 + 261, 200, x1+346, 340, fill="white")
         self.areaPlay.create_rectangle(x1 + 261, 200, x1+346, 250, fill="", outline="black")
         self.areaPlay.create_rectangle(x1 + 261, 250, x1+346, 295, fill="", outline="black")
-        self.areaPlay.create_rectangle(x1 + 261, 295, x1+346, 340, fill="", outline="black") 
+        self.areaPlay.create_rectangle(x1 + 261, 295, x1+346, 340, fill="", outline="black")
+
+        self.areaPlay.create_rectangle(x1 + 27, 360, x1+320, 400, fill="white")
+
+        self.areaPlay.create_rectangle(x1 + 27, 410, x1+320, 450, fill="white")
+
+        self.areaPlay.create_rectangle(x1 + 27, 460, x1+320, 500, fill="white")
 
     def hp_update(self,player,areaPlay,monster):
         hp_max = self.max_life_point
@@ -404,8 +409,90 @@ class player:
             fill="red",
         )
 
+
+    def eventJoueur(self, text):
+        map_width = WindowParameter.mapWidth
+        map_height = WindowParameter.mapHeight
+        screen_width = WindowParameter.screenWidth
+        x1 = map_width
+        x2 = screen_width
+        y2 = screen_width
+
+        eventJoueur = self.areaPlay.create_text(x1 + 170, 385, text=text, fill="black",font=("Press Start 2P", 12))
+        self.window.after(500, lambda: self.areaPlay.delete(eventJoueur))
+
+    def update_infoPN(self):
+        print(self.fullMonster)
+        map_width = WindowParameter.mapWidth
+        map_height = WindowParameter.mapHeight
+        screen_width = WindowParameter.screenWidth
+        x1 = map_width
+        x2 = screen_width
+        y2 = screen_width
+
+        monsterN_image = Image.open(self.fullMonster["n"][0]).convert("P")
+        mNImage_width,mNImage_height = monsterN_image.size
+        monsterN_image = monsterN_image.resize((mNImage_width,mNImage_height))
+        self.monsterN_photo = ImageTk.PhotoImage(monsterN_image)
+        self.areaPlay.create_image(x1 + 47, 220, image = self.monsterN_photo)
+        self.areaPlay.create_text(x1 + 47, 275, text=self.fullMonster["n"][1], fill="black",font=("Press Start 2P", 12), anchor="w")
+        self.areaPlay.create_text(x1 + 47, 320, text=self.fullMonster["n"][2], fill="black",font=("Press Start 2P", 12), anchor="w")
+
+    def update_infoPE(self):
+        print(self.fullMonster)
+        map_width = WindowParameter.mapWidth
+        map_height = WindowParameter.mapHeight
+        screen_width = WindowParameter.screenWidth
+        x1 = map_width
+        x2 = screen_width
+        y2 = screen_width
+
+        monsterE_image = Image.open(self.fullMonster["e"][0]).convert("P")
+        mEImage_width,mEImage_height = monsterE_image.size
+        monsterE_image = monsterE_image.resize((mEImage_width ,mEImage_height))
+        self.monsterE_photo = ImageTk.PhotoImage(monsterE_image)
+        self.areaPlay.create_image(x1 + 133, 220, image = self.monsterE_photo)
+        self.areaPlay.create_text(x1 + 133, 275, text=self.fullMonster["e"][1], fill="black",font=("Press Start 2P", 12), anchor="w")
+        self.areaPlay.create_text(x1 + 133, 320, text=self.fullMonster["e"][2], fill="black",font=("Press Start 2P", 12), anchor="w")
+
+    def update_infoPS(self):
+        print(self.fullMonster)
+        map_width = WindowParameter.mapWidth
+        map_height = WindowParameter.mapHeight
+        screen_width = WindowParameter.screenWidth
+        x1 = map_width
+        x2 = screen_width
+        y2 = screen_width
+
+        monsterS_image = Image.open(self.fullMonster["s"][0]).convert("P")
+        mSImage_width,mSImage_height = monsterS_image.size
+        monsterS_image = monsterS_image.resize((mSImage_width,mSImage_height))
+        self.monsterS_photo = ImageTk.PhotoImage(monsterS_image)
+        self.areaPlay.create_image(x1 + 219, 220, image = self.monsterS_photo)
+        self.areaPlay.create_text(x1 + 219, 275, text=self.fullMonster["s"][1], fill="black",font=("Press Start 2P", 12), anchor="w")
+        self.areaPlay.create_text(x1 + 219, 320, text=self.fullMonster["s"][2], fill="black",font=("Press Start 2P", 12), anchor="w")
+        
+    
+    def update_infoPW(self):
+        print(self.fullMonster)
+        map_width = WindowParameter.mapWidth
+        map_height = WindowParameter.mapHeight
+        screen_width = WindowParameter.screenWidth
+        x1 = map_width
+        x2 = screen_width
+        y2 = screen_width
+
+        monsterW_image = Image.open(self.fullMonster["w"][0]).convert("P")
+        mWImage_width,mWImage_height = monsterW_image.size
+        monsterW_image = monsterW_image.resize((mWImage_width,mWImage_height))
+        self.monsterW_photo = ImageTk.PhotoImage(monsterW_image)
+        self.areaPlay.create_image(x1 + 305, 220, image = self.monsterW_photo)
+        self.areaPlay.create_text(x1 + 305, 275, text=self.fullMonster["w"][1], fill="black",font=("Press Start 2P", 12), anchor="w")
+        self.areaPlay.create_text(x1 + 305, 320, text=self.fullMonster["w"][2], fill="black",font=("Press Start 2P", 12), anchor="w")
+
     def Fight(self):
-        ##print("fonction fight :", self.monsterDico)
+        print("Event joueur : Le joueur attaque")
+        
         attack = self.areaPlay.coords(self.attackRect)
         attack_x1 = attack[0]
         attack_y1 = attack[1]
@@ -454,25 +541,40 @@ class player:
                    
 
             i += 1
+    
 
     def collisionWithMonster(self):
-        cooPlayer = self.areaPlay.coords(self.character_id)
-        x1, y1, w1, h1 = cooPlayer
+        tolerance = 6
+        ci = self.areaPlay.coords(self.character_id)
         for i in range(len(self.monsters)):
             monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
-            x2, y2, w2, h2 = monsterCOO
-            if (x1+5 < w2 and w1+5 > x2) and (y1+5 < h2 and h1+5 > y2):
-                print("coll")
+            if ci[2] + tolerance >= monsterCOO[0] and ci[0] <= monsterCOO[2] + tolerance:
+                if ci[3] + tolerance >= monsterCOO[1] and ci[1] <= monsterCOO[3] + tolerance:
+                    print("Collision avec le monstre", i)
+                    if ci[0] > monsterCOO[2] and ci[0] > monsterCOO[2] and ci[1] == monsterCOO[1] and ci[3] == monsterCOO[3]:
+                        print("W")
+                        self.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
+                    elif ci[2] < monsterCOO[0] and ci[2] < monsterCOO[2] and ci[1] == monsterCOO[1] and ci[3] == monsterCOO[3]:
+                        print("E")
+                        self.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
+                    elif ci[0] == monsterCOO[0] and ci[2] == monsterCOO[2] and ci[1] > monsterCOO[1] and ci[1] > monsterCOO[3]:
+                        print("N")
+                        self.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
+                    elif ci[0] == monsterCOO[0] and ci[2] == monsterCOO[2] and ci[3] < monsterCOO[1] and ci[3] < monsterCOO[3]:
+                        print("S")
+                        self.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
+
+                    
 
     def move_character(self, event):
+        eventJoueur = False
+        self.countTourActivate = False
         ##print(self.map.CaseNoire.values())
         ##print(self.pnjCooDico.values())
-        print(self.fullMonster)
-        self.collisionWithMonster()
         key = event.keysym
         if not self.collPNJ :
             if self.tourPlayer :
-                if event.char == "a" and self.countTour% self.weaponTour == 0:
+                if event.char == "a":
                         if self.attackDirection == "Right":
                             #print("direction attack right")
                             taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
@@ -538,7 +640,7 @@ class player:
                             
                             self.countTourActivate = True
                         self.window.after(500, self.start_moving_monsters)
-                    
+       
                 
 
                 #Player
@@ -552,6 +654,7 @@ class player:
                                     return
                                 dx = self.moveDistance  # Déplacement vers la droite
                                 self.attackDirection = "Right"
+                                
                                 
                             elif key == "Left":
                                 if self.character_x1 - self.moveDistance < 0:
@@ -600,6 +703,7 @@ class player:
                             self.getKey()
                             
                             if not self.gonext:
+                                eventJoueur = True
                                 self.areaPlay.move(self.character_id, dx, dy)  # Déplacer le personnage
                                 self.areaPlay.move(self.sprite, dx, dy)
                                 self.update_view()
@@ -607,13 +711,21 @@ class player:
                         self.window.after(500, self.start_moving_monsters)
             
             self.tourPlayer = False
-            if self.countTour == self.weaponTour:
+            """if self.countTour == self.weaponTour:
                 self.countTour = 0
                 self.countTourActivate = False
             if self.countTourActivate :
-                self.countTour += 1
-        print(self.fullMonster)
+                self.countTour += 1"""
+        #self.collisionWithMonster()
+        print("in p ",self.fullMonster)
         self.player_info(self.areaPlay, self)
+        if eventJoueur == True:
+            print("Event joueur : Le joueur se déplace à ",self.attackDirection)
+            text = "Le joueur marche"
+            self.eventJoueur(text)
+        elif self.countTourActivate == True:
+            text = "Le joueur attaque"
+            self.eventJoueur(text)
         #print(self.countTour)
             
         #print(self.countTour)
@@ -647,6 +759,7 @@ class player:
             self.gonext = False
         elif(self.hasExitKey and self.character_x1 >= self.map.x1R and self.character_x2 <= self.map.x2R and self.character_y2 <= self.map.y2R and self.character_y1 >= self.map.y1R):
             self.gonext = True
+            print("Event : Le joueur passe au prochain étage")
             ##print("Yes !")
             self.generateNewMap()
         
@@ -654,6 +767,7 @@ class player:
     def getKey(self):
         if (self.character_x1 < self.map.keyX2 and self.character_x2 > self.map.keyX1) and (self.character_y1 < self.map.keyY2 and self.character_y2 > self.map.keyY1):
             self.hasExitKey = True
+            print("Event : Le joueur ramasse la clé")
             self.areaPlay.delete(self.map.key)
             ##print(self.inventory)
 
