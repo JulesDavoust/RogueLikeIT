@@ -514,17 +514,9 @@ class player:
         self.areaPlay.create_rectangle(x1 + 27, 410, x1+320, 450, fill="white")
 
         self.areaPlay.create_rectangle(x1 + 27, 460, x1+320, 500, fill="white")
+        
         # The battle information
         # TBC
-
-        # Inventory information
-        # invento_string = ""
-        # for item in self.inventory.items():
-        #     invento_string += f"{item[0]} : {item[1]} \n"
-        # print(invento_string)
-        # invento_info = tk.Label(areaPlay, text= invento_string, fg = "White", bg= "Black")
-        # invento_info.place(x= WindowParameter.mapWidth + 30, y=100)
-        # areaPlay.create_text(WindowParameter.mapWidth + 50, WindowParameter.tileSize * 3, text= invento_string, fill="white", anchor = "w")
 
         # The storage of items
         # Start at Y :  WindowParameter.screenHeight - 150
@@ -571,12 +563,17 @@ class player:
             lineX + item_img_size * 1, y_item_top_aera, image=self.image_potion_mp , anchor = "nw"
         )
 
-
         # The square for showing the storage of the items
-        for i in range(lineX, max_x, item_img_size):
+        # This one is for each grid
+        # for i in range(lineX, max_x, item_img_size):
+        #     self.areaPlay.create_rectangle(
+        #         i, y_item_top_aera, i + 20, y_item_top_aera + 20, outline="black"
+        #     )
+        for i in range(2):
             self.areaPlay.create_rectangle(
-                i, y_item_top_aera, i + 20, y_item_top_aera + 20, outline="black"
+                lineX + i * item_img_size, y_item_top_aera, lineX + i * item_img_size + 20, y_item_top_aera + 20, outline="black"
             )
+
         # Use button
         self.areaPlay.create_line(
             lineX,
@@ -585,6 +582,14 @@ class player:
             y_item_top_aera + item_img_size,
             fill="Black",
             width=3
+        )
+
+        # Third slot for weapon
+        image_item = Image.open("./sprites/potion_MP.png").convert("P")
+        image_item = image_item.resize((item_img_size, item_img_size))
+        self.image_potion_mp = ImageTk.PhotoImage(image_item)
+        self.areaPlay.create_image(
+            lineX + item_img_size * 1, y_item_top_aera, image=self.image_potion_mp , anchor = "nw"
         )
 
 
@@ -753,16 +758,16 @@ class player:
                     print("Collision avec le monstre", i)
                     if ci[0] > monsterCOO[2] and ci[0] > monsterCOO[2] and ci[1] == monsterCOO[1] and ci[3] == monsterCOO[3]:
                         print("W")
-                        self.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
+                        self.fullMonster["w"] = ["./sprites/monster_1.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
                     elif ci[2] < monsterCOO[0] and ci[2] < monsterCOO[2] and ci[1] == monsterCOO[1] and ci[3] == monsterCOO[3]:
                         print("E")
-                        self.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
+                        self.fullMonster["e"] = ["./sprites/monster_1.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
                     elif ci[0] == monsterCOO[0] and ci[2] == monsterCOO[2] and ci[1] > monsterCOO[1] and ci[1] > monsterCOO[3]:
                         print("N")
-                        self.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
+                        self.fullMonster["n"] = ["./sprites/monster_1.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
                     elif ci[0] == monsterCOO[0] and ci[2] == monsterCOO[2] and ci[3] < monsterCOO[1] and ci[3] < monsterCOO[3]:
                         print("S")
-                        self.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
+                        self.fullMonster["s"] = ["./sprites/monster_1.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
 
 
     def move_character(self, event):

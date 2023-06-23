@@ -150,22 +150,22 @@ class Monster:
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
                                             ok = True
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
                                             ok = True
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
                                             ok = True
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
                                             ok = True
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
@@ -201,22 +201,22 @@ class Monster:
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
                                             ok = True
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
                                             ok = True
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
                                             ok = True
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
                                             ok = True
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
@@ -254,22 +254,22 @@ class Monster:
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
                                             ok = True
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
                                             ok = True
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
                                             ok = True
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
                                             ok = True
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
@@ -307,22 +307,22 @@ class Monster:
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
                                             ok = True
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
                                             ok = True
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
                                             ok = True
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
                                             ok = True
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
@@ -338,19 +338,19 @@ class Monster:
                         print("Collision avec le monstre")
                         if ci[0] > self.monster_x2 and ci[0] > self.monster_x2 and ci[1] == self.monster_y1 and ci[3] == self.monster_y2:
                             print("W")
-                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                             playerSelf.update_infoPW()
                         elif ci[2] < self.monster_x1 and ci[2] < self.monster_x2 and ci[1] == self.monster_y1 and ci[3] == self.monster_y2:
                             print("E")
-                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                             playerSelf.update_infoPE()
                         elif ci[0] == self.monster_x1 and ci[2] == self.monster_x2 and ci[1] > self.monster_y1 and ci[1] > self.monster_y2:
                             print("N")
-                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                             playerSelf.update_infoPN()
                         elif ci[0] == self.monster_x1 and ci[2] == self.monster_x2 and ci[3] < self.monster_y1 and ci[3] < self.monster_y2:
                             print("S")
-                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                             playerSelf.update_infoPS()    
             print(playerSelf.fullMonster)    
             
@@ -388,19 +388,19 @@ class Monster:
                                         print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                     areaPlay.move(self.monster, 0, 1 * self.moveDistance)
                     areaPlay.move(self.health_bar, 0, 1 * self.moveDistance)
@@ -422,19 +422,19 @@ class Monster:
                                         print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                     areaPlay.move(self.monster, 0, -1 * self.moveDistance)
                     areaPlay.move(self.health_bar, 0, -1 * self.moveDistance)
@@ -456,19 +456,19 @@ class Monster:
                                         print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                     areaPlay.move(self.monster, -1 * self.moveDistance, 0)
                     areaPlay.move(self.health_bar, -1 * self.moveDistance, 0)
@@ -490,19 +490,19 @@ class Monster:
                                         print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                     areaPlay.move(self.monster, 1 * self.moveDistance, 0)
                     areaPlay.move(self.health_bar, 1 * self.moveDistance, 0)
@@ -538,19 +538,19 @@ class Monster:
                                         print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
@@ -583,19 +583,19 @@ class Monster:
                                         print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
@@ -629,19 +629,19 @@ class Monster:
                                         print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
@@ -674,19 +674,19 @@ class Monster:
                                         print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
@@ -721,19 +721,19 @@ class Monster:
                                         print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
@@ -766,19 +766,19 @@ class Monster:
                                         print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
@@ -812,19 +812,19 @@ class Monster:
                                         print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
@@ -857,19 +857,19 @@ class Monster:
                                         print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("W")
-                                            playerSelf.fullMonster["w"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             print("E")
-                                            playerSelf.fullMonster["e"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             print("N")
-                                            playerSelf.fullMonster["n"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             print("S")
-                                            playerSelf.fullMonster["s"] = ["./sprites/big_zombie_idle_anim_f0.png", self.life_points_monster, self.damage]
+                                            playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
