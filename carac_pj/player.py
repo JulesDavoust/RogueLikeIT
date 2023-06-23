@@ -103,7 +103,6 @@ class player:
         self.areaPlay.pack()
         window.bind("<KeyPress>", self.move_character)
 
-        ##print("test")
 
     def createAll(self):
         self.hasExitKey = False
@@ -323,7 +322,7 @@ class player:
                     monster_coords[3],
                 ]
                 self.moved_m_index += 1
-                # print(self.monsterDico)
+                
 
         # self.areaPlay.after(800, self.move_monster_periodically)
 
@@ -531,9 +530,6 @@ class player:
 
         #self.areaPlay.create_rectangle(x1 + 27, 410, x1+320, 450, fill="white")
 
-        #self.areaPlay.create_rectangle(x1 + 27, 460, x1+320, 500, fill="white")
-
-    def hp_update(self,player,areaPlay,monster):
         self.areaPlay.create_rectangle(x1 + 27, 460, x1+320, 500, fill="white")
         
         # The battle information
@@ -863,10 +859,8 @@ class player:
 
 
     def move_character(self, event):
-        print("début move")
         eventJoueur = False
         self.countTourActivate = False
-        
         key = event.keysym
         if not self.collPNJ :
             if self.tourPlayer :
@@ -937,7 +931,6 @@ class player:
                             self.countTourActivate = True
                         self.window.after(500, self.start_moving_monsters)
        
-                
 
                 #Player
                 elif self.player_collision != True:
@@ -950,7 +943,6 @@ class player:
                                     return
                                 dx = self.moveDistance  # Déplacement vers la droite
                                 self.attackDirection = "Right"
-                                
                                 
                             elif key == "Left":
                                 if self.character_x1 - self.moveDistance < 0:
@@ -974,7 +966,7 @@ class player:
                             new_y1 = self.character_y1 + dy
                             new_x2 = self.character_x2 + dx
                             new_y2 = self.character_y2 + dy
-
+                            
                             for cle, valeur in self.map.CaseNoire.items():
                                 if (
                                     new_x2 > valeur[0]
