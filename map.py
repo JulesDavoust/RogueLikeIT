@@ -90,7 +90,16 @@ class Map:
         self.x2R = self.dicoC[cooR][2]
         self.y2R = self.dicoC[cooR][3]
 
-        areaPlay.create_rectangle(self.x1R, self.y1R, self.x2R, self.y2R, fill="red")
+        #Exit
+        areaPlay.create_rectangle(self.x1R, self.y1R, self.x2R, self.y2R, fill="")
+        image_item = Image.open("./sprites/exit.png").convert("P")
+        image_item = image_item.resize((WindowParameter.tileSize, WindowParameter.tileSize))
+        self.image_exit = ImageTk.PhotoImage(image_item)
+        areaPlay.create_image(
+           self.x1R, self.y1R, image=self.image_exit , anchor = "nw"
+        )
+
+
 
         cooG = random.randint(0, len(list(self.dicoC.keys())))
         """self.xGreen = random.randint(0, (self.map_width-50)// case_size)
@@ -102,7 +111,16 @@ class Map:
         y1G = self.dicoC[cooG][1]
         x2G = self.dicoC[cooG][2]
         y2G = self.dicoC[cooG][3]
-        areaPlay.create_rectangle(x1G, y1G, x2G, y2G, fill="green")
+
+        #Spawn point
+        areaPlay.create_rectangle(x1G, y1G, x2G, y2G, fill="")
+        image_item = Image.open("./sprites/spawn.png").convert("P")
+        image_item = image_item.resize((WindowParameter.tileSize, WindowParameter.tileSize))
+        self.image_spawn = ImageTk.PhotoImage(image_item)
+        areaPlay.create_image(
+           x1G, y1G, image=self.image_spawn , anchor = "nw"
+        )
+
 
         KeyfindG = -1
         KeyfindR = -1
@@ -164,7 +182,15 @@ class Map:
         self.keyY1 = y1
         self.keyX2 = x1 + 6
         self.keyY2 = y1 + 6
-        self.key = areaPlay.create_rectangle(b_x1, b_y1, b_x2, b_y2, fill="yellow")
+
+        image_item = Image.open("./sprites/key_1.png").convert("P")
+        image_item = image_item.resize((WindowParameter.tileSize, WindowParameter.tileSize))
+        self.image_key = ImageTk.PhotoImage(image_item)
+        self.key = areaPlay.create_image(
+           x1, y1, image=self.image_key , anchor = "nw"
+        )
+
+        # self.key = areaPlay.create_rectangle(b_x1, b_y1, b_x2, b_y2)
 
     
 

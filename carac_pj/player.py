@@ -1,6 +1,5 @@
 import random
 from map import Map
-from Fight import fight
 from monster import Monster
 from pnj import PNJ
 from windowParameters import WindowParameter
@@ -65,7 +64,7 @@ class player:
 
         self.countTourActivate = False
         self.countTour = 0
-        self.weaponTour = 3
+        self.weaponTour = 1
 
         self.attackDirection = "Right"
 
@@ -173,19 +172,16 @@ class player:
         min_y = 0
         max_y = self.map.map_height - 50
         placeable_cell_list = mazeMap.three_walls_cells(self.map.maze)
-        number_pnj = random.randint(0, 3)
+        number_pnj = random.randint(1, 3)
         if number_pnj > len(placeable_cell_list):
             number_pnj = len(placeable_cell_list)
 
         for _ in range(number_pnj):
-            ##print(_)
             pnj = PNJ()  # Crée une instance de pnj
 
             # PNJ generation V2.0
             randomPNJ = random.choice(placeable_cell_list)
             placeable_cell_list.remove(randomPNJ)
-            ##print("Random PNJ:")
-            ##print(randomPNJ)
             x1 = randomPNJ[1]
             y1 = randomPNJ[0]
 
@@ -538,6 +534,7 @@ class player:
         #self.areaPlay.create_rectangle(x1 + 27, 460, x1+320, 500, fill="white")
 
     def hp_update(self,player,areaPlay,monster):
+        self.areaPlay.create_rectangle(x1 + 27, 460, x1+320, 500, fill="white")
         # The battle information
         # TBC
 
@@ -574,13 +571,27 @@ class player:
             )
 
         # First slot for potion PV
-        image_potion_pv = Image.open("./sprites/potion_PV.png").convert("P")
-        image_potion_pv = image_potion_pv.resize((item_img_size, item_img_size))
-        self.image_potion_pv = ImageTk.PhotoImage(image_potion_pv)
-
+        image_item = Image.open("./sprites/potion_PV.png").convert("P")
+        image_item = image_item.resize((item_img_size, item_img_size))
+        self.image_potion_pv = ImageTk.PhotoImage(image_item)
         self.areaPlay.create_image(
             lineX , y_item_top_aera, image=self.image_potion_pv , anchor = "nw"
         )
+        # Second slot for potion MP
+        image_item = Image.open("./sprites/potion_MP.png").convert("P")
+        image_item = image_item.resize((item_img_size, item_img_size))
+        self.image_potion_mp = ImageTk.PhotoImage(image_item)
+        self.areaPlay.create_image(
+            lineX + item_img_size * 1, y_item_top_aera, image=self.image_potion_mp , anchor = "nw"
+        )
+        # Second slot for potion MP
+        image_item = Image.open("./sprites/potion_MP.png").convert("P")
+        image_item = image_item.resize((item_img_size, item_img_size))
+        self.image_potion_mp = ImageTk.PhotoImage(image_item)
+        self.areaPlay.create_image(
+            lineX + item_img_size * 1, y_item_top_aera, image=self.image_potion_mp , anchor = "nw"
+        )
+
 
         # The square for showing the storage of the items
         for i in range(lineX, max_x, item_img_size):
@@ -594,8 +605,10 @@ class player:
             max_x,
             y_item_top_aera + item_img_size,
             fill="Black",
-            width=3,
+            width=3
         )
+
+
 
     def hp_update(self, player, areaPlay, monster):
         hp_max = self.max_life_point
@@ -755,9 +768,7 @@ class player:
         i = 0
         pop = False
         while i < len(self.monsters) and pop == False:
-            ##print("for loop")
             monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
-            ##print(monsterCOO)
             monster_x1 = monsterCOO[0]
             monster_y1 = monsterCOO[1]
             monster_x2 = monsterCOO[2]
