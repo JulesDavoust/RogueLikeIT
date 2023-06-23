@@ -585,11 +585,34 @@ class player:
         )
 
         # Third slot for weapon
-        image_item = Image.open("./sprites/potion_MP.png").convert("P")
+        
+        image_item = Image.open("./sprites/blade_0.png").convert("P")
         image_item = image_item.resize((item_img_size, item_img_size))
-        self.image_potion_mp = ImageTk.PhotoImage(image_item)
+        self.image_weapon = ImageTk.PhotoImage(image_item)
         self.areaPlay.create_image(
-            lineX + item_img_size * 1, y_item_top_aera, image=self.image_potion_mp , anchor = "nw"
+            lineX + item_img_size * 2, y_item_top_aera, image=self.image_weapon , anchor = "nw"
+        )
+
+
+        # Fourth slot for armor
+
+        image_item = Image.open("./sprites/ring_0.png").convert("P")
+        image_item = image_item.resize((item_img_size, item_img_size))
+        self.image_armor = ImageTk.PhotoImage(image_item)
+        self.areaPlay.create_image(
+            lineX + item_img_size * 3, y_item_top_aera, image=self.image_armor , anchor = "nw"
+        )
+
+        # Last slot for key
+        if(self.hasExitKey):
+            image_item = Image.open("./sprites/key_1.png").convert("P")
+        else:
+            image_item = Image.open("./sprites/key_1_empty.png").convert("P")
+        
+        image_item = image_item.resize((item_img_size, item_img_size))
+        self.image_key = ImageTk.PhotoImage(image_item)
+        self.areaPlay.create_image(
+            lineX + item_img_size * 4, y_item_top_aera, image=self.image_key, anchor = "nw"
         )
 
 
