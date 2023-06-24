@@ -36,6 +36,6 @@ class Equipements:
     }
 
 class Items:
-    healthAmount = 10
-    magicAmount = 5
+    healthAmount = 20
+    magicAmount = 10
     potionPrice = 10
