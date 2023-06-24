@@ -6,7 +6,8 @@ from windowParameters import WindowParameter
 import tkinter as tk
 from PIL import Image, ImageTk
 import mazeMap
-#from items import Items
+from equipements import Equipements, Items
+
 
 
 class player:
@@ -23,7 +24,7 @@ class player:
         # Each item is saved as dict in the list of inventory, in this way we can know the storage directly
         self.potion_pv = "potion_PV"
         self.potion_mp = "potion_MP"
-        self.inventory = {self.potion_pv: 1, self.potion_mp: 0}
+        self.inventory = {self.potion_pv: 3, self.potion_mp: 0}
         self.gold = 30
 
         self.hasExitKey = False
@@ -81,7 +82,11 @@ class player:
             self.life_point = 100
             self.max_life_point = self.life_point
             self.mana = 20
-            self.damage = 30
+            self.weapon = "blade_0"
+            self.armor = "ring_0"
+            self.damage = Equipements.equipement_stats[self.weapon]
+            self.defense = Equipements.equipement_stats[self.armor]
+            
             # self.knight = tk.PhotoImage(file="./sprites/knight_f_idle_anim_f0.png")
         elif classe == 1:
             self.life_point = 80
@@ -388,6 +393,22 @@ class player:
             return True
         else:
             return False
+        
+            
+##########################################################################
+# Item functions
+# Why they are here? Because implenting from another class within inputs has
+# conflicts with bind_tag click ¯\_(ツ)_/¯
+    def healthRestore_potion(self,event):
+        if(self.inventory[self.potion_pv] > 0):
+            self.life_point += Items.healthAmount
+            if(self.life_point > self.max_life_point):
+                self.life_point = self.max_life_point
+            self.inventory[self.potion_pv] -= 1
+        else:
+            pass
+
+##########################################################################
 
     def player_info(self):
         map_width = WindowParameter.mapWidth
@@ -601,8 +622,8 @@ class player:
 #################################################################################################################
 
         # Third slot for weapon
-        
-        image_item = Image.open("./sprites/blade_0.png").convert("P")
+        text = f"./sprites/{self.weapon}.png"
+        image_item = Image.open(text).convert("P")
         image_item = image_item.resize((item_grid_size, item_grid_size))
         self.image_weapon = ImageTk.PhotoImage(image_item)
         self.areaPlay.create_image(
@@ -611,8 +632,8 @@ class player:
 
 
         # Fourth slot for armor
-
-        image_item = Image.open("./sprites/ring_0.png").convert("P")
+        text = f"./sprites/{self.armor}.png"
+        image_item = Image.open(text).convert("P")
         image_item = image_item.resize((item_grid_size, item_grid_size))
         self.image_armor = ImageTk.PhotoImage(image_item)
         self.areaPlay.create_image(
@@ -662,7 +683,7 @@ class player:
             anchor="w"
         )
 
-        #self.areaPlay.tag_bind(use_btn_pv, '<Button-1>', self.healthRestore_potion)
+        self.areaPlay.tag_bind(use_btn_pv, '<Button-1>', self.healthRestore_potion)
 
         # Second lower slot: potion PV
         self.areaPlay.create_text(
@@ -706,8 +727,6 @@ class player:
 
 
     def hp_update(self):
-        print("hpp")
-        print(self.life_point)
         if self.life_point <= 25:
             print("Dead")
             self.playerDied = True
@@ -886,12 +905,9 @@ class player:
                 and attack_y2 >= monster_y1
                 and attack_y1 <= monster_y2
             ):
-                ###print(self.monsters[i].life_points_monster)
                 self.monsters[i].life_points_monster = (
                     self.monsters[i].life_points_monster - self.damage
                 )
-
-                ###print(self.monsters[i].life_points_monster)
 
                 if self.monsters[i].life_points_monster <= 0:
                     self.areaPlay.delete(self.monsters[i].health_bar)
@@ -907,9 +923,6 @@ class player:
                         self.xp = 0
                     self.gold = self.monsters[i].xp + self.gold
                     pop = True
-                    # #print("Level : ", self.PlayerLevel)
-                    # #print("Xp : ", self.xp)
-                    # #print("Gold : ", self.gold)
                     self.monsters.pop(i)
                 else:
                     self.monsters[i].update_healthBar(

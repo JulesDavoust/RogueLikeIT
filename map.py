@@ -27,7 +27,7 @@ class Map:
         case_size = WindowParameter.tileSize
         x_tile = WindowParameter.mapTileCol
         y_tile = WindowParameter.mapTileRow
-        num_remove_walls = 35
+        num_remove_walls = 80
 
         # Image assests import
         wall_image = Image.open("./sprites/wall_mid.png").convert("P")

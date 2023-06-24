@@ -160,7 +160,7 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             ok = True
                                             #print("E")
@@ -168,7 +168,7 @@ class Monster:
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             ok = True
                                             #print("N")
@@ -176,7 +176,7 @@ class Monster:
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             ok = True
                                             #print("S")
@@ -184,7 +184,7 @@ class Monster:
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                 playerSelf.eventMWVar = True
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
@@ -224,7 +224,7 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             ok = True
                                             #print("E")
@@ -232,7 +232,7 @@ class Monster:
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             ok = True
                                             #print("N")
@@ -240,7 +240,7 @@ class Monster:
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             ok = True
                                             #print("S")
@@ -248,7 +248,7 @@ class Monster:
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                 playerSelf.eventMWVar = True
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
@@ -290,7 +290,7 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             ok = True
                                             #print("E")
@@ -298,7 +298,7 @@ class Monster:
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             
                                             ok = True
@@ -307,7 +307,7 @@ class Monster:
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             ok = True
                                             #print("S")
@@ -315,7 +315,7 @@ class Monster:
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                 playerSelf.eventMWVar = True
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
@@ -357,7 +357,7 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             ok = True
                                             #print("E")
@@ -365,7 +365,7 @@ class Monster:
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             ok = True
                                             #print("N")
@@ -373,7 +373,7 @@ class Monster:
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             ok = True
                                             #print("S")
@@ -381,7 +381,7 @@ class Monster:
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                 playerSelf.eventMWVar = True
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
@@ -396,28 +396,28 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                         elif ci[2] < self.monster_x1 and ci[2] < self.monster_x2 and ci[1] == self.monster_y1 and ci[3] == self.monster_y2:
                                             #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                         elif ci[0] == self.monster_x1 and ci[2] == self.monster_x2 and ci[1] > self.monster_y1 and ci[1] > self.monster_y2:
                                             #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                         elif ci[0] == self.monster_x1 and ci[2] == self.monster_x2 and ci[3] < self.monster_y1 and ci[3] < self.monster_y2:
                                             #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
             print(playerSelf.fullMonster)    
             
 
@@ -458,28 +458,28 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                     playerSelf.eventMWVar = True
                     areaPlay.move(self.monster, 0, 1 * self.moveDistance)
                     areaPlay.move(self.monsterPic, 0, 1 * self.moveDistance)
@@ -505,28 +505,28 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                     playerSelf.eventMWVar = True
                     areaPlay.move(self.monster, 0, -1 * self.moveDistance)
                     areaPlay.move(self.monsterPic, 0, -1 * self.moveDistance)
@@ -552,28 +552,28 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                     playerSelf.eventMWVar = True
                     areaPlay.move(self.monster, -1 * self.moveDistance, 0)
                     areaPlay.move(self.monsterPic, -1 * self.moveDistance, 0)
@@ -599,28 +599,28 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                     playerSelf.eventMWVar = True
                     areaPlay.move(self.monster, 1 * self.moveDistance, 0)
                     areaPlay.move(self.monsterPic, 1 * self.moveDistance, 0)
@@ -660,28 +660,28 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                 playerSelf.eventMWVar = True
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
@@ -718,28 +718,28 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                 playerSelf.eventMWVar = True
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
@@ -777,28 +777,28 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                 playerSelf.eventMWVar = True
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
@@ -835,28 +835,28 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                 playerSelf.eventMWVar = True
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
@@ -895,28 +895,28 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                 playerSelf.eventMWVar = True
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
@@ -953,28 +953,28 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                 playerSelf.eventMWVar = True
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
@@ -1012,28 +1012,28 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                 playerSelf.eventMWVar = True
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
@@ -1070,28 +1070,28 @@ class Monster:
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-                                            playerSelf.life_point = playerSelf.life_point - self.damage
+                                            playerSelf.life_point = playerSelf.life_point - self.damage + playerSelf.defense
                                 playerSelf.eventMWVar = True
                                 areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
