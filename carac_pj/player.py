@@ -6,12 +6,12 @@ from windowParameters import WindowParameter
 import tkinter as tk
 from PIL import Image, ImageTk
 import mazeMap
-from items import Items
+#from items import Items
 
 
 class player:
     def __init__(self, classe):
-        self.items = Items()
+        #self.items = Items()
 
         self.allClasse = {0: "guerrier", 1: "archer", 2: "sorcier"}
         self.classe = classe
@@ -118,7 +118,7 @@ class player:
         self.map.level = self.map.level + 1
         self.levelMap = self.map.level
         self.map.generateKey(self.areaPlay)
-        self.player_info(self.areaPlay)
+        self.player_info()
         self.hp_update()
         # print("map level : ", self.levelMap)
         # """#print(self.map.CaseNoire)
@@ -389,7 +389,7 @@ class player:
         else:
             return False
 
-    def player_info(self, areaPlay, player):
+    def player_info(self):
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
         screen_width = WindowParameter.screenWidth
@@ -662,7 +662,7 @@ class player:
             anchor="w"
         )
 
-        self.areaPlay.tag_bind(use_btn_pv, '<Button-1>', self.healthRestore_potion)
+        #self.areaPlay.tag_bind(use_btn_pv, '<Button-1>', self.healthRestore_potion)
 
         # Second lower slot: potion PV
         self.areaPlay.create_text(
@@ -1089,7 +1089,7 @@ class player:
                 self.countTour += 1"""
         #self.collisionWithMonster()
         print("in p ",self.fullMonster)
-        self.player_info(self.areaPlay, self)
+        self.player_info()
         if self.eventNrVar == True:
             text =  "Player go to the next room"
             self.eventJoueur(text)
