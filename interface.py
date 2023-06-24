@@ -32,6 +32,8 @@ class Interface:
         self.MenuClass()
 
     def GenerateGame(self):
+        with open('save.json', 'w') as fichier:
+            fichier.truncate(0)
         self.menu.pack_forget()
         self.player.generatePlayer(self.window)
         self.player.areaPlay.focus_set()

@@ -23,6 +23,8 @@ class player:
         self.weapon = "blade_0"
         self.armor = "ring_0"
         self.damage = Equipements.equipement_stats[self.weapon]
+        self.damageSpell = 20
+        self.max_mana = 20
         self.defense = Equipements.equipement_stats[self.armor]
         self.inventory = {self.potion_pv: 3, self.potion_mp: 0}
         self.xp = 0
@@ -71,6 +73,7 @@ class player:
         self.eventMAVar = False
 
         self.countTourActivate = False
+        self.countTourActivateSort = False
         self.countTour = 0
 
         self.attackDirection = "Right"
@@ -140,25 +143,32 @@ class player:
 
     def reset(self):
         if self.classe == 0:
-                self.initializeBasic_knight
+                self.initializeBasic_knight()
         # elif self.classe == 1:
-        #         self.life_point = 80
+        #         self.life_point = 75
+        #         self.armor = 0
         #         self.max_life_point = self.life_point
         #         self.mana = 30
         #         self.range = 10
         #         self.damage = 10
+        #         self.damageSpell = 20
+        #         self.max_mana = 30
         # elif self.classe == 2:
-        #         self.life_point = 100
+        #         self.life_point = 95
         #         self.armor = 0
         #         self.max_life_point = self.life_point
         #         self.mana = 50
         #         self.range = 5
         #         self.damage = 20
+        #         self.damageSpell = 30
+        #         self.max_mana = 50
+
+
         self.tourPlayer = True
-        self.playerDied = False
         
         self.initializeGeneral()
         
+
 
     def createAll(self):
         
@@ -168,10 +178,11 @@ class player:
         self.levelMap = self.map.level
         self.map.generateKey(self.areaPlay)
         self.player_info()
-        self.hp_update()
-        # #print("map level : ", self.levelMap)
-        # """##print(self.map.CaseNoire)
-        # ##print(self.map.centreCaseNoire)"""
+        self.hp_update(False)
+        self.mana_update(False)
+        # print("map level : ", self.levelMap)
+        # """#print(self.map.CaseNoire)
+        # #print(self.map.centreCaseNoire)"""
 
         self.character_x = self.map.spawnX
         self.character_y = self.map.spawnY
@@ -548,6 +559,7 @@ class player:
         )
 
         # Monsters infos
+        self.areaPlay.create_text(x1 + 45, 195, text="North", fill="white", font=("Press Start 2P", 11))
         self.areaPlay.create_rectangle(x1 + 3, 200, x1 + 88, 340, fill="")
         self.areaPlay.create_rectangle(
             x1 + 3, 200, x1 + 88, 250, fill="", outline="white"
@@ -559,7 +571,7 @@ class player:
             x1 + 3, 295, x1 + 88, 340, fill="", outline="white"
         )
         
-
+        self.areaPlay.create_text(x1 + 131, 195, text="East", fill="white", font=("Press Start 2P", 11))
         self.areaPlay.create_rectangle(x1 + 89, 200, x1 + 174, 340, fill="")
         self.areaPlay.create_rectangle(
             x1 + 89, 200, x1 + 174, 250, fill="", outline="white"
@@ -571,6 +583,7 @@ class player:
             x1 + 89, 295, x1 + 174, 340, fill="", outline="white"
         )
 
+        self.areaPlay.create_text(x1 + 217, 195, text="South", fill="white", font=("Press Start 2P", 11))
         self.areaPlay.create_rectangle(x1 + 175, 200, x1 + 260, 340, fill="")
         self.areaPlay.create_rectangle(
             x1 + 175, 200, x1 + 260, 250, fill="", outline="white"
@@ -582,6 +595,7 @@ class player:
             x1 + 175, 295, x1 + 260, 340, fill="", outline="white"
         )
 
+        self.areaPlay.create_text(x1 + 306, 195, text="West", fill="white", font=("Press Start 2P", 11))
         self.areaPlay.create_rectangle(x1 + 261, 200, x1 + 346, 340, fill="")
         self.areaPlay.create_rectangle(
             x1 + 261, 200, x1 + 346, 250, fill="", outline="white"
@@ -770,24 +784,45 @@ class player:
         )
 
 
-    def hp_update(self):
+    def hp_update(self, textThere):
+        print(self.life_point)
+
         if self.life_point <= 10:
-            #print("Dead")
+            self.areaPlay.delete(self.text_health)
+            self.areaPlay.delete(self.health_bar)
+            self.text_health = self.areaPlay.create_text(WindowParameter.mapWidth + 83,  WindowParameter.tileSize+17, text=(str(0)), fill="white", font=("Press Start 2P", 12))
+            print("Dead")
             
             self.dead()
         else:
+            if textThere == True:
+                self.areaPlay.delete(self.text_health)
+                self.areaPlay.delete(self.health_bar)
             self.health_percent = self.life_point/self.max_life_point
             self.bar_width = self.health_percent * 300
             self.health_bar = self.areaPlay.create_rectangle(WindowParameter.mapWidth + 80,  WindowParameter.tileSize, WindowParameter.mapWidth+ self.bar_width, WindowParameter.tileSize + 30, fill="red")
+            self.text_health = self.areaPlay.create_text(WindowParameter.mapWidth + self.bar_width+20,  WindowParameter.tileSize+17, text=(str(self.life_point-25)), fill="white", font=("Press Start 2P", 12))
+        
+    def mana_update(self, textThere):
+        print(self.mana)
+        if self.mana >= 5:
+            if textThere == True:
+                self.areaPlay.delete(self.text_mana)
+                self.areaPlay.delete(self.mana_bar)
+            self.mana_percent = self.mana/self.max_mana
+            self.bar_mana_width = self.mana_percent * 300
+            self.mana_bar = self.areaPlay.create_rectangle(WindowParameter.mapWidth + 80,  WindowParameter.tileSize + 40, WindowParameter.mapWidth+ self.bar_mana_width, WindowParameter.tileSize + 50, fill="blue")
+            self.text_mana = self.areaPlay.create_text(WindowParameter.mapWidth + self.bar_mana_width+20,  WindowParameter.tileSize+50, text=(str(self.mana)), fill="white", font=("Press Start 2P", 12))
+        else:
+            self.text_mana = self.areaPlay.create_text(WindowParameter.mapWidth + 80,  WindowParameter.tileSize+50, text=(str(0)), fill="white", font=("Press Start 2P", 12))
         
     def dead(self):
         self.reset()
         with open('save.json', 'w') as fichier:
             fichier.truncate(0)
-        self.areaPlay.delete("all")
         self.areaPlay.unbind("<KeyPress>")
         self.playerDied = True
-        self.blackScreen = self.areaPlay.create_rectangle(0, 0, WindowParameter.screenWidth, WindowParameter.screenHeight, fill="black")
+        self.blackScreen = self.areaPlay.create_rectangle(0, 0, WindowParameter.screenWidth, WindowParameter.screenHeight, outline="black")
         """self.died = self.areaPlay.create_text(WindowParameter.screenWidth / 2, WindowParameter.screenHeight / 2, text="You died", fill="Red", font=("Press Start 2P", 16), anchor="center")
         self.buttonNewG = tk.Button(self.window, text="New Game", command=self.newGame)"""
 
@@ -817,6 +852,7 @@ class player:
         # Pour supprimer le bouton
         self.button.destroy()
         self.menuButton.destroy()
+        self.areaPlay.delete("all")
         self.reset()
         self.createAll()
 
@@ -995,6 +1031,94 @@ class player:
 
             i += 1
     
+    def Sort(self):
+        #print("Event joueur : Le joueur attaque")
+        self.mana = self.mana - 5
+        self.mana_update(True)
+        if self.mana < 0:
+            self.mana = 0
+        attackR = self.areaPlay.coords(self.attackRectR)
+        attack_x1R = attackR[0]
+        attack_y1R = attackR[1]
+        attack_x2R = attackR[2]
+        attack_y2R = attackR[3]
+        attackL = self.areaPlay.coords(self.attackRectL)
+        attack_x1L = attackL[0]
+        attack_y1L = attackL[1]
+        attack_x2L = attackL[2]
+        attack_y2L = attackL[3]
+        attackU = self.areaPlay.coords(self.attackRectU)
+        attack_x1U = attackU[0]
+        attack_y1U = attackU[1]
+        attack_x2U = attackU[2]
+        attack_y2U = attackU[3]
+        attackD = self.areaPlay.coords(self.attackRectD)
+        attack_x1D = attackD[0]
+        attack_y1D = attackD[1]
+        attack_x2D = attackD[2]
+        attack_y2D = attackD[3]
+        i = 0
+        pop = False
+        while i < len(self.monsters) and pop == False:
+            monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
+            monster_x1 = monsterCOO[0]
+            monster_y1 = monsterCOO[1]
+            monster_x2 = monsterCOO[2]
+            monster_y2 = monsterCOO[3]
+            if (
+                attack_x2R >= monster_x1
+                and attack_x1R <= monster_x2
+                and attack_y2R >= monster_y1
+                and attack_y1R <= monster_y2
+            ) or (
+                attack_x2L >= monster_x1
+                and attack_x1L <= monster_x2
+                and attack_y2L >= monster_y1
+                and attack_y1L <= monster_y2
+            ) or (
+                attack_x2U >= monster_x1
+                and attack_x1U <= monster_x2
+                and attack_y2U >= monster_y1
+                and attack_y1U <= monster_y2
+            )or (
+                attack_x2D >= monster_x1
+                and attack_x1D <= monster_x2
+                and attack_y2D >= monster_y1
+                and attack_y1D <= monster_y2
+            ):
+                ###print(self.monsters[i].life_points_monster)
+                self.monsters[i].life_points_monster = (
+                    self.monsters[i].life_points_monster - self.damageSpell
+                )
+
+                ###print(self.monsters[i].life_points_monster)
+
+                if self.monsters[i].life_points_monster <= 0:
+                    self.areaPlay.delete(self.monsters[i].health_bar)
+                    self.areaPlay.delete(self.monsters[i].monster)
+
+                    self.xp = self.xp + (self.monsters[i].xp - self.PlayerLevel * 2)
+                    if self.xp <= 0:
+                        self.xp = self.xp + 1
+                    if self.xp >= 50:
+                        self.PlayerLevel = self.PlayerLevel + 1
+                        self.life_point = self.life_point + 3
+                        self.damage = self.damage + 3
+                        self.damageSpell = self.damageSpell + 2
+                        self.xp = 0
+                    self.gold = self.monsters[i].xp + self.gold
+                    pop = True
+                    # #print("Level : ", self.PlayerLevel)
+                    # #print("Xp : ", self.xp)
+                    # #print("Gold : ", self.gold)
+                    self.monsters.pop(i)
+                else:
+                    self.monsters[i].update_healthBar(
+                        self.areaPlay, monster_x1, monster_y1
+                    )
+
+            i += 1
+    
 
     def collisionWithMonster(self):
         tolerance = 6
@@ -1021,6 +1145,7 @@ class player:
     def move_character(self, event):
         eventJoueur = False
         self.countTourActivate = False
+        self.countTourActivateSort = False
         key = event.keysym
         if key == "Escape" and not self.collPNJ:
             self.collPNJ = True
@@ -1094,6 +1219,46 @@ class player:
                             
                             self.countTourActivate = True
                         self.window.after(200, self.start_moving_monsters)
+
+                elif key == "s" and self.mana >= 5:
+                            ##print("direction attack right")
+                            taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
+                            taille_secondaire = 8  # Taille du côté du carré secondaire
+
+                            x1R = self.character_x2  # Coordonnée x1 du carré secondaire
+                            y1R = self.character_y1 + (taille_cote - taille_secondaire) / 2  # Coordonnée y1 du carré secondaire
+                            x2R = x1R + taille_secondaire  # Coordonnée x2 du carré secondaire
+                            y2R = y1R + taille_secondaire  # Coordonnée y2 du carré secondaire
+
+                            x2L = self.character_x1  # Coordonnée x1 du carré secondaire
+                            y1L = self.character_y1 + (taille_cote - taille_secondaire) / 2  # Coordonnée y1 du carré secondaire
+                            x1L = x2L - taille_secondaire  # Coordonnée x2 du carré secondaire
+                            y2L = y1L + taille_secondaire  # Coordonnée y2 du carré secondaire
+
+                            x1U = self.character_x1 + (taille_cote - taille_secondaire) / 2
+                            x2U = x1U + taille_secondaire
+                            y2U = self.character_y1 # Coordonnée y2 du carré secondaire
+                            y1U = y2U - taille_secondaire
+
+                            x1D = self.character_x1 + (taille_cote - taille_secondaire) / 2 # Coordonnée x1 du carré secondaire
+                            y1D = self.character_y2  # Coordonnée y1 du carré secondaire
+                            x2D = x1D + taille_secondaire  # Coordonnée x2 du carré secondaire
+                            y2D = y1D + taille_secondaire  # Coordonnée y2 du carré secondaire
+
+                            self.attackRectR = self.areaPlay.create_rectangle(x1R, y1R, x2R+8, y2R, fill="red")
+                            self.attackRectL = self.areaPlay.create_rectangle(x1L-8, y1L, x2L, y2L, fill="red")
+                            self.attackRectU = self.areaPlay.create_rectangle(x1U, y1U-8, x2U, y2U, fill="red")
+                            self.attackRectD = self.areaPlay.create_rectangle(x1D, y1D, x2D, y2D+8, fill="red")
+                            self.Sort()
+
+                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRectR))
+                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRectL))
+                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRectU))
+                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRectD))
+
+                            self.countTourActivateSort = True
+                            
+                            self.window.after(200, self.start_moving_monsters)
        
 
                 #Player
@@ -1163,15 +1328,10 @@ class player:
                         self.window.after(100, self.start_moving_monsters)
             
             self.tourPlayer = False
-            """if self.countTour == self.weaponTour:
-                self.countTour = 0
-                self.countTourActivate = False
-            if self.countTourActivate :
-                self.countTour += 1"""
-            #self.collisionWithMonster()
-            # #print("in p ",self.fullMonster)
+            # print("in p ",self.fullMonster)
             self.player_info()
-            self.hp_update()
+            self.hp_update(True)
+            self.mana_update(True)
             if self.eventNrVar == True:
                 text =  "Player go to the next room"
                 self.eventJoueur(text)
@@ -1187,7 +1347,10 @@ class player:
             elif self.countTourActivate == True:
                 text = "Player attacks"
                 self.eventJoueur(text)
-            # #print(self.text)
+            elif self.countTourActivateSort == True:
+                text = "Player casts a spell"
+                self.eventJoueur(text)
+            # print(self.text)
             self.eventMWalked = False
             self.eventMAVar = False
             self.text = "Monster :"

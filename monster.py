@@ -1590,7 +1590,7 @@ class Monster:
             text = "Monsters walks"
             playerSelf.eventMonster(text)
             playerSelf.eventMWalked = True
-        playerSelf.hp_update()
+        playerSelf.hp_update(True)
 
 
     # Vérifier si deux segments de ligne s'intersectent
