@@ -1,8 +1,6 @@
 from carac_pj.classePJ import classePJ
 from carac_pj.player import player
-from map import Map
 import tkinter as tk
-import GameMap
 import json
 import os
 

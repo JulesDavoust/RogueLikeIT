@@ -2,6 +2,7 @@ import tkinter as tk
 import json
 import windowParameters
 import equipements
+from map import Map
 
 class Escape:
 
@@ -87,7 +88,8 @@ class Escape:
                 'armor': self.selfplayer.armor,
                 'weapon': self.selfplayer.weapon,
                 'defense':equipements.Equipements.equipement_stats[self.selfplayer.armor],
-                'inventory': self.selfplayer.inventory
+                'inventory': self.selfplayer.inventory,
+                'map': self.selfplayer.map.maze
             }
         
             # Écrire les données dans le fichier JSON

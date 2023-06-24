@@ -83,8 +83,8 @@ class player:
     def __init__(self, classe, interface):
 
         self.escape = Escape()
-        #self.items = Items()
         self.interface = interface
+        self.mazeMap = None
     
         self.classe = classe
         self.potion_pv = "potion_PV"
@@ -109,6 +109,7 @@ class player:
                 self.armor = data['armor']
                 self.damage = data['damage']
                 self.defense = data['defense']
+                self.mazeMap = data['map']
         else:
             if classe == 0:
                 self.initializeBasic_knight()
@@ -177,7 +178,7 @@ class player:
     def createAll(self):
         
         self.map = Map()
-        self.map.generateMap(self.areaPlay)
+        self.map.generateMap(self.areaPlay, self.mazeMap)
         self.map.level = self.map.level + 1
         self.levelMap = self.map.level
         self.map.generateKey(self.areaPlay)

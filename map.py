@@ -19,25 +19,13 @@ class Map:
         self.indexDicoC = 0
         self.spawnX = 0
         self.spawnY = 0
-        self.maze = None
 
-    def generateMap(self, areaPlay):
+    def generateMap(self, areaPlay, existMap):
         self.map_width = WindowParameter.mapWidth
         self.map_height = WindowParameter.mapHeight
         case_size = WindowParameter.tileSize
         x_tile = WindowParameter.mapTileCol
         y_tile = WindowParameter.mapTileRow
-
-        random_loto = random.randint(0,50)
-        if(random_loto < 10):
-            num_remove_walls = random.randint(0,10)
-        elif(random_loto >= 10 and random_loto < 30):
-            num_remove_walls = random.randint(40, 60)
-        elif(random_loto >= 30 and random_loto < 45):
-            num_remove_walls = random.randint(20,50)
-        else:
-            num_remove_walls = 80
-        
 
         # Image assests import
         wall_image = Image.open("./sprites/wall_mid.png").convert("P")
@@ -48,17 +36,28 @@ class Map:
         floor_image = floor_image.resize((case_size, case_size), Image.ANTIALIAS)
         self.floor_photo = ImageTk.PhotoImage(floor_image)
 
-        # maze generation The number of wall can be modified(removed)
-        self.maze = mazeMap.generate_maze(x_tile, y_tile)
-        wall_list = mazeMap.detect_walls(self.maze)
-        for i in range(num_remove_walls):
-            remove_index = random.choice(wall_list)
-            self.maze = mazeMap.delete_wall(self.maze, remove_index[0], remove_index[1])
-            wall_list = mazeMap.detect_walls(self.maze)
+        if(existMap == None):
+            random_loto = random.randint(0,50)
+            if(random_loto < 10):
+                num_remove_walls = random.randint(0,10)
+            elif(random_loto >= 10 and random_loto < 30):
+                num_remove_walls = random.randint(40, 60)
+            elif(random_loto >= 30 and random_loto < 45):
+                num_remove_walls = random.randint(20,50)
+            else:
+                num_remove_walls = 80
 
-        ####print("Maze after delete walls:")
-        #for row in self.maze:
-            ####print(" ".join(row))
+            # maze generation The number of wall can be modified(removed)
+            self.maze = mazeMap.generate_maze(x_tile, y_tile)
+            wall_list = mazeMap.detect_walls(self.maze)
+            for i in range(num_remove_walls):
+                remove_index = random.choice(wall_list)
+                self.maze = mazeMap.delete_wall(self.maze, remove_index[0], remove_index[1])
+                wall_list = mazeMap.detect_walls(self.maze)
+        else:
+            self.maze = existMap
+
+        
         # Dessine les cases V2.0
         for y in range(len(self.maze)):
             for x in range(len(self.maze[y])):
