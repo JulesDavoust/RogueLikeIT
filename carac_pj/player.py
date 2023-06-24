@@ -43,7 +43,7 @@ class player:
         self.view_distance = 100
         self.character_x = 0
         self.character_y = 0
-
+        self.playerDied = False
         self.player_collision = False
         self.pause = False
         self.collPNJ = False
@@ -107,12 +107,15 @@ class player:
     def createAll(self):
         self.hasExitKey = False
         self.tourPlayer = True
+        self.playerDied = False
+        self.life_point = self.max_life_point
         self.map = Map()
         self.map.generateMap(self.areaPlay)
         self.map.level = self.map.level + 1
         self.levelMap = self.map.level
         self.map.generateKey(self.areaPlay)
-        self.player_info(self.areaPlay, self)
+        self.player_info(self.areaPlay)
+        self.hp_update()
         # print("map level : ", self.levelMap)
         # """#print(self.map.CaseNoire)
         # #print(self.map.centreCaseNoire)"""
@@ -296,7 +299,7 @@ class player:
         self.monsterDico = {}
         self.moved_m_index = 0
         # self.monster.moveMonster(self.areaPlay, self.view_x1, self.view_y1, self.view_x2, self.view_y2, self.character_x, self.character_y, self.character_x2, self.character_x1, self.character_y2, self.character_y1)
-        if self.player_collision == False:
+        if  self.playerDied == False or self.player_collision == False:
             # print("continue ?")
             for monster in self.monsters:
                 monster.moveMonster(
@@ -314,6 +317,8 @@ class player:
                     self,
                     self.map,
                 )
+                if self.playerDied == True :
+                    break
                 monster_coords = self.areaPlay.coords(monster.monster)
                 self.monsterDico[self.moved_m_index] = [
                     monster_coords[0],
@@ -380,7 +385,7 @@ class player:
         else:
             return False
 
-    def player_info(self, areaPlay, player):
+    def player_info(self, areaPlay):
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
         screen_width = WindowParameter.screenWidth
@@ -404,13 +409,8 @@ class player:
         self.areaPlay.create_image(
             map_width + 50, WindowParameter.tileSize + 10, image=self.player_photoI
         )
-        self.areaPlay.create_rectangle(
-            map_width + 80,
-            WindowParameter.tileSize,
-            map_width + 300,
-            WindowParameter.tileSize + 30,
-            fill="red",
-        )
+
+        
 
         # Money / XP / Lv
         self.areaPlay.create_rectangle(x1 + 20, 100, x1 + 310, 140, fill="white")
@@ -629,25 +629,37 @@ class player:
 
 
 
-    def hp_update(self, player, areaPlay, monster):
-        hp_max = self.max_life_point
-        current_hp = self.life_point
+    def hp_update(self):
+        print("hpp")
+        print(self.life_point)
+        if self.life_point <= 25:
+            print("Dead")
+            self.playerDied = True
+            self.dead()
+        else:
+            self.health_percent = self.life_point/self.max_life_point
+            self.bar_width = self.health_percent * 300
+            self.health_bar = self.areaPlay.create_rectangle(WindowParameter.mapWidth + 80,  WindowParameter.tileSize, WindowParameter.mapWidth+ self.bar_width, WindowParameter.tileSize + 30, fill="red")
+        
+    def dead(self):
+        self.areaPlay.delete("all")
+        self.blackScreen = self.areaPlay.create_rectangle(0, 0, WindowParameter.screenWidth, WindowParameter.screenHeight, fill="black")
+        """self.died = self.areaPlay.create_text(WindowParameter.screenWidth / 2, WindowParameter.screenHeight / 2, text="You died", fill="Red", font=("Press Start 2P", 16), anchor="center")
+        self.buttonNewG = tk.Button(self.window, text="New Game", command=self.newGame)"""
 
-        self.areaPlay.create_rectangle(
-            WindowParameter.mapWidth + 80,
-            50,
-            WindowParameter.mapWidth + (hp_max * 3),
-            80,
-            fill="grey",
-        )
-        self.areaPlay.create_rectangle(
-            WindowParameter.mapWidth + 80,
-            50,
-            WindowParameter.mapWidth + (current_hp * 3),
-            80,
-            fill="red",
-        )
+        self.text = tk.Label(self.window, text="You died", font=("Press Start 2P", 16), fg="red", bg="black")
+        self.text.place(x=WindowParameter.screenWidth / 2, y=WindowParameter.screenHeight / 2, anchor="center")
+        
+        # Création du bouton
+        self.button = tk.Button(self.window, text="New Game", command=self.newGame)
+        self.button.place(x=WindowParameter.screenWidth / 2, y=WindowParameter.screenHeight / 2 + 30, anchor="center")
 
+    def newGame(self):
+        self.text.destroy()
+        # Pour supprimer le bouton
+        self.button.destroy()
+        self.areaPlay.delete("all")
+        self.createAll()
 
     def eventJoueur(self, text):
         if self.EJ == True:
@@ -857,7 +869,7 @@ class player:
         eventJoueur = False
         self.countTourActivate = False
         key = event.keysym
-        if not self.collPNJ :
+        if (self.playerDied == False) or (not self.collPNJ):
             if self.tourPlayer :
                 if event.char == "a":
                         if self.attackDirection == "Right":
@@ -1000,27 +1012,29 @@ class player:
             if self.countTourActivate :
                 self.countTour += 1"""
         #self.collisionWithMonster()
-        print("in p ",self.fullMonster)
-        self.player_info(self.areaPlay, self)
-        if self.eventNrVar == True:
-            text =  "Player go to the next room"
-            self.eventJoueur(text)
-            self.eventNrVar = False
-        elif self.eventKVar == True:
-            text =  "Player get the key"
-            print(text)
-            self.eventJoueur(text)
-            self.eventKVar = False
-        elif eventJoueur == True:
-            text = "Player walks"
-            self.eventJoueur(text)
-        elif self.countTourActivate == True:
-            text = "Player attacks"
-            self.eventJoueur(text)
-        print(self.text)
-        self.eventMWalked = False
-        self.eventMAVar = False
-        self.text = "Monster :"
+        if self.playerDied == False:
+            print("in p ",self.fullMonster)
+            self.player_info(self.areaPlay)
+            self.hp_update()
+            if self.eventNrVar == True:
+                text =  "Player go to the next room"
+                self.eventJoueur(text)
+                self.eventNrVar = False
+            elif self.eventKVar == True:
+                text =  "Player get the key"
+                print(text)
+                self.eventJoueur(text)
+                self.eventKVar = False
+            elif eventJoueur == True:
+                text = "Player walks"
+                self.eventJoueur(text)
+            elif self.countTourActivate == True:
+                text = "Player attacks"
+                self.eventJoueur(text)
+            print(self.text)
+            self.eventMWalked = False
+            self.eventMAVar = False
+            self.text = "Monster :"
         
         
 
