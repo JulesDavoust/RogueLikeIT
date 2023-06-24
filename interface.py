@@ -54,6 +54,8 @@ class Interface:
         continue_button.pack()
 
     def MenuClass(self):
+        with open('save.json', 'w') as fichier:
+            fichier.truncate(0)
         self.generate.pack_forget()
         self.fight.pack_forget()
         self.main_menu.pack_forget()
@@ -65,18 +67,8 @@ class Interface:
             guerrier = tk.Label(self.menu, text="Classe : Guerrier")
             buttonGuerrier = tk.Button(self.menu, text="Choisir", command=self.select_guerrier)
 
-            archer = tk.Label(self.menu, text="Classe : Archer")
-            buttonArcher = tk.Button(self.menu, text="Choisir", command=self.select_archer)
-
-            sorcier = tk.Label(self.menu, text="Classe : Sorcier")
-            buttonSorcier = tk.Button(self.menu, text="Choisir", command=self.select_sorcier)
-
             guerrier.pack()
             buttonGuerrier.pack()
-            archer.pack()
-            buttonArcher.pack()
-            sorcier.pack()
-            buttonSorcier.pack()
 
     def ContinueGame(self):
         # Code pour charger une partie existante

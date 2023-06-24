@@ -18,12 +18,11 @@ class player:
     def __init__(self, classe, interface):
         #self.items = Items()
         self.interface = interface
-    
+        classe = 0
         self.classe = classe
         self.potion_pv = "potion_PV"
         self.potion_mp = "potion_MP"
-        self.inventory = {self.potion_pv: 3, self.potion_mp: 0}
-        self.gold = 30
+        
 
         print("initiate player")
         if not self.interface.is_json_file_empty():
@@ -37,10 +36,12 @@ class player:
                 self.max_life_point = data['max_life_point']
                 self.mana = data['mana']
                 self.max_mana = data['max_mana']
-                self.damage = data['damage']
                 self.damageSpell = data['damageSpell']
                 self.inventory = data['inventory']
+                self.weapon = data['weapon']
                 self.armor = data['armor']
+                self.damage = data['damage']
+                self.defense = data['defense']
         else:
             self.PlayerLevel = 0
             self.xp = 0
