@@ -530,6 +530,7 @@ class player:
             if(self.life_point > self.max_life_point):
                 self.life_point = self.max_life_point
             self.inventory[self.potion_pv] -= 1
+            self.hp_update(True)
         else:
             pass
 
