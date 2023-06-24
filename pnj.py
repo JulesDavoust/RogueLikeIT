@@ -60,6 +60,7 @@ class PNJ:
         
         self.windowShop = tk.Toplevel(window)
         self.windowShop.geometry("400x200")
+        self.windowShop.focus_set()
 
         #Remove window decorations (Top-right)
         self.windowShop.overrideredirect(True)

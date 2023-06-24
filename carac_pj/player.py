@@ -8,24 +8,71 @@ from PIL import Image, ImageTk
 import mazeMap
 from equipements import Equipements, Items
 
+import json
+from escape import Escape
+
+#from items import Items
 
 
 class player:
-    def __init__(self, classe):
+    def __init__(self, classe, interface):
         #self.items = Items()
-
-        self.allClasse = {0: "guerrier", 1: "archer", 2: "sorcier"}
+        self.interface = interface
+    
         self.classe = classe
-
-        self.PlayerLevel = 0
-        self.xp = 0
-
-        # add the other items in case we have time, like bomb
-        # Each item is saved as dict in the list of inventory, in this way we can know the storage directly
         self.potion_pv = "potion_PV"
         self.potion_mp = "potion_MP"
         self.inventory = {self.potion_pv: 3, self.potion_mp: 0}
         self.gold = 30
+
+        print("initiate player")
+        if not self.interface.is_json_file_empty():
+            print("Le fichier JSON n'est pas vide.")
+            with open('save.json', 'r') as file:
+                data = json.load(file)
+                self.PlayerLevel = data['level']
+                self.xp = data['xp']
+                self.gold = data['gold']
+                self.life_point = data['life_point']
+                self.max_life_point = data['max_life_point']
+                self.mana = data['mana']
+                self.damage = data['damage']
+                self.inventory = data['inventory']
+                self.armor = data['armor']
+        else:
+            self.PlayerLevel = 0
+            self.xp = 0
+            self.inventory = {self.potion_pv: 1, self.potion_mp: 0}
+            self.gold = 30
+            if classe == 0:
+                self.life_point = 50
+                self.armor = 0
+                self.max_life_point = self.life_point
+                self.mana = 20
+                self.damage = 30
+                self.weapon = "blade_0"
+                self.armor = "ring_0"
+                self.damage = Equipements.equipement_stats[self.weapon]
+                self.defense = Equipements.equipement_stats[self.armor]
+                # self.knight = tk.PhotoImage(file="./sprites/knight_f_idle_anim_f0.png")
+            elif classe == 1:
+                self.life_point = 80
+                self.armor = 0
+                self.max_life_point = self.life_point
+                self.mana = 30
+                self.range = 10
+                self.damage = 10
+            elif classe == 2:
+                self.life_point = 100
+                self.armor = 0
+                self.max_life_point = self.life_point
+                self.mana = 50
+                self.range = 5
+                self.damage = 20
+        # add the other items in case we have time, like bomb
+        # Each item is saved as dict in the list of inventory, in this way we can know the storage directly
+        
+        
 
         self.hasExitKey = False
 
@@ -44,6 +91,7 @@ class player:
         
         self.text = "Monster :"
 
+        self.escape = Escape()
         self.map = Map()
         self.view_distance = 100
         self.character_x = 0
@@ -69,7 +117,6 @@ class player:
 
         self.countTourActivate = False
         self.countTour = 0
-        self.weaponTour = 1
 
         self.attackDirection = "Right"
 
@@ -77,29 +124,8 @@ class player:
 
         # The distance of mouvement for player and monster
         self.moveDistance = WindowParameter.tileSize
-
-        if classe == 0:
-            self.life_point = 100
-            self.max_life_point = self.life_point
-            self.mana = 20
-            self.weapon = "blade_0"
-            self.armor = "ring_0"
-            self.damage = Equipements.equipement_stats[self.weapon]
-            self.defense = Equipements.equipement_stats[self.armor]
             
-            # self.knight = tk.PhotoImage(file="./sprites/knight_f_idle_anim_f0.png")
-        elif classe == 1:
-            self.life_point = 80
-            self.max_life_point = self.life_point
-            self.mana = 30
-            self.range = 10
-            self.damage = 10
-        elif classe == 2:
-            self.life_point = 100
-            self.max_life_point = self.life_point
-            self.mana = 50
-            self.range = 5
-            self.damage = 20
+        
 
     def generatePlayer(self, window):
         self.window = window
@@ -112,12 +138,89 @@ class player:
         self.areaPlay.pack()
         window.bind("<KeyPress>", self.move_character)
 
+    
 
-    def createAll(self):
+
+    def reset(self):
+        if self.classe == 0:
+                self.life_point = 50
+                self.armor = 0
+                self.max_life_point = self.life_point
+                self.mana = 20
+                self.damage = 30
+                # self.knight = tk.PhotoImage(file="./sprites/knight_f_idle_anim_f0.png")
+        elif self.classe == 1:
+                self.life_point = 80
+                self.armor = 0
+                self.max_life_point = self.life_point
+                self.mana = 30
+                self.range = 10
+                self.damage = 10
+        elif self.classe == 2:
+                self.life_point = 100
+                self.armor = 0
+                self.max_life_point = self.life_point
+                self.mana = 50
+                self.range = 5
+                self.damage = 20
+        self.inventory = {self.potion_pv: 1, self.potion_mp: 0}
         self.hasExitKey = False
         self.tourPlayer = True
         self.playerDied = False
+        self.PlayerLevel = 0
+        self.xp = 0
+
+        self.gold = 30
+
+        self.hasExitKey = False
+
+        self.pnjCooDico = {}
+        self.monsterDico = {}
+        self.moved_m_index = 0
+
+        self.indexDico = 0
+        self.indexMonster = 0
+
+        self.fullMonster = {"n": [], "e": [], "s": [], "w": []}
+        self.lengthFullMonster = 0
+        self.maxLengthFullMonster = 3
+
+        self.monsterAttack = []
+        
+        self.text = "Monster :"
+        
+        self.view_distance = 100
+        self.character_x = 0
+        self.character_y = 0
+        self.playerDied = False
+        self.player_collision = False
+        self.pause = False
+        self.collPNJ = False
+        self.cooldown_active = False
+        self.gonext = False
+        self.tourPlayer = True
+
+        self.EJ = False
+        self.E = False
+        self.EA = False
+
+        self.eventNrVar = False
+        self.eventKVar = False
+        self.eventMWVar = False
+        self.eventMWalked = False
+
+        self.eventMAVar = False
+
+        self.countTourActivate = False
+        self.countTour = 0
+
+        self.attackDirection = "Right"
+
+        self.numPNJ = 0
         self.life_point = self.max_life_point
+
+    def createAll(self):
+        
         self.map = Map()
         self.map.generateMap(self.areaPlay)
         self.map.level = self.map.level + 1
@@ -729,7 +832,7 @@ class player:
     def hp_update(self):
         if self.life_point <= 25:
             print("Dead")
-            self.playerDied = True
+            
             self.dead()
         else:
             self.health_percent = self.life_point/self.max_life_point
@@ -737,7 +840,12 @@ class player:
             self.health_bar = self.areaPlay.create_rectangle(WindowParameter.mapWidth + 80,  WindowParameter.tileSize, WindowParameter.mapWidth+ self.bar_width, WindowParameter.tileSize + 30, fill="red")
         
     def dead(self):
+        self.reset()
+        with open('save.json', 'w') as fichier:
+            fichier.truncate(0)
         self.areaPlay.delete("all")
+        self.areaPlay.unbind("<KeyPress>")
+        self.playerDied = True
         self.blackScreen = self.areaPlay.create_rectangle(0, 0, WindowParameter.screenWidth, WindowParameter.screenHeight, fill="black")
         """self.died = self.areaPlay.create_text(WindowParameter.screenWidth / 2, WindowParameter.screenHeight / 2, text="You died", fill="Red", font=("Press Start 2P", 16), anchor="center")
         self.buttonNewG = tk.Button(self.window, text="New Game", command=self.newGame)"""
@@ -749,11 +857,26 @@ class player:
         self.button = tk.Button(self.window, text="New Game", command=self.newGame)
         self.button.place(x=WindowParameter.screenWidth / 2, y=WindowParameter.screenHeight / 2 + 30, anchor="center")
 
+        self.menuButton = tk.Button(self.window, text="Menu", command=self.menu)
+        self.menuButton.place(x=WindowParameter.screenWidth / 2, y=WindowParameter.screenHeight / 2 + 60, anchor="center")
+
+    def menu(self):
+        self.text.destroy()
+        self.button.destroy()
+        self.menuButton.destroy()
+        self.areaPlay.delete("all")
+        self.areaPlay.destroy()
+        self.reset()
+        print("test1")
+        self.interface.backtomenu()
+        print("test2")
+
     def newGame(self):
         self.text.destroy()
         # Pour supprimer le bouton
         self.button.destroy()
-        self.areaPlay.delete("all")
+        self.menuButton.destroy()
+        self.reset()
         self.createAll()
 
     def eventJoueur(self, text):
@@ -958,9 +1081,13 @@ class player:
         eventJoueur = False
         self.countTourActivate = False
         key = event.keysym
-        if (self.playerDied == False) or (not self.collPNJ):
+        if key == "Escape" and not self.collPNJ:
+            self.collPNJ = True
+            self.escape.createEscap(self.window,self)
+
+        elif (self.playerDied == False) and (not self.collPNJ):
             if self.tourPlayer :
-                if event.char == "a":
+                if key == "a":
                         if self.attackDirection == "Right":
                             ##print("direction attack right")
                             taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
@@ -1100,28 +1227,29 @@ class player:
                 self.countTourActivate = False
             if self.countTourActivate :
                 self.countTour += 1"""
-        #self.collisionWithMonster()
-        print("in p ",self.fullMonster)
-        self.player_info()
-        if self.eventNrVar == True:
-            text =  "Player go to the next room"
-            self.eventJoueur(text)
-            self.eventNrVar = False
-        elif self.eventKVar == True:
-            text =  "Player get the key"
-            print(text)
-            self.eventJoueur(text)
-            self.eventKVar = False
-        elif eventJoueur == True:
-            text = "Player walks"
-            self.eventJoueur(text)
-        elif self.countTourActivate == True:
-            text = "Player attacks"
-            self.eventJoueur(text)
-        print(self.text)
-        self.eventMWalked = False
-        self.eventMAVar = False
-        self.text = "Monster :"
+            #self.collisionWithMonster()
+            print("in p ",self.fullMonster)
+            self.player_info()
+            self.hp_update()
+            if self.eventNrVar == True:
+                text =  "Player go to the next room"
+                self.eventJoueur(text)
+                self.eventNrVar = False
+            elif self.eventKVar == True:
+                text =  "Player get the key"
+                print(text)
+                self.eventJoueur(text)
+                self.eventKVar = False
+            elif eventJoueur == True:
+                text = "Player walks"
+                self.eventJoueur(text)
+            elif self.countTourActivate == True:
+                text = "Player attacks"
+                self.eventJoueur(text)
+            print(self.text)
+            self.eventMWalked = False
+            self.eventMAVar = False
+            self.text = "Monster :"
         
         
 
