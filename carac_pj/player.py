@@ -791,7 +791,7 @@ class player:
     def hp_update(self, textThere):
         print(self.life_point)
 
-        if self.life_point <= 10:
+        if self.life_point <= 25:
             self.areaPlay.delete(self.text_health)
             self.areaPlay.delete(self.health_bar)
             self.text_health = self.areaPlay.create_text(WindowParameter.mapWidth + 83,  WindowParameter.tileSize+17, text=(str(0)), fill="white", font=("Press Start 2P", 12))
@@ -1388,14 +1388,14 @@ class player:
         self.view_y2 = self.character_y + self.view_distance
 
         ####print("Player : x1 : ",self.view_x1," y1 : ",self.view_x2," x2 : ",self.view_x2," y2 : ",self.view_y2)
-
+        # Aura of the player
         self.areaPlay.create_rectangle(
             self.view_x1,
             self.view_y1,
             self.view_x2,
             self.view_y2,
             fill="",
-            outline="white",
+            outline="",
             tag="view",
         )
 
