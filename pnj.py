@@ -54,6 +54,7 @@ class PNJ:
         self.string2 = self.keysItem[2]+"\n"+self.keySousDico2[0]+" : "+str(self.shop[self.keysItem[2]][self.keySousDico2[0]])+" \n"+self.keySousDico2[1]+" : "+str(self.shop[self.keysItem[2]][self.keySousDico2[1]])
         self.windowShop = tk.Toplevel(window)
         self.windowShop.geometry("400x300")
+        self.windowShop.focus_set()
 
         """self.keySousDico0[0]," : ",
         ,self.keySousDico0[1]," : " """
