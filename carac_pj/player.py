@@ -107,6 +107,7 @@ class player:
         self.eventMAVar = False
 
         self.countTourActivate = False
+        self.countTourActivateSort = False
         self.countTour = 0
 
         self.attackDirection = "Right"
@@ -203,6 +204,7 @@ class player:
         self.eventMAVar = False
 
         self.countTourActivate = False
+        self.countTourActivateSort = False
         self.countTour = 0
 
         self.attackDirection = "Right"
@@ -1037,6 +1039,60 @@ class player:
 
             i += 1
     
+    def Sort(self):
+        #print("Event joueur : Le joueur attaque")
+        
+        attack = self.areaPlay.coords(self.attackRect)
+        attack_x1 = attack[0]
+        attack_y1 = attack[1]
+        attack_x2 = attack[2]
+        attack_y2 = attack[3]
+        i = 0
+        pop = False
+        while i < len(self.monsters) and pop == False:
+            monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
+            monster_x1 = monsterCOO[0]
+            monster_y1 = monsterCOO[1]
+            monster_x2 = monsterCOO[2]
+            monster_y2 = monsterCOO[3]
+            if (
+                attack_x2 >= monster_x1
+                and attack_x1 <= monster_x2
+                and attack_y2 >= monster_y1
+                and attack_y1 <= monster_y2
+            ):
+                ###print(self.monsters[i].life_points_monster)
+                self.monsters[i].life_points_monster = (
+                    self.monsters[i].life_points_monster - self.damage
+                )
+
+                ###print(self.monsters[i].life_points_monster)
+
+                if self.monsters[i].life_points_monster <= 0:
+                    self.areaPlay.delete(self.monsters[i].health_bar)
+                    self.areaPlay.delete(self.monsters[i].monster)
+
+                    self.xp = self.xp + (self.monsters[i].xp - self.PlayerLevel * 2)
+                    if self.xp <= 0:
+                        self.xp = self.xp + 1
+                    if self.xp >= 50:
+                        self.PlayerLevel = self.PlayerLevel + 1
+                        self.life_point = self.life_point + 3
+                        self.damage = self.damage + 3
+                        self.xp = 0
+                    self.gold = self.monsters[i].xp + self.gold
+                    pop = True
+                    # #print("Level : ", self.PlayerLevel)
+                    # #print("Xp : ", self.xp)
+                    # #print("Gold : ", self.gold)
+                    self.monsters.pop(i)
+                else:
+                    self.monsters[i].update_healthBar(
+                        self.areaPlay, monster_x1, monster_y1
+                    )
+
+            i += 1
+    
 
     def collisionWithMonster(self):
         tolerance = 6
@@ -1063,6 +1119,7 @@ class player:
     def move_character(self, event):
         eventJoueur = False
         self.countTourActivate = False
+        self.countTourActivateSort = False
         key = event.keysym
         if key == "Escape" and not self.collPNJ:
             self.collPNJ = True
@@ -1082,7 +1139,7 @@ class player:
                             y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
                             self.attackRect = self.areaPlay.create_rectangle(x1, y1, x2+8, y2, fill="blue")
-                            self.Fight()
+                            self.Sort()
                             self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
 
                             self.countTourActivate = True
@@ -1098,7 +1155,7 @@ class player:
                             y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
                             self.attackRect = self.areaPlay.create_rectangle(x1-8, y1, x2, y2, fill="blue")
-                            self.Fight()
+                            self.Sort()
                             self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
 
                             self.countTourActivate = True  # Désactive le cooldown après 2000 millisecondes (2 secondes)
@@ -1115,7 +1172,7 @@ class player:
                             
 
                             self.attackRect = self.areaPlay.create_rectangle(x1, y1-8, x2, y2, fill="blue")
-                            self.Fight()
+                            self.Sort()
                             self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
                             
                             self.countTourActivate = True
@@ -1131,11 +1188,78 @@ class player:
                             y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
 
                             self.attackRect = self.areaPlay.create_rectangle(x1, y1, x2, y2+8, fill="blue")
-                            self.Fight()
+                            self.Sort()
                             self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
                             
                             self.countTourActivate = True
                         self.window.after(200, self.start_moving_monsters)
+
+                elif key == "s":
+                    if self.attackDirection == "Right":
+                            ##print("direction attack right")
+                            taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
+                            taille_secondaire = 8  # Taille du côté du carré secondaire
+
+                            x1 = self.character_x2  # Coordonnée x1 du carré secondaire
+                            y1 = self.character_y1 + (taille_cote - taille_secondaire) / 2  # Coordonnée y1 du carré secondaire
+                            x2 = x1 + taille_secondaire  # Coordonnée x2 du carré secondaire
+                            y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
+
+                            self.attackRect = self.areaPlay.create_rectangle(x1, y1, x2+8, y2, fill="blue")
+                            self.Fight()
+                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
+
+                            self.countTourActivateSort = True
+                            
+                    elif self.attackDirection == "Left":
+                            ##print("direction attack Left")
+                            taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
+                            taille_secondaire = 8  # Taille du côté du carré secondaire
+
+                            x2 = self.character_x1  # Coordonnée x1 du carré secondaire
+                            y1 = self.character_y1 + (taille_cote - taille_secondaire) / 2  # Coordonnée y1 du carré secondaire
+                            x1 = x2 - taille_secondaire  # Coordonnée x2 du carré secondaire
+                            y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
+
+                            self.attackRect = self.areaPlay.create_rectangle(x1-8, y1, x2, y2, fill="blue")
+                            self.Fight()
+                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
+
+                            self.countTourActivateSort = True  # Désactive le cooldown après 2000 millisecondes (2 secondes)
+                            
+                    elif self.attackDirection == "Up":
+                            ##print("direction attack Up")
+                            taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
+                            taille_secondaire = 8  # Taille du côté du carré secondaire
+
+                            x1 = self.character_x1 + (taille_cote - taille_secondaire) / 2
+                            x2 = x1 + taille_secondaire
+                            y2 = self.character_y1 # Coordonnée y2 du carré secondaire
+                            y1 = y2 - taille_secondaire
+                            
+
+                            self.attackRect = self.areaPlay.create_rectangle(x1, y1-8, x2, y2, fill="blue")
+                            self.Fight()
+                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
+                            
+                            self.countTourActivateSort = True
+                        
+                    elif self.attackDirection == "Down":
+                            ##print("direction attack Down")
+                            taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
+                            taille_secondaire = 8  # Taille du côté du carré secondaire
+
+                            x1 = self.character_x1 + (taille_cote - taille_secondaire) / 2 # Coordonnée x1 du carré secondaire
+                            y1 = self.character_y2  # Coordonnée y1 du carré secondaire
+                            x2 = x1 + taille_secondaire  # Coordonnée x2 du carré secondaire
+                            y2 = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
+
+                            self.attackRect = self.areaPlay.create_rectangle(x1, y1, x2, y2+8, fill="blue")
+                            self.Fight()
+                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
+                            
+                            self.countTourActivateSort = True
+                    self.window.after(200, self.start_moving_monsters)
        
 
                 #Player
@@ -1205,12 +1329,6 @@ class player:
                         self.window.after(100, self.start_moving_monsters)
             
             self.tourPlayer = False
-            """if self.countTour == self.weaponTour:
-                self.countTour = 0
-                self.countTourActivate = False
-            if self.countTourActivate :
-                self.countTour += 1"""
-            #self.collisionWithMonster()
             print("in p ",self.fullMonster)
             self.player_info()
             self.hp_update()
