@@ -99,6 +99,6 @@ class Escape:
         self.selfplayer.interface.backtomenu()
 
     def closeEsc(self):
-        #print("destroy")
+        ##print("destroy")
         self.selfplayer.collPNJ = False
         self.windowEsc.destroy()

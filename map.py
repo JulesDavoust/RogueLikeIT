@@ -27,7 +27,17 @@ class Map:
         case_size = WindowParameter.tileSize
         x_tile = WindowParameter.mapTileCol
         y_tile = WindowParameter.mapTileRow
-        num_remove_walls = 80
+
+        random_loto = random.randint(0,50)
+        if(random_loto < 10):
+            num_remove_walls = random.randint(0,10)
+        elif(random_loto >= 10 and random_loto < 30):
+            num_remove_walls = random.randint(40, 60)
+        elif(random_loto >= 30 and random_loto < 45):
+            num_remove_walls = random.randint(20,50)
+        else:
+            num_remove_walls = 80
+        
 
         # Image assests import
         wall_image = Image.open("./sprites/wall_mid.png").convert("P")
@@ -46,9 +56,9 @@ class Map:
             self.maze = mazeMap.delete_wall(self.maze, remove_index[0], remove_index[1])
             wall_list = mazeMap.detect_walls(self.maze)
 
-        ###print("Maze after delete walls:")
+        ####print("Maze after delete walls:")
         #for row in self.maze:
-            ###print(" ".join(row))
+            ####print(" ".join(row))
         # Dessine les cases V2.0
         for y in range(len(self.maze)):
             for x in range(len(self.maze[y])):
@@ -147,7 +157,7 @@ class Map:
             self.centreCaseNoire.pop(KeyfindR)
         self.spawnX = x1G
         self.spawnY = y1G
-        # ###print(self.CaseNoire)
+        # ####print(self.CaseNoire)
 
     def generateKey(self, areaPlay):
         emplacement = False
@@ -195,7 +205,7 @@ class Map:
     
 
     """def numberMonster(self, maplevel):
-        ###print(maplevel)
+        ####print(maplevel)
         if(maplevel == 1):
             return random.randint(5, 7)
         elif(maplevel == 2 and maplevel <=4):
