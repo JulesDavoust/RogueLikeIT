@@ -23,8 +23,8 @@ class Map:
         case_size = WindowParameter.tileSize
         x_tile = self.map_width // case_size
         y_tile = self.map_height // case_size
-        #print(x_tile)
-        #print(y_tile)
+        ##print(x_tile)
+        ##print(y_tile)
         wall_image = Image.open(".\sprites\wall_mid.png").convert("RGBA")
         wall_image = wall_image.resize((case_size, case_size), Image.ANTIALIAS)
         self.wall_photo = ImageTk.PhotoImage(wall_image)
@@ -130,8 +130,8 @@ class Map:
         case_size = WindowParameter.tileSize
         x_tile = map_width // case_size
         y_tile = map_height // case_size
-        #print(x_tile)
-        #print(y_tile)
+        ##print(x_tile)
+        ##print(y_tile)
 
         #Parcours les cases et change la map
         for x in range(x_tile):
@@ -140,7 +140,7 @@ class Map:
                     return True
                 
     def generateFirstSalle(self, areaPlay):
-        #print("salutGENERATEfirstSALLE")
+        ##print("salutGENERATEfirstSALLE")
         # x1, y1 = 150, 150
         # x2, y2 = 300, 150
         # x3, y3 = 300, 300
@@ -152,11 +152,11 @@ class Map:
         
 
     def generateSalle(self, window, areaPlay):
-        #print("salutGENERATESALLE")
+        ##print("salutGENERATESALLE")
         # areaPlay.create_line(100, 450, 100, 350, fill="brown", width=4)
 
     """def numberMonster(self, maplevel):
-        #print(maplevel)
+        ##print(maplevel)
         if(maplevel == 1):
             return random.randint(5, 7)
         elif(maplevel == 2 and maplevel <=4):

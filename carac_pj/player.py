@@ -6,10 +6,13 @@ from windowParameters import WindowParameter
 import tkinter as tk
 from PIL import Image, ImageTk
 import mazeMap
+from items import Items
 
 
 class player:
     def __init__(self, classe):
+        self.items = Items()
+
         self.allClasse = {0: "guerrier", 1: "archer", 2: "sorcier"}
         self.classe = classe
 
@@ -18,7 +21,9 @@ class player:
 
         # add the other items in case we have time, like bomb
         # Each item is saved as dict in the list of inventory, in this way we can know the storage directly
-        self.inventory = {"potion_PV": 1, "potion_MP": 0, "bomb": 0}
+        self.potion_pv = "potion_PV"
+        self.potion_mp = "potion_MP"
+        self.inventory = {self.potion_pv: 1, self.potion_mp: 0}
         self.gold = 30
 
         self.hasExitKey = False
@@ -35,7 +40,6 @@ class player:
         self.maxLengthFullMonster = 3
 
         self.monsterAttack = []
-        
         
         self.text = "Monster :"
 
@@ -208,9 +212,9 @@ class player:
                 if emplacementOK:
                     emplacement = True
                 emplacementOK = True"""
-            """#print(x1, y1, x1 + 30, y1 + 30)"""
+            """##print(x1, y1, x1 + 30, y1 + 30)"""
 
-            # #print(f"In generatePNJs:\n X: {x1*WindowParameter.tileSize} Y: {y1*WindowParameter.tileSize}")
+            # ##print(f"In generatePNJs:\n X: {x1*WindowParameter.tileSize} Y: {y1*WindowParameter.tileSize}")
             # self.areaPlay.create_image(x1*WindowParameter.tileSize, y1*WindowParameter.tileSize, anchor="nw", image=self.map.floor_photo)
             self.map.indexDico += 1
             self.map.CaseNoire[self.map.indexDico] = [
@@ -230,13 +234,13 @@ class player:
             self.shops.append(pnj.shop)
             self.pnjs.append(pnj)
 
-            print("pnj : ", self.pnjCooDico)
-            print("CaseNoire : ", self.map.CaseNoire)
+            ##print("pnj : ", self.pnjCooDico)
+            ##print("CaseNoire : ", self.map.CaseNoire)
 
             # self.map.CaseNoire.pop(randomPNJ)
-        ##print(self.shops)
+        ###print(self.shops)
         # for i in range(0, len(self.pnjs)):
-        ##print(self.areaPlay.coords(self.pnjs[i].pnj))
+        ###print(self.areaPlay.coords(self.pnjs[i].pnj))
 
     def generateMonsters(self, num_monsters):
         self.monsters = []  # Liste pour stocker les monstres
@@ -252,8 +256,8 @@ class player:
             emplacementOK = True
             while not emplacement:
                 cooM = random.randint(0, len(list(self.map.dicoC)) - 1)
-                ##print(self.map.dicoC)
-                ##print(cooM)
+                ###print(self.map.dicoC)
+                ###print(cooM)
                 x1 = self.map.dicoC[cooM][0]
                 y1 = self.map.dicoC[cooM][1]
                 while self.checkMonsterInView(x1, y1):
@@ -271,7 +275,7 @@ class player:
                 if emplacementOK:
                     emplacement = True
                 emplacementOK = True
-            """#print(x1, y1, x1 + 30, y1 + 30)"""
+            """##print(x1, y1, x1 + 30, y1 + 30)"""
 
             # Génère le carré noir du monstre dans l'areaPlay à la position aléatoire
             monster.generateMonster(self.areaPlay, x1, y1)
@@ -283,7 +287,7 @@ class player:
             ]
             self.indexMonster += 1
             self.monsters.append(monster)  # Ajoute le monstre à la liste
-        ##print("coo ===========",self.monsterDico)
+        ###print("coo ===========",self.monsterDico)
 
     def checkMonsterInView(self, monster_x, monster_y):
         if (
@@ -299,7 +303,7 @@ class player:
         self.monsterDico = {}
         self.moved_m_index = 0
         # self.monster.moveMonster(self.areaPlay, self.view_x1, self.view_y1, self.view_x2, self.view_y2, self.character_x, self.character_y, self.character_x2, self.character_x1, self.character_y2, self.character_y1)
-        if  self.playerDied == False or self.player_collision == False:
+        if self.player_collision == False:
             # print("continue ?")
             for monster in self.monsters:
                 monster.moveMonster(
@@ -351,10 +355,10 @@ class player:
             self.character_y1 + dy < self.pnj_y2
             and self.character_y2 + dy > self.pnj_y1
         ):
-            ##print("open shop")
+            ###print("open shop")
             self.numPNJ = i
             self.collPNJ = True
-            ##print("pnj num : ", self.numPNJ)
+            ###print("pnj num : ", self.numPNJ)
             self.eventJoueur("Shop open")
             self.pnjs[i].openShop(self.window, self, self.collPNJ)
             return True
@@ -385,7 +389,7 @@ class player:
         else:
             return False
 
-    def player_info(self, areaPlay):
+    def player_info(self, areaPlay, player):
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
         screen_width = WindowParameter.screenWidth
@@ -435,7 +439,7 @@ class player:
             text=self.gold,
             fill="white",
             font=("Press Start 2P", 12),
-            anchor="w",
+            anchor="w"
         )
 
         self.areaPlay.create_rectangle(
@@ -447,7 +451,7 @@ class player:
             text="XP:",
             fill="white",
             font=("Press Start 2P", 12),
-            anchor="w",
+            anchor="w"
         )
         self.areaPlay.create_text(
             x1 + 190,
@@ -455,7 +459,7 @@ class player:
             text=self.xp,
             fill="white",
             font=("Press Start 2P", 12),
-            anchor="w",
+            anchor="w"
         )
 
         self.areaPlay.create_rectangle(
@@ -467,7 +471,7 @@ class player:
             text="LVL:",
             fill="white",
             font=("Press Start 2P", 12),
-            anchor="w",
+            anchor="w"
         )
         self.areaPlay.create_text(
             x1 + 305,
@@ -475,7 +479,7 @@ class player:
             text=self.PlayerLevel,
             fill="white",
             font=("Press Start 2P", 12),
-            anchor="w",
+            anchor="w"
         )
 
         # Monsters infos
@@ -532,6 +536,7 @@ class player:
 
         # The storage of items
         # Start at Y :  WindowParameter.screenHeight - 150
+        # End at Y : y_item_top_aera + 100
 
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
@@ -541,92 +546,163 @@ class player:
         y2 = screen_width
         lineX = x1 + 3
         max_x = x1 + 346
-        item_img_size = 70
+        item_grid_size = 70
+        item_image_size = 64
         y_item_top_aera = WindowParameter.screenHeight - 150
 
         self.areaPlay.create_rectangle(
-            x1 + 3, y_item_top_aera, x1 + 346, y_item_top_aera + 100, fill="White"
+            x1 + 3, y_item_top_aera, x1 + 346, y_item_top_aera + 100, fill="", outline="white"
         )
         # The square for display items
-        for i in range(lineX, max_x, item_img_size):
+        for i in range(lineX, max_x, item_grid_size):
             self.areaPlay.create_line(
-                i, y_item_top_aera, i, y_item_top_aera + 120, fill="Black", width=3
+                i, y_item_top_aera, i, y_item_top_aera + 100, fill="white", width=3
             )
 
         # First slot for potion PV
         image_item = Image.open("./sprites/potion_PV.png").convert("P")
-        image_item = image_item.resize((item_img_size, item_img_size))
+        image_item = image_item.resize((item_grid_size, item_grid_size))
         self.image_potion_pv = ImageTk.PhotoImage(image_item)
         self.areaPlay.create_image(
-            lineX , y_item_top_aera, image=self.image_potion_pv , anchor = "nw"
+            lineX, y_item_top_aera, image=self.image_potion_pv , anchor = "nw"
         )
         # Second slot for potion MP
         image_item = Image.open("./sprites/potion_MP.png").convert("P")
-        image_item = image_item.resize((item_img_size, item_img_size))
+        image_item = image_item.resize((item_grid_size, item_grid_size))
         self.image_potion_mp = ImageTk.PhotoImage(image_item)
         self.areaPlay.create_image(
-            lineX + item_img_size * 1, y_item_top_aera, image=self.image_potion_mp , anchor = "nw"
-        )
-        # Second slot for potion MP
-        image_item = Image.open("./sprites/potion_MP.png").convert("P")
-        image_item = image_item.resize((item_img_size, item_img_size))
-        self.image_potion_mp = ImageTk.PhotoImage(image_item)
-        self.areaPlay.create_image(
-            lineX + item_img_size * 1, y_item_top_aera, image=self.image_potion_mp , anchor = "nw"
+            lineX + item_grid_size * 1, y_item_top_aera, image=self.image_potion_mp , anchor = "nw"
         )
 
         # The square for showing the storage of the items
-        # This one is for each grid
-        # for i in range(lineX, max_x, item_img_size):
+        # for i in range(2):
         #     self.areaPlay.create_rectangle(
-        #         i, y_item_top_aera, i + 20, y_item_top_aera + 20, outline="black"
+        #         lineX + i * item_grid_size, y_item_top_aera, lineX + i * item_grid_size + 20, y_item_top_aera + 20, outline="white"
         #     )
-        for i in range(2):
-            self.areaPlay.create_rectangle(
-                lineX + i * item_img_size, y_item_top_aera, lineX + i * item_img_size + 20, y_item_top_aera + 20, outline="black"
-            )
 
-        # Use button
-        self.areaPlay.create_line(
-            lineX,
-            y_item_top_aera + item_img_size,
-            max_x,
-            y_item_top_aera + item_img_size,
-            fill="Black",
-            width=3
+        #Storage potion PV
+        self.areaPlay.create_text(
+            lineX +5,
+            y_item_top_aera+5,
+            text=self.inventory[self.potion_pv],
+            fill="white",
+            font=("Press Start 2P", 10),
+            anchor="nw"
         )
+        #Storage potion MP
+        self.areaPlay.create_text(
+            lineX + item_grid_size + 5,
+            y_item_top_aera + 5,
+            text=self.inventory[self.potion_mp],
+            fill="white",
+            font=("Press Start 2P", 10),
+            anchor="nw"
+        )
+#################################################################################################################
 
         # Third slot for weapon
         
         image_item = Image.open("./sprites/blade_0.png").convert("P")
-        image_item = image_item.resize((item_img_size, item_img_size))
+        image_item = image_item.resize((item_grid_size, item_grid_size))
         self.image_weapon = ImageTk.PhotoImage(image_item)
         self.areaPlay.create_image(
-            lineX + item_img_size * 2, y_item_top_aera, image=self.image_weapon , anchor = "nw"
+            lineX + item_grid_size * 2, y_item_top_aera, image=self.image_weapon , anchor = "nw"
         )
 
 
         # Fourth slot for armor
 
         image_item = Image.open("./sprites/ring_0.png").convert("P")
-        image_item = image_item.resize((item_img_size, item_img_size))
+        image_item = image_item.resize((item_grid_size, item_grid_size))
         self.image_armor = ImageTk.PhotoImage(image_item)
         self.areaPlay.create_image(
-            lineX + item_img_size * 3, y_item_top_aera, image=self.image_armor , anchor = "nw"
+            lineX + item_grid_size * 3, y_item_top_aera, image=self.image_armor , anchor = "nw"
         )
-
+#################################################################################################################
         # Last slot for key
+        # X: lineX + item_grid_size * 4
         if(self.hasExitKey):
             image_item = Image.open("./sprites/key_1.png").convert("P")
         else:
             image_item = Image.open("./sprites/key_1_empty.png").convert("P")
         
-        image_item = image_item.resize((item_img_size, item_img_size))
+        image_item = image_item.resize((item_image_size, item_image_size))
         self.image_key = ImageTk.PhotoImage(image_item)
         self.areaPlay.create_image(
-            lineX + item_img_size * 4, y_item_top_aera, image=self.image_key, anchor = "nw"
+            lineX + item_grid_size * 4, y_item_top_aera, image=self.image_key, anchor = "nw"
+        )
+        
+#################################################################################################################
+        # Lower Slot
+        # Y: y_item_top_aera + item_grid_size
+        self.areaPlay.create_line(
+            lineX, y_item_top_aera + item_grid_size,
+            max_x, y_item_top_aera + item_grid_size,
+            fill="white",
+            width=3
         )
 
+        
+        # First lower slot: potion PV
+
+        # self.areaPlay.create_rectangle(
+        #     lineX,
+        #     y_item_top_aera + item_grid_size,
+        #     lineX + item_grid_size,
+        #     y_item_top_aera + item_grid_size + 30,
+        #     fill="black"
+        # )
+
+        use_btn_pv = self.areaPlay.create_text(
+            lineX + 10,
+            y_item_top_aera + item_grid_size + 20,
+            text="USE",
+            fill="white",
+            font=("Press Start 2P", 12),
+            anchor="w"
+        )
+
+        self.areaPlay.tag_bind(use_btn_pv, '<Button-1>', self.healthRestore_potion)
+
+        # Second lower slot: potion PV
+        self.areaPlay.create_text(
+            lineX + item_grid_size + 10,
+            y_item_top_aera + item_grid_size + 20,
+            text="USE",
+            fill="white",
+            font=("Press Start 2P", 12),
+            anchor="w"
+        )
+#################################################################################################################
+        # Third lower slot: weapon
+        self.areaPlay.create_text(
+            lineX + item_grid_size * 2 + 10,
+            y_item_top_aera + item_grid_size + 20,
+            text="ATK",
+            fill="white",
+            font=("Press Start 2P", 12),
+            anchor="w"
+        )
+
+        # Fourth lower slot: armor
+        self.areaPlay.create_text(
+            lineX + item_grid_size * 3 + 10,
+            y_item_top_aera + item_grid_size + 20,
+            text="DEF",
+            fill="white",
+            font=("Press Start 2P", 12),
+            anchor="w"
+        )
+
+        # Last lower slot: KEY
+        self.areaPlay.create_text(
+            lineX + item_grid_size * 4 + 10,
+            y_item_top_aera + item_grid_size + 20,
+            text="KEY",
+            fill="white",
+            font=("Press Start 2P", 12),
+            anchor="w"
+        )
 
 
     def hp_update(self):
@@ -706,22 +782,22 @@ class player:
 
         if direction == "n":
             self.text = self.text+"\n"+"\t-Attack from north"
-            print( self.text)
+            #print( self.text)
         if direction == "e":
             self.text = self.text+"\n"+"\t-Attack from east"
-            print( self.text)
+            #print( self.text)
         if direction == "s":
             self.text = self.text+"\n"+"\t-Attack from south"
-            print( self.text)
+            #print( self.text)
         if direction == "w":
             self.text = self.text+"\n"+"\t-Attack from west"
-            print( self.text)
+            #print( self.text)
 
         self.eventMonsterAttacktxt = self.areaPlay.create_text(x1 + 9, 410, text= self.text, fill="white",font=("Press Start 2P", 9),  anchor="nw")
         self.EA = True
 
     def update_infoPN(self):
-        print(self.fullMonster)
+        #print(self.fullMonster)
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
         screen_width = WindowParameter.screenWidth
@@ -738,7 +814,7 @@ class player:
         self.areaPlay.create_text(x1 + 47, 320, text=self.fullMonster["n"][2], fill="white",font=("Press Start 2P", 12), anchor="w")
 
     def update_infoPE(self):
-        print(self.fullMonster)
+        #print(self.fullMonster)
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
         screen_width = WindowParameter.screenWidth
@@ -755,7 +831,7 @@ class player:
         self.areaPlay.create_text(x1 + 133, 320, text=self.fullMonster["e"][2], fill="white",font=("Press Start 2P", 12), anchor="w")
 
     def update_infoPS(self):
-        print(self.fullMonster)
+        #print(self.fullMonster)
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
         screen_width = WindowParameter.screenWidth
@@ -772,7 +848,7 @@ class player:
         self.areaPlay.create_text(x1 + 219, 320, text=self.fullMonster["s"][2], fill="white",font=("Press Start 2P", 12), anchor="w")
         
     def update_infoPW(self):
-        print(self.fullMonster)
+        #print(self.fullMonster)
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
         screen_width = WindowParameter.screenWidth
@@ -789,7 +865,7 @@ class player:
         self.areaPlay.create_text(x1 + 305, 320, text=self.fullMonster["w"][2], fill="white",font=("Press Start 2P", 12), anchor="w")
 
     def Fight(self):
-        print("Event joueur : Le joueur attaque")
+        #print("Event joueur : Le joueur attaque")
         
         attack = self.areaPlay.coords(self.attackRect)
         attack_x1 = attack[0]
@@ -810,12 +886,12 @@ class player:
                 and attack_y2 >= monster_y1
                 and attack_y1 <= monster_y2
             ):
-                ##print(self.monsters[i].life_points_monster)
+                ###print(self.monsters[i].life_points_monster)
                 self.monsters[i].life_points_monster = (
                     self.monsters[i].life_points_monster - self.damage
                 )
 
-                ##print(self.monsters[i].life_points_monster)
+                ###print(self.monsters[i].life_points_monster)
 
                 if self.monsters[i].life_points_monster <= 0:
                     self.areaPlay.delete(self.monsters[i].health_bar)
@@ -831,9 +907,9 @@ class player:
                         self.xp = 0
                     self.gold = self.monsters[i].xp + self.gold
                     pop = True
-                    # print("Level : ", self.PlayerLevel)
-                    # print("Xp : ", self.xp)
-                    # print("Gold : ", self.gold)
+                    # #print("Level : ", self.PlayerLevel)
+                    # #print("Xp : ", self.xp)
+                    # #print("Gold : ", self.gold)
                     self.monsters.pop(i)
                 else:
                     self.monsters[i].update_healthBar(
@@ -850,18 +926,18 @@ class player:
             monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
             if ci[2] + tolerance >= monsterCOO[0] and ci[0] <= monsterCOO[2] + tolerance:
                 if ci[3] + tolerance >= monsterCOO[1] and ci[1] <= monsterCOO[3] + tolerance:
-                    print("Collision avec le monstre", i)
+                    #print("Collision avec le monstre", i)
                     if ci[0] > monsterCOO[2] and ci[0] > monsterCOO[2] and ci[1] == monsterCOO[1] and ci[3] == monsterCOO[3]:
-                        print("W")
+                        #print("W")
                         self.fullMonster["w"] = ["./sprites/monster_1.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
                     elif ci[2] < monsterCOO[0] and ci[2] < monsterCOO[2] and ci[1] == monsterCOO[1] and ci[3] == monsterCOO[3]:
-                        print("E")
+                        #print("E")
                         self.fullMonster["e"] = ["./sprites/monster_1.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
                     elif ci[0] == monsterCOO[0] and ci[2] == monsterCOO[2] and ci[1] > monsterCOO[1] and ci[1] > monsterCOO[3]:
-                        print("N")
+                        #print("N")
                         self.fullMonster["n"] = ["./sprites/monster_1.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
                     elif ci[0] == monsterCOO[0] and ci[2] == monsterCOO[2] and ci[3] < monsterCOO[1] and ci[3] < monsterCOO[3]:
-                        print("S")
+                        #print("S")
                         self.fullMonster["s"] = ["./sprites/monster_1.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
 
 
@@ -873,7 +949,7 @@ class player:
             if self.tourPlayer :
                 if event.char == "a":
                         if self.attackDirection == "Right":
-                            #print("direction attack right")
+                            ##print("direction attack right")
                             taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
                             taille_secondaire = 8  # Taille du côté du carré secondaire
 
@@ -889,7 +965,7 @@ class player:
                             self.countTourActivate = True
                             
                         elif self.attackDirection == "Left":
-                            #print("direction attack Left")
+                            ##print("direction attack Left")
                             taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
                             taille_secondaire = 8  # Taille du côté du carré secondaire
 
@@ -905,7 +981,7 @@ class player:
                             self.countTourActivate = True  # Désactive le cooldown après 2000 millisecondes (2 secondes)
                             
                         elif self.attackDirection == "Up":
-                            #print("direction attack Up")
+                            ##print("direction attack Up")
                             taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
                             taille_secondaire = 8  # Taille du côté du carré secondaire
 
@@ -922,7 +998,7 @@ class player:
                             self.countTourActivate = True
                         
                         elif self.attackDirection == "Down":
-                            #print("direction attack Down")
+                            ##print("direction attack Down")
                             taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
                             taille_secondaire = 8  # Taille du côté du carré secondaire
 
@@ -936,7 +1012,7 @@ class player:
                             self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
                             
                             self.countTourActivate = True
-                        self.window.after(500, self.start_moving_monsters)
+                        self.window.after(200, self.start_moving_monsters)
        
 
                 #Player
@@ -1012,29 +1088,27 @@ class player:
             if self.countTourActivate :
                 self.countTour += 1"""
         #self.collisionWithMonster()
-        if self.playerDied == False:
-            print("in p ",self.fullMonster)
-            self.player_info(self.areaPlay)
-            self.hp_update()
-            if self.eventNrVar == True:
-                text =  "Player go to the next room"
-                self.eventJoueur(text)
-                self.eventNrVar = False
-            elif self.eventKVar == True:
-                text =  "Player get the key"
-                print(text)
-                self.eventJoueur(text)
-                self.eventKVar = False
-            elif eventJoueur == True:
-                text = "Player walks"
-                self.eventJoueur(text)
-            elif self.countTourActivate == True:
-                text = "Player attacks"
-                self.eventJoueur(text)
-            print(self.text)
-            self.eventMWalked = False
-            self.eventMAVar = False
-            self.text = "Monster :"
+        print("in p ",self.fullMonster)
+        self.player_info(self.areaPlay, self)
+        if self.eventNrVar == True:
+            text =  "Player go to the next room"
+            self.eventJoueur(text)
+            self.eventNrVar = False
+        elif self.eventKVar == True:
+            text =  "Player get the key"
+            print(text)
+            self.eventJoueur(text)
+            self.eventKVar = False
+        elif eventJoueur == True:
+            text = "Player walks"
+            self.eventJoueur(text)
+        elif self.countTourActivate == True:
+            text = "Player attacks"
+            self.eventJoueur(text)
+        print(self.text)
+        self.eventMWalked = False
+        self.eventMAVar = False
+        self.text = "Monster :"
         
         
 
@@ -1064,7 +1138,7 @@ class player:
         self.view_x2 = self.character_x + self.view_distance
         self.view_y2 = self.character_y + self.view_distance
 
-        ##print("Player : x1 : ",self.view_x1," y1 : ",self.view_x2," x2 : ",self.view_x2," y2 : ",self.view_y2)
+        ###print("Player : x1 : ",self.view_x1," y1 : ",self.view_x2," x2 : ",self.view_x2," y2 : ",self.view_y2)
 
         self.areaPlay.create_rectangle(
             self.view_x1,
@@ -1077,7 +1151,7 @@ class player:
         )
 
     def goNextRoom(self):
-        ##print("nextRoom ?")
+        ###print("nextRoom ?")
         if self.gonext:
             self.gonext = False
         elif (
@@ -1088,9 +1162,9 @@ class player:
             and self.character_y1 >= self.map.y1R
         ):
             self.gonext = True
-            print("Event : Le joueur passe au prochain étage")
+            #print("Event : Le joueur passe au prochain étage")
             self.eventNrVar = True
-            ##print("Yes !")
+            ###print("Yes !")
             self.generateNewMap()
 
     def getKey(self):
@@ -1100,10 +1174,10 @@ class player:
             self.character_y1 < self.map.keyY2 and self.character_y2 > self.map.keyY1
         ):
             self.hasExitKey = True
-            print("Event : Le joueur ramasse la clé")
+            #print("Event : Le joueur ramasse la clé")
             self.eventKVar = True
             self.areaPlay.delete(self.map.key)
-            ##print(self.inventory)
+            ###print(self.inventory)
 
     def generateNewMap(self):
         # Supprime les éléments de la carte actuelle
