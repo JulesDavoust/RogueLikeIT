@@ -46,9 +46,9 @@ class Map:
             self.maze = mazeMap.delete_wall(self.maze, remove_index[0], remove_index[1])
             wall_list = mazeMap.detect_walls(self.maze)
 
-        ##print("Maze after delete walls:")
+        ###print("Maze after delete walls:")
         #for row in self.maze:
-            ##print(" ".join(row))
+            ###print(" ".join(row))
         # Dessine les cases V2.0
         for y in range(len(self.maze)):
             for x in range(len(self.maze[y])):
@@ -147,7 +147,7 @@ class Map:
             self.centreCaseNoire.pop(KeyfindR)
         self.spawnX = x1G
         self.spawnY = y1G
-        # ##print(self.CaseNoire)
+        # ###print(self.CaseNoire)
 
     def generateKey(self, areaPlay):
         emplacement = False
@@ -195,7 +195,7 @@ class Map:
     
 
     """def numberMonster(self, maplevel):
-        ##print(maplevel)
+        ###print(maplevel)
         if(maplevel == 1):
             return random.randint(5, 7)
         elif(maplevel == 2 and maplevel <=4):

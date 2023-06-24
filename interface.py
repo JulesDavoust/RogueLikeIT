@@ -89,7 +89,7 @@ class Interface:
                 data = json.load(file)
 
                 # Exemple d'accès aux informations dans un objet JSON
-                print(data)
+                #print(data)
                 if data['class'] == 0:
                     self.select_guerrier()
                 elif data['class'] == 1:

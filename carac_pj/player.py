@@ -15,65 +15,22 @@ from escape import Escape
 
 
 class player:
-    def __init__(self, classe, interface):
-        #self.items = Items()
-        self.interface = interface
-    
-        self.classe = classe
-        self.potion_pv = "potion_PV"
-        self.potion_mp = "potion_MP"
+    # PLEASE use a fonction instead of duplicated codes, if not there's a probleme to change value when we want to
+    def initializeBasic_knight(self):
+        self.life_point = 50
+        self.max_life_point = self.life_point
+        self.mana = 20
+        self.weapon = "blade_0"
+        self.armor = "ring_0"
+        self.damage = Equipements.equipement_stats[self.weapon]
+        self.defense = Equipements.equipement_stats[self.armor]
         self.inventory = {self.potion_pv: 3, self.potion_mp: 0}
+        self.xp = 0
         self.gold = 30
-
-        print("initiate player")
-        if not self.interface.is_json_file_empty():
-            print("Le fichier JSON n'est pas vide.")
-            with open('save.json', 'r') as file:
-                data = json.load(file)
-                self.PlayerLevel = data['level']
-                self.xp = data['xp']
-                self.gold = data['gold']
-                self.life_point = data['life_point']
-                self.max_life_point = data['max_life_point']
-                self.mana = data['mana']
-                self.damage = data['damage']
-                self.inventory = data['inventory']
-                self.armor = data['armor']
-        else:
-            self.PlayerLevel = 0
-            self.xp = 0
-            self.inventory = {self.potion_pv: 1, self.potion_mp: 0}
-            self.gold = 30
-            if classe == 0:
-                self.life_point = 50
-                self.armor = 0
-                self.max_life_point = self.life_point
-                self.mana = 20
-                self.damage = 30
-                self.weapon = "blade_0"
-                self.armor = "ring_0"
-                self.damage = Equipements.equipement_stats[self.weapon]
-                self.defense = Equipements.equipement_stats[self.armor]
-                # self.knight = tk.PhotoImage(file="./sprites/knight_f_idle_anim_f0.png")
-            elif classe == 1:
-                self.life_point = 80
-                self.armor = 0
-                self.max_life_point = self.life_point
-                self.mana = 30
-                self.range = 10
-                self.damage = 10
-            elif classe == 2:
-                self.life_point = 100
-                self.armor = 0
-                self.max_life_point = self.life_point
-                self.mana = 50
-                self.range = 5
-                self.damage = 20
-        # add the other items in case we have time, like bomb
-        # Each item is saved as dict in the list of inventory, in this way we can know the storage directly
-        
-        
-
+        self.PlayerLevel = 0
+        # self.knight = tk.PhotoImage(file="./sprites/knight_f_idle_anim_f0.png")
+    
+    def initializeGeneral(self):
         self.hasExitKey = False
 
         self.pnjCooDico = {}
@@ -90,9 +47,7 @@ class player:
         self.monsterAttack = []
         
         self.text = "Monster :"
-
-        self.escape = Escape()
-        self.map = Map()
+        
         self.view_distance = 100
         self.character_x = 0
         self.character_y = 0
@@ -121,6 +76,51 @@ class player:
         self.attackDirection = "Right"
 
         self.numPNJ = 0
+
+
+    def __init__(self, classe, interface):
+        #self.items = Items()
+        self.interface = interface
+    
+        self.classe = classe
+        self.potion_pv = "potion_PV"
+        self.potion_mp = "potion_MP"
+        # self.gold = 0
+        # self.xp = 0
+        #print("initiate player")
+        if not self.interface.is_json_file_empty():
+            #print("Le fichier JSON n'est pas vide.")
+            with open('save.json', 'r') as file:
+                data = json.load(file)
+                self.PlayerLevel = data['level']
+                self.xp = data['xp']
+                self.gold = data['gold']
+                self.life_point = data['life_point']
+                self.max_life_point = data['max_life_point']
+                self.mana = data['mana']
+                self.damage = data['damage']
+                self.inventory = data['inventory']
+                self.weapon = data['weapon']
+                self.armor = data['armor']
+        else:
+            if classe == 0:
+                self.initializeBasic_knight()
+            # elif classe == 1:
+            #     self.life_point = 80
+            #     self.max_life_point = self.life_point
+            #     self.mana = 30
+            #     self.range = 10
+            #     self.damage = 10
+            # elif classe == 2:
+            #     self.life_point = 100
+            #     self.max_life_point = self.life_point
+            #     self.mana = 50
+            #     self.range = 5
+            #     self.damage = 20
+        # add the other items in case we have time, like bomb
+        # Each item is saved as dict in the list of inventory, in this way we can know the storage directly
+        
+        self.initializeGeneral()
 
         # The distance of mouvement for player and monster
         self.moveDistance = WindowParameter.tileSize
@@ -138,86 +138,27 @@ class player:
         self.areaPlay.pack()
         window.bind("<KeyPress>", self.move_character)
 
-    
-
-
     def reset(self):
         if self.classe == 0:
-                self.life_point = 50
-                self.armor = 0
-                self.max_life_point = self.life_point
-                self.mana = 20
-                self.damage = 30
-                # self.knight = tk.PhotoImage(file="./sprites/knight_f_idle_anim_f0.png")
-        elif self.classe == 1:
-                self.life_point = 80
-                self.armor = 0
-                self.max_life_point = self.life_point
-                self.mana = 30
-                self.range = 10
-                self.damage = 10
-        elif self.classe == 2:
-                self.life_point = 100
-                self.armor = 0
-                self.max_life_point = self.life_point
-                self.mana = 50
-                self.range = 5
-                self.damage = 20
-        self.inventory = {self.potion_pv: 1, self.potion_mp: 0}
-        self.hasExitKey = False
+                self.initializeBasic_knight
+        # elif self.classe == 1:
+        #         self.life_point = 80
+        #         self.max_life_point = self.life_point
+        #         self.mana = 30
+        #         self.range = 10
+        #         self.damage = 10
+        # elif self.classe == 2:
+        #         self.life_point = 100
+        #         self.armor = 0
+        #         self.max_life_point = self.life_point
+        #         self.mana = 50
+        #         self.range = 5
+        #         self.damage = 20
         self.tourPlayer = True
         self.playerDied = False
-        self.PlayerLevel = 0
-        self.xp = 0
-
-        self.gold = 30
-
-        self.hasExitKey = False
-
-        self.pnjCooDico = {}
-        self.monsterDico = {}
-        self.moved_m_index = 0
-
-        self.indexDico = 0
-        self.indexMonster = 0
-
-        self.fullMonster = {"n": [], "e": [], "s": [], "w": []}
-        self.lengthFullMonster = 0
-        self.maxLengthFullMonster = 3
-
-        self.monsterAttack = []
         
-        self.text = "Monster :"
+        self.initializeGeneral()
         
-        self.view_distance = 100
-        self.character_x = 0
-        self.character_y = 0
-        self.playerDied = False
-        self.player_collision = False
-        self.pause = False
-        self.collPNJ = False
-        self.cooldown_active = False
-        self.gonext = False
-        self.tourPlayer = True
-
-        self.EJ = False
-        self.E = False
-        self.EA = False
-
-        self.eventNrVar = False
-        self.eventKVar = False
-        self.eventMWVar = False
-        self.eventMWalked = False
-
-        self.eventMAVar = False
-
-        self.countTourActivate = False
-        self.countTour = 0
-
-        self.attackDirection = "Right"
-
-        self.numPNJ = 0
-        self.life_point = self.max_life_point
 
     def createAll(self):
         
@@ -228,9 +169,9 @@ class player:
         self.map.generateKey(self.areaPlay)
         self.player_info()
         self.hp_update()
-        # print("map level : ", self.levelMap)
-        # """#print(self.map.CaseNoire)
-        # #print(self.map.centreCaseNoire)"""
+        # #print("map level : ", self.levelMap)
+        # """##print(self.map.CaseNoire)
+        # ##print(self.map.centreCaseNoire)"""
 
         self.character_x = self.map.spawnX
         self.character_y = self.map.spawnY
@@ -320,9 +261,9 @@ class player:
                 if emplacementOK:
                     emplacement = True
                 emplacementOK = True"""
-            """##print(x1, y1, x1 + 30, y1 + 30)"""
+            """###print(x1, y1, x1 + 30, y1 + 30)"""
 
-            # ##print(f"In generatePNJs:\n X: {x1*WindowParameter.tileSize} Y: {y1*WindowParameter.tileSize}")
+            # ###print(f"In generatePNJs:\n X: {x1*WindowParameter.tileSize} Y: {y1*WindowParameter.tileSize}")
             # self.areaPlay.create_image(x1*WindowParameter.tileSize, y1*WindowParameter.tileSize, anchor="nw", image=self.map.floor_photo)
             self.map.indexDico += 1
             self.map.CaseNoire[self.map.indexDico] = [
@@ -342,13 +283,13 @@ class player:
             self.shops.append(pnj.shop)
             self.pnjs.append(pnj)
 
-            ##print("pnj : ", self.pnjCooDico)
-            ##print("CaseNoire : ", self.map.CaseNoire)
+            ###print("pnj : ", self.pnjCooDico)
+            ###print("CaseNoire : ", self.map.CaseNoire)
 
             # self.map.CaseNoire.pop(randomPNJ)
-        ###print(self.shops)
+        ####print(self.shops)
         # for i in range(0, len(self.pnjs)):
-        ###print(self.areaPlay.coords(self.pnjs[i].pnj))
+        ####print(self.areaPlay.coords(self.pnjs[i].pnj))
 
     def generateMonsters(self, num_monsters):
         self.monsters = []  # Liste pour stocker les monstres
@@ -364,8 +305,8 @@ class player:
             emplacementOK = True
             while not emplacement:
                 cooM = random.randint(0, len(list(self.map.dicoC)) - 1)
-                ###print(self.map.dicoC)
-                ###print(cooM)
+                ####print(self.map.dicoC)
+                ####print(cooM)
                 x1 = self.map.dicoC[cooM][0]
                 y1 = self.map.dicoC[cooM][1]
                 while self.checkMonsterInView(x1, y1):
@@ -383,7 +324,7 @@ class player:
                 if emplacementOK:
                     emplacement = True
                 emplacementOK = True
-            """##print(x1, y1, x1 + 30, y1 + 30)"""
+            """###print(x1, y1, x1 + 30, y1 + 30)"""
 
             # Génère le carré noir du monstre dans l'areaPlay à la position aléatoire
             monster.generateMonster(self.areaPlay, x1, y1)
@@ -395,7 +336,7 @@ class player:
             ]
             self.indexMonster += 1
             self.monsters.append(monster)  # Ajoute le monstre à la liste
-        ###print("coo ===========",self.monsterDico)
+        ####print("coo ===========",self.monsterDico)
 
     def checkMonsterInView(self, monster_x, monster_y):
         if (
@@ -412,7 +353,7 @@ class player:
         self.moved_m_index = 0
         # self.monster.moveMonster(self.areaPlay, self.view_x1, self.view_y1, self.view_x2, self.view_y2, self.character_x, self.character_y, self.character_x2, self.character_x1, self.character_y2, self.character_y1)
         if self.player_collision == False:
-            # print("continue ?")
+            # #print("continue ?")
             for monster in self.monsters:
                 monster.moveMonster(
                     self.areaPlay,
@@ -463,10 +404,10 @@ class player:
             self.character_y1 + dy < self.pnj_y2
             and self.character_y2 + dy > self.pnj_y1
         ):
-            ###print("open shop")
+            ####print("open shop")
             self.numPNJ = i
             self.collPNJ = True
-            ###print("pnj num : ", self.numPNJ)
+            ####print("pnj num : ", self.numPNJ)
             self.eventJoueur("Shop open")
             self.pnjs[i].openShop(self.window, self, self.collPNJ)
             return True
@@ -830,8 +771,8 @@ class player:
 
 
     def hp_update(self):
-        if self.life_point <= 25:
-            print("Dead")
+        if self.life_point <= 10:
+            #print("Dead")
             
             self.dead()
         else:
@@ -867,9 +808,9 @@ class player:
         self.areaPlay.delete("all")
         self.areaPlay.destroy()
         self.reset()
-        print("test1")
+        #print("test1")
         self.interface.backtomenu()
-        print("test2")
+        #print("test2")
 
     def newGame(self):
         self.text.destroy()
@@ -924,22 +865,22 @@ class player:
 
         if direction == "n":
             self.text = self.text+"\n"+"\t-Attack from north"
-            #print( self.text)
+            ##print( self.text)
         if direction == "e":
             self.text = self.text+"\n"+"\t-Attack from east"
-            #print( self.text)
+            ##print( self.text)
         if direction == "s":
             self.text = self.text+"\n"+"\t-Attack from south"
-            #print( self.text)
+            ##print( self.text)
         if direction == "w":
             self.text = self.text+"\n"+"\t-Attack from west"
-            #print( self.text)
+            ##print( self.text)
 
         self.eventMonsterAttacktxt = self.areaPlay.create_text(x1 + 9, 410, text= self.text, fill="white",font=("Press Start 2P", 9),  anchor="nw")
         self.EA = True
 
     def update_infoPN(self):
-        #print(self.fullMonster)
+        ##print(self.fullMonster)
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
         screen_width = WindowParameter.screenWidth
@@ -956,7 +897,7 @@ class player:
         self.areaPlay.create_text(x1 + 47, 320, text=self.fullMonster["n"][2], fill="white",font=("Press Start 2P", 12), anchor="w")
 
     def update_infoPE(self):
-        #print(self.fullMonster)
+        ##print(self.fullMonster)
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
         screen_width = WindowParameter.screenWidth
@@ -973,7 +914,7 @@ class player:
         self.areaPlay.create_text(x1 + 133, 320, text=self.fullMonster["e"][2], fill="white",font=("Press Start 2P", 12), anchor="w")
 
     def update_infoPS(self):
-        #print(self.fullMonster)
+        ##print(self.fullMonster)
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
         screen_width = WindowParameter.screenWidth
@@ -990,7 +931,7 @@ class player:
         self.areaPlay.create_text(x1 + 219, 320, text=self.fullMonster["s"][2], fill="white",font=("Press Start 2P", 12), anchor="w")
         
     def update_infoPW(self):
-        #print(self.fullMonster)
+        ##print(self.fullMonster)
         map_width = WindowParameter.mapWidth
         map_height = WindowParameter.mapHeight
         screen_width = WindowParameter.screenWidth
@@ -1007,7 +948,7 @@ class player:
         self.areaPlay.create_text(x1 + 305, 320, text=self.fullMonster["w"][2], fill="white",font=("Press Start 2P", 12), anchor="w")
 
     def Fight(self):
-        #print("Event joueur : Le joueur attaque")
+        ##print("Event joueur : Le joueur attaque")
         
         attack = self.areaPlay.coords(self.attackRect)
         attack_x1 = attack[0]
@@ -1062,18 +1003,18 @@ class player:
             monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
             if ci[2] + tolerance >= monsterCOO[0] and ci[0] <= monsterCOO[2] + tolerance:
                 if ci[3] + tolerance >= monsterCOO[1] and ci[1] <= monsterCOO[3] + tolerance:
-                    #print("Collision avec le monstre", i)
+                    ##print("Collision avec le monstre", i)
                     if ci[0] > monsterCOO[2] and ci[0] > monsterCOO[2] and ci[1] == monsterCOO[1] and ci[3] == monsterCOO[3]:
-                        #print("W")
+                        ##print("W")
                         self.fullMonster["w"] = ["./sprites/monster_1.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
                     elif ci[2] < monsterCOO[0] and ci[2] < monsterCOO[2] and ci[1] == monsterCOO[1] and ci[3] == monsterCOO[3]:
-                        #print("E")
+                        ##print("E")
                         self.fullMonster["e"] = ["./sprites/monster_1.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
                     elif ci[0] == monsterCOO[0] and ci[2] == monsterCOO[2] and ci[1] > monsterCOO[1] and ci[1] > monsterCOO[3]:
-                        #print("N")
+                        ##print("N")
                         self.fullMonster["n"] = ["./sprites/monster_1.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
                     elif ci[0] == monsterCOO[0] and ci[2] == monsterCOO[2] and ci[3] < monsterCOO[1] and ci[3] < monsterCOO[3]:
-                        #print("S")
+                        ##print("S")
                         self.fullMonster["s"] = ["./sprites/monster_1.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
 
 
@@ -1089,7 +1030,7 @@ class player:
             if self.tourPlayer :
                 if key == "a":
                         if self.attackDirection == "Right":
-                            ##print("direction attack right")
+                            ###print("direction attack right")
                             taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
                             taille_secondaire = 8  # Taille du côté du carré secondaire
 
@@ -1105,7 +1046,7 @@ class player:
                             self.countTourActivate = True
                             
                         elif self.attackDirection == "Left":
-                            ##print("direction attack Left")
+                            ###print("direction attack Left")
                             taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
                             taille_secondaire = 8  # Taille du côté du carré secondaire
 
@@ -1121,7 +1062,7 @@ class player:
                             self.countTourActivate = True  # Désactive le cooldown après 2000 millisecondes (2 secondes)
                             
                         elif self.attackDirection == "Up":
-                            ##print("direction attack Up")
+                            ###print("direction attack Up")
                             taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
                             taille_secondaire = 8  # Taille du côté du carré secondaire
 
@@ -1138,7 +1079,7 @@ class player:
                             self.countTourActivate = True
                         
                         elif self.attackDirection == "Down":
-                            ##print("direction attack Down")
+                            ###print("direction attack Down")
                             taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
                             taille_secondaire = 8  # Taille du côté du carré secondaire
 
@@ -1228,7 +1169,7 @@ class player:
             if self.countTourActivate :
                 self.countTour += 1"""
             #self.collisionWithMonster()
-            print("in p ",self.fullMonster)
+            # #print("in p ",self.fullMonster)
             self.player_info()
             self.hp_update()
             if self.eventNrVar == True:
@@ -1237,7 +1178,7 @@ class player:
                 self.eventNrVar = False
             elif self.eventKVar == True:
                 text =  "Player get the key"
-                print(text)
+                #print(text)
                 self.eventJoueur(text)
                 self.eventKVar = False
             elif eventJoueur == True:
@@ -1246,7 +1187,7 @@ class player:
             elif self.countTourActivate == True:
                 text = "Player attacks"
                 self.eventJoueur(text)
-            print(self.text)
+            # #print(self.text)
             self.eventMWalked = False
             self.eventMAVar = False
             self.text = "Monster :"
@@ -1279,7 +1220,7 @@ class player:
         self.view_x2 = self.character_x + self.view_distance
         self.view_y2 = self.character_y + self.view_distance
 
-        ###print("Player : x1 : ",self.view_x1," y1 : ",self.view_x2," x2 : ",self.view_x2," y2 : ",self.view_y2)
+        ####print("Player : x1 : ",self.view_x1," y1 : ",self.view_x2," x2 : ",self.view_x2," y2 : ",self.view_y2)
 
         self.areaPlay.create_rectangle(
             self.view_x1,
@@ -1292,7 +1233,7 @@ class player:
         )
 
     def goNextRoom(self):
-        ###print("nextRoom ?")
+        ####print("nextRoom ?")
         if self.gonext:
             self.gonext = False
         elif (
@@ -1303,9 +1244,9 @@ class player:
             and self.character_y1 >= self.map.y1R
         ):
             self.gonext = True
-            #print("Event : Le joueur passe au prochain étage")
+            ##print("Event : Le joueur passe au prochain étage")
             self.eventNrVar = True
-            ###print("Yes !")
+            ####print("Yes !")
             self.generateNewMap()
 
     def getKey(self):
@@ -1315,10 +1256,10 @@ class player:
             self.character_y1 < self.map.keyY2 and self.character_y2 > self.map.keyY1
         ):
             self.hasExitKey = True
-            #print("Event : Le joueur ramasse la clé")
+            ##print("Event : Le joueur ramasse la clé")
             self.eventKVar = True
             self.areaPlay.delete(self.map.key)
-            ###print(self.inventory)
+            ####print(self.inventory)
 
     def generateNewMap(self):
         # Supprime les éléments de la carte actuelle

@@ -11,11 +11,6 @@ class PNJ:
         self.shop = {}
         self.NumberItems = 3
 
-        # self.sword = {}
-        # self.PH = {}
-        # self.PM = {}
-        # self.armor = {}
-        # self.bow = {}
         self.WS = {}
         self.buyIt1 = False
         self.buyIt2 = False
@@ -30,7 +25,7 @@ class PNJ:
         self.collPNJ = False
 
     def generatePNJ(self, areaPlay, x, y):
-        ###print(f"In generatePNJ: \nX:{x} Y:{y}")
+        ####print(f"In generatePNJ: \nX:{x} Y:{y}")
         x = x * WindowParameter.tileSize
         y = y * WindowParameter.tileSize
 
@@ -46,7 +41,7 @@ class PNJ:
     def openShop(self, window, selfPlayer, collPNJ):
         self.collPNJ = collPNJ
         self.selfP = selfPlayer
-        ##print(self.collPNJ)
+        ###print(self.collPNJ)
         self.keysItem = list(self.shop.keys())
         """self.keySousItem0 = list()
         self.keySousItem1 = list(self.shop[self.keysItem[1]])
@@ -80,8 +75,8 @@ class PNJ:
         self.windowShop.grab_set()
         self.windowShop.focus_set()
 
-        ##print("gold : ", self.selfP.gold, "inventory : ", self.selfP.inventory)
-        ##print(self.buyIt1,"\n",self.buyIt2,"\n",self.buyIt3)
+        ###print("gold : ", self.selfP.gold, "inventory : ", self.selfP.inventory)
+        ###print(self.buyIt1,"\n",self.buyIt2,"\n",self.buyIt3)
         
         self.item0 = tk.Label(self.windowShop, text=self.string0)
         self.buyI0 = tk.Button(self.windowShop, text="Buy", command=self.buy1)
@@ -109,15 +104,15 @@ class PNJ:
         self.buyI1.place(anchor="center", x = 60, y=150)"""
 
     def buy1(self):
-        # print("buy1")
+        # #print("buy1")
         self.putInventoryItem1()
 
     def buy2(self):
-        # print("buy2")
+        # #print("buy2")
         self.putInventoryItem2()
 
     def buy3(self):
-        # print("buy3")
+        # #print("buy3")
         self.putInventoryItem3()
 
     # Weapon
@@ -126,7 +121,7 @@ class PNJ:
             # self.selfP.inventory[self.keysItem[0]] = self.shop[self.keysItem[0]]
             self.selfP.weapon = self.shop_weapon
             self.selfP.gold = self.selfP.gold - self.shop[self.keysItem[0]][self.keySousDico0[1]]
-        ##print(self.selfP.inventory)
+        ###print(self.selfP.inventory)
         
     # Armor
     def putInventoryItem2(self):
@@ -134,7 +129,7 @@ class PNJ:
             # self.selfP.inventory[self.keysItem[1]] = self.shop[self.keysItem[1]]
             self.selfP.armor = self.shop_armor
             self.selfP.gold = self.selfP.gold - self.shop[self.keysItem[1]][self.keySousDico1[1]]
-        ##print(self.selfP.inventory)
+        ###print(self.selfP.inventory)
 
     # Item
     def putInventoryItem3(self):
@@ -142,7 +137,7 @@ class PNJ:
             # self.selfP.inventory[self.keysItem[2]] = self.shop[self.keysItem[2]]
             self.selfP.inventory[self.shop_item] += 1
             self.selfP.gold = self.selfP.gold - self.shop[self.keysItem[1]][self.keySousDico1[1]]
-        ##print(self.selfP.inventory)
+        ###print(self.selfP.inventory)
 
 
     def closeShop(self, event):
@@ -197,8 +192,8 @@ class PNJ:
         #             indexRandom = random.randint(0, len(AllItems)-1)
         #     index.append(indexRandom)
         #     ItemsShop.append(AllItems[indexRandom])
-        ###print(index)
-        ###print(ItemsShop)
+        ####print(index)
+        ####print(ItemsShop)
         # for i in range(0, len(ItemsShop)):
         #     if ItemsShop[i] == "Sword":
         #         damage = random.randint(5, 8)
@@ -224,7 +219,7 @@ class PNJ:
         #         damage = random.randint(4,8)
         #         if(damage <= 8):
         #             self.shop["Wizard's staff"] = {"damage" : damage, "cost" : 4}
-        # ##print(self.shop)
+        # ###print(self.shop)
 
 
 

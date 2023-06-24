@@ -6,5 +6,5 @@ class fight:
         pass
     
     def FightPage(self ):
-        ##print("Test ?")
+        ###print("Test ?")
         self.fightpage = tk.Toplevel()
