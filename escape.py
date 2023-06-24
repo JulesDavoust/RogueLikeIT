@@ -1,7 +1,7 @@
 import tkinter as tk
 import json
 import windowParameters
-
+import equipements
 
 class Escape:
 
@@ -82,11 +82,12 @@ class Escape:
                 'max_life_point':self.selfplayer.max_life_point,
                 'mana': self.selfplayer.mana,
                 'max_mana': self.selfplayer.max_mana,
-                'damage': self.selfplayer.damage,
+                'damage': equipements.Equipements.equipement_stats[self.selfplayer.weapon],
                 'damageSpell' : self.selfplayer.damageSpell,
                 'armor': self.selfplayer.armor,
-                'inventory': self.selfplayer.inventory,
-                'weapon': self.selfplayer.weapon
+                'weapon': self.selfplayer.weapon,
+                'defense':equipements.Equipements.equipement_stats[self.selfplayer.armor],
+                'inventory': self.selfplayer.inventory
             }
         
             # Écrire les données dans le fichier JSON

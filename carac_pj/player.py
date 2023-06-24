@@ -17,7 +17,7 @@ from escape import Escape
 class player:
     # PLEASE use a fonction instead of duplicated codes, if not there's a probleme to change value when we want to
     def initializeBasic_knight(self):
-        self.life_point = 50
+        self.life_point = 75
         self.max_life_point = self.life_point
         self.mana = 20
         self.weapon = "blade_0"
@@ -101,10 +101,13 @@ class player:
                 self.life_point = data['life_point']
                 self.max_life_point = data['max_life_point']
                 self.mana = data['mana']
-                self.damage = data['damage']
+                self.max_mana = data['max_mana']
+                self.damageSpell = data['damageSpell']
                 self.inventory = data['inventory']
                 self.weapon = data['weapon']
                 self.armor = data['armor']
+                self.damage = data['damage']
+                self.defense = data['defense']
         else:
             if classe == 0:
                 self.initializeBasic_knight()
@@ -460,6 +463,7 @@ class player:
             if(self.life_point > self.max_life_point):
                 self.life_point = self.max_life_point
             self.inventory[self.potion_pv] -= 1
+            self.hp_update(True)
         else:
             pass
 
