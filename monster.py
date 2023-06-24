@@ -100,7 +100,6 @@ class Monster:
         self.monster_y1 = self.monster_coords[1]  
         self.monster_x2 = self.monster_coords[2]
         self.monster_y2 = self.monster_coords[3]
-        ##print("Monster : x1 : ",self.monster_x1)
         
 
         self.current_x = (self.monster_coords[0] + self.monster_coords[2])/2
@@ -116,8 +115,8 @@ class Monster:
         else:
                 slope = 0
         
-        print(int(slope))
-        print(self.current_x, target_x)
+        #print(int(slope))
+        #print(self.current_x, target_x)
         dx = self.moveDistance
         dy = -self.moveDistance
         """if x1_rect1 < x2_rect2 and x2_rect1 > x1_rect2 and y1_rect1 < y2_rect2 and y2_rect1 > y1_rect2:"""
@@ -153,31 +152,31 @@ class Monster:
                                 
                                 if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             ok = True
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             ok = True
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             ok = True
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             ok = True
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -213,31 +212,31 @@ class Monster:
                                             return
                                 if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             ok = True
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             ok = True
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             ok = True
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             ok = True
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -275,17 +274,17 @@ class Monster:
                                             return
                                 if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             ok = True
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             ok = True
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
@@ -293,14 +292,14 @@ class Monster:
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             
                                             ok = True
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             ok = True
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -338,31 +337,31 @@ class Monster:
                                             return
                                 if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             ok = True
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
                                             ok = True
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
                                             ok = True
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
                                             ok = True
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -374,39 +373,39 @@ class Monster:
             if ok == False:
                 if ci[2] + tolerance >= self.monster_x1 and ci[0] <= self.monster_x2 + tolerance:
                     if ci[3] + tolerance >= self.monster_y1 and ci[1] <= self.monster_y2 + tolerance:
-                        print("Collision avec le monstre")
+                        #print("Collision avec le monstre")
                         if ci[0] > self.monster_x2 and ci[0] > self.monster_x2 and ci[1] == self.monster_y1 and ci[3] == self.monster_y2:
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                         elif ci[2] < self.monster_x1 and ci[2] < self.monster_x2 and ci[1] == self.monster_y1 and ci[3] == self.monster_y2:
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                         elif ci[0] == self.monster_x1 and ci[2] == self.monster_x2 and ci[1] > self.monster_y1 and ci[1] > self.monster_y2:
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                         elif ci[0] == self.monster_x1 and ci[2] == self.monster_x2 and ci[3] < self.monster_y1 and ci[3] < self.monster_y2:
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
                                             playerSelf.eventMAVar = True
-            print(playerSelf.fullMonster)    
+            #print(playerSelf.fullMonster)    
             
 
         elif(self.monster_x1 < x2P and self.monster_x2 > x1P and self.monster_y1 < y2P and self.monster_y2 > y1P and playerSelf.player_collision == False and playerSelf.collPNJ == False):
           
             self.monster_collision = False
-            ##print(self.current_x, self.current_y, target_x, target_y)
-            ##print("slope", slope)
+            ###print(self.current_x, self.current_y, target_x, target_y)
+            ###print("slope", slope)
             intersec = False
             for case in map.CaseNoire.values():
                 x3, y3, x4, y4 = case
@@ -417,7 +416,7 @@ class Monster:
             #return False
             
             if intersec == False:
-                ##print("intersec")
+                ###print("intersec")
                 if slope == 0 and target_x == self.current_x and self.current_y < target_y:
                     new_x2 = self.monster_x2
                     new_x1 = self.monster_x1
@@ -432,27 +431,27 @@ class Monster:
                                 return
                     if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -475,27 +474,27 @@ class Monster:
                                 return
                     if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -518,27 +517,27 @@ class Monster:
                                 return
                     if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -561,27 +560,27 @@ class Monster:
                                 return
                     if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -618,27 +617,27 @@ class Monster:
                                             return
                                 if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -672,27 +671,27 @@ class Monster:
                                             return
                                 if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -727,27 +726,27 @@ class Monster:
                                             return
                                 if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -781,27 +780,27 @@ class Monster:
                                             return
                                 if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -837,27 +836,27 @@ class Monster:
                                             return
                                 if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -891,27 +890,27 @@ class Monster:
                                             return
                                 if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -946,27 +945,27 @@ class Monster:
                                             return
                                 if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -1000,27 +999,27 @@ class Monster:
                                             return
                                 if ci[2] + tolerance >= new_x1 and ci[0] <= new_x2 + tolerance:
                                     if ci[3] + tolerance >= new_y1 and ci[1] <= new_y2 + tolerance:
-                                        print("Collision avec le monstre")
+                                        #print("Collision avec le monstre")
                                         if ci[0] > new_x2 and ci[0] > new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("W")
+                                            #print("W")
                                             playerSelf.fullMonster["w"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPW()
                                             playerSelf.eventMonsterAttack("w")
                                             playerSelf.eventMAVar = True
                                         elif ci[2] < new_x1 and ci[2] < new_x2 and ci[1] == new_y1 and ci[3] == new_y2:
-                                            print("E")
+                                            #print("E")
                                             playerSelf.fullMonster["e"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPE()
                                             playerSelf.eventMonsterAttack("e")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[1] > new_y1 and ci[1] > new_y2:
-                                            print("N")
+                                            #print("N")
                                             playerSelf.fullMonster["n"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPN()
                                             playerSelf.eventMonsterAttack("n")
                                             playerSelf.eventMAVar = True
                                         elif ci[0] == new_x1 and ci[2] == new_x2 and ci[3] < new_y1 and ci[3] < new_y2:
-                                            print("S")
+                                            #print("S")
                                             playerSelf.fullMonster["s"] = ["./sprites/monster_1_big.png", self.life_points_monster, self.damage]
                                             playerSelf.update_infoPS()
                                             playerSelf.eventMonsterAttack("s")
@@ -1030,17 +1029,17 @@ class Monster:
                                 areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
                                 areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
 
-                    ##print("diag")
+                    ###print("diag")
                 
-                ##print("not intersec")
+                ###print("not intersec")
             else:
                 self.diag = False
-                ##print("intersec")
+                ###print("intersec")
                 stop = False
                 if self.monster_x2 + self.moveDistance > WindowParameter.mapWidth-WindowParameter.tileSize:
-                    ##print("test1")
+                    ###print("test1")
                     self.diag = False
-                    ##print("x2")
+                    ###print("x2")
                     #areaPlay.move(self.monster, -1*self.moveDistance, 0)
                     
                     dx = random.choice([-1, 0])
@@ -1057,11 +1056,11 @@ class Monster:
                             and new_x1 < monster[2]
                             and new_y1 < monster[3]):
                                 stop = True        
-                    ##print(new_x1, new_y1, new_x2, new_y2)
+                    ###print(new_x1, new_y1, new_x2, new_y2)
                     while (new_x2 > WindowParameter.mapWidth or
                     any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
                     any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                        ##print("Whiletest1")
+                        ###print("Whiletest1")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
                             if areaPlay.coords(monster) != areaPlay.coords(self.monster):
@@ -1085,9 +1084,9 @@ class Monster:
                     areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                     #areaPlay.move(self.monster_pic, -20, 0)
                 elif self.monster_x1 - self.moveDistance < 0+WindowParameter.tileSize:
-                            ##print("test2")
+                            ###print("test2")
                             self.diag = False
-                            ##print("x1")
+                            ###print("x1")
                             #areaPlay.move(self.monster, +1*self.moveDistance, 0)
                             dx = random.choice([0, 1])
                             dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
@@ -1102,11 +1101,11 @@ class Monster:
                                     and new_x1 < monster[2]
                                     and new_y1 < monster[3]):
                                         stop = True
-                            ##print(new_x1, new_y1, new_x2, new_y2)
+                            ###print(new_x1, new_y1, new_x2, new_y2)
                             while (new_x1 < 0 or
                             any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
                             any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                                ##print("Whiletest2")
+                                ###print("Whiletest2")
                                 stop = False
                                 for monster in playerSelf.monsterDico.values():
                                     if areaPlay.coords(monster) != areaPlay.coords(self.monster):
@@ -1131,8 +1130,8 @@ class Monster:
                             #areaPlay.move(self.monster_pic, -20, 0)
                 elif self.monster_y2 + self.moveDistance > WindowParameter.mapHeight-WindowParameter.tileSize:
                             self.diag = False
-                            ##print("test3")
-                            ##print("y2")
+                            ###print("test3")
+                            ###print("y2")
                             #areaPlay.move(self.monster, 0, -1*self.moveDistance)
                             dy = random.choice([-1, 0])
                             dx = random.choice([-1, 1]) if dy == 0 else 0  # Empêche les mouvements en diagonal
@@ -1147,11 +1146,11 @@ class Monster:
                                     and new_x1 < monster[2]
                                     and new_y1 < monster[3]):
                                         stop = True
-                            ##print(new_x1, new_y1, new_x2, new_y2)
+                            ###print(new_x1, new_y1, new_x2, new_y2)
                             while (new_y2 > WindowParameter.mapHeight or
                             any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
                             any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                                ##print("Whiletest3")
+                                ###print("Whiletest3")
                                 stop = False
                                 for monster in playerSelf.monsterDico.values():
                                     if areaPlay.coords(monster) != areaPlay.coords(self.monster):
@@ -1176,8 +1175,8 @@ class Monster:
                             #areaPlay.move(self.monster_pic, -20, 0)
                 elif self.monster_y1 - self.moveDistance < 0+WindowParameter.tileSize:
                             self.diag = False
-                            ##print("test4")
-                            ##print("y1")
+                            ###print("test4")
+                            ###print("y1")
                             #areaPlay.move(self.monster, 0, +1*self.moveDistance)
                             dy = random.choice([0, 1])
                             dx = random.choice([-1, 1]) if dy == 0 else 0  # Empêche les mouvements en diagonal
@@ -1192,11 +1191,11 @@ class Monster:
                                     and new_x1 < monster[2]
                                     and new_y1 < monster[3]):
                                         stop = True
-                            ##print(new_x1, new_y1, new_x2, new_y2)
+                            ###print(new_x1, new_y1, new_x2, new_y2)
                             while (new_y1 < 0 or
                             any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
                             any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                                ##print("Whiletest4")
+                                ###print("Whiletest4")
                                 stop = False
                                 for monster in playerSelf.monsterDico.values():
                                     if areaPlay.coords(monster) != areaPlay.coords(self.monster):
@@ -1230,7 +1229,7 @@ class Monster:
                     new_y1 = self.monster_y1 + dy * self.moveDistance
                     new_x2 = self.monster_x2 + dx * self.moveDistance
                     new_y2 = self.monster_y2 + dy * self.moveDistance
-                    ##print("test5")
+                    ###print("test5")
                     for monster in playerSelf.monsterDico.values():
                         if areaPlay.coords(monster) != areaPlay.coords(self.monster):
                             if (new_x2 > monster[0] 
@@ -1241,7 +1240,7 @@ class Monster:
                     # Vérification de collision avec les murs (cases noires) et les carrés bleus
                     while (any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
                         any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                        ##print("Whiletest5")
+                        ###print("Whiletest5")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
                             if areaPlay.coords(monster) != areaPlay.coords(self.monster):
@@ -1265,14 +1264,14 @@ class Monster:
                     areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                 #areaPlay.move(self.monster_pic, dx, dy)
             """else:
-                #print("intersect")
-            ##print(is_black_tile_in_between)
-                #print("if")
+                ##print("intersect")
+            ###print(is_black_tile_in_between)
+                ##print("if")
                 dx = (target_x - self.current_x)  # Déplacement en x nécessaire
                 dy = (target_y - self.current_y)  # Déplacement en y nécessaire
 
-                # #print(dx)
-                # #print(dy)
+                # ##print(dx)
+                # ##print(dy)
                 if dx == 0 and dy < 0:
                     areaPlay.move(self.monster, 0, -1 * self.moveDistance)
                 elif dx == 0 and dy > 0:
@@ -1283,11 +1282,11 @@ class Monster:
                     areaPlay.move(self.monster, +1 * self.moveDistance , 0)"""
      
         elif self.monster_x2 + self.moveDistance > WindowParameter.mapWidth-WindowParameter.tileSize:
-                    ##print("test6")
+                    ###print("test6")
                     self.monster_collision = False
                     self.diag = False
                     stop = False
-                    ##print("x2")
+                    ###print("x2")
                     #areaPlay.move(self.monster, -1*self.moveDistance, 0)
 
                     dx = random.choice([-1, 0])
@@ -1303,11 +1302,11 @@ class Monster:
                                 and new_x1 < monster[2]
                                 and new_y1 < monster[3]):
                                     stop = True
-                    ##print(new_x1, new_y1, new_x2, new_y2)
+                    ###print(new_x1, new_y1, new_x2, new_y2)
                     while (new_x2 > WindowParameter.mapWidth or
                     any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
                     any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                        ##print("Whiletest6")
+                        ###print("Whiletest6")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
                             if areaPlay.coords(monster) != areaPlay.coords(self.monster):
@@ -1333,8 +1332,8 @@ class Monster:
         elif self.monster_x1 - self.moveDistance < 0+WindowParameter.tileSize:
                     self.monster_collision = False
                     self.diag = False
-                    ##print("x1")
-                    ##print("test7")
+                    ###print("x1")
+                    ###print("test7")
                     #areaPlay.move(self.monster, +1*self.moveDistance, 0)
                     dx = random.choice([0, 1])
                     dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
@@ -1350,11 +1349,11 @@ class Monster:
                                 and new_x1 < monster[2]
                                 and new_y1 < monster[3]):
                                     stop = True
-                    ##print(new_x1, new_y1, new_x2, new_y2)
+                    ###print(new_x1, new_y1, new_x2, new_y2)
                     while (new_x1 < 0 or
                     any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
                     any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                        ##print("Whiletest7")
+                        ###print("Whiletest7")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
                             if areaPlay.coords(monster) != areaPlay.coords(self.monster):
@@ -1380,8 +1379,8 @@ class Monster:
         elif self.monster_y2 + self.moveDistance > WindowParameter.mapHeight-WindowParameter.tileSize:
                     self.monster_collision = False
                     self.diag = False
-                    ##print("y2")
-                    ##print("test8")
+                    ###print("y2")
+                    ###print("test8")
                     #areaPlay.move(self.monster, 0, -1*self.moveDistance)
                     dy = random.choice([-1, 0])
                     dx = random.choice([-1, 1]) if dy == 0 else 0  # Empêche les mouvements en diagonal
@@ -1397,11 +1396,11 @@ class Monster:
                                 and new_x1 < monster[2]
                                 and new_y1 < monster[3]):
                                     stop = True
-                    ##print(new_x1, new_y1, new_x2, new_y2)
+                    ###print(new_x1, new_y1, new_x2, new_y2)
                     while (new_y2 > WindowParameter.mapHeight or
                     any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
                     any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                        ##print("Whiletest8")
+                        ###print("Whiletest8")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
                             if areaPlay.coords(monster) != areaPlay.coords(self.monster):
@@ -1427,8 +1426,8 @@ class Monster:
         elif self.monster_y1 - self.moveDistance < 0+WindowParameter.tileSize:
                     self.monster_collision = False
                     self.diag = False
-                    ##print("test9")
-                    ##print("y1")
+                    ###print("test9")
+                    ###print("y1")
                     #areaPlay.move(self.monster, 0, +1*self.moveDistance)
                     dy = random.choice([0, 1])
                     dx = random.choice([-1, 1]) if dy == 0 else 0  # Empêche les mouvements en diagonal
@@ -1444,11 +1443,11 @@ class Monster:
                                 and new_x1 < monster[2]
                                 and new_y1 < monster[3]):
                                     stop = True
-                    ##print(new_x1, new_y1, new_x2, new_y2)
+                    ###print(new_x1, new_y1, new_x2, new_y2)
                     while (new_y1 < 0 or
                     any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
                     any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                        ##print("Whiletest10")
+                        ###print("Whiletest10")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
                             if areaPlay.coords(monster) != areaPlay.coords(self.monster):
@@ -1477,7 +1476,7 @@ class Monster:
             coll = False
             index = list(map.CaseNoire.keys())
             i = 0
-            ##print("test11")
+            ###print("test11")
             dx = random.randint(-1, 1)
             dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
             new_x1 = self.monster_x1 + dx * self.moveDistance
@@ -1495,7 +1494,7 @@ class Monster:
             # Vérification de collision avec les murs (cases noires) et les carrés bleus
             while (any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
                 any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                ##print("Whiletest11")
+                ###print("Whiletest11")
                 stop = False
                 for monster in playerSelf.monsterDico.values():
                             if areaPlay.coords(monster) != areaPlay.coords(self.monster):
@@ -1507,7 +1506,7 @@ class Monster:
                 if self.antiInfinite > 150:
                     return
                 self.antiInfinite += 1
-                ##print((new_x1, new_y1, new_x2, new_y2))
+                ###print((new_x1, new_y1, new_x2, new_y2))
                 dx = random.randint(-1, 1)
                 dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
                 new_x1 = self.monster_x1 + dx * self.moveDistance
@@ -1519,7 +1518,7 @@ class Monster:
             areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
             areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)       
         if playerSelf.eventMAVar != True and playerSelf.eventMWVar == True and playerSelf.eventMWalked == False :
-            print("Monsters walks")
+            # #print("Monsters walks")
             text = "Monsters walks"
             playerSelf.eventMonster(text)
             playerSelf.eventMWalked = True
