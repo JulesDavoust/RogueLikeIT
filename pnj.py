@@ -60,8 +60,7 @@ class PNJ:
         
         self.windowShop = tk.Toplevel(window)
         self.windowShop.geometry("400x200")
-        self.windowShop.focus_set()
-
+       
         #Remove window decorations (Top-right)
         self.windowShop.overrideredirect(True)
 
@@ -90,7 +89,7 @@ class PNJ:
         self.item2 = tk.Label(self.windowShop, text=self.string2)
         self.buyI2 = tk.Button(self.windowShop, text="Buy", command=self.buy3)
 
-        indication = tk.Label(self.windowShop, text="Press E to quit")
+        indication = tk.Button(self.windowShop, text="Quit", command=self.closeShop)
         indication.place(x=200, y=160, anchor="center")
         
         self.item0.grid(row=0, column=0, pady=20, sticky="nsew")
@@ -103,8 +102,6 @@ class PNJ:
         self.windowShop.grid_columnconfigure(1, weight=1)
         self.windowShop.grid_columnconfigure(2, weight=1)
         
-    
-        self.windowShop.bind("<KeyPress>", self.closeShop)
         """self.item0.place(anchor="center", x=60, y=120)
         self.buyI1.place(anchor="center", x = 60, y=150)"""
 
@@ -145,11 +142,9 @@ class PNJ:
         ##print(self.selfP.inventory)
 
 
-    def closeShop(self, event):
-        key = event.keysym
+    def closeShop(self):
         self.selfP.collPNJ = False
-        if key == "e":
-            self.windowShop.destroy()
+        self.windowShop.destroy()
         
 
     def generateShop(self,areaPlay, x1, y1):

@@ -36,7 +36,9 @@ class player:
                 self.life_point = data['life_point']
                 self.max_life_point = data['max_life_point']
                 self.mana = data['mana']
+                self.max_mana = data['max_mana']
                 self.damage = data['damage']
+                self.damageSpell = data['damageSpell']
                 self.inventory = data['inventory']
                 self.armor = data['armor']
         else:
@@ -45,32 +47,36 @@ class player:
             self.inventory = {self.potion_pv: 1, self.potion_mp: 0}
             self.gold = 30
             if classe == 0:
-                self.life_point = 50
+                self.life_point = 75
                 self.armor = 0
                 self.max_life_point = self.life_point
                 self.mana = 20
                 self.damage = 30
+                self.damageSpell = 20
+                self.max_mana = 20
                 self.weapon = "blade_0"
                 self.armor = "ring_0"
                 self.damage = Equipements.equipement_stats[self.weapon]
                 self.defense = Equipements.equipement_stats[self.armor]
                 # self.knight = tk.PhotoImage(file="./sprites/knight_f_idle_anim_f0.png")
             elif classe == 1:
-                self.life_point = 80
+                self.life_point = 75
                 self.armor = 0
                 self.max_life_point = self.life_point
                 self.mana = 30
                 self.range = 10
                 self.damage = 10
                 self.damageSpell = 20
+                self.max_mana = 30
             elif classe == 2:
-                self.life_point = 100
+                self.life_point = 95
                 self.armor = 0
                 self.max_life_point = self.life_point
                 self.mana = 50
                 self.range = 5
                 self.damage = 20
                 self.damageSpell = 30
+                self.max_mana = 50
         # add the other items in case we have time, like bomb
         # Each item is saved as dict in the list of inventory, in this way we can know the storage directly
         
@@ -146,26 +152,36 @@ class player:
 
     def reset(self):
         if self.classe == 0:
-                self.life_point = 50
+                self.life_point = 75
                 self.armor = 0
                 self.max_life_point = self.life_point
                 self.mana = 20
                 self.damage = 30
+                self.damageSpell = 20
+                self.max_mana = 20
+                self.weapon = "blade_0"
+                self.armor = "ring_0"
+                self.damage = Equipements.equipement_stats[self.weapon]
+                self.defense = Equipements.equipement_stats[self.armor]
                 # self.knight = tk.PhotoImage(file="./sprites/knight_f_idle_anim_f0.png")
         elif self.classe == 1:
-                self.life_point = 80
+                self.life_point = 75
                 self.armor = 0
                 self.max_life_point = self.life_point
                 self.mana = 30
                 self.range = 10
                 self.damage = 10
+                self.damageSpell = 20
+                self.max_mana = 30
         elif self.classe == 2:
-                self.life_point = 100
+                self.life_point = 95
                 self.armor = 0
                 self.max_life_point = self.life_point
                 self.mana = 50
                 self.range = 5
                 self.damage = 20
+                self.damageSpell = 30
+                self.max_mana = 50
         self.inventory = {self.potion_pv: 1, self.potion_mp: 0}
         self.hasExitKey = False
         self.tourPlayer = True
@@ -231,7 +247,8 @@ class player:
         self.levelMap = self.map.level
         self.map.generateKey(self.areaPlay)
         self.player_info()
-        self.hp_update()
+        self.hp_update(False)
+        self.mana_update(False)
         # print("map level : ", self.levelMap)
         # """#print(self.map.CaseNoire)
         # #print(self.map.centreCaseNoire)"""
@@ -611,6 +628,7 @@ class player:
         )
 
         # Monsters infos
+        self.areaPlay.create_text(x1 + 45, 195, text="North", fill="white", font=("Press Start 2P", 11))
         self.areaPlay.create_rectangle(x1 + 3, 200, x1 + 88, 340, fill="")
         self.areaPlay.create_rectangle(
             x1 + 3, 200, x1 + 88, 250, fill="", outline="white"
@@ -622,7 +640,7 @@ class player:
             x1 + 3, 295, x1 + 88, 340, fill="", outline="white"
         )
         
-
+        self.areaPlay.create_text(x1 + 131, 195, text="East", fill="white", font=("Press Start 2P", 11))
         self.areaPlay.create_rectangle(x1 + 89, 200, x1 + 174, 340, fill="")
         self.areaPlay.create_rectangle(
             x1 + 89, 200, x1 + 174, 250, fill="", outline="white"
@@ -634,6 +652,7 @@ class player:
             x1 + 89, 295, x1 + 174, 340, fill="", outline="white"
         )
 
+        self.areaPlay.create_text(x1 + 217, 195, text="South", fill="white", font=("Press Start 2P", 11))
         self.areaPlay.create_rectangle(x1 + 175, 200, x1 + 260, 340, fill="")
         self.areaPlay.create_rectangle(
             x1 + 175, 200, x1 + 260, 250, fill="", outline="white"
@@ -645,6 +664,7 @@ class player:
             x1 + 175, 295, x1 + 260, 340, fill="", outline="white"
         )
 
+        self.areaPlay.create_text(x1 + 306, 195, text="West", fill="white", font=("Press Start 2P", 11))
         self.areaPlay.create_rectangle(x1 + 261, 200, x1 + 346, 340, fill="")
         self.areaPlay.create_rectangle(
             x1 + 261, 200, x1 + 346, 250, fill="", outline="white"
@@ -833,24 +853,45 @@ class player:
         )
 
 
-    def hp_update(self):
+    def hp_update(self, textThere):
+        print(self.life_point)
+
         if self.life_point <= 25:
+            self.areaPlay.delete(self.text_health)
+            self.areaPlay.delete(self.health_bar)
+            self.text_health = self.areaPlay.create_text(WindowParameter.mapWidth + 83,  WindowParameter.tileSize+17, text=(str(0)), fill="white", font=("Press Start 2P", 12))
             print("Dead")
             
             self.dead()
         else:
+            if textThere == True:
+                self.areaPlay.delete(self.text_health)
+                self.areaPlay.delete(self.health_bar)
             self.health_percent = self.life_point/self.max_life_point
             self.bar_width = self.health_percent * 300
             self.health_bar = self.areaPlay.create_rectangle(WindowParameter.mapWidth + 80,  WindowParameter.tileSize, WindowParameter.mapWidth+ self.bar_width, WindowParameter.tileSize + 30, fill="red")
+            self.text_health = self.areaPlay.create_text(WindowParameter.mapWidth + self.bar_width+20,  WindowParameter.tileSize+17, text=(str(self.life_point-25)), fill="white", font=("Press Start 2P", 12))
+        
+    def mana_update(self, textThere):
+        print(self.mana)
+        if self.mana >= 5:
+            if textThere == True:
+                self.areaPlay.delete(self.text_mana)
+                self.areaPlay.delete(self.mana_bar)
+            self.mana_percent = self.mana/self.max_mana
+            self.bar_mana_width = self.mana_percent * 300
+            self.mana_bar = self.areaPlay.create_rectangle(WindowParameter.mapWidth + 80,  WindowParameter.tileSize + 40, WindowParameter.mapWidth+ self.bar_mana_width, WindowParameter.tileSize + 50, fill="blue")
+            self.text_mana = self.areaPlay.create_text(WindowParameter.mapWidth + self.bar_mana_width+20,  WindowParameter.tileSize+50, text=(str(self.mana)), fill="white", font=("Press Start 2P", 12))
+        else:
+            self.text_mana = self.areaPlay.create_text(WindowParameter.mapWidth + 80,  WindowParameter.tileSize+50, text=(str(0)), fill="white", font=("Press Start 2P", 12))
         
     def dead(self):
         self.reset()
         with open('save.json', 'w') as fichier:
             fichier.truncate(0)
-        self.areaPlay.delete("all")
         self.areaPlay.unbind("<KeyPress>")
         self.playerDied = True
-        self.blackScreen = self.areaPlay.create_rectangle(0, 0, WindowParameter.screenWidth, WindowParameter.screenHeight, fill="black")
+        self.blackScreen = self.areaPlay.create_rectangle(0, 0, WindowParameter.screenWidth, WindowParameter.screenHeight, outline="black")
         """self.died = self.areaPlay.create_text(WindowParameter.screenWidth / 2, WindowParameter.screenHeight / 2, text="You died", fill="Red", font=("Press Start 2P", 16), anchor="center")
         self.buttonNewG = tk.Button(self.window, text="New Game", command=self.newGame)"""
 
@@ -880,6 +921,7 @@ class player:
         # Pour supprimer le bouton
         self.button.destroy()
         self.menuButton.destroy()
+        self.areaPlay.delete("all")
         self.reset()
         self.createAll()
 
@@ -1060,7 +1102,10 @@ class player:
     
     def Sort(self):
         #print("Event joueur : Le joueur attaque")
-        
+        self.mana = self.mana - 5
+        self.mana_update(True)
+        if self.mana < 0:
+            self.mana = 0
         attackR = self.areaPlay.coords(self.attackRectR)
         attack_x1R = attackR[0]
         attack_y1R = attackR[1]
@@ -1112,7 +1157,7 @@ class player:
             ):
                 ###print(self.monsters[i].life_points_monster)
                 self.monsters[i].life_points_monster = (
-                    self.monsters[i].life_points_monster - self.damage
+                    self.monsters[i].life_points_monster - self.damageSpell
                 )
 
                 ###print(self.monsters[i].life_points_monster)
@@ -1128,6 +1173,7 @@ class player:
                         self.PlayerLevel = self.PlayerLevel + 1
                         self.life_point = self.life_point + 3
                         self.damage = self.damage + 3
+                        self.damageSpell = self.damageSpell + 2
                         self.xp = 0
                     self.gold = self.monsters[i].xp + self.gold
                     pop = True
@@ -1243,15 +1289,15 @@ class player:
                             self.countTourActivate = True
                         self.window.after(200, self.start_moving_monsters)
 
-                elif key == "s":
+                elif key == "s" and self.mana >= 5:
                             ##print("direction attack right")
                             taille_cote = WindowParameter.characterSize  # Taille du côté du carré principal
                             taille_secondaire = 8  # Taille du côté du carré secondaire
 
                             x1R = self.character_x2  # Coordonnée x1 du carré secondaire
                             y1R = self.character_y1 + (taille_cote - taille_secondaire) / 2  # Coordonnée y1 du carré secondaire
-                            x2R = x1 + taille_secondaire  # Coordonnée x2 du carré secondaire
-                            y2R = y1 + taille_secondaire  # Coordonnée y2 du carré secondaire
+                            x2R = x1R + taille_secondaire  # Coordonnée x2 du carré secondaire
+                            y2R = y1R + taille_secondaire  # Coordonnée y2 du carré secondaire
 
                             x2L = self.character_x1  # Coordonnée x1 du carré secondaire
                             y1L = self.character_y1 + (taille_cote - taille_secondaire) / 2  # Coordonnée y1 du carré secondaire
@@ -1353,7 +1399,8 @@ class player:
             self.tourPlayer = False
             print("in p ",self.fullMonster)
             self.player_info()
-            self.hp_update()
+            self.hp_update(True)
+            self.mana_update(True)
             if self.eventNrVar == True:
                 text =  "Player go to the next room"
                 self.eventJoueur(text)
@@ -1368,6 +1415,9 @@ class player:
                 self.eventJoueur(text)
             elif self.countTourActivate == True:
                 text = "Player attacks"
+                self.eventJoueur(text)
+            elif self.countTourActivateSort == True:
+                text = "Player casts a spell"
                 self.eventJoueur(text)
             print(self.text)
             self.eventMWalked = False
