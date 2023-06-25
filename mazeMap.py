@@ -96,7 +96,7 @@ def three_walls_cells(maze):
             
    
 
-# Display the maze
-# maze = generate_maze(WindowParameter.mapTileCol,WindowParameter.mapTileRow)
-# wall_list = detect_walls(maze)
-# ####print(three_walls_cells(maze))
+#Display the maze
+"""maze = generate_maze(WindowParameter.mapTileCol,WindowParameter.mapTileRow)
+wall_list = detect_walls(maze)
+print(three_walls_cells(maze))"""

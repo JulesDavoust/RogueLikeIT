@@ -14,7 +14,6 @@ from escape import Escape
 
 
 class player:
-    # PLEASE use a fonction instead of duplicated codes, if not there's a probleme to change value when we want to
     def initializeBasic_knight(self):
         self.life_point = 75
         self.max_life_point = self.life_point
@@ -386,10 +385,10 @@ class player:
         self.cooPNJ = self.areaPlay.coords(self.pnjs[i].pnj)
         self.pnj_x = (
             self.cooPNJ[0] + self.cooPNJ[2]
-        ) / 2  # Coordonnée x du centre du rectangle rouge
+        ) / 2  # Coordonnée x du centre du rectangle
         self.pnj_y = (
             self.cooPNJ[1] + self.cooPNJ[3]
-        ) / 2  # Coordonnée y du centre du rectangle rouge
+        ) / 2  # Coordonnée y du centre du rectangle
 
         self.pnj_x1 = self.cooPNJ[0]
         self.pnj_y1 = self.cooPNJ[1]
@@ -416,10 +415,10 @@ class player:
         self.monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
         self.monster_x = (
             self.monsterCOO[0] + self.monsterCOO[2]
-        ) / 2  # Coordonnée x du centre du rectangle rouge
+        ) / 2  # Coordonnée x du centre du rectangle 
         self.monster_y = (
             self.monsterCOO[1] + self.monsterCOO[3]
-        ) / 2  # Coordonnée y du centre du rectangle rouge
+        ) / 2  # Coordonnée y du centre du rectangle 
 
         self.monster_x1 = self.monsterCOO[0]
         self.monster_y1 = self.monsterCOO[1]
@@ -1164,7 +1163,7 @@ class player:
 
                             self.attackRect = self.areaPlay.create_rectangle(x1, y1, x2+8, y2, fill="blue")
                             self.Fight()
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRect))
 
                             self.countTourActivate = True
                             
@@ -1180,7 +1179,7 @@ class player:
 
                             self.attackRect = self.areaPlay.create_rectangle(x1-8, y1, x2, y2, fill="blue")
                             self.Fight()
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRect))
 
                             self.countTourActivate = True  # Désactive le cooldown après 2000 millisecondes (2 secondes)
                             
@@ -1197,7 +1196,7 @@ class player:
 
                             self.attackRect = self.areaPlay.create_rectangle(x1, y1-8, x2, y2, fill="blue")
                             self.Fight()
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRect))
                             
                             self.countTourActivate = True
                         
@@ -1213,10 +1212,10 @@ class player:
 
                             self.attackRect = self.areaPlay.create_rectangle(x1, y1, x2, y2+8, fill="blue")
                             self.Fight()
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRect))
                             
                             self.countTourActivate = True
-                        self.window.after(200, self.start_moving_monsters)
+                        self.window.after(30, self.start_moving_monsters)
 
                 elif key == "s" and self.mana >= 5:
                             ###print("direction attack right")
@@ -1249,14 +1248,14 @@ class player:
                             self.attackRectD = self.areaPlay.create_rectangle(x1D, y1D, x2D, y2D+8, fill="red")
                             self.Sort()
 
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRectR))
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRectL))
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRectU))
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRectD))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRectR))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRectL))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRectU))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRectD))
 
                             self.countTourActivateSort = True
                             
-                            self.window.after(200, self.start_moving_monsters)
+                            self.window.after(30, self.start_moving_monsters)
        
 
                 #Player
@@ -1323,7 +1322,7 @@ class player:
                                 self.areaPlay.move(self.sprite, dx, dy)
                                 self.update_view()
                             self.goNextRoom()
-                        self.window.after(100, self.start_moving_monsters)
+                        self.window.after(30, self.start_moving_monsters)
             
             self.tourPlayer = False
             # #print("in p ",self.fullMonster)
@@ -1352,7 +1351,6 @@ class player:
             self.eventMWalked = False
             self.eventMAVar = False
             self.text = "Monster :"
-        
         
 
         

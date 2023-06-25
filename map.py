@@ -203,16 +203,3 @@ class Map:
         # self.key = areaPlay.create_rectangle(b_x1, b_y1, b_x2, b_y2)
 
     
-
-    """def numberMonster(self, maplevel):
-        ####print(maplevel)
-        if(maplevel == 1):
-            return random.randint(5, 7)
-        elif(maplevel == 2 and maplevel <=4):
-            return random.randint(8,10)
-        elif(maplevel == 5 and maplevel <= 7):
-            return random.randint(11,13)
-        elif(maplevel == 8 and maplevel <= 10):
-            return random.randint(14, 16)
-        elif(maplevel > 10):
-            return random.randint(17, 25)"""

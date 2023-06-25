@@ -143,7 +143,7 @@ class Monster:
                                     if any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()):
                                         return
                                 for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                                    if monster != areaPlay.coords(self.monster):
                                         if (new_x2 > monster[0] 
                                         and new_y2 > monster[1]
                                         and new_x1 < monster[2]
@@ -208,7 +208,7 @@ class Monster:
                                     if any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()):
                                         return
                                 for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                                    if monster != areaPlay.coords(self.monster):
                                         if (new_x2 > monster[0] 
                                         and new_y2 > monster[1]
                                         and new_x1 < monster[2]
@@ -274,7 +274,7 @@ class Monster:
                                     if any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()):
                                         return
                                 for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                                    if (monster) != areaPlay.coords(self.monster):
                                         if (new_x2 > monster[0] 
                                         and new_y2 > monster[1]
                                         and new_x1 < monster[2]
@@ -341,7 +341,7 @@ class Monster:
                                     if any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()):
                                         return
                                 for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                                    if (monster) != areaPlay.coords(self.monster):
                                         if (new_x2 > monster[0] 
                                         and new_y2 > monster[1]
                                         and new_x1 < monster[2]
@@ -443,7 +443,7 @@ class Monster:
                     new_y1 = self.monster_y1 + self.moveDistance
                     new_y2 = self.monster_y2 + self.moveDistance
                     for monster in playerSelf.monsterDico.values():
-                        if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                        if (monster) != areaPlay.coords(self.monster):
                             if (new_x2 > monster[0] 
                             and new_y2 > monster[1]
                             and new_x1 < monster[2]
@@ -490,7 +490,7 @@ class Monster:
                     new_y1 = self.monster_y1 - self.moveDistance
                     new_y2 = self.monster_y2 - self.moveDistance
                     for monster in playerSelf.monsterDico.values():
-                        if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                        if (monster) != areaPlay.coords(self.monster):
                             if (new_x2 > monster[0] 
                             and new_y2 > monster[1]
                             and new_x1 < monster[2]
@@ -537,7 +537,7 @@ class Monster:
                     new_y1 = self.monster_y1
                     new_y2 = self.monster_y2
                     for monster in playerSelf.monsterDico.values():
-                        if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                        if (monster) != areaPlay.coords(self.monster):
                             if (new_x2 > monster[0] 
                             and new_y2 > monster[1]
                             and new_x1 < monster[2]
@@ -584,7 +584,7 @@ class Monster:
                     new_y1 = self.monster_y1 
                     new_y2 = self.monster_y2 
                     for monster in playerSelf.monsterDico.values():
-                        if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                        if (monster) != areaPlay.coords(self.monster):
                             if (new_x2 > monster[0] 
                             and new_y2 > monster[1]
                             and new_x1 < monster[2]
@@ -645,7 +645,7 @@ class Monster:
                                 new_y1 = self.monster_y1 + dy * self.moveDistance
                                 new_y2 = self.monster_y2 + dy * self.moveDistance
                                 for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                                    if (monster) != areaPlay.coords(self.monster):
                                         if (new_x2 > monster[0] 
                                         and new_y2 > monster[1]
                                         and new_x1 < monster[2]
@@ -703,7 +703,7 @@ class Monster:
                                 new_y1 = self.monster_y1 + dy * self.moveDistance
                                 new_y2 = self.monster_y2 + dy * self.moveDistance
                                 for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                                    if (monster) != areaPlay.coords(self.monster):
                                         if (new_x2 > monster[0] 
                                         and new_y2 > monster[1]
                                         and new_x1 < monster[2]
@@ -762,7 +762,7 @@ class Monster:
                                 new_y1 = self.monster_y1 + dy * self.moveDistance
                                 new_y2 = self.monster_y2 + dy * self.moveDistance
                                 for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                                    if (monster) != areaPlay.coords(self.monster):
                                         if (new_x2 > monster[0] 
                                         and new_y2 > monster[1]
                                         and new_x1 < monster[2]
@@ -820,7 +820,7 @@ class Monster:
                                 new_y1 = self.monster_y1 + dy * self.moveDistance
                                 new_y2 = self.monster_y2 + dy * self.moveDistance
                                 for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                                    if (monster) != areaPlay.coords(self.monster):
                                         if (new_x2 > monster[0] 
                                         and new_y2 > monster[1]
                                         and new_x1 < monster[2]
@@ -880,7 +880,7 @@ class Monster:
                                 new_y1 = self.monster_y1 + dy * self.moveDistance
                                 new_y2 = self.monster_y2 + dy * self.moveDistance
                                 for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                                    if (monster) != areaPlay.coords(self.monster):
                                         if (new_x2 > monster[0] 
                                         and new_y2 > monster[1]
                                         and new_x1 < monster[2]
@@ -938,7 +938,7 @@ class Monster:
                                 new_y1 = self.monster_y1 + dy * self.moveDistance
                                 new_y2 = self.monster_y2 + dy * self.moveDistance
                                 for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                                    if (monster) != areaPlay.coords(self.monster):
                                         if (new_x2 > monster[0] 
                                         and new_y2 > monster[1]
                                         and new_x1 < monster[2]
@@ -997,7 +997,7 @@ class Monster:
                                 new_y1 = self.monster_y1 + dy * self.moveDistance
                                 new_y2 = self.monster_y2 + dy * self.moveDistance
                                 for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                                    if (monster) != areaPlay.coords(self.monster):
                                         if (new_x2 > monster[0] 
                                         and new_y2 > monster[1]
                                         and new_x1 < monster[2]
@@ -1055,7 +1055,7 @@ class Monster:
                                 new_y1 = self.monster_y1 + dy * self.moveDistance
                                 new_y2 = self.monster_y2 + dy * self.moveDistance
                                 for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                                    if (monster) != areaPlay.coords(self.monster):
                                         if (new_x2 > monster[0] 
                                         and new_y2 > monster[1]
                                         and new_x1 < monster[2]
@@ -1104,13 +1104,13 @@ class Monster:
                 self.diag = False
                 #####print("intersec")
                 stop = False
-                if self.monster_x2 + self.moveDistance > WindowParameter.mapWidth-WindowParameter.tileSize:
+                if (0 > self.monster_x1-self.moveDistance or self.monster_x2+self.moveDistance > WindowParameter.mapWidth) or (0 > self.monster_y1- self.moveDistance or self.monster_y2+ self.moveDistance > WindowParameter.mapHeight):
                     #####print("test1")
                     self.diag = False
                     #####print("x2")
                     #areaPlay.move(self.monster, -1*self.moveDistance, 0)
                     
-                    dx = random.choice([-1, 0])
+                    dx = random.randint(-1, 1)
                     dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
                     new_x1 = self.monster_x1 + dx * self.moveDistance
                     new_y1 = self.monster_y1 + dy * self.moveDistance
@@ -1118,20 +1118,20 @@ class Monster:
                     new_y2 = self.monster_y2 + dy * self.moveDistance
                     
                     for monster in playerSelf.monsterDico.values():
-                        if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                        if (monster) != areaPlay.coords(self.monster):
                             if (new_x2 > monster[0] 
                             and new_y2 > monster[1]
                             and new_x1 < monster[2]
                             and new_y1 < monster[3]):
                                 stop = True        
                     #####print(new_x1, new_y1, new_x2, new_y2)
-                    while (new_x2 > WindowParameter.mapWidth or
+                    while ((0 > new_x1 or new_x2 > WindowParameter.mapWidth or 0 > new_y1 or new_y2 > WindowParameter.mapHeight) or
                     any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
                     any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
                         #####print("Whiletest1")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
-                            if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                            if (monster) != areaPlay.coords(self.monster):
                                 if (new_x2 > monster[0] 
                                 and new_y2 > monster[1]
                                 and new_x1 < monster[2]
@@ -1140,7 +1140,7 @@ class Monster:
                         if self.antiInfinite > 150:
                              return
                         self.antiInfinite += 1
-                        dx = random.choice([-1, 0])
+                        dx = random.randint(-1, 1)
                         dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
                         new_x1 = self.monster_x1 + dx * self.moveDistance
                         new_y1 = self.monster_y1 + dy * self.moveDistance
@@ -1151,141 +1151,7 @@ class Monster:
                     areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
                     areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
                     #areaPlay.move(self.monster_pic, -20, 0)
-                elif self.monster_x1 - self.moveDistance < 0+WindowParameter.tileSize:
-                            #####print("test2")
-                            self.diag = False
-                            #####print("x1")
-                            #areaPlay.move(self.monster, +1*self.moveDistance, 0)
-                            dx = random.choice([0, 1])
-                            dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
-                            new_x1 = self.monster_x1 + dx * self.moveDistance
-                            new_y1 = self.monster_y1 + dy * self.moveDistance
-                            new_x2 = self.monster_x2 + dx * self.moveDistance
-                            new_y2 = self.monster_y2 + dy * self.moveDistance
-                            for monster in playerSelf.monsterDico.values():
-                                if areaPlay.coords(monster) != areaPlay.coords(self.monster):
-                                    if (new_x2 > monster[0] 
-                                    and new_y2 > monster[1]
-                                    and new_x1 < monster[2]
-                                    and new_y1 < monster[3]):
-                                        stop = True
-                            #####print(new_x1, new_y1, new_x2, new_y2)
-                            while (new_x1 < 0 or
-                            any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                            any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                                #####print("Whiletest2")
-                                stop = False
-                                for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
-                                        if (new_x2 > monster[0] 
-                                        and new_y2 > monster[1]
-                                        and new_x1 < monster[2]
-                                        and new_y1 < monster[3]):
-                                            stop = True
-                                if self.antiInfinite > 150:
-                                    return
-                                self.antiInfinite += 1
-                                dx = random.choice([0, 1])
-                                dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
-                                new_x1 = self.monster_x1 + dx * self.moveDistance
-                                new_y1 = self.monster_y1 + dy * self.moveDistance
-                                new_x2 = self.monster_x2 + dx * self.moveDistance
-                                new_y2 = self.monster_y2 + dy * self.moveDistance
-                            playerSelf.eventMWVar = True
-                            areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
-                            areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
-                            areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
-                            #areaPlay.move(self.monster_pic, -20, 0)
-                elif self.monster_y2 + self.moveDistance > WindowParameter.mapHeight-WindowParameter.tileSize:
-                            self.diag = False
-                            #####print("test3")
-                            #####print("y2")
-                            #areaPlay.move(self.monster, 0, -1*self.moveDistance)
-                            dy = random.choice([-1, 0])
-                            dx = random.choice([-1, 1]) if dy == 0 else 0  # Empêche les mouvements en diagonal
-                            new_x1 = self.monster_x1 + dx * self.moveDistance
-                            new_y1 = self.monster_y1 + dy * self.moveDistance
-                            new_x2 = self.monster_x2 + dx * self.moveDistance
-                            new_y2 = self.monster_y2 + dy * self.moveDistance
-                            for monster in playerSelf.monsterDico.values():
-                                if areaPlay.coords(monster) != areaPlay.coords(self.monster):
-                                    if (new_x2 > monster[0] 
-                                    and new_y2 > monster[1]
-                                    and new_x1 < monster[2]
-                                    and new_y1 < monster[3]):
-                                        stop = True
-                            #####print(new_x1, new_y1, new_x2, new_y2)
-                            while (new_y2 > WindowParameter.mapHeight or
-                            any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                            any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                                #####print("Whiletest3")
-                                stop = False
-                                for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
-                                        if (new_x2 > monster[0] 
-                                        and new_y2 > monster[1]
-                                        and new_x1 < monster[2]
-                                        and new_y1 < monster[3]):
-                                            stop = True
-                                if self.antiInfinite > 150:
-                                    return
-                                self.antiInfinite += 1
-                                dy = random.choice([-1, 0])
-                                dx = random.choice([-1, 1]) if dy == 0 else 0  # Empêche les mouvements en diagonal
-                                new_x1 = self.monster_x1 + dx * self.moveDistance
-                                new_y1 = self.monster_y1 + dy * self.moveDistance
-                                new_x2 = self.monster_x2 + dx * self.moveDistance
-                                new_y2 = self.monster_y2 + dy * self.moveDistance
-                            playerSelf.eventMWVar = True
-                            areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
-                            areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
-                            areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
-                            #areaPlay.move(self.monster_pic, -20, 0)
-                elif self.monster_y1 - self.moveDistance < 0+WindowParameter.tileSize:
-                            self.diag = False
-                            #####print("test4")
-                            #####print("y1")
-                            #areaPlay.move(self.monster, 0, +1*self.moveDistance)
-                            dy = random.choice([0, 1])
-                            dx = random.choice([-1, 1]) if dy == 0 else 0  # Empêche les mouvements en diagonal
-                            new_x1 = self.monster_x1 + dx * self.moveDistance
-                            new_y1 = self.monster_y1 + dy * self.moveDistance
-                            new_x2 = self.monster_x2 + dx * self.moveDistance
-                            new_y2 = self.monster_y2 + dy * self.moveDistance
-                            for monster in playerSelf.monsterDico.values():
-                                if areaPlay.coords(monster) != areaPlay.coords(self.monster):
-                                    if (new_x2 > monster[0] 
-                                    and new_y2 > monster[1]
-                                    and new_x1 < monster[2]
-                                    and new_y1 < monster[3]):
-                                        stop = True
-                            #####print(new_x1, new_y1, new_x2, new_y2)
-                            while (new_y1 < 0 or
-                            any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                            any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                                #####print("Whiletest4")
-                                stop = False
-                                for monster in playerSelf.monsterDico.values():
-                                    if areaPlay.coords(monster) != areaPlay.coords(self.monster):
-                                        if (new_x2 > monster[0] 
-                                        and new_y2 > monster[1]
-                                        and new_x1 < monster[2]
-                                        and new_y1 < monster[3]):
-                                            stop = True
-                                if self.antiInfinite > 150:
-                                    return
-                                self.antiInfinite += 1
-                                dy = random.choice([0, 1])
-                                dx = random.choice([-1, 1]) if dy == 0 else 0  # Empêche les mouvements en diagonal
-                                new_x1 = self.monster_x1 + dx * self.moveDistance
-                                new_y1 = self.monster_y1 + dy * self.moveDistance
-                                new_x2 = self.monster_x2 + dx * self.moveDistance
-                                new_y2 = self.monster_y2 + dy * self.moveDistance
-                            playerSelf.eventMWVar = True
-                            areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
-                            areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
-                            areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
-                            #areaPlay.move(self.monster_pic, -20, 0)
+                
                 else:
                     self.diag = False
                     coll = False
@@ -1299,7 +1165,7 @@ class Monster:
                     new_y2 = self.monster_y2 + dy * self.moveDistance
                     #####print("test5")
                     for monster in playerSelf.monsterDico.values():
-                        if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                        if (monster) != areaPlay.coords(self.monster):
                             if (new_x2 > monster[0] 
                             and new_y2 > monster[1]
                             and new_x1 < monster[2]
@@ -1311,7 +1177,7 @@ class Monster:
                         #####print("Whiletest5")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
-                            if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                            if (monster) != areaPlay.coords(self.monster):
                                 if (new_x2 > monster[0] 
                                 and new_y2 > monster[1]
                                 and new_x1 < monster[2]
@@ -1349,35 +1215,38 @@ class Monster:
                 elif dx > 0 and dy == 0:
                     areaPlay.move(self.monster, +1 * self.moveDistance , 0)"""
      
-        elif self.monster_x2 + self.moveDistance > WindowParameter.mapWidth-WindowParameter.tileSize:
+        elif (0 > self.current_x-self.moveDistance or self.current_x+self.moveDistance > WindowParameter.mapWidth) or (0 > self.current_y- self.moveDistance or self.current_y+ self.moveDistance > WindowParameter.mapHeight):
+                    #####print("test1")
                     #####print("test6")
                     self.monster_collision = False
                     self.diag = False
                     stop = False
                     #####print("x2")
                     #areaPlay.move(self.monster, -1*self.moveDistance, 0)
-
-                    dx = random.choice([-1, 0])
+                    
+                    dx = random.randint(-1, 1)
                     dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
                     new_x1 = self.monster_x1 + dx * self.moveDistance
                     new_y1 = self.monster_y1 + dy * self.moveDistance
                     new_x2 = self.monster_x2 + dx * self.moveDistance
                     new_y2 = self.monster_y2 + dy * self.moveDistance
+                    
                     for monster in playerSelf.monsterDico.values():
-                            if areaPlay.coords(monster) != areaPlay.coords(self.monster):
-                                if (new_x2 > monster[0] 
-                                and new_y2 > monster[1]
-                                and new_x1 < monster[2]
-                                and new_y1 < monster[3]):
-                                    stop = True
+                        if (monster) != areaPlay.coords(self.monster):
+                            if (new_x2 > monster[0] 
+                            and new_y2 > monster[1]
+                            and new_x1 < monster[2]
+                            and new_y1 < monster[3]):
+                                stop = True        
                     #####print(new_x1, new_y1, new_x2, new_y2)
-                    while (new_x2 > WindowParameter.mapWidth or
+                    
+                    while ((0 > new_x1 or new_x2 > WindowParameter.mapWidth or 0 > new_y1 or new_y2 > WindowParameter.mapHeight) or
                     any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
                     any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                        #####print("Whiletest6")
+                        #####print("Whiletest1")
                         stop = False
                         for monster in playerSelf.monsterDico.values():
-                            if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                            if (monster) != areaPlay.coords(self.monster):
                                 if (new_x2 > monster[0] 
                                 and new_y2 > monster[1]
                                 and new_x1 < monster[2]
@@ -1386,7 +1255,7 @@ class Monster:
                         if self.antiInfinite > 150:
                              return
                         self.antiInfinite += 1
-                        dx = random.choice([-1, 0])
+                        dx = random.randint(-1, 1)
                         dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
                         new_x1 = self.monster_x1 + dx * self.moveDistance
                         new_y1 = self.monster_y1 + dy * self.moveDistance
@@ -1396,148 +1265,6 @@ class Monster:
                     areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
                     areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
                     areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
-                    #areaPlay.move(self.monster_pic, -20, 0)
-        elif self.monster_x1 - self.moveDistance < 0+WindowParameter.tileSize:
-                    self.monster_collision = False
-                    self.diag = False
-                    #####print("x1")
-                    #####print("test7")
-                    #areaPlay.move(self.monster, +1*self.moveDistance, 0)
-                    dx = random.choice([0, 1])
-                    dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
-                    new_x1 = self.monster_x1 + dx * self.moveDistance
-                    new_y1 = self.monster_y1 + dy * self.moveDistance
-                    new_x2 = self.monster_x2 + dx * self.moveDistance
-                    new_y2 = self.monster_y2 + dy * self.moveDistance
-                    stop = False
-                    for monster in playerSelf.monsterDico.values():
-                            if areaPlay.coords(monster) != areaPlay.coords(self.monster):
-                                if (new_x2 > monster[0] 
-                                and new_y2 > monster[1]
-                                and new_x1 < monster[2]
-                                and new_y1 < monster[3]):
-                                    stop = True
-                    #####print(new_x1, new_y1, new_x2, new_y2)
-                    while (new_x1 < 0 or
-                    any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                    any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                        #####print("Whiletest7")
-                        stop = False
-                        for monster in playerSelf.monsterDico.values():
-                            if areaPlay.coords(monster) != areaPlay.coords(self.monster):
-                                if (new_x2 > monster[0] 
-                                and new_y2 > monster[1]
-                                and new_x1 < monster[2]
-                                and new_y1 < monster[3]):
-                                    stop = True
-                        if self.antiInfinite > 150:
-                             return
-                        self.antiInfinite += 1
-                        dx = random.choice([0, 1])
-                        dy = random.choice([-1, 1]) if dx == 0 else 0  # Empêche les mouvements en diagonal
-                        new_x1 = self.monster_x1 + dx * self.moveDistance
-                        new_y1 = self.monster_y1 + dy * self.moveDistance
-                        new_x2 = self.monster_x2 + dx * self.moveDistance
-                        new_y2 = self.monster_y2 + dy * self.moveDistance
-                    playerSelf.eventMWVar = True
-                    areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
-                    areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
-                    areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
-                    #areaPlay.move(self.monster_pic, -20, 0)
-        elif self.monster_y2 + self.moveDistance > WindowParameter.mapHeight-WindowParameter.tileSize:
-                    self.monster_collision = False
-                    self.diag = False
-                    #####print("y2")
-                    #####print("test8")
-                    #areaPlay.move(self.monster, 0, -1*self.moveDistance)
-                    dy = random.choice([-1, 0])
-                    dx = random.choice([-1, 1]) if dy == 0 else 0  # Empêche les mouvements en diagonal
-                    new_x1 = self.monster_x1 + dx * self.moveDistance
-                    new_y1 = self.monster_y1 + dy * self.moveDistance
-                    new_x2 = self.monster_x2 + dx * self.moveDistance
-                    new_y2 = self.monster_y2 + dy * self.moveDistance
-                    stop = False
-                    for monster in playerSelf.monsterDico.values():
-                            if areaPlay.coords(monster) != areaPlay.coords(self.monster):
-                                if (new_x2 > monster[0] 
-                                and new_y2 > monster[1]
-                                and new_x1 < monster[2]
-                                and new_y1 < monster[3]):
-                                    stop = True
-                    #####print(new_x1, new_y1, new_x2, new_y2)
-                    while (new_y2 > WindowParameter.mapHeight or
-                    any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                    any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                        #####print("Whiletest8")
-                        stop = False
-                        for monster in playerSelf.monsterDico.values():
-                            if areaPlay.coords(monster) != areaPlay.coords(self.monster):
-                                if (new_x2 > monster[0] 
-                                and new_y2 > monster[1]
-                                and new_x1 < monster[2]
-                                and new_y1 < monster[3]):
-                                    stop = True
-                        if self.antiInfinite > 150:
-                             return
-                        self.antiInfinite += 1
-                        dy = random.choice([-1, 0])
-                        dx = random.choice([-1, 1]) if dy == 0 else 0  # Empêche les mouvements en diagonal
-                        new_x1 = self.monster_x1 + dx * self.moveDistance
-                        new_y1 = self.monster_y1 + dy * self.moveDistance
-                        new_x2 = self.monster_x2 + dx * self.moveDistance
-                        new_y2 = self.monster_y2 + dy * self.moveDistance
-                    playerSelf.eventMWVar = True
-                    areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
-                    areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
-                    areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
-                    #areaPlay.move(self.monster_pic, -20, 0)
-        elif self.monster_y1 - self.moveDistance < 0+WindowParameter.tileSize:
-                    self.monster_collision = False
-                    self.diag = False
-                    #####print("test9")
-                    #####print("y1")
-                    #areaPlay.move(self.monster, 0, +1*self.moveDistance)
-                    dy = random.choice([0, 1])
-                    dx = random.choice([-1, 1]) if dy == 0 else 0  # Empêche les mouvements en diagonal
-                    new_x1 = self.monster_x1 + dx * self.moveDistance
-                    new_y1 = self.monster_y1 + dy * self.moveDistance
-                    new_x2 = self.monster_x2 + dx * self.moveDistance
-                    new_y2 = self.monster_y2 + dy * self.moveDistance
-                    stop = False
-                    for monster in playerSelf.monsterDico.values():
-                            if areaPlay.coords(monster) != areaPlay.coords(self.monster):
-                                if (new_x2 > monster[0] 
-                                and new_y2 > monster[1]
-                                and new_x1 < monster[2]
-                                and new_y1 < monster[3]):
-                                    stop = True
-                    #####print(new_x1, new_y1, new_x2, new_y2)
-                    while (new_y1 < 0 or
-                    any(new_x2 > case[0] and new_y2 > case[1] and new_x1 < case[2] and new_y1 < case[3] for case in map.CaseNoire.values()) or
-                    any(new_x2 > monster[0] and new_y2 > monster[1] and new_x1 < monster[2] and new_y1 < monster[3] for monster in playerSelf.monsterDico.values()) or stop == True):
-                        #####print("Whiletest10")
-                        stop = False
-                        for monster in playerSelf.monsterDico.values():
-                            if areaPlay.coords(monster) != areaPlay.coords(self.monster):
-                                if (new_x2 > monster[0] 
-                                and new_y2 > monster[1]
-                                and new_x1 < monster[2]
-                                and new_y1 < monster[3]):
-                                    stop = True
-                        if self.antiInfinite > 150:
-                             return
-                        self.antiInfinite += 1
-                        dy = random.choice([0, 1])
-                        dx = random.choice([-1, 1]) if dy == 0 else 0  # Empêche les mouvements en diagonal
-                        new_x1 = self.monster_x1 + dx * self.moveDistance
-                        new_y1 = self.monster_y1 + dy * self.moveDistance
-                        new_x2 = self.monster_x2 + dx * self.moveDistance
-                        new_y2 = self.monster_y2 + dy * self.moveDistance
-                    playerSelf.eventMWVar = True
-                    areaPlay.move(self.monster, dx * self.moveDistance, dy * self.moveDistance)
-                    areaPlay.move(self.monsterPic, dx * self.moveDistance, dy * self.moveDistance)
-                    areaPlay.move(self.health_bar, dx * self.moveDistance, dy * self.moveDistance)
-                    #areaPlay.move(self.monster_pic, -20, 0)
         elif(playerSelf.player_collision == False):
             self.monster_collision = False
             self.diag = False
@@ -1553,7 +1280,7 @@ class Monster:
             new_y2 = self.monster_y2 + dy * self.moveDistance
             stop = False
             for monster in playerSelf.monsterDico.values():
-                            if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                            if (monster) != areaPlay.coords(self.monster):
                                 if (new_x2 > monster[0] 
                                 and new_y2 > monster[1]
                                 and new_x1 < monster[2]
@@ -1565,7 +1292,7 @@ class Monster:
                 #####print("Whiletest11")
                 stop = False
                 for monster in playerSelf.monsterDico.values():
-                            if areaPlay.coords(monster) != areaPlay.coords(self.monster):
+                            if (monster) != areaPlay.coords(self.monster):
                                 if (new_x2 > monster[0] 
                                 and new_y2 > monster[1]
                                 and new_x1 < monster[2]
@@ -1595,10 +1322,9 @@ class Monster:
 
     # Vérifier si deux segments de ligne s'intersectent
     def intersect(self, x1, y1, x2, y2, x3, y3, x4, y4):
-        # Implémentez ici votre algorithme de détection d'intersection
         # Renvoyez True si les segments s'intersectent, False sinon
 
-        # Exemple d'implémentation simplifiée avec une intersection de segments basée sur les coordonnées des points
+        #implémentation avec une intersection de segments basée sur les coordonnées des points
         if max(x1, x2) < min(x3, x4) or max(x3, x4) < min(x1, x2) or max(y1, y2) < min(y3, y4) or max(y3, y4) < min(y1, y2):
             return False
         return True
