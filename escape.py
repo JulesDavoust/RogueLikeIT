@@ -70,7 +70,7 @@ class Escape:
         self.selfplayer.areaPlay.delete("all")
         self.selfplayer.areaPlay.unbind("<KeyPress>")
         with open('save.json', 'w') as fichier:
-        # Créer une structure de données avec les données souhaitées
+        # Créer de la save
             dataPlayer = {
                 'level' : self.selfplayer.PlayerLevel,
                 'xp' : self.selfplayer.xp,
