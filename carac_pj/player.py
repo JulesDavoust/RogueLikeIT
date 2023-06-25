@@ -14,7 +14,6 @@ from escape import Escape
 
 
 class player:
-    # PLEASE use a fonction instead of duplicated codes, if not there's a probleme to change value when we want to
     def initializeBasic_knight(self):
         self.life_point = 75
         self.max_life_point = self.life_point
@@ -386,10 +385,10 @@ class player:
         self.cooPNJ = self.areaPlay.coords(self.pnjs[i].pnj)
         self.pnj_x = (
             self.cooPNJ[0] + self.cooPNJ[2]
-        ) / 2  # Coordonnée x du centre du rectangle rouge
+        ) / 2  # Coordonnée x du centre du rectangle
         self.pnj_y = (
             self.cooPNJ[1] + self.cooPNJ[3]
-        ) / 2  # Coordonnée y du centre du rectangle rouge
+        ) / 2  # Coordonnée y du centre du rectangle
 
         self.pnj_x1 = self.cooPNJ[0]
         self.pnj_y1 = self.cooPNJ[1]
@@ -416,10 +415,10 @@ class player:
         self.monsterCOO = self.areaPlay.coords(self.monsters[i].monster)
         self.monster_x = (
             self.monsterCOO[0] + self.monsterCOO[2]
-        ) / 2  # Coordonnée x du centre du rectangle rouge
+        ) / 2  # Coordonnée x du centre du rectangle 
         self.monster_y = (
             self.monsterCOO[1] + self.monsterCOO[3]
-        ) / 2  # Coordonnée y du centre du rectangle rouge
+        ) / 2  # Coordonnée y du centre du rectangle 
 
         self.monster_x1 = self.monsterCOO[0]
         self.monster_y1 = self.monsterCOO[1]

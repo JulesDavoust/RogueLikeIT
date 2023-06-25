@@ -1322,10 +1322,9 @@ class Monster:
 
     # Vérifier si deux segments de ligne s'intersectent
     def intersect(self, x1, y1, x2, y2, x3, y3, x4, y4):
-        # Implémentez ici votre algorithme de détection d'intersection
         # Renvoyez True si les segments s'intersectent, False sinon
 
-        # Exemple d'implémentation simplifiée avec une intersection de segments basée sur les coordonnées des points
+        #implémentation avec une intersection de segments basée sur les coordonnées des points
         if max(x1, x2) < min(x3, x4) or max(x3, x4) < min(x1, x2) or max(y1, y2) < min(y3, y4) or max(y3, y4) < min(y1, y2):
             return False
         return True

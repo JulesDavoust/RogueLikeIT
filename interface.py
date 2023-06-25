@@ -51,19 +51,15 @@ class Interface:
         self.fight.pack_forget()
         self.menu.pack_forget()
         self.main_menu.pack()
-
         title = tk.Label(self.main_menu, text="Rogue Like", font=("Press Start 2P", 24))
         title.pack()
-
         if self.clickChoose:
             self.GenerateGame()
         else:
             new_game_button = tk.Button(self.main_menu, text="New Game", command=self.newGame)
             new_game_button.pack()
-
             continue_button = tk.Button(self.main_menu, text="Continue", command=self.ContinueGame)
             continue_button.pack()
-
             quit_button = tk.Button(self.main_menu, text="Quit", command=self.quit)
             quit_button.pack()
 
@@ -101,7 +97,6 @@ class Interface:
 
     def saveGame(self):
         with open('save.json', 'w') as fichier:
-        # Créer une structure de données avec les données souhaitées
             dataPlayer = {
                 'level' : self.player.PlayerLevel,
                 'xp' : self.player.xp,
@@ -150,11 +145,9 @@ class Interface:
             self.cont = True
             with open('save.json', 'r') as file:
                 data = json.load(file)
-                # Exemple d'accès aux informations dans un objet JSON
                 ##print(data)
                 if data['class'] == 0:
                     self.select_guerrier()
-                # Continuez à extraire les informations selon vos besoins...
 
 
     def backtomenu(self):
