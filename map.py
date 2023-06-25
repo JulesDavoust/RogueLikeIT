@@ -10,8 +10,9 @@ from windowParameters import WindowParameter
 
 class Map:
     maze = None
+    levelStatic = 0
     def __init__(self) -> None:
-        self.level = 0
+        Map.levelStatic += 1
         self.CaseNoire = {}
         self.centreCaseNoire = {}
         self.dicoC = {}
@@ -110,11 +111,11 @@ class Map:
 
 
 
-        cooG = random.randint(0, len(list(self.dicoC.keys())))
+        cooG = random.randint(0, len(list(self.dicoC.keys()))-1)
         """self.xGreen = random.randint(0, (self.map_width-50)// case_size)
         self.yGreen = random.randint(0, (self.map_height-50)// case_size)"""
         while cooG == cooR:
-            cooG = random.randint(0, len(list(self.dicoC.keys())))
+            cooG = random.randint(0, len(list(self.dicoC.keys()))-1)
             # self.yGreen = random.randint(0, (self.map_height-50)//case_size)
         x1G = self.dicoC[cooG][0]
         y1G = self.dicoC[cooG][1]

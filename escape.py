@@ -12,10 +12,6 @@ class Escape:
     def createEscap(self,window, selfP):
         self.selfplayer = selfP
         self.windowEsc = tk.Toplevel(window)
-        self.windowEsc.geometry("150x150")
-        self.windowEsc.focus_set()
-        self.windowEsc.lift()
-        self.windowEsc.grab_set()
 
         # #Remove window decorations (Top-right)
         # self.windowEsc.overrideredirect(True)
@@ -62,6 +58,7 @@ class Escape:
         buttonQuit.place(x=150 / 2, y=(300 / 2) + 40, anchor="center")
 
     def quit(self):
+
         self.selfplayer.areaPlay.delete("all")
         self.selfplayer.areaPlay.unbind("<KeyPress>")
         self.windowEsc.destroy()
@@ -89,7 +86,8 @@ class Escape:
                 'weapon': self.selfplayer.weapon,
                 'defense':equipements.Equipements.equipement_stats[self.selfplayer.armor],
                 'inventory': self.selfplayer.inventory,
-                'map': self.selfplayer.map.maze
+                'map': self.selfplayer.map.maze,
+                'levelMap': self.selfplayer.levelMap
             }
         
             # Écrire les données dans le fichier JSON

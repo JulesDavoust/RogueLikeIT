@@ -92,7 +92,7 @@ class player:
         # self.gold = 0
         # self.xp = 0
         ##print("initiate player")
-        if not self.interface.is_json_file_empty():
+        if not self.interface.is_json_file_empty() and self.interface.cont == True:
             ##print("Le fichier JSON n'est pas vide.")
             with open('save.json', 'r') as file:
                 data = json.load(file)
@@ -110,6 +110,7 @@ class player:
                 self.damage = data['damage']
                 self.defense = data['defense']
                 self.mazeMap = data['map']
+                self.levelMapSave = data['levelMap']
         else:
             if classe == 0:
                 self.initializeBasic_knight()
@@ -176,11 +177,23 @@ class player:
 
 
     def createAll(self):
-        
+        self.initializeGeneral()
         self.map = Map()
         self.map.generateMap(self.areaPlay, self.mazeMap)
-        self.map.level = self.map.level + 1
-        self.levelMap = self.map.level
+        print(self.interface.newGameVar)
+        if self.interface.cont == True:
+            print("if")
+            self.levelMap = self.levelMapSave
+        elif self.interface.newGameVar == True:
+            print("elif")
+            Map.levelStatic = 1
+            self.levelMap = Map.levelStatic
+            self.interface.newGameVar = False
+        else:
+            print("else")
+            self.levelMap = Map.levelStatic
+            self.interface.newGameVar = False
+        print(self.levelMap)
         self.map.generateKey(self.areaPlay)
         self.player_info()
         self.hp_update(False)
@@ -807,7 +820,7 @@ class player:
             fichier.truncate(0)
         self.areaPlay.unbind("<KeyPress>")
         self.playerDied = True
-        self.blackScreen = self.areaPlay.create_rectangle(0, 0, WindowParameter.screenWidth, WindowParameter.screenHeight, outline="black")
+        self.blackScreen = self.areaPlay.create_rectangle(0, WindowParameter.screenHeight / 2-40, WindowParameter.screenWidth, WindowParameter.screenHeight/2+100, fill="black")
         """self.died = self.areaPlay.create_text(WindowParameter.screenWidth / 2, WindowParameter.screenHeight / 2, text="You died", fill="Red", font=("Press Start 2P", 16), anchor="center")
         self.buttonNewG = tk.Button(self.window, text="New Game", command=self.newGame)"""
 
