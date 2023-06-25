@@ -1164,7 +1164,7 @@ class player:
 
                             self.attackRect = self.areaPlay.create_rectangle(x1, y1, x2+8, y2, fill="blue")
                             self.Fight()
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRect))
 
                             self.countTourActivate = True
                             
@@ -1180,7 +1180,7 @@ class player:
 
                             self.attackRect = self.areaPlay.create_rectangle(x1-8, y1, x2, y2, fill="blue")
                             self.Fight()
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRect))
 
                             self.countTourActivate = True  # Désactive le cooldown après 2000 millisecondes (2 secondes)
                             
@@ -1197,7 +1197,7 @@ class player:
 
                             self.attackRect = self.areaPlay.create_rectangle(x1, y1-8, x2, y2, fill="blue")
                             self.Fight()
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRect))
                             
                             self.countTourActivate = True
                         
@@ -1213,10 +1213,10 @@ class player:
 
                             self.attackRect = self.areaPlay.create_rectangle(x1, y1, x2, y2+8, fill="blue")
                             self.Fight()
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRect))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRect))
                             
                             self.countTourActivate = True
-                        self.window.after(200, self.start_moving_monsters)
+                        self.window.after(30, self.start_moving_monsters)
 
                 elif key == "s" and self.mana >= 5:
                             ###print("direction attack right")
@@ -1249,14 +1249,14 @@ class player:
                             self.attackRectD = self.areaPlay.create_rectangle(x1D, y1D, x2D, y2D+8, fill="red")
                             self.Sort()
 
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRectR))
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRectL))
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRectU))
-                            self.window.after(100, lambda: self.areaPlay.delete(self.attackRectD))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRectR))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRectL))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRectU))
+                            self.window.after(20, lambda: self.areaPlay.delete(self.attackRectD))
 
                             self.countTourActivateSort = True
                             
-                            self.window.after(200, self.start_moving_monsters)
+                            self.window.after(30, self.start_moving_monsters)
        
 
                 #Player
@@ -1323,7 +1323,7 @@ class player:
                                 self.areaPlay.move(self.sprite, dx, dy)
                                 self.update_view()
                             self.goNextRoom()
-                        self.window.after(100, self.start_moving_monsters)
+                        self.window.after(30, self.start_moving_monsters)
             
             self.tourPlayer = False
             # #print("in p ",self.fullMonster)
@@ -1352,7 +1352,6 @@ class player:
             self.eventMWalked = False
             self.eventMAVar = False
             self.text = "Monster :"
-        
         
 
         
