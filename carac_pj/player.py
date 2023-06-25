@@ -132,9 +132,7 @@ class player:
 
         # The distance of mouvement for player and monster
         self.moveDistance = WindowParameter.tileSize
-            
-        
-
+       
     def generatePlayer(self, window):
         self.window = window
         self.areaPlay = tk.Canvas(
@@ -172,27 +170,25 @@ class player:
         self.tourPlayer = True
         
         self.initializeGeneral()
-        
-
-
+   
     def createAll(self):
         self.initializeGeneral()
         self.map = Map()
         self.map.generateMap(self.areaPlay, self.mazeMap)
-        print(self.interface.newGameVar)
+        #print(self.interface.newGameVar)
         if self.interface.cont == True:
-            print("if")
+            #print("if")
             self.levelMap = self.levelMapSave
         elif self.interface.newGameVar == True:
-            print("elif")
+            #print("elif")
             Map.levelStatic = 1
             self.levelMap = Map.levelStatic
             self.interface.newGameVar = False
         else:
-            print("else")
+            #print("else")
             self.levelMap = Map.levelStatic
             self.interface.newGameVar = False
-        print(self.levelMap)
+        #print(self.levelMap)
         self.map.generateKey(self.areaPlay)
         self.player_info()
         self.hp_update(False)
@@ -285,8 +281,6 @@ class player:
             pnj.generateShop(self.areaPlay, x1, y1)
             self.shops.append(pnj.shop)
             self.pnjs.append(pnj)
-
-            
 
     def generateMonsters(self, num_monsters):
         self.monsters = []  # Liste pour stocker les monstres
@@ -486,8 +480,6 @@ class player:
         self.areaPlay.create_image(
             map_width + 50, WindowParameter.tileSize + 10, image=self.player_photoI
         )
-
-        
 
         # Money / XP / Lv
         self.areaPlay.create_rectangle(x1 + 20, 100, x1 + 310, 140, fill="white")
@@ -779,7 +771,6 @@ class player:
             font=("Press Start 2P", 12),
             anchor="w"
         )
-
 
     def hp_update(self, textThere):
         #print(self.life_point)
@@ -1116,7 +1107,6 @@ class player:
 
             i += 1
     
-
     def collisionWithMonster(self):
         tolerance = 6
         ci = self.areaPlay.coords(self.character_id)
@@ -1137,7 +1127,6 @@ class player:
                     elif ci[0] == monsterCOO[0] and ci[2] == monsterCOO[2] and ci[3] < monsterCOO[1] and ci[3] < monsterCOO[3]:
                         ###print("S")
                         self.fullMonster["s"] = ["./sprites/monster_1.png", self.monsters[i].life_points_monster, self.monsters[i].damage]
-
 
     def move_character(self, event):
         eventJoueur = False
@@ -1352,11 +1341,6 @@ class player:
             self.eventMAVar = False
             self.text = "Monster :"
         
-
-        
-            
-        
-
     def update_view(self):
         character_coords = self.areaPlay.coords(self.character_id)
         self.character_x = (

@@ -112,7 +112,8 @@ class Interface:
                 'weapon': self.player.weapon,
                 'defense':equipements.Equipements.equipement_stats[self.player.armor],
                 'inventory': self.player.inventory,
-                'map': self.player.map.maze
+                'map': self.player.map.maze,
+                'levelMap': self.player.levelMap
             }
         
             # Écrire les données dans le fichier JSON
