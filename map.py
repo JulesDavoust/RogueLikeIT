@@ -180,14 +180,6 @@ class Map:
             if emplacementOK:
                 emplacement = True
             emplacementOK = True
-        a_width = self.dicoC[cooM][2] - x1
-        a_height = self.dicoC[cooM][3] - y1
-        b_width = a_width * 0.5
-        b_height = a_height * 0.5
-        b_x1 = x1 + (a_width - b_width) / 2
-        b_y1 = y1 + (a_height - b_height) / 2
-        b_x2 = b_x1 + b_width
-        b_y2 = b_y1 + b_height
         self.keyX1 = x1
         self.keyY1 = y1
         self.keyX2 = x1 + 6
